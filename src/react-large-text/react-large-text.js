@@ -8,11 +8,13 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { maxWidth, maxHeight, viewportHeight, nbLines } = state;
 
-  const onKeyDown = useCallback(function () {}, []);
-  const onWheel = useCallback(function () {}, []);
-
   const onResizeCallback = useCallback(function (width, height) {
     dispatch(actions.onResize(width, height));
+  }, []);
+
+  const onHorizontalScroll = useCallback(function (percent) {}, []);
+  const onVerticalScroll = useCallback(function (percent) {
+    // dispatch(actions.onVerticalScroll(percent));
   }, []);
 
   useEffect(
@@ -28,14 +30,15 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
     },
     [value, lineHeight, viewportHeight]
   );
+
   const containerEl = useResizeObserver(onResizeCallback);
   return (
     <div className="react-large-text">
       <ScrollableContainer
         maxWidth={maxWidth}
         maxHeight={maxHeight}
-        onKeyDown={onKeyDown}
-        onWheel={onWheel}
+        onHorizontalScroll={onHorizontalScroll}
+        onVerticalScroll={onVerticalScroll}
       >
         <ScrollableContent
           nbLines={nbLines}

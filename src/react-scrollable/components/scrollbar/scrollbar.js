@@ -2,11 +2,15 @@ import React, { useCallback } from "react";
 import classnames from "classnames";
 import "./scrollbar.scss";
 
+function safeCss(value) {
+  return value || 0;
+}
+
 function getStyle(vertical, tPos, tSize) {
   if (vertical) {
-    return { marginTop: tPos, height: tSize };
+    return { marginTop: safeCss(tPos), height: safeCss(tSize) };
   }
-  return { marginLeft: tPos, width: tSize };
+  return { marginLeft: safeCss(tPos), width: safeCss(tSize) };
 }
 
 /**

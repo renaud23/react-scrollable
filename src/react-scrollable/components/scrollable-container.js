@@ -13,15 +13,23 @@ function ScrollableContainer({
   children,
   maxWidth,
   maxHeight,
-  onKeyDown,
-  onWheel,
+  onHorizontalScroll = () => null,
+  onVerticalScroll = () => null,
 }) {
   const scrollbarVEl = useRef();
   const scrollbarHEl = useRef();
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal } = state;
-  const { drag: verticalDrag } = vertical;
-  const { drag: horizontalDrag } = horizontal;
+  const {
+    drag: verticalDrag,
+    scrollPercent: verticalPercent,
+    size: verticalSize,
+  } = vertical;
+  const {
+    drag: horizontalDrag,
+    scrollPercent: horizontalPercent,
+    size: horizontalSize,
+  } = horizontal;
 
   /* USE CALLBACK */
 
@@ -73,6 +81,25 @@ function ScrollableContainer({
   );
 
   /* USE EFFECT */
+  useEffect(
+    function () {
+      onHorizontalScroll(horizontalPercent);
+    },
+    [horizontalPercent, onHorizontalScroll]
+  );
+  useEffect(
+    function () {
+      onVerticalScroll(verticalPercent);
+    },
+    [verticalPercent, onVerticalScroll]
+  );
+
+  useEffect(
+    function () {
+      dispatch(actions.onRefreshViewport());
+    },
+    [verticalSize, horizontalSize, maxWidth, maxHeight]
+  );
 
   // useEffect(function () {}, []);
 
@@ -102,12 +129,7 @@ function ScrollableContainer({
   const containerEl = useResizeObserver(onResizeCallback);
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
-      <div
-        ref={containerEl}
-        className="react-scrollable-container"
-        onWheel={() => null}
-        onKeyDown={() => null}
-      >
+      <div ref={containerEl} className="react-scrollable-container">
         <ScrollbarVertical
           ref={scrollbarVEl}
           {...vertical}

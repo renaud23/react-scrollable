@@ -1,6 +1,7 @@
 import * as actions from "../actions";
 import reduceOnInit from "./reduce-on-init";
 import reduceOnResize from "./reduce-on-resize";
+import reduceOnRefreshViewPort from "./reduce-on-refresh-viewport";
 import {
   reduceOnVerticalStartDrag,
   reduceOnHorizontalStartDrag,
@@ -32,6 +33,9 @@ function reducer(state, action) {
       return reduceOnHorizontalStopDrag(state, action);
     case actions.ON_HORIZONTAL_DRAG:
       return reduceOnHorizontalDrag(state, action);
+
+    case actions.ON_REFRESH_VIEWPORT:
+      return reduceOnRefreshViewPort(state, action);
     default:
       return state;
   }

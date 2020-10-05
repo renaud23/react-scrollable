@@ -10,8 +10,6 @@ const SCROLLBAR_INITIAL_STATE = {
 
 const INITIAL_STATE = {
   init: true,
-  viewportWidth: undefined,
-  viewportHeight: undefined,
   horizontal: { ...SCROLLBAR_INITIAL_STATE },
   vertical: { ...SCROLLBAR_INITIAL_STATE },
 };

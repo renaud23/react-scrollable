@@ -47,3 +47,8 @@ export const ON_HORIZONTAL_STOP_DRAG =
 export const onHorizontalStopDrag = () => ({
   type: ON_HORIZONTAL_STOP_DRAG,
 });
+
+export const ON_REFRESH_VIEWPORT = "react-scrollable/on-refresh-viewport";
+export const onRefreshViewport = () => ({
+  type: ON_REFRESH_VIEWPORT,
+});

@@ -10,8 +10,11 @@ export const INITIAL_STATE = {
   maxLines: undefined,
 
   viewportWidth: undefined,
-  viewPortHeight: undefined,
+  viewportHeight: undefined,
   nbLines: undefined,
+
+  verticalScrollPercent: 0,
+  horizontalScrollPercent: 0,
 };
 
 function getMaxLength(text = []) {
@@ -47,9 +50,12 @@ function reduceOnResize(state, action) {
   return { ...state, viewportWidth: width, viewportHeight: height };
 }
 
-// function reduceRefreshColumn(state){}
+function reduceOnVerticalScroll(state, action) {
+  const { payload } = action;
+  const { percent } = payload;
 
-// function reduceRefreshLine(state){}
+  return { ...state, verticalScrollPercent: percent };
+}
 
 function reduceOnRefreshViewportSize(state) {
   const { lineHeight, viewportHeight } = state;
@@ -66,9 +72,15 @@ function reducer(state, action) {
       return reduceOnResize(state, action);
     case actions.ON_REFRESH_VIEWPORT_SIZE:
       return reduceOnRefreshViewportSize(state, action);
+    case actions.ON_VERTICAL_SCROLL:
+      return reduceOnVerticalScroll(state, action);
     default:
       return state;
   }
 }
 
-export default reducer;
+export default (state, action) => {
+  const next = reducer(state, action);
+  // console.log({ action, prev: state, next });
+  return next;
+};
