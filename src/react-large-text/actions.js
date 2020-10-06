@@ -16,5 +16,11 @@ export const onVerticalScroll = (percent) => ({
   payload: { percent },
 });
 
+export const ON_HORIZONTAL_SCROLL = "react-large-text/on-horizontal-scroll";
+export const onHorizontalScroll = (percent) => ({
+  type: ON_HORIZONTAL_SCROLL,
+  payload: { percent },
+});
+
 export const ON_REFRESH_VIEWPORT_SIZE = "react-large-text/on-viewport-size";
 export const onRefreshViewportSize = () => ({ type: ON_REFRESH_VIEWPORT_SIZE });

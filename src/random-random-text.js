@@ -51,7 +51,7 @@ export function getSentence(sentence = "", current) {
 
 function getRandomText(length) {
   return new Array(length).fill(null).map(function () {
-    return getSentence();
+    return getSentence().trim();
   });
 }
 

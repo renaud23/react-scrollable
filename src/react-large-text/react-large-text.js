@@ -2,7 +2,9 @@ import React, { useCallback, useEffect, useReducer } from "react";
 import { ScrollableContainer } from "../react-scrollable";
 import { useResizeObserver } from "../react-scrollable";
 import * as actions from "./actions";
+import OffsetChar from "../offset-char";
 import reducer, { INITIAL_STATE } from "./reducer";
+import "./react-large-text.scss";
 
 function ReactLargeText({ value, lineHeight, offsetChar }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
@@ -13,13 +15,16 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
     nbLines,
     startLine,
     marginTop,
+    marginLeft,
   } = state;
 
   const onResizeCallback = useCallback(function (width, height) {
     dispatch(actions.onResize(width, height));
   }, []);
 
-  const onHorizontalScroll = useCallback(function (percent) {}, []);
+  const onHorizontalScroll = useCallback(function (percent) {
+    dispatch(actions.onHorizontalScroll(percent));
+  }, []);
   const onVerticalScroll = useCallback(function (percent) {
     dispatch(actions.onVerticalScroll(percent));
   }, []);
@@ -52,6 +57,7 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
           startLine={startLine}
           lineHeight={lineHeight}
           marginTop={marginTop}
+          marginLeft={marginLeft}
         />
       </ScrollableContainer>
     </div>
@@ -64,6 +70,7 @@ function ScrollableContent({
   nbLines,
   lineHeight,
   marginTop,
+  marginLeft,
 }) {
   const el = nbLines
     ? new Array(nbLines).fill(null).map(function (_, i) {
@@ -83,11 +90,17 @@ function ScrollableContent({
   return (
     <div
       className="react-large-text-content"
-      style={{ marginTop: `${marginTop || 0}px` }}
+      style={{ marginTop: `${marginTop || 0}px`, marginLeft: marginLeft || 0 }}
     >
       {el}
     </div>
   );
 }
 
-export default ReactLargeText;
+export default ({ value, lineHeight }) => {
+  return (
+    <OffsetChar>
+      <ReactLargeText value={value} lineHeight={lineHeight} />
+    </OffsetChar>
+  );
+};
