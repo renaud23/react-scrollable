@@ -1,6 +1,7 @@
 $scrollbarBgColor: rgba(100, 120, 90, 0.6);
 $scrollbarTrackBgColor: rgba(247, 229, 75, 0.6);
 $scrollbarSize: 12px;
+ 
 
 .react-scrollable-container {
   .react-scrollbar {
@@ -22,7 +23,7 @@ $scrollbarSize: 12px;
       width: calc(100% - 12px);
       bottom: 0;
       height: $scrollbarSize;
-      background-color: transparent;
+      background-color: $scrollbarBgColor;
 
       &.hidden {
         height: 0;
@@ -40,7 +41,7 @@ $scrollbarSize: 12px;
       }
 
       &.horizontal {
-        background-color: transparent;
+        background-color: $scrollbarTrackBgColor;
         height: 100%;
 
         &:hover, &.on-drag  {

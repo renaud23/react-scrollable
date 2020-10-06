@@ -57,7 +57,7 @@ function reduceOnInit(state, action) {
   const maxLineSize = getMaxLength(lines);
   const maxLines = lines.length;
   const maxHeight = maxLines * lineHeight;
-  const maxWidth = maxLineSize * offsetChar;
+  const maxWidth = Math.ceil(maxLineSize * offsetChar);
   return {
     ...state,
     lineHeight,

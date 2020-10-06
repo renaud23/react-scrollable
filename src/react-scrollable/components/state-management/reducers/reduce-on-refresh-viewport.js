@@ -1,7 +1,7 @@
 import { computeScrollbarSize, computeScrollbarPos } from "../common-reducers";
 
-function resolve(scrollbar) {
-  return computeScrollbarPos(computeScrollbarSize(scrollbar));
+function resolve(scrollbar, viewportSize) {
+  return computeScrollbarPos(computeScrollbarSize(scrollbar, viewportSize));
 }
 
 /**
@@ -10,12 +10,11 @@ function resolve(scrollbar) {
  * @param {*} action
  */
 function reduce(state) {
-  const { horizontal, vertical } = state;
-
+  const { horizontal, vertical, viewportWidth, viewportHeight } = state;
   return {
     ...state,
-    horizontal: resolve(horizontal),
-    vertical: resolve(vertical),
+    horizontal: resolve(horizontal, viewportWidth),
+    vertical: resolve(vertical, viewportHeight),
   };
 }
 

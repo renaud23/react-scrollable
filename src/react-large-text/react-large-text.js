@@ -58,6 +58,7 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
           lineHeight={lineHeight}
           marginTop={marginTop}
           marginLeft={marginLeft}
+          maxWidth={maxWidth}
         />
       </ScrollableContainer>
     </div>
@@ -71,6 +72,7 @@ function ScrollableContent({
   lineHeight,
   marginTop,
   marginLeft,
+  maxWidth,
 }) {
   const el = nbLines
     ? new Array(nbLines).fill(null).map(function (_, i) {
@@ -78,7 +80,7 @@ function ScrollableContent({
         return (
           <div
             className="react-large-text-line"
-            style={{ maxHeight: lineHeight }}
+            style={{ maxHeight: lineHeight, width: maxWidth }}
             key={i}
           >
             {content}

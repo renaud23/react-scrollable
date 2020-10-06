@@ -1,7 +1,7 @@
 export const ON_RESIZE = "react-scrollable/on-resize";
-export const onResize = (width, height) => ({
+export const onResize = ({ width, height, viewportWidth, viewportHeight }) => ({
   type: ON_RESIZE,
-  payload: { width, height },
+  payload: { width, height, viewportWidth, viewportHeight },
 });
 
 export const ON_INIT = "react-scrollable/on-init";

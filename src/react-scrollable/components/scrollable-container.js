@@ -34,7 +34,7 @@ function ScrollableContainer({
   /* USE CALLBACK */
 
   const onResizeCallback = useCallback(
-    function () {
+    function (viewportWidth, viewportHeight) {
       const { width } = scrollbarHEl.current
         ? scrollbarHEl.current.getBoundingClientRect()
         : {};
@@ -43,7 +43,9 @@ function ScrollableContainer({
         ? scrollbarVEl.current.getBoundingClientRect()
         : {};
 
-      dispatch(actions.onResize(width, height));
+      dispatch(
+        actions.onResize({ width, height, viewportWidth, viewportHeight })
+      );
     },
     [dispatch, scrollbarHEl, scrollbarVEl]
   );
