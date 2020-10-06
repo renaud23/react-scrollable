@@ -1,41 +1,51 @@
 $scrollbarBgColor: rgba(100, 120, 90, 0.6);
+$scrollbarTrackBgColor: rgba(247, 229, 75, 0.6);
 $scrollbarSize: 12px;
 
 .react-scrollable-container {
   .react-scrollbar {
     position: absolute;
     display: inline-block;
-    background-color: $scrollbarBgColor;
-
-    
 
     &.vertical {
       width: $scrollbarSize;
       right: 0;
       height: calc(100% - 12px);
+      background-color: $scrollbarBgColor;
 
       &.hidden {
         width: 0;
-       }
+      }
     }
 
     &.horizontal {
       width: calc(100% - 12px);
       bottom: 0;
       height: $scrollbarSize;
+      background-color: transparent;
 
       &.hidden {
-       height: 0;
+        height: 0;
+      }
+
+      &:hover, &.on-drag   {
+        background-color: $scrollbarBgColor;
       }
     }
     /* TRACK */
     .react-scrollbar-track {
-      background-color: yellow;
-      &.horizontal {
-        height: 100%;
-      }
       &.vertical {
+        background-color: $scrollbarTrackBgColor;
         width: 100%;
+      }
+
+      &.horizontal {
+        background-color: transparent;
+        height: 100%;
+
+        &:hover, &.on-drag  {
+          background-color: $scrollbarTrackBgColor;
+        }
       }
     }
   }

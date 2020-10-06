@@ -25,6 +25,7 @@ export default React.forwardRef(function Scrollbar(
     tPos,
     tSize,
     max,
+    drag,
     onTrackMouseDown = () => null,
     onBarMouseDown = () => null,
   },
@@ -57,12 +58,17 @@ export default React.forwardRef(function Scrollbar(
   return (
     <div
       ref={containerEl}
-      className={classnames("react-scrollbar", className, { hidden })}
+      className={classnames("react-scrollbar", className, {
+        hidden,
+        "on-drag": drag,
+      })}
       onMouseDown={onMouseDownBarCallback}
     >
       {hidden ? null : (
         <div
-          className={classnames("react-scrollbar-track", className)}
+          className={classnames("react-scrollbar-track", className, {
+            "on-drag": drag,
+          })}
           style={getStyle(vertical, tPos, tSize)}
           onMouseDown={onMouseDownTrackCallback}
         />
