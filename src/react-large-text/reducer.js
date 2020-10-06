@@ -15,7 +15,26 @@ export const INITIAL_STATE = {
 
   verticalScrollPercent: 0,
   horizontalScrollPercent: 0,
+  startLine: undefined,
+  defaultStartLine: 0,
+  marginTop: 0,
 };
+
+function computeVerticalPos(state) {
+  const {
+    verticalScrollPercent,
+    maxHeight,
+    viewportHeight,
+    lineHeight,
+  } = state;
+  const scrollTop = verticalScrollPercent * (maxHeight - viewportHeight);
+  const startLine = Math.trunc(scrollTop / lineHeight) || 0;
+  const endTop = scrollTop + viewportHeight;
+  const endLine = Math.ceil(endTop / lineHeight);
+  const nbLines = endLine - startLine;
+  const marginTop = startLine * lineHeight - scrollTop;
+  return { ...state, startLine, nbLines, marginTop };
+}
 
 function getMaxLength(text = []) {
   return text.reduce(function (a, { length }) {
@@ -46,7 +65,6 @@ function reduceOnInit(state, action) {
 function reduceOnResize(state, action) {
   const { payload } = action;
   const { width, height } = payload;
-
   return { ...state, viewportWidth: width, viewportHeight: height };
 }
 
@@ -54,13 +72,14 @@ function reduceOnVerticalScroll(state, action) {
   const { payload } = action;
   const { percent } = payload;
 
-  return { ...state, verticalScrollPercent: percent };
+  return computeVerticalPos({ ...state, verticalScrollPercent: percent });
 }
 
 function reduceOnRefreshViewportSize(state) {
-  const { lineHeight, viewportHeight } = state;
-  const nbLines = Math.ceil(viewportHeight / lineHeight);
-  return { ...state, nbLines };
+  // const { lineHeight, viewportHeight } = state;
+  // const nbLines = Math.ceil(viewportHeight / lineHeight);
+
+  return computeVerticalPos(state);
 }
 
 function reducer(state, action) {

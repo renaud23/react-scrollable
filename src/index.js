@@ -5,12 +5,12 @@ import OffsetChar from "./offset-char";
 import getRandomText from "./random-random-text";
 import "./custom-scrollable.scss";
 
-const largeText = getRandomText(10000);
+const largeText = getRandomText(10);
 
 /* **** */
 ReactDOM.render(
   <OffsetChar>
-    <ReactLargeText value={largeText} lineHeight={22} />
+    <ReactLargeText value={largeText} lineHeight={66} />
   </OffsetChar>,
   document.getElementById("root")
 );

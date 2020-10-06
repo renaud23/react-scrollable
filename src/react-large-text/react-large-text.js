@@ -6,7 +6,14 @@ import reducer, { INITIAL_STATE } from "./reducer";
 
 function ReactLargeText({ value, lineHeight, offsetChar }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const { maxWidth, maxHeight, viewportHeight, nbLines } = state;
+  const {
+    maxWidth,
+    maxHeight,
+    viewportHeight,
+    nbLines,
+    startLine,
+    marginTop,
+  } = state;
 
   const onResizeCallback = useCallback(function (width, height) {
     dispatch(actions.onResize(width, height));
@@ -14,7 +21,7 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
 
   const onHorizontalScroll = useCallback(function (percent) {}, []);
   const onVerticalScroll = useCallback(function (percent) {
-    // dispatch(actions.onVerticalScroll(percent));
+    dispatch(actions.onVerticalScroll(percent));
   }, []);
 
   useEffect(
@@ -30,10 +37,9 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
     },
     [value, lineHeight, viewportHeight]
   );
-
   const containerEl = useResizeObserver(onResizeCallback);
   return (
-    <div className="react-large-text">
+    <div className="react-large-text" ref={containerEl}>
       <ScrollableContainer
         maxWidth={maxWidth}
         maxHeight={maxHeight}
@@ -43,19 +49,22 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
         <ScrollableContent
           nbLines={nbLines}
           lines={value}
-          startLine={0}
+          startLine={startLine}
           lineHeight={lineHeight}
-          ref={containerEl}
+          marginTop={marginTop}
         />
       </ScrollableContainer>
     </div>
   );
 }
 
-const ScrollableContent = React.forwardRef(function ScrollableContent(
-  { lines, startLine, nbLines, lineHeight },
-  ref
-) {
+function ScrollableContent({
+  lines,
+  startLine,
+  nbLines,
+  lineHeight,
+  marginTop,
+}) {
   const el = nbLines
     ? new Array(nbLines).fill(null).map(function (_, i) {
         const content = lines[startLine + i];
@@ -70,11 +79,15 @@ const ScrollableContent = React.forwardRef(function ScrollableContent(
         );
       })
     : null;
+
   return (
-    <div className="react-large-text-content" ref={ref}>
+    <div
+      className="react-large-text-content"
+      style={{ marginTop: `${marginTop || 0}px` }}
+    >
       {el}
     </div>
   );
-});
+}
 
 export default ReactLargeText;

@@ -87,6 +87,7 @@ function ScrollableContainer({
     },
     [horizontalPercent, onHorizontalScroll]
   );
+
   useEffect(
     function () {
       onVerticalScroll(verticalPercent);
