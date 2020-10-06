@@ -13,13 +13,15 @@ function ScrollableContainer({
   children,
   maxWidth,
   maxHeight,
+  verticalScrollPercentRequest,
+  horizontalScrollPercentRequest,
   onHorizontalScroll = () => null,
   onVerticalScroll = () => null,
 }) {
   const scrollbarVEl = useRef();
   const scrollbarHEl = useRef();
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
-  const { vertical, horizontal } = state;
+  const { vertical, horizontal, refresh } = state;
   const {
     drag: verticalDrag,
     scrollPercent: verticalPercent,
@@ -90,19 +92,37 @@ function ScrollableContainer({
     [verticalDrag, horizontalDrag]
   );
 
-  /* USE EFFECT */
   useEffect(
     function () {
-      onHorizontalScroll(horizontalPercent);
+      const { percent } = verticalScrollPercentRequest || {};
+      dispatch(actions.onVerticalScrollPercentRequest(percent));
     },
-    [horizontalPercent, onHorizontalScroll]
+    [verticalScrollPercentRequest]
   );
 
   useEffect(
     function () {
-      onVerticalScroll(verticalPercent);
+      const { percent } = horizontalScrollPercentRequest || {};
+      if (percent) {
+        dispatch(actions.onHorizontalScrollPercentRequest(percent));
+      }
     },
-    [verticalPercent, onVerticalScroll]
+    [horizontalScrollPercentRequest]
+  );
+
+  /* USE EFFECT */
+  useEffect(
+    function () {
+      if (refresh) onHorizontalScroll(horizontalPercent);
+    },
+    [horizontalPercent, onHorizontalScroll, refresh]
+  );
+
+  useEffect(
+    function () {
+      if (refresh) onVerticalScroll(verticalPercent);
+    },
+    [verticalPercent, onVerticalScroll, refresh]
   );
 
   useEffect(

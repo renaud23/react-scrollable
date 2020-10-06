@@ -15,6 +15,10 @@ import {
   reduceOnVerticalMouseDown,
   reduceOnHorizontalMouseDown,
 } from "./reduce-on-mouse-down";
+import {
+  reduceOnVerticalScrollPercentRequest,
+  reduceOnHorizontalScrollPercentRequest,
+} from "./reduce-on-scroll-percent-request";
 
 function reducer(state, action) {
   const { type } = action;
@@ -45,6 +49,11 @@ function reducer(state, action) {
       return reduceOnVerticalMouseDown(state, action);
     case actions.ON_HORIZONTAL_MOUSE_DOWN:
       return reduceOnHorizontalMouseDown(state, action);
+
+    case actions.ON_VERTICAL_SCROLL_PERCENT_REQUEST:
+      return reduceOnVerticalScrollPercentRequest(state, action);
+    case actions.ON_HORIZONTAL_SCROLL_PERCENT_REQUEST:
+      return reduceOnHorizontalScrollPercentRequest(state, action);
     default:
       return state;
   }

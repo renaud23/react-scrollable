@@ -50,8 +50,8 @@ export function getSentence(sentence = "", current) {
 }
 
 function getRandomText(length) {
-  return new Array(length).fill(null).map(function () {
-    return getSentence().trim();
+  return new Array(length).fill(null).map(function (_, i) {
+    return `${i + 1} - ${getSentence().trim()}`;
   });
 }
 

@@ -19,6 +19,9 @@ export const INITIAL_STATE = {
   defaultStartLine: 0,
   marginTop: 0,
   marginLeft: 0,
+
+  verticalScrollPercentRequest: undefined,
+  horizontalScrollPercentRequest: undefined,
 };
 
 function computeVerticalPos(state) {
@@ -34,6 +37,7 @@ function computeVerticalPos(state) {
   const endLine = Math.ceil(endTop / lineHeight);
   const nbLines = endLine - startLine;
   const marginTop = startLine * lineHeight - scrollTop;
+
   return { ...state, startLine, nbLines, marginTop };
 }
 
@@ -93,6 +97,71 @@ function reduceOnRefreshViewportSize(state) {
   return computeVerticalPos(state);
 }
 
+function reduceOnArrowDown(state) {
+  const { startLine, maxLines, nbLines } = state;
+  const next = Math.min(startLine + 1, maxLines - nbLines);
+  const verticalScrollPercentRequest = {
+    percent: next / (maxLines - nbLines),
+  };
+  return {
+    ...state,
+    startLine: next,
+    verticalScrollPercentRequest,
+    marginTop: 0,
+  };
+}
+
+function reduceOnArrowUp(state) {
+  const { startLine, maxLines, nbLines } = state;
+  const next = Math.max(startLine - 1, 0);
+  const verticalScrollPercentRequest = {
+    percent: next / (maxLines - nbLines),
+  };
+  return {
+    ...state,
+    startLine: next,
+    verticalScrollPercentRequest,
+    marginTop: 0,
+  };
+}
+
+function reduceOnArrowLeft(state, action) {
+  const { marginLeft, maxWidth, viewportWidth, offsetChar } = state;
+  const how = offsetChar / (maxWidth - viewportWidth);
+  const percent = Math.max(
+    (Math.abs(marginLeft) || 0) / (maxWidth - viewportWidth) - how,
+    0
+  );
+  return {
+    ...state,
+    marginLeft: -percent * (maxWidth - viewportWidth),
+    horizontalScrollPercentRequest: { percent },
+  };
+}
+
+function reduceOnArrowRight(state) {
+  const { marginLeft, maxWidth, viewportWidth, offsetChar } = state;
+  const how = offsetChar / (maxWidth - viewportWidth);
+
+  const percent = Math.min(
+    (Math.abs(marginLeft) || 0) / (maxWidth - viewportWidth) + how,
+    1.0
+  );
+  return {
+    ...state,
+    marginLeft: -percent * (maxWidth - viewportWidth),
+    horizontalScrollPercentRequest: { percent },
+  };
+}
+
+function reduceOnPageUp(state, action) {
+  return state;
+}
+
+function reduceOnPageDown(state, action) {
+  return state;
+}
+
 function reducer(state, action) {
   const { type } = action;
   switch (type) {
@@ -106,6 +175,19 @@ function reducer(state, action) {
       return reduceOnVerticalScroll(state, action);
     case actions.ON_HORIZONTAL_SCROLL:
       return reduceOnHorizontalScroll(state, action);
+    case actions.ON_ARROW_DOWN:
+      return reduceOnArrowDown(state, action);
+    case actions.ON_ARROW_UP:
+      return reduceOnArrowUp(state, action);
+    case actions.ON_ARROW_LEFT:
+      return reduceOnArrowLeft(state, action);
+    case actions.ON_ARROW_RIGHT:
+      return reduceOnArrowRight(state, action);
+    case actions.ON_PAGE_UP:
+      return reduceOnPageUp(state, action);
+    case actions.ON_PAGE_DOWN:
+      return reduceOnPageDown(state, action);
+
     default:
       return state;
   }

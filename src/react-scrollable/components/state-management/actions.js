@@ -65,3 +65,17 @@ export const onHorizontalMouseDown = (clientPos) => ({
   type: ON_HORIZONTAL_MOUSE_DOWN,
   payload: { clientPos },
 });
+
+export const ON_VERTICAL_SCROLL_PERCENT_REQUEST =
+  "react-scrollable/on-vertical-scroll-percent-request";
+export const onVerticalScrollPercentRequest = (percent) => ({
+  type: ON_VERTICAL_SCROLL_PERCENT_REQUEST,
+  payload: { percent },
+});
+
+export const ON_HORIZONTAL_SCROLL_PERCENT_REQUEST =
+  "react-scrollable/on-horizontal-scroll-percent-request";
+export const onHorizontalScrollPercentRequest = (percent) => ({
+  type: ON_HORIZONTAL_SCROLL_PERCENT_REQUEST,
+  payload: { percent },
+});

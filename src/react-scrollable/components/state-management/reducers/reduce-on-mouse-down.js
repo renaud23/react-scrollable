@@ -11,10 +11,10 @@ function resolve(scrollbar, action) {
 
 export function reduceOnVerticalMouseDown(state, action) {
   const { vertical } = state;
-  return { ...state, vertical: resolve(vertical, action) };
+  return { ...state, refresh: true, vertical: resolve(vertical, action) };
 }
 
 export function reduceOnHorizontalMouseDown(state, action) {
   const { horizontal } = state;
-  return { ...state, horizontal: resolve(horizontal, action) };
+  return { ...state, refresh: true, horizontal: resolve(horizontal, action) };
 }

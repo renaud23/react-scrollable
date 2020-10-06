@@ -16,7 +16,25 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
     startLine,
     marginTop,
     marginLeft,
+    verticalScrollPercentRequest,
+    horizontalScrollPercentRequest,
   } = state;
+
+  const onKeyDownCallback = useCallback(function (e) {
+    if (e.key === "ArrowDown") {
+      dispatch(actions.onArrowDown());
+    } else if (e.key === "ArrowUp") {
+      dispatch(actions.onArrowUp());
+    } else if (e.key === "ArrowLeft") {
+      dispatch(actions.onArrowLeft());
+    } else if (e.key === "ArrowRight") {
+      dispatch(actions.onArrowRight());
+    } else if (e.key === "PageUp") {
+      dispatch(actions.onPageUp());
+    } else if (e.key === "PageDown") {
+      dispatch(actions.onPageDown());
+    }
+  }, []);
 
   const onResizeCallback = useCallback(function (width, height) {
     dispatch(actions.onResize(width, height));
@@ -44,12 +62,19 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
   );
   const containerEl = useResizeObserver(onResizeCallback);
   return (
-    <div className="react-large-text" ref={containerEl}>
+    <div
+      className="react-large-text"
+      ref={containerEl}
+      tabIndex="0"
+      onKeyDown={onKeyDownCallback}
+    >
       <ScrollableContainer
         maxWidth={maxWidth}
         maxHeight={maxHeight}
         onHorizontalScroll={onHorizontalScroll}
         onVerticalScroll={onVerticalScroll}
+        verticalScrollPercentRequest={verticalScrollPercentRequest}
+        horizontalScrollPercentRequest={horizontalScrollPercentRequest}
       >
         <ScrollableContent
           nbLines={nbLines}
@@ -80,7 +105,7 @@ function ScrollableContent({
         return (
           <div
             className="react-large-text-line"
-            style={{ maxHeight: lineHeight, width: maxWidth }}
+            style={{ height: lineHeight, width: maxWidth }}
             key={i}
           >
             {content}
