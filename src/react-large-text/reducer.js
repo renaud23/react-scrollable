@@ -43,9 +43,12 @@ function computeVerticalPos(state) {
 
 function computeHorizontalPos(state) {
   const { horizontalScrollPercent, maxWidth, viewportWidth } = state;
-  const marginLeft = horizontalScrollPercent * (maxWidth - viewportWidth) * -1;
+  if (viewportWidth < maxWidth) {
+    const marginLeft = horizontalScrollPercent * (maxWidth - viewportWidth);
 
-  return { ...state, marginLeft };
+    return { ...state, marginLeft: -marginLeft };
+  }
+  return { ...state, marginLeft: 0 };
 }
 
 function getMaxLength(text = []) {
@@ -94,7 +97,7 @@ function reduceOnHorizontalScroll(state, action) {
 }
 
 function reduceOnRefreshViewportSize(state) {
-  return computeVerticalPos(state);
+  return computeHorizontalPos(computeVerticalPos(state));
 }
 
 function reduceOnArrowDown(state) {
