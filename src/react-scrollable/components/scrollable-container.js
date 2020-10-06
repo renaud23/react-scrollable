@@ -48,11 +48,19 @@ function ScrollableContainer({
     [dispatch, scrollbarHEl, scrollbarVEl]
   );
 
+  /* */
   const onMDHcbk = useCallback(function (clientPos) {
     dispatch(actions.onHorizontalStartDrag(clientPos));
   }, []);
   const onMDVcbk = useCallback(function (clientPos) {
     dispatch(actions.onVerticalStartDrag(clientPos));
+  }, []);
+  /* */
+  const onBarMouseDownVer = useCallback(function (clientPos) {
+    dispatch(actions.onVerticalMouseDown(clientPos));
+  }, []);
+  const onBarMouseDownHor = useCallback(function (clientPos) {
+    dispatch(actions.onHorizontalMouseDown(clientPos));
   }, []);
 
   const onmouseupCbk = useCallback(
@@ -134,12 +142,14 @@ function ScrollableContainer({
         <ScrollbarVertical
           ref={scrollbarVEl}
           {...vertical}
-          onMouseDown={onMDVcbk}
+          onTrackMouseDown={onMDVcbk}
+          onBarMouseDown={onBarMouseDownVer}
         />
         <ScrollbarHorizontal
           ref={scrollbarHEl}
           {...horizontal}
-          onMouseDown={onMDHcbk}
+          onTrackMouseDown={onMDHcbk}
+          onBarMouseDown={onBarMouseDownHor}
         />
         {children}
       </div>

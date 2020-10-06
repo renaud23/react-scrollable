@@ -25,31 +25,46 @@ export default React.forwardRef(function Scrollbar(
     tPos,
     tSize,
     max,
-    onMouseDown = () => null,
+    onTrackMouseDown = () => null,
+    onBarMouseDown = () => null,
   },
   containerEl
 ) {
-  const onMouseDownCallback = useCallback(
+  const onMouseDownTrackCallback = useCallback(
     function (e) {
       e.stopPropagation();
       if (e.button === 0) {
         const clientPos = vertical ? e.clientY : e.clientX;
-        onMouseDown(clientPos);
+        onTrackMouseDown(clientPos);
       }
     },
-    [onMouseDown, vertical]
+    [onTrackMouseDown, vertical]
   );
+
+  const onMouseDownBarCallback = useCallback(
+    function (e) {
+      e.stopPropagation();
+      if (e.button === 0) {
+        const { left, top } = e.target.getBoundingClientRect();
+        const clientPos = vertical ? e.clientY - top : e.clientX - left;
+        onBarMouseDown(clientPos);
+      }
+    },
+    [onBarMouseDown, vertical]
+  );
+
   const hidden = pSize >= max;
   return (
     <div
       ref={containerEl}
       className={classnames("react-scrollbar", className, { hidden })}
+      onMouseDown={onMouseDownBarCallback}
     >
       {hidden ? null : (
         <div
           className={classnames("react-scrollbar-track", className)}
           style={getStyle(vertical, tPos, tSize)}
-          onMouseDown={onMouseDownCallback}
+          onMouseDown={onMouseDownTrackCallback}
         />
       )}
     </div>

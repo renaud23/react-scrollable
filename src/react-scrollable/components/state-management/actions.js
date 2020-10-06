@@ -52,3 +52,16 @@ export const ON_REFRESH_VIEWPORT = "react-scrollable/on-refresh-viewport";
 export const onRefreshViewport = () => ({
   type: ON_REFRESH_VIEWPORT,
 });
+
+export const ON_VERTICAL_MOUSE_DOWN = "react-scrollable/on-vertical-mouse-down";
+export const onVerticalMouseDown = (clientPos) => ({
+  type: ON_VERTICAL_MOUSE_DOWN,
+  payload: { clientPos },
+});
+
+export const ON_HORIZONTAL_MOUSE_DOWN =
+  "react-scrollable/on-horizontal-mouse-down";
+export const onHorizontalMouseDown = (clientPos) => ({
+  type: ON_HORIZONTAL_MOUSE_DOWN,
+  payload: { clientPos },
+});

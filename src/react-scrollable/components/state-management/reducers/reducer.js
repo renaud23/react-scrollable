@@ -11,6 +11,10 @@ import {
   reduceOnHorizontalStopDrag,
 } from "./reduce-on-stop-drag";
 import { reduceOnVerticalDrag, reduceOnHorizontalDrag } from "./reduce-on-drag";
+import {
+  reduceOnVerticalMouseDown,
+  reduceOnHorizontalMouseDown,
+} from "./reduce-on-mouse-down";
 
 function reducer(state, action) {
   const { type } = action;
@@ -36,6 +40,11 @@ function reducer(state, action) {
 
     case actions.ON_REFRESH_VIEWPORT:
       return reduceOnRefreshViewPort(state, action);
+
+    case actions.ON_VERTICAL_MOUSE_DOWN:
+      return reduceOnVerticalMouseDown(state, action);
+    case actions.ON_HORIZONTAL_MOUSE_DOWN:
+      return reduceOnHorizontalMouseDown(state, action);
     default:
       return state;
   }
