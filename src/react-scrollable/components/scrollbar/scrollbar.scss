@@ -23,7 +23,7 @@ $scrollbarSize: 12px;
       width: calc(100% - 12px);
       bottom: 0;
       height: $scrollbarSize;
-      background-color: $scrollbarBgColor;
+      background-color: transparent;
 
       &.hidden {
         height: 0;
@@ -31,6 +31,9 @@ $scrollbarSize: 12px;
 
       &:hover, &.on-drag   {
         background-color: $scrollbarBgColor;
+        .react-scrollbar-track{
+          background-color: $scrollbarTrackBgColor;
+        }
       }
     }
     /* TRACK */
@@ -41,7 +44,7 @@ $scrollbarSize: 12px;
       }
 
       &.horizontal {
-        background-color: $scrollbarTrackBgColor;
+        background-color: transparent;
         height: 100%;
 
         &:hover, &.on-drag  {
