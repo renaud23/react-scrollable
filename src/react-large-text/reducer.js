@@ -45,7 +45,6 @@ function computeHorizontalPos(state) {
   const { horizontalScrollPercent, maxWidth, viewportWidth } = state;
   if (viewportWidth < maxWidth) {
     const marginLeft = horizontalScrollPercent * (maxWidth - viewportWidth);
-
     return { ...state, marginLeft: -marginLeft };
   }
   return { ...state, marginLeft: 0 };
@@ -158,11 +157,27 @@ function reduceOnArrowRight(state) {
 }
 
 function reduceOnPageUp(state, action) {
-  return state;
+  const { startLine, maxLines, nbLines } = state;
+  const next = Math.max(startLine - nbLines, 0);
+  const verticalScrollPercentRequest = { percent: next / (maxLines - nbLines) };
+  return {
+    ...state,
+    startLine: next,
+    verticalScrollPercentRequest,
+    marginTop: 0,
+  };
 }
 
 function reduceOnPageDown(state, action) {
-  return state;
+  const { startLine, maxLines, nbLines } = state;
+  const next = Math.min(startLine + nbLines, maxLines - nbLines);
+  const verticalScrollPercentRequest = { percent: next / (maxLines - nbLines) };
+  return {
+    ...state,
+    startLine: next,
+    verticalScrollPercentRequest,
+    marginTop: 0,
+  };
 }
 
 function reducer(state, action) {

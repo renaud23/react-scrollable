@@ -19,6 +19,7 @@ import {
   reduceOnVerticalScrollPercentRequest,
   reduceOnHorizontalScrollPercentRequest,
 } from "./reduce-on-scroll-percent-request";
+import reduceOnWheel from "./reduce-on-wheel";
 
 function reducer(state, action) {
   const { type } = action;
@@ -54,6 +55,8 @@ function reducer(state, action) {
       return reduceOnVerticalScrollPercentRequest(state, action);
     case actions.ON_HORIZONTAL_SCROLL_PERCENT_REQUEST:
       return reduceOnHorizontalScrollPercentRequest(state, action);
+    case actions.ON_WHEEL:
+      return reduceOnWheel(state, action);
     default:
       return state;
   }

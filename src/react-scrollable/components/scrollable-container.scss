@@ -12,4 +12,10 @@
 
   &.resizable {
   }
+
+
+  &:focus {
+    outline: none;
+
+  }
 }

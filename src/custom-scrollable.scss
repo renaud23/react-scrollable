@@ -5,10 +5,17 @@
 
   width: 400px;
   height: 300px;
-  position: absolute;
-  top: 50px;
-  left: 50px; 
+
   overflow: hidden;
   resize: both;
-  // line-height: 66px;
+
+  padding: 10px 10px;
+  border-radius: 10px;
+
+  &:focus-within {
+    border: solid 1px saddlebrown;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  }
 }

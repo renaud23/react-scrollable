@@ -65,8 +65,8 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
     <div
       className="react-large-text"
       ref={containerEl}
-      tabIndex="0"
       onKeyDown={onKeyDownCallback}
+      tabIndex="0"
     >
       <ScrollableContainer
         maxWidth={maxWidth}

@@ -4,12 +4,15 @@ import ReactLargeText from "./react-large-text";
 import getRandomText from "./random-random-text";
 import "./custom-scrollable.scss";
 
-const largeText = getRandomText(10);
+const largeText = getRandomText(10000);
+
+function App() {
+  return (
+    <div className="custom-large-text">
+      <ReactLargeText value={largeText} lineHeight={32} />
+    </div>
+  );
+}
 
 /* **** */
-ReactDOM.render(
-  <div className="custom-large-text">
-    <ReactLargeText value={largeText} lineHeight={66} />
-  </div>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));

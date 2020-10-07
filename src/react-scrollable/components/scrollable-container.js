@@ -92,6 +92,10 @@ function ScrollableContainer({
     [verticalDrag, horizontalDrag]
   );
 
+  const onWheelCallback = useCallback(function (e) {
+    dispatch(actions.onWheel(e.deltaY));
+  }, []);
+  /* USE EFFECT */
   useEffect(
     function () {
       const { percent } = verticalScrollPercentRequest || {};
@@ -160,7 +164,12 @@ function ScrollableContainer({
   const containerEl = useResizeObserver(onResizeCallback);
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
-      <div ref={containerEl} className="react-scrollable-container">
+      <div
+        ref={containerEl}
+        className="react-scrollable-container"
+        tabIndex="-1"
+        onWheel={onWheelCallback}
+      >
         <ScrollbarVertical
           ref={scrollbarVEl}
           {...vertical}

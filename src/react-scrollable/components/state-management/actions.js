@@ -79,3 +79,6 @@ export const onHorizontalScrollPercentRequest = (percent) => ({
   type: ON_HORIZONTAL_SCROLL_PERCENT_REQUEST,
   payload: { percent },
 });
+
+export const ON_WHEEL = "react-scrollable/on-wheel";
+export const onWheel = (delta) => ({ type: ON_WHEEL, payload: { delta } });
