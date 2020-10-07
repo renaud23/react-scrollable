@@ -13,20 +13,30 @@ function ScrollableContainer({
   children,
   maxWidth,
   maxHeight,
-  onKeyDown,
-  onWheel,
+  verticalScrollPercentRequest,
+  horizontalScrollPercentRequest,
+  onHorizontalScroll = () => null,
+  onVerticalScroll = () => null,
 }) {
   const scrollbarVEl = useRef();
   const scrollbarHEl = useRef();
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
-  const { vertical, horizontal } = state;
-  const { drag: verticalDrag } = vertical;
-  const { drag: horizontalDrag } = horizontal;
+  const { vertical, horizontal, refresh } = state;
+  const {
+    drag: verticalDrag,
+    scrollPercent: verticalPercent,
+    size: verticalSize,
+  } = vertical;
+  const {
+    drag: horizontalDrag,
+    scrollPercent: horizontalPercent,
+    size: horizontalSize,
+  } = horizontal;
 
   /* USE CALLBACK */
 
   const onResizeCallback = useCallback(
-    function () {
+    function (viewportWidth, viewportHeight) {
       const { width } = scrollbarHEl.current
         ? scrollbarHEl.current.getBoundingClientRect()
         : {};
@@ -35,16 +45,26 @@ function ScrollableContainer({
         ? scrollbarVEl.current.getBoundingClientRect()
         : {};
 
-      dispatch(actions.onResize(width, height));
+      dispatch(
+        actions.onResize({ width, height, viewportWidth, viewportHeight })
+      );
     },
     [dispatch, scrollbarHEl, scrollbarVEl]
   );
 
+  /* */
   const onMDHcbk = useCallback(function (clientPos) {
     dispatch(actions.onHorizontalStartDrag(clientPos));
   }, []);
   const onMDVcbk = useCallback(function (clientPos) {
     dispatch(actions.onVerticalStartDrag(clientPos));
+  }, []);
+  /* */
+  const onBarMouseDownVer = useCallback(function (clientPos) {
+    dispatch(actions.onVerticalMouseDown(clientPos));
+  }, []);
+  const onBarMouseDownHor = useCallback(function (clientPos) {
+    dispatch(actions.onHorizontalMouseDown(clientPos));
   }, []);
 
   const onmouseupCbk = useCallback(
@@ -72,7 +92,49 @@ function ScrollableContainer({
     [verticalDrag, horizontalDrag]
   );
 
+  const onWheelCallback = useCallback(function (e) {
+    dispatch(actions.onWheel(e.deltaY));
+  }, []);
   /* USE EFFECT */
+  useEffect(
+    function () {
+      const { percent } = verticalScrollPercentRequest || {};
+      dispatch(actions.onVerticalScrollPercentRequest(percent));
+    },
+    [verticalScrollPercentRequest]
+  );
+
+  useEffect(
+    function () {
+      const { percent } = horizontalScrollPercentRequest || {};
+      if (percent) {
+        dispatch(actions.onHorizontalScrollPercentRequest(percent));
+      }
+    },
+    [horizontalScrollPercentRequest]
+  );
+
+  /* USE EFFECT */
+  useEffect(
+    function () {
+      if (refresh) onHorizontalScroll(horizontalPercent);
+    },
+    [horizontalPercent, onHorizontalScroll, refresh]
+  );
+
+  useEffect(
+    function () {
+      if (refresh) onVerticalScroll(verticalPercent);
+    },
+    [verticalPercent, onVerticalScroll, refresh]
+  );
+
+  useEffect(
+    function () {
+      dispatch(actions.onRefreshViewport());
+    },
+    [verticalSize, horizontalSize, maxWidth, maxHeight]
+  );
 
   // useEffect(function () {}, []);
 
@@ -105,18 +167,20 @@ function ScrollableContainer({
       <div
         ref={containerEl}
         className="react-scrollable-container"
-        onWheel={() => null}
-        onKeyDown={() => null}
+        tabIndex="-1"
+        onWheel={onWheelCallback}
       >
         <ScrollbarVertical
           ref={scrollbarVEl}
           {...vertical}
-          onMouseDown={onMDVcbk}
+          onTrackMouseDown={onMDVcbk}
+          onBarMouseDown={onBarMouseDownVer}
         />
         <ScrollbarHorizontal
           ref={scrollbarHEl}
           {...horizontal}
-          onMouseDown={onMDHcbk}
+          onTrackMouseDown={onMDHcbk}
+          onBarMouseDown={onBarMouseDownHor}
         />
         {children}
       </div>

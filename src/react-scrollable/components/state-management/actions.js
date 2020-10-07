@@ -1,7 +1,7 @@
 export const ON_RESIZE = "react-scrollable/on-resize";
-export const onResize = (width, height) => ({
+export const onResize = ({ width, height, viewportWidth, viewportHeight }) => ({
   type: ON_RESIZE,
-  payload: { width, height },
+  payload: { width, height, viewportWidth, viewportHeight },
 });
 
 export const ON_INIT = "react-scrollable/on-init";
@@ -47,3 +47,38 @@ export const ON_HORIZONTAL_STOP_DRAG =
 export const onHorizontalStopDrag = () => ({
   type: ON_HORIZONTAL_STOP_DRAG,
 });
+
+export const ON_REFRESH_VIEWPORT = "react-scrollable/on-refresh-viewport";
+export const onRefreshViewport = () => ({
+  type: ON_REFRESH_VIEWPORT,
+});
+
+export const ON_VERTICAL_MOUSE_DOWN = "react-scrollable/on-vertical-mouse-down";
+export const onVerticalMouseDown = (clientPos) => ({
+  type: ON_VERTICAL_MOUSE_DOWN,
+  payload: { clientPos },
+});
+
+export const ON_HORIZONTAL_MOUSE_DOWN =
+  "react-scrollable/on-horizontal-mouse-down";
+export const onHorizontalMouseDown = (clientPos) => ({
+  type: ON_HORIZONTAL_MOUSE_DOWN,
+  payload: { clientPos },
+});
+
+export const ON_VERTICAL_SCROLL_PERCENT_REQUEST =
+  "react-scrollable/on-vertical-scroll-percent-request";
+export const onVerticalScrollPercentRequest = (percent) => ({
+  type: ON_VERTICAL_SCROLL_PERCENT_REQUEST,
+  payload: { percent },
+});
+
+export const ON_HORIZONTAL_SCROLL_PERCENT_REQUEST =
+  "react-scrollable/on-horizontal-scroll-percent-request";
+export const onHorizontalScrollPercentRequest = (percent) => ({
+  type: ON_HORIZONTAL_SCROLL_PERCENT_REQUEST,
+  payload: { percent },
+});
+
+export const ON_WHEEL = "react-scrollable/on-wheel";
+export const onWheel = (delta) => ({ type: ON_WHEEL, payload: { delta } });

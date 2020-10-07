@@ -1,6 +1,7 @@
 import * as actions from "../actions";
 import reduceOnInit from "./reduce-on-init";
 import reduceOnResize from "./reduce-on-resize";
+import reduceOnRefreshViewPort from "./reduce-on-refresh-viewport";
 import {
   reduceOnVerticalStartDrag,
   reduceOnHorizontalStartDrag,
@@ -10,6 +11,15 @@ import {
   reduceOnHorizontalStopDrag,
 } from "./reduce-on-stop-drag";
 import { reduceOnVerticalDrag, reduceOnHorizontalDrag } from "./reduce-on-drag";
+import {
+  reduceOnVerticalMouseDown,
+  reduceOnHorizontalMouseDown,
+} from "./reduce-on-mouse-down";
+import {
+  reduceOnVerticalScrollPercentRequest,
+  reduceOnHorizontalScrollPercentRequest,
+} from "./reduce-on-scroll-percent-request";
+import reduceOnWheel from "./reduce-on-wheel";
 
 function reducer(state, action) {
   const { type } = action;
@@ -32,6 +42,21 @@ function reducer(state, action) {
       return reduceOnHorizontalStopDrag(state, action);
     case actions.ON_HORIZONTAL_DRAG:
       return reduceOnHorizontalDrag(state, action);
+
+    case actions.ON_REFRESH_VIEWPORT:
+      return reduceOnRefreshViewPort(state, action);
+
+    case actions.ON_VERTICAL_MOUSE_DOWN:
+      return reduceOnVerticalMouseDown(state, action);
+    case actions.ON_HORIZONTAL_MOUSE_DOWN:
+      return reduceOnHorizontalMouseDown(state, action);
+
+    case actions.ON_VERTICAL_SCROLL_PERCENT_REQUEST:
+      return reduceOnVerticalScrollPercentRequest(state, action);
+    case actions.ON_HORIZONTAL_SCROLL_PERCENT_REQUEST:
+      return reduceOnHorizontalScrollPercentRequest(state, action);
+    case actions.ON_WHEEL:
+      return reduceOnWheel(state, action);
     default:
       return state;
   }

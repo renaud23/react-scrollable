@@ -2,11 +2,15 @@ import React, { useCallback } from "react";
 import classnames from "classnames";
 import "./scrollbar.scss";
 
+function safeCss(value) {
+  return value || 0;
+}
+
 function getStyle(vertical, tPos, tSize) {
   if (vertical) {
-    return { marginTop: tPos, height: tSize };
+    return { marginTop: safeCss(tPos), height: safeCss(tSize) };
   }
-  return { marginLeft: tPos, width: tSize };
+  return { marginLeft: safeCss(tPos), width: safeCss(tSize) };
 }
 
 /**
@@ -21,31 +25,52 @@ export default React.forwardRef(function Scrollbar(
     tPos,
     tSize,
     max,
-    onMouseDown = () => null,
+    drag,
+    onTrackMouseDown = () => null,
+    onBarMouseDown = () => null,
   },
   containerEl
 ) {
-  const onMouseDownCallback = useCallback(
+  const onMouseDownTrackCallback = useCallback(
     function (e) {
       e.stopPropagation();
       if (e.button === 0) {
         const clientPos = vertical ? e.clientY : e.clientX;
-        onMouseDown(clientPos);
+        onTrackMouseDown(clientPos);
       }
     },
-    [onMouseDown, vertical]
+    [onTrackMouseDown, vertical]
   );
+
+  const onMouseDownBarCallback = useCallback(
+    function (e) {
+      e.stopPropagation();
+      if (e.button === 0) {
+        const { left, top } = e.target.getBoundingClientRect();
+        const clientPos = vertical ? e.clientY - top : e.clientX - left;
+        onBarMouseDown(clientPos);
+      }
+    },
+    [onBarMouseDown, vertical]
+  );
+
   const hidden = pSize >= max;
   return (
     <div
       ref={containerEl}
-      className={classnames("react-scrollbar", className, { hidden })}
+      className={classnames("react-scrollbar", className, {
+        hidden,
+        "on-drag": drag,
+      })}
+      onMouseDown={onMouseDownBarCallback}
     >
       {hidden ? null : (
         <div
-          className={classnames("react-scrollbar-track", className)}
+          className={classnames("react-scrollbar-track", className, {
+            "on-drag": drag,
+          })}
           style={getStyle(vertical, tPos, tSize)}
-          onMouseDown={onMouseDownCallback}
+          onMouseDown={onMouseDownTrackCallback}
         />
       )}
     </div>
