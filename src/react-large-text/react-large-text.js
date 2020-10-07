@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useReducer } from "react";
 import { ScrollableContainer } from "../react-scrollable";
 import { useResizeObserver } from "../react-scrollable";
 import * as actions from "./actions";
-import OffsetChar from "../offset-char";
+import OffsetChar from "./offset-char";
 import reducer, { INITIAL_STATE } from "./reducer";
 import "./react-large-text.scss";
 
