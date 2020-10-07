@@ -6,8 +6,9 @@
     "type": "git",
     "url": "https://github.com/renaud23/react-scrollable.git"
   },
+  "main": "./release/index.js",
   "files": [
-    "release"
+    "src"
   ],
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
