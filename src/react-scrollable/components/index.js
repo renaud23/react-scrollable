@@ -1,1 +1,1 @@
-export { default as ScrollableContainer } from "./scrollable-container";
+export { default } from "./scrollable-container";

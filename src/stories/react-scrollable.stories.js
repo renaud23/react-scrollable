@@ -1,7 +1,7 @@
 import React from "react";
 import ReactLargeText from "../react-large-text";
 import getRandomText from "./random-random-text";
-import { ScrollableContainer } from "../react-scrollable";
+import ScrollableContainer from "../react-scrollable";
 import "./custom-scrollable.scss";
 
 function SimpleScrollable({ width, height }) {

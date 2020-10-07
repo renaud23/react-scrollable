@@ -26,6 +26,7 @@ export default React.forwardRef(function Scrollbar(
     tSize,
     max,
     drag,
+    scrollPercent,
     onTrackMouseDown = () => null,
     onBarMouseDown = () => null,
   },
@@ -58,6 +59,11 @@ export default React.forwardRef(function Scrollbar(
   return (
     <div
       ref={containerEl}
+      role="scrollbar"
+      aria-valuemin={0}
+      aria-valuemax={1}
+      aria-valuenow={scrollPercent}
+      aria-horientation={vertical ? "vertical" : "horizontal"}
       className={classnames("react-scrollbar", className, {
         hidden,
         "on-drag": drag,

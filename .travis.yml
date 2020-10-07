@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - 'stable'
+cache: yarn
+install:
+  - yarn install
+jobs:
+  include:
+    - stage: build and deploy
+      script:
+        - yarn build
+      deploy:
+        provider: npm
+        skip_cleanup: true
+        email: '$NPM_EMAIL'
+        api_key: '$NPM_TOKEN'
+        on:
+          tags: true

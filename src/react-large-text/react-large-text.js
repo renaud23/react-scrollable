@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useReducer } from "react";
-import { ScrollableContainer } from "../react-scrollable";
+import ScrollableContainer from "../react-scrollable";
 import { useResizeObserver } from "../react-scrollable";
 import * as actions from "./actions";
 import OffsetChar from "./offset-char";
