@@ -1,0 +1,22 @@
+.custom-large-table-theme {
+ thead {
+
+   th {
+     border-right: solid 1px black;
+     border-bottom: solid 1px black;
+     background-color: saddlebrown;
+     color: bisque;
+     line-height: 30px;
+   }
+ }
+}
+
+.default-table-container {
+  width: 400px;
+  height: 300px;
+
+  overflow: hidden;
+  resize: both;
+
+  background-color: khaki;
+}

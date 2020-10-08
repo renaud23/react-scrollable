@@ -3,6 +3,7 @@ $scrollbarTrackBgColor: rgba(52, 158, 19, 0.6);
 $scrollbarSize: 12px;
 
 .react-scrollable-container {
+  z-index: 1;
   &:focus {
     outline: none;
   }

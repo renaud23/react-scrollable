@@ -60,6 +60,7 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
     },
     [value, lineHeight, viewportHeight]
   );
+
   return (
     <div
       className="react-large-text"
