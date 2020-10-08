@@ -51,6 +51,7 @@ function ScrollableContainer({
       dispatch(
         actions.onResize({ width, height, viewportWidth, viewportHeight })
       );
+      dispatch(actions.onRefreshViewport());
       onResize(viewportWidth, viewportHeight);
     },
     [dispatch, scrollbarHEl, scrollbarVEl, onResize]
@@ -133,11 +134,14 @@ function ScrollableContainer({
     [verticalPercent, onVerticalScroll, refresh]
   );
 
+  /* ***** */
+
   useEffect(
     function () {
+      dispatch(actions.onInit(maxWidth, maxHeight));
       dispatch(actions.onRefreshViewport());
     },
-    [verticalSize, horizontalSize, maxWidth, maxHeight]
+    [maxWidth, maxHeight]
   );
 
   useEffect(
@@ -150,15 +154,6 @@ function ScrollableContainer({
       };
     },
     [onmouseupCbk, onmousemoveCbk]
-  );
-
-  /* ***** */
-
-  useEffect(
-    function () {
-      dispatch(actions.onInit(maxWidth, maxHeight));
-    },
-    [maxWidth, maxHeight]
   );
 
   /* *** */
