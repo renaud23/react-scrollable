@@ -11977,6 +11977,16 @@ react-scripts@^3.4.3:
   optionalDependencies:
     fsevents "2.1.2"
 
+react-scrollable-div@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-scrollable-div/-/react-scrollable-div-0.1.2.tgz#c7a1cae0f7a24348a1597cacb96bbd78dd483784"
+  integrity sha512-9wdAssC9/IkJoFeBSNH1E9Irr4mIC+6IEa94sPPH+uD0hVxpqALcruH6WkS6alg69IlZx3EbKjI07pR4YVh8DQ==
+  dependencies:
+    "@testing-library/jest-dom" "^4.2.4"
+    "@testing-library/react" "^9.3.2"
+    "@testing-library/user-event" "^7.1.2"
+    classnames "^2.2.6"
+
 react-sizeme@^2.6.7:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/react-sizeme/-/react-sizeme-2.6.12.tgz#ed207be5476f4a85bf364e92042520499455453e"
