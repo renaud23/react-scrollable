@@ -17,6 +17,7 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
     marginLeft,
     verticalScrollPercentRequest,
     horizontalScrollPercentRequest,
+    id,
   } = state;
 
   const onKeyDownCallback = useCallback(function (e) {
@@ -64,6 +65,7 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
       className="react-large-text"
       onKeyDown={onKeyDownCallback}
       tabIndex="0"
+      id={id}
     >
       <ScrollableContainer
         maxWidth={maxWidth}
@@ -73,6 +75,7 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
         verticalScrollPercentRequest={verticalScrollPercentRequest}
         horizontalScrollPercentRequest={horizontalScrollPercentRequest}
         onResize={onResizeCallback}
+        idContent={id}
       >
         <ScrollableContent
           nbLines={nbLines}

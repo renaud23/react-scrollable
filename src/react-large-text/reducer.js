@@ -1,6 +1,9 @@
 import * as actions from "./actions";
 
+let __LARGE_TEXT_ID__ = 1;
+
 export const INITIAL_STATE = {
+  id: undefined,
   lineHeight: undefined,
   offsetChar: undefined,
 
@@ -58,6 +61,7 @@ function getMaxLength(text = []) {
 
 function reduceOnInit(state, action) {
   const { payload } = action;
+  const { id } = state;
   const { lines, lineHeight, offsetChar } = payload;
 
   const maxLineSize = getMaxLength(lines);
@@ -72,6 +76,7 @@ function reduceOnInit(state, action) {
     maxWidth,
     maxLineSize,
     maxLines,
+    id: id ? id : `react-large-text-${__LARGE_TEXT_ID__++}`,
   };
 }
 

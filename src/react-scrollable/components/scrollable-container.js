@@ -15,6 +15,7 @@ function ScrollableContainer({
   maxHeight,
   verticalScrollPercentRequest,
   horizontalScrollPercentRequest,
+  idContent,
   onHorizontalScroll = () => null,
   onVerticalScroll = () => null,
   onResize = () => null,
@@ -138,8 +139,6 @@ function ScrollableContainer({
     [verticalSize, horizontalSize, maxWidth, maxHeight]
   );
 
-  // useEffect(function () {}, []);
-
   useEffect(
     function () {
       window.addEventListener("mouseup", onmouseupCbk);
@@ -177,12 +176,14 @@ function ScrollableContainer({
           {...vertical}
           onTrackMouseDown={onMDVcbk}
           onBarMouseDown={onBarMouseDownVer}
+          idContent={idContent}
         />
         <ScrollbarHorizontal
           ref={scrollbarHEl}
           {...horizontal}
           onTrackMouseDown={onMDHcbk}
           onBarMouseDown={onBarMouseDownHor}
+          idContent={idContent}
         />
         {children}
       </div>
