@@ -17,6 +17,7 @@ function ScrollableContainer({
   horizontalScrollPercentRequest,
   onHorizontalScroll = () => null,
   onVerticalScroll = () => null,
+  onResize = () => null,
 }) {
   const scrollbarVEl = useRef();
   const scrollbarHEl = useRef();
@@ -48,8 +49,9 @@ function ScrollableContainer({
       dispatch(
         actions.onResize({ width, height, viewportWidth, viewportHeight })
       );
+      onResize(viewportWidth, viewportHeight);
     },
-    [dispatch, scrollbarHEl, scrollbarVEl]
+    [dispatch, scrollbarHEl, scrollbarVEl, onResize]
   );
 
   /* */

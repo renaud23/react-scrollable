@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useReducer } from "react";
 import ScrollableContainer from "../react-scrollable";
-import { useResizeObserver } from "../react-scrollable";
 import * as actions from "./actions";
 import OffsetChar from "./offset-char";
 import reducer, { INITIAL_STATE } from "./reducer";
@@ -60,11 +59,9 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
     },
     [value, lineHeight, viewportHeight]
   );
-  const containerEl = useResizeObserver(onResizeCallback);
   return (
     <div
       className="react-large-text"
-      ref={containerEl}
       onKeyDown={onKeyDownCallback}
       tabIndex="0"
     >
@@ -75,6 +72,7 @@ function ReactLargeText({ value, lineHeight, offsetChar }) {
         onVerticalScroll={onVerticalScroll}
         verticalScrollPercentRequest={verticalScrollPercentRequest}
         horizontalScrollPercentRequest={horizontalScrollPercentRequest}
+        onResize={onResizeCallback}
       >
         <ScrollableContent
           nbLines={nbLines}
