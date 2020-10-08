@@ -1,4 +1,5 @@
 import React, { useCallback, useReducer, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { useResizeObserver } from "./common-tools";
 import {
   reducers,
@@ -190,5 +191,29 @@ function ScrollableContainer({
     </ScrollableContext.Provider>
   );
 }
+
+ScrollableContainer.propTypes = {
+  maxWidth: PropTypes.number.isRequired,
+  maxHeight: PropTypes.number.isRequired,
+  verticalScrollPercentRequest: PropTypes.shape({
+    percent: PropTypes.number.isRequired,
+  }),
+  horizontalScrollPercentRequest: PropTypes.shape({
+    percent: PropTypes.number.isRequired,
+  }),
+  idContent: PropTypes.string,
+  onHorizontalScroll: PropTypes.func,
+  onVerticalScroll: PropTypes.func,
+  onResize: PropTypes.func,
+};
+
+ScrollableContainer.defaultProps = {
+  verticalScrollPercentRequest: undefined,
+  horizontalScrollPercentRequest: undefined,
+  onHorizontalScroll: () => null,
+  onVerticalScroll: () => null,
+  onResize: () => null,
+  idContent: "",
+};
 
 export default ScrollableContainer;
