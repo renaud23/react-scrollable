@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   nbColumns: undefined,
   marginLeft: undefined,
 
-  maxHeight: undefined,
+  maxHeight: 0,
   cumulRowHeight: undefined,
   startRow: undefined,
   nbRows: undefined,

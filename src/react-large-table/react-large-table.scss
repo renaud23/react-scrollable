@@ -27,13 +27,15 @@
     thead {
       display: block;
       width: 100%;
+      position: absolute;
+      top: 0;
 
       tr {
         display: block;
         width: max-content;
-        height: 100%;
-        th {
-          z-index: -1;
+         
+
+        th { 
           height: 100%;
           display: inline-block;
           position: relative;
@@ -49,7 +51,7 @@
 
     tbody {
       display: block;
-
+      overflow: hidden;
       tr {
         display: block;
         width: max-content;
@@ -66,3 +68,5 @@
     }
   }
 }
+
+

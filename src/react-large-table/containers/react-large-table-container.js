@@ -18,11 +18,23 @@ function ReactLargeTableContainer({ className }) {
     horizontalScrollPercent,
     viewportWidth,
     rows,
+    verticalScrollPercent,
+    maxHeight,
+    cumulRowsHeight,
+    viewportHeight,
+    headerHeight,
   } = state;
 
   const onHorizontalScrollCallback = useCallback(
     function (percent) {
       dispatch(actions.onHorizontalScroll(percent));
+    },
+    [dispatch]
+  );
+
+  const onVerticalScrollCallback = useCallback(
+    function (percent) {
+      dispatch(actions.onVerticalScroll(percent));
     },
     [dispatch]
   );
@@ -61,20 +73,33 @@ function ReactLargeTableContainer({ className }) {
     ]
   );
 
+  useEffect(
+    function () {
+      dispatch(actions.onRefreshLines());
+    },
+    [
+      verticalScrollPercent,
+      maxHeight,
+      cumulRowsHeight,
+      viewportHeight,
+      dispatch,
+    ]
+  );
+
   return (
     <div className={classnames("react-large-table", className)}>
       <ReactScrollable
         maxWidth={maxWidth}
-        maxHeight={10000}
+        maxHeight={maxHeight}
         onHorizontalScroll={onHorizontalScrollCallback}
-        onVerticalScroll={() => null}
+        onVerticalScroll={onVerticalScrollCallback}
         verticalScrollPercentRequest={undefined}
         horizontalScrollPercentRequest={undefined}
         onResize={onResizeCallback}
       >
         <Table>
           <THead>
-            <Tr>
+            <Tr heigh={headerHeight}>
               <HeaderContent />
             </Tr>
           </THead>

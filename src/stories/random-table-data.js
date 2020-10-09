@@ -29,16 +29,18 @@ function generate(nbCols, nbRows) {
     };
   });
   const rows = new Array(nbRows).fill(null).map(function (_, i) {
-    return header.reduce(function (a, { path, type }, j) {
-      return {
-        ...a,
-        [path]: {
-          type,
-          value: getRandomValue(type),
-          height: 20 + randomInt(20),
-        },
-      };
-    }, {});
+    return header.reduce(
+      function (a, { path, type }, j) {
+        return {
+          ...a,
+          [path]: {
+            type,
+            value: getRandomValue(type),
+          },
+        };
+      },
+      { __height: 20 + randomInt(20) }
+    );
   });
   return { header, rows };
 }
