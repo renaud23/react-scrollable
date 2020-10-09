@@ -4,3 +4,5 @@ export {
   findInTreeSize,
   findCumulsSize,
 } from "./compute-tree-size";
+export { default as resolveRefreshData } from "./resolve-refresh-data";
+export { default as resolveScrollbar } from "./resolve-scrollbar";

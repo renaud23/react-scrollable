@@ -5,10 +5,11 @@ import Th from "../components/th";
 
 function HeaderContent() {
   const [state] = useContext(TableContext);
-  const { startColumn, nbColumns, header, headerHeight } = state;
-  if (nbColumns) {
-    return new Array(nbColumns).fill(null).map(function (_, i) {
-      const column = header[startColumn + i];
+  const { horizontal, header, headerHeight } = state;
+  const { start, nb } = horizontal;
+  if (nb) {
+    return new Array(nb).fill(null).map(function (_, i) {
+      const column = header[start + i];
       const { width, label } = column;
 
       return (
