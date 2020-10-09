@@ -16,6 +16,15 @@
       height: 100%;
     }
   }
+
+  .react-scrollable-container {
+    .react-scrollbar {
+      &.vertical {
+        height: calc(100% - 43px);
+        margin-top: 31px;
+      }
+    }
+  }
 }
 
 .default-table-container {
@@ -28,11 +37,4 @@
   background-color: khaki;
 }
 
-.react-scrollable-container {
-  .react-scrollbar {
-    &.vertical {
-      height: calc(100% - 43px);
-      margin-top: 31px;
-    }
-  }
-}
+

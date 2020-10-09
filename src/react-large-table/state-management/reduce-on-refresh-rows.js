@@ -1,3 +1,5 @@
+import { computeTreeSize } from "./commons-reducer.js";
+
 function cumulHeight(tab, height) {
   const last = tab[tab.length - 1];
   return [...tab, height + last];
@@ -27,7 +29,8 @@ function resolve(state) {
 
 function reduce(state) {
   const { maxHeight, cumulRowsHeight } = resolve(state);
-  return { ...state, maxHeight, cumulRowsHeight };
+  const rowsTreeSize = computeTreeSize(cumulRowsHeight);
+  return { ...state, maxHeight, cumulRowsHeight, rowsTreeSize };
 }
 
 export default reduce;

@@ -1,4 +1,5 @@
 import { countSize } from "./commons-reducer.js";
+import { findInTreeSize } from "./commons-reducer.js";
 
 function reduce(state, action) {
   const {
@@ -6,22 +7,16 @@ function reduce(state, action) {
     maxHeight,
     viewportHeight,
     cumulRowsHeight,
-    rows,
     headerHeight,
+    rowsTreeSize,
   } = state;
 
   if (maxHeight && viewportHeight) {
     const miny =
       verticalScrollPercent * (maxHeight - viewportHeight + headerHeight);
-    const startRow = rows.reduce(function (sc, row, i) {
-      const { __height } = row;
-      const start = cumulRowsHeight[i];
-      const end = start + __height;
-      if (start <= miny && end > miny) {
-        return i;
-      }
-      return sc;
-    }, 0);
+
+    const startRow = findInTreeSize(rowsTreeSize, miny);
+    // const startRow = findCumulsSize(cumulRowsHeight, miny);
     const marginTop = cumulRowsHeight[startRow] - miny;
     const nbRows = countSize(
       cumulRowsHeight,

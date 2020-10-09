@@ -3,7 +3,7 @@ import ReactLargeTable from "../react-large-table";
 import generate from "./random-table-data";
 import "./custom-large-table.scss";
 
-const data = generate(30, 10000);
+const data = generate(30, 2000);
 
 export function DefaultTable() {
   return (
