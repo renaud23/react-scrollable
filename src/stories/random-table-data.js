@@ -4,12 +4,12 @@ const __MIN_WIDTH__ = 100;
 
 const __TYPES__ = ["string", "sentence", "number", "euro"];
 
-function getRandomValue(type) {
+function getRandomValue(type, i) {
   switch (type) {
     case "sentence":
       return getSentence();
     case "string":
-      return getRandomWord();
+      return `${i + 1} - ${getRandomWord()}`;
     case "number":
       return randomInt(10000);
     case "euro":
@@ -35,11 +35,11 @@ function generate(nbCols, nbRows) {
           ...a,
           [path]: {
             type,
-            value: getRandomValue(type),
+            value: getRandomValue(type, i),
           },
         };
       },
-      { __height: 20 + randomInt(20) }
+      { __height: 30 + randomInt(60) }
     );
   });
   return { header, rows };

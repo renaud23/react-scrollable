@@ -12,7 +12,7 @@ function BodyContent() {
       const { __height } = row;
       return (
         <Tr key={i} height={__height}>
-          <TrContent row={row} index={startRow + i} />
+          <TrContent row={row} index={startRow + i} height={__height} />
         </Tr>
       );
     });

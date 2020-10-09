@@ -11,7 +11,8 @@ function reduce(state, action) {
   } = state;
 
   if (maxHeight && viewportHeight) {
-    const miny = verticalScrollPercent * (maxHeight - viewportHeight);
+    const miny =
+      verticalScrollPercent * (maxHeight - viewportHeight + headerHeight);
     const startRow = rows.reduce(function (sc, row, i) {
       const { __height } = row;
       const start = cumulRowsHeight[i];
