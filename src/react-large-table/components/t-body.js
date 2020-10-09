@@ -4,7 +4,8 @@ import { safeCss } from "../commons";
 
 function TBody({ children }) {
   const [state] = useContext(TableContext);
-  const { marginTop, headerHeight, marginLeft } = state;
+  const { marginTop, headerHeight, horizontal } = state;
+  const { margin: marginLeft } = horizontal;
   return (
     <tbody
       className="react-large-table-tbody-el"

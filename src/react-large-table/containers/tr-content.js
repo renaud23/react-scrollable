@@ -5,7 +5,8 @@ import CellRenderer from "./default-cell-renderer";
 
 function Content({ row, index, height }) {
   const [state] = useContext(TableContext);
-  const { header, startColumn, nbColumns } = state;
+  const { header, horizontal } = state;
+  const { start: startColumn, nb: nbColumns } = horizontal;
   if (startColumn === undefined) {
     return null;
   }
