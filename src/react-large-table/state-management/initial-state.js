@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   header: [],
   rows: [],
   headerHeight: undefined,
+  treeSize: false,
 
   viewportWidth: undefined,
   viewportHeight: undefined,

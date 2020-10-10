@@ -5,11 +5,10 @@ function getHeight({ __height }) {
 }
 
 function reduce(state) {
-  const { vertical, rows } = state;
-
+  const { vertical, rows, treeSize } = state;
   return {
     ...state,
-    vertical: { ...vertical, ...resolveRefreshData(rows, getHeight) },
+    vertical: { ...vertical, ...resolveRefreshData(rows, getHeight, treeSize) },
   };
 }
 

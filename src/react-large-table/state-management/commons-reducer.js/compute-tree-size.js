@@ -17,17 +17,37 @@ function computeTree(cumuls, step = cumuls, index = 0) {
   };
 }
 
+// export function findInTreeSize(tree, seuil) {
+//   const { min, max, index, left, right } = tree;
+//   if (seuil >= min && seuil < max) {
+//     return index;
+//   }
+//   if (seuil < min && left) {
+//     return findInTreeSize(left, seuil);
+//   }
+//   if (seuil > max && right) {
+//     return findInTreeSize(right, seuil);
+//   }
+//   return 0;
+// }
+
 export function findInTreeSize(tree, seuil) {
-  const { min, max, index, left, right } = tree;
-  if (seuil >= min && seuil < max) {
-    return index;
+  const stack = [tree];
+  while (stack.length) {
+    const current = stack.pop();
+    const { min, max, index, left, right } = current;
+
+    if (seuil >= min && seuil < max) {
+      return index;
+    }
+    if (seuil < min && left) {
+      stack.push(left);
+    }
+    if (seuil > max && right) {
+      stack.push(right);
+    }
   }
-  if (seuil < min && left) {
-    return findInTreeSize(left, seuil);
-  }
-  if (seuil > max && right) {
-    return findInTreeSize(right, seuil);
-  }
+
   return 0;
 }
 

@@ -1,3 +1,5 @@
+import computeTreeSize from "./compute-tree-size";
+
 function appendSize(cumuls, size) {
   const last = cumuls[cumuls.length - 1];
   return [...cumuls, size + last];
@@ -7,7 +9,7 @@ function cumulMaxSize(max, size) {
   return max + size;
 }
 
-function resolve(data, getSize) {
+function resolveCumuls(data, getSize) {
   return data.reduce(
     function ({ maxSize, cumulsSize }, o) {
       const size = getSize(o);
@@ -21,6 +23,14 @@ function resolve(data, getSize) {
       cumulsSize: [0],
     }
   );
+}
+
+function resolve(data, getSize, treeSize = false) {
+  const { maxSize, cumulsSize } = resolveCumuls(data, getSize);
+  if (treeSize) {
+    return { maxSize, cumulsSize, treeSize: computeTreeSize(cumulsSize) };
+  }
+  return { maxSize, cumulsSize };
 }
 
 export default resolve;

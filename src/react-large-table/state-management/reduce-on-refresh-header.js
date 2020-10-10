@@ -5,11 +5,14 @@ function getWidth({ width }) {
 }
 
 function reduce(state) {
-  const { horizontal, header } = state;
+  const { horizontal, header, treeSize } = state;
 
   return {
     ...state,
-    horizontal: { ...horizontal, ...resolveRefreshData(header, getWidth) },
+    horizontal: {
+      ...horizontal,
+      ...resolveRefreshData(header, getWidth, treeSize),
+    },
   };
 }
 

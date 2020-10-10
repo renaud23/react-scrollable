@@ -12,6 +12,7 @@ export function DefaultTable() {
         className="custom-large-table-theme"
         data={data}
         headerHeight={30}
+        treeSize={false}
       />
     </div>
   );

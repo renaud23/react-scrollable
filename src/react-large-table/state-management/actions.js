@@ -1,7 +1,7 @@
 export const ON_INIT = "react-large-table/on-init";
-export const onInit = ({ rows, header, headerHeight }) => ({
+export const onInit = ({ rows, header, headerHeight, treeSize }) => ({
   type: ON_INIT,
-  payload: { rows, header, headerHeight },
+  payload: { rows, header, headerHeight, treeSize },
 });
 
 export const ON_REFRESH_HEADER = "react-large-table/on-refresh-header";
