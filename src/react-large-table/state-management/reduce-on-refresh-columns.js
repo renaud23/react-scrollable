@@ -5,10 +5,10 @@ function getWidth({ width }) {
 }
 
 function reduce(state) {
-  const { horizontal, header, viewportWidth } = state;
+  const { horizontal, viewportWidth } = state;
   return {
     ...state,
-    horizontal: resolveScrollbar(horizontal, header, viewportWidth, getWidth),
+    horizontal: resolveScrollbar(horizontal, viewportWidth, getWidth),
   };
 }
 

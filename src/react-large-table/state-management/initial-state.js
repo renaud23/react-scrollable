@@ -7,6 +7,7 @@ function initializeScrollbar() {
     nb: undefined,
     margin: undefined,
     scrollPercent: 0,
+    scrollRequest: undefined,
   };
 }
 

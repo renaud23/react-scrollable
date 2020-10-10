@@ -3,7 +3,7 @@ import resolveStart from "./resolve-start";
 import resolveMargin from "./resolve-margin";
 import resolveNb from "./resolve-nb";
 
-function resolve(scrollbar, data, viewportSize, getSize) {
+function resolve(scrollbar, viewportSize, getSize) {
   const { maxSize } = scrollbar;
   if (maxSize && viewportSize) {
     const seuil = computeSeuil(scrollbar, viewportSize);

@@ -5,12 +5,12 @@ function getHeight({ __height }) {
 }
 
 function reduce(state) {
-  const { vertical, rows, viewportHeight, headerHeight } = state;
+  const { vertical, viewportHeight, headerHeight } = state;
   return {
     ...state,
     vertical: resolveScrollbar(
       vertical,
-      rows,
+
       viewportHeight - headerHeight,
       getHeight
     ),

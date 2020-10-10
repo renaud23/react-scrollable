@@ -11,26 +11,20 @@ import classnames from "classnames";
 
 function ReactLargeTableContainer({ className }) {
   const [state, dispatch] = useContext(TableContext);
-  const {
-    header,
-    horizontal,
-    vertical,
-    viewportWidth,
-    rows,
-    viewportHeight,
-    headerHeight,
-  } = state;
+  const { header, horizontal, vertical, rows, headerHeight } = state;
 
   const {
     maxSize: maxWidth,
     cumulsSize: cumulColumnsWidth,
     scrollPercent: horizontalScrollPercent,
+    scrollRequest: horizontalScrollPercentRequest,
   } = horizontal;
 
   const {
     maxSize: maxHeight,
     cumulSize: cumulRowsHeight,
     scrollPercent: verticalScrollPercent,
+    scrollRequest: verticalScrollPercentRequest,
   } = vertical;
 
   const onHorizontalScrollCallback = useCallback(
@@ -72,26 +66,14 @@ function ReactLargeTableContainer({ className }) {
     function () {
       dispatch(actions.onRefreshColumns());
     },
-    [
-      horizontalScrollPercent,
-      maxWidth,
-      cumulColumnsWidth,
-      viewportWidth,
-      dispatch,
-    ]
+    [horizontalScrollPercent, maxWidth, cumulColumnsWidth, dispatch]
   );
 
   useEffect(
     function () {
       dispatch(actions.onRefreshLines());
     },
-    [
-      verticalScrollPercent,
-      maxHeight,
-      cumulRowsHeight,
-      viewportHeight,
-      dispatch,
-    ]
+    [verticalScrollPercent, maxHeight, cumulRowsHeight, dispatch]
   );
 
   return (
@@ -101,8 +83,8 @@ function ReactLargeTableContainer({ className }) {
         maxHeight={maxHeight}
         onHorizontalScroll={onHorizontalScrollCallback}
         onVerticalScroll={onVerticalScrollCallback}
-        verticalScrollPercentRequest={undefined}
-        horizontalScrollPercentRequest={undefined}
+        verticalScrollPercentRequest={verticalScrollPercentRequest}
+        horizontalScrollPercentRequest={horizontalScrollPercentRequest}
         onResize={onResizeCallback}
       >
         <Table>
