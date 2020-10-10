@@ -19,19 +19,7 @@ const INITIAL_STATE = {
   viewportHeight: undefined,
 
   horizontal: initializeScrollbar(),
-  // maxWidth: 0,
-  // cumulColumnsWidth: undefined,
-  // startColumn: undefined,
-  // nbColumns: undefined,
-  // marginLeft: undefined,
-  // horizontalScrollPercent: 0,
-
-  maxHeight: 0,
-  cumulRowHeight: undefined,
-  startRow: undefined,
-  nbRows: undefined,
-  marginTop: undefined,
-  verticalScrollPercent: 0,
+  vertical: initializeScrollbar(),
 };
 
 export default INITIAL_STATE;

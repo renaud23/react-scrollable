@@ -1,7 +1,8 @@
 function reduce(state, action) {
   const { payload } = action;
   const { percent } = payload;
-  return { ...state, verticalScrollPercent: percent };
+  const { vertical } = state;
+  return { ...state, vertical: { ...vertical, scrollPercent: percent } };
 }
 
 export default reduce;

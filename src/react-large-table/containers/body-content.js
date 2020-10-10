@@ -5,14 +5,15 @@ import { TableContext } from "../state-management";
 
 function BodyContent() {
   const [state] = useContext(TableContext);
-  const { nbRows, rows, startRow } = state;
-  if (nbRows) {
-    return new Array(nbRows).fill(null).map(function (_, i) {
-      const row = rows[startRow + i];
+  const { vertical, rows } = state;
+  const { nb, start } = vertical;
+  if (nb) {
+    return new Array(nb).fill(null).map(function (_, i) {
+      const row = rows[start + i];
       const { __height } = row;
       return (
         <Tr key={i} height={__height}>
-          <TrContent row={row} index={startRow + i} height={__height} />
+          <TrContent row={row} index={start + i} height={__height} />
         </Tr>
       );
     });
