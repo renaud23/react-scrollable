@@ -14,12 +14,6 @@ export const onRefreshRows = () => ({
   type: ON_REFRESH_ROWS,
 });
 
-export const ON_REFRESH_COLUMNS = "react-large-table/on-refresh-columns";
-export const onRefreshColumns = () => ({ type: ON_REFRESH_COLUMNS });
-
-export const ON_REFRESH_LINES = "react-large-table/on-refresh-lines";
-export const onRefreshLines = () => ({ type: ON_REFRESH_LINES });
-
 export const ON_HORIZONTAL_SCROLL = "react-large-table/on-horizontal-scroll";
 export const onHorizontalScroll = (percent) => ({
   type: ON_HORIZONTAL_SCROLL,

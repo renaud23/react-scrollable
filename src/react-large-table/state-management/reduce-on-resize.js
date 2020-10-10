@@ -1,4 +1,4 @@
-import { resolveScrollbar } from "./commons-reducer";
+import { resolveScrollbar, resolveNb, computeSeuil } from "./commons-reducer";
 
 function getWidth({ width }) {
   return width;
@@ -24,18 +24,17 @@ function reduceWidth(state, width) {
     };
   }
   const next = resolveScrollPercent(horizontal, width);
-  // const seuil = computeSeuil(next, width);
+  const seuil = computeSeuil(next, width);
+
   return {
     ...state,
     viewportWidth: width,
-    horizontal: next,
-    // horizontal: resolveMargin(next, seuil),
+    horizontal: resolveNb(next, width, seuil),
   };
 }
 
 function reduceHeight(state, height) {
   const { viewportHeight, vertical, headerHeight } = state;
-
   if (viewportHeight === undefined) {
     return {
       ...state,
@@ -44,12 +43,11 @@ function reduceHeight(state, height) {
     };
   }
   const next = resolveScrollPercent(vertical, height - headerHeight);
-  // const seuil = computeSeuil(next, height - headerHeight);
+  const seuil = computeSeuil(next, height - headerHeight);
   return {
     ...state,
     viewportHeight: height,
-    vertical: next,
-    // vertical: resolveMargin(next, seuil),
+    vertical: resolveNb(next, height - headerHeight, seuil),
   };
 }
 

@@ -10,4 +10,5 @@ export {
   resolveMargin,
   computeSeuil,
   resolveNb,
+  resolveStart,
 } from "./resolve-scrollbar";

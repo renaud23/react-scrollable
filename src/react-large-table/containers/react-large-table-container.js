@@ -15,15 +15,11 @@ function ReactLargeTableContainer({ className }) {
 
   const {
     maxSize: maxWidth,
-    cumulsSize: cumulColumnsWidth,
-    scrollPercent: horizontalScrollPercent,
     scrollRequest: horizontalScrollPercentRequest,
   } = horizontal;
 
   const {
     maxSize: maxHeight,
-    cumulSize: cumulRowsHeight,
-    scrollPercent: verticalScrollPercent,
     scrollRequest: verticalScrollPercentRequest,
   } = vertical;
 
@@ -60,20 +56,6 @@ function ReactLargeTableContainer({ className }) {
       dispatch(actions.onRefreshRows());
     },
     [rows, dispatch]
-  );
-
-  useEffect(
-    function () {
-      dispatch(actions.onRefreshColumns());
-    },
-    [horizontalScrollPercent, maxWidth, cumulColumnsWidth, dispatch]
-  );
-
-  useEffect(
-    function () {
-      dispatch(actions.onRefreshLines());
-    },
-    [verticalScrollPercent, maxHeight, cumulRowsHeight, dispatch]
   );
 
   return (

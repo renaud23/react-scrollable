@@ -1,7 +1,10 @@
 function compute(scrollbar, seuil) {
   const { start, cumulsSize } = scrollbar;
-  const margin = cumulsSize[start] - seuil;
-  return { ...scrollbar, margin };
+  if (cumulsSize) {
+    const margin = cumulsSize[start] - seuil;
+    return { ...scrollbar, margin };
+  }
+  return 0;
 }
 
 export default compute;

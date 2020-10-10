@@ -10,8 +10,11 @@ function count(cumTab, index, max) {
 
 function compute(scrollbar, viewportSize, seuil) {
   const { cumulsSize, start } = scrollbar;
-  const nb = count(cumulsSize, start, seuil + viewportSize);
-  return { ...scrollbar, nb };
+  if (cumulsSize) {
+    const nb = count(cumulsSize, start, seuil + viewportSize);
+    return { ...scrollbar, nb };
+  }
+  return scrollbar;
 }
 
 export default compute;

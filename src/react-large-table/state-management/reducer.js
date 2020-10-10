@@ -4,9 +4,7 @@ import reduceOnRefreshHeader from "./reduce-on-refresh-header";
 import reduceOnHorizontalScroll from "./reduce-on-horizontal-scroll";
 import reduceOnVerticalScroll from "./reduce-on-vertical-scroll";
 import reduceOnResize from "./reduce-on-resize";
-import reduceOnRefreshColumns from "./reduce-on-refresh-columns";
 import reduceOnRefreshRows from "./reduce-on-refresh-rows";
-import reduceOnRefreshLines from "./on-reduce-refresh-lines";
 
 function reducer(state, action) {
   const { type } = action;
@@ -21,15 +19,15 @@ function reducer(state, action) {
       return reduceOnVerticalScroll(state, action);
     case actions.ON_RESIZE:
       return reduceOnResize(state, action);
-    case actions.ON_REFRESH_COLUMNS:
-      return reduceOnRefreshColumns(state, action);
     case actions.ON_REFRESH_ROWS:
       return reduceOnRefreshRows(state, action);
-    case actions.ON_REFRESH_LINES:
-      return reduceOnRefreshLines(state, action);
     default:
       return state;
   }
 }
 
-export default reducer;
+export default (state, action) => {
+  const next = reducer(state, action);
+  // console.log(action, state, next);
+  return next;
+};
