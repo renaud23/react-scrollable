@@ -1,4 +1,4 @@
-import { resolveRefreshData } from "./commons-reducer.js";
+import { resolveRefreshData } from "./commons-reducer";
 
 function getWidth({ width }) {
   return width;

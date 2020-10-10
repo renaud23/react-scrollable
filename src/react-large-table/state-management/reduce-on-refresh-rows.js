@@ -1,4 +1,4 @@
-import { resolveRefreshData } from "./commons-reducer.js";
+import { resolveRefreshData } from "./commons-reducer";
 
 function getHeight({ __height }) {
   return __height;

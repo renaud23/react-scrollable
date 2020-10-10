@@ -1,4 +1,4 @@
-import { resolveScrollbar } from "./commons-reducer.js";
+import { resolveScrollbar } from "./commons-reducer";
 
 function getWidth({ width }) {
   return width;

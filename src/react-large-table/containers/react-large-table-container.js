@@ -20,16 +20,19 @@ function ReactLargeTableContainer({ className }) {
     viewportHeight,
     headerHeight,
   } = state;
+
   const {
     maxSize: maxWidth,
     cumulsSize: cumulColumnsWidth,
     scrollPercent: horizontalScrollPercent,
   } = horizontal;
+
   const {
     maxSize: maxHeight,
     cumulSize: cumulRowsHeight,
     scrollPercent: verticalScrollPercent,
   } = vertical;
+
   const onHorizontalScrollCallback = useCallback(
     function (percent) {
       dispatch(actions.onHorizontalScroll(percent));
