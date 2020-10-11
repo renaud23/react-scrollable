@@ -4,3 +4,4 @@ export { default as reducer } from "./reducer";
 export { actions };
 export { default as INITIAL_STATE } from "./initial-state";
 export { default as TableContext } from "./table-context";
+export { default as createKeyboardMiddleWare } from "./create-keyboard-middleware";

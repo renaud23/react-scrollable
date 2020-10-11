@@ -9,6 +9,7 @@ import {
 } from "./state-management";
 import { ScrollbarVertical, ScrollbarHorizontal } from "./scrollbar";
 import "./scrollable-container.scss";
+import compose from "./state-management/reducers/compose";
 
 function ScrollableContainer({
   children,
@@ -20,15 +21,25 @@ function ScrollableContainer({
   onHorizontalScroll = () => null,
   onVerticalScroll = () => null,
   onResize = () => null,
+  middleware,
 }) {
   const scrollbarVEl = useRef();
   const scrollbarHEl = useRef();
-  const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
+  const [state, dispatch] = useReducer(
+    middleware ? compose(reducers, middleware) : reducers,
+    INITIAL_STATE
+  );
   const { vertical, horizontal, refresh } = state;
   const { drag: verticalDrag, scrollPercent: verticalPercent } = vertical;
   const { drag: horizontalDrag, scrollPercent: horizontalPercent } = horizontal;
 
   /* USE CALLBACK */
+
+  const onKeyDownCallback = useCallback(function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(actions.onKeyDown(e.key));
+  }, []);
 
   const onResizeCallback = useCallback(
     function (viewportWidth, viewportHeight) {
@@ -158,6 +169,7 @@ function ScrollableContainer({
         className="react-scrollable-container"
         tabIndex="-1"
         onWheel={onWheelCallback}
+        onKeyDown={onKeyDownCallback}
       >
         <ScrollbarVertical
           ref={scrollbarVEl}

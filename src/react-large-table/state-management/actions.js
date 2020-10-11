@@ -37,3 +37,9 @@ export const onResizeColumn = (index, delta) => ({
   type: ON_RESIZE_COLUMN,
   payload: { index, delta },
 });
+
+export const ON_KEYDOWN = "react-large-table/on-keydown";
+export const onKeyDown = (key) => ({
+  type: ON_KEYDOWN,
+  payload: { key },
+});

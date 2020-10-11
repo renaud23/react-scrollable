@@ -6,6 +6,7 @@ import reduceOnVerticalScroll from "./reduce-on-vertical-scroll";
 import reduceOnResize from "./reduce-on-resize";
 import reduceOnRefreshRows from "./reduce-on-refresh-rows";
 import reduceOnResizColumn from "./reduce-on-resize-column";
+import reduceOnKeyDown from "./reduce-on-key-down";
 
 function reducer(state, action) {
   const { type } = action;
@@ -24,6 +25,8 @@ function reducer(state, action) {
       return reduceOnRefreshRows(state, action);
     case actions.ON_RESIZE_COLUMN:
       return reduceOnResizColumn(state, action);
+    case actions.ON_KEYDOWN:
+      return reduceOnKeyDown(state, action);
     default:
       return state;
   }
