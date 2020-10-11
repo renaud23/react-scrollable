@@ -25,16 +25,8 @@ function ScrollableContainer({
   const scrollbarHEl = useRef();
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, refresh } = state;
-  const {
-    drag: verticalDrag,
-    scrollPercent: verticalPercent,
-    size: verticalSize,
-  } = vertical;
-  const {
-    drag: horizontalDrag,
-    scrollPercent: horizontalPercent,
-    size: horizontalSize,
-  } = horizontal;
+  const { drag: verticalDrag, scrollPercent: verticalPercent } = vertical;
+  const { drag: horizontalDrag, scrollPercent: horizontalPercent } = horizontal;
 
   /* USE CALLBACK */
 
