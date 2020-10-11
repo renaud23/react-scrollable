@@ -1,4 +1,9 @@
-import { resolveScrollbar, resolveNb, computeSeuil } from "./commons-reducer";
+import {
+  resolveScrollbar,
+  resolveNb,
+  resolveScrollPercent,
+  computeSeuil,
+} from "./commons-reducer";
 
 function getWidth({ width }) {
   return width;
@@ -6,12 +11,6 @@ function getWidth({ width }) {
 
 function getHeight({ __height }) {
   return __height;
-}
-
-function resolveScrollPercent(scrollbar, viewportSize) {
-  const { maxSize, start, cumulsSize, margin } = scrollbar;
-  const percent = (cumulsSize[start] - margin) / (maxSize - viewportSize);
-  return { ...scrollbar, scrollPercent: percent, scrollRequest: { percent } };
 }
 
 function reduceWidth(state, width) {

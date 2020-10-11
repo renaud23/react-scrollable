@@ -26,6 +26,7 @@ function generate(nbCols, nbRows) {
       width: __MIN_WIDTH__ + randomInt(100),
       label: `column${i + 1}`,
       type: __TYPES__[randomInt(__TYPES__.length)],
+      resizable: true,
     };
   });
   const rows = new Array(nbRows).fill(null).map(function (_, i) {

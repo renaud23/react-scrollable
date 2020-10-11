@@ -31,3 +31,9 @@ export const onResize = (width, height) => ({
   type: ON_RESIZE,
   payload: { width, height },
 });
+
+export const ON_RESIZE_COLUMN = "react-large-table/on-resize-column";
+export const onResizeColumn = (index, delta) => ({
+  type: ON_RESIZE_COLUMN,
+  payload: { index, delta },
+});

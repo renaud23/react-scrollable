@@ -11,4 +11,5 @@ export {
   computeSeuil,
   resolveNb,
   resolveStart,
+  resolveScrollPercent,
 } from "./resolve-scrollbar";
