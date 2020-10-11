@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import Td from "../components/td";
 import { TableContext } from "../state-management";
-import CellRenderer from "./default-cell-renderer";
 
-function Content({ row, index, height }) {
+function Content({ row, index, height, cellRenderer: CellRenderer }) {
   const [state] = useContext(TableContext);
   const { header, horizontal } = state;
   const { start: startColumn, nb: nbColumns } = horizontal;

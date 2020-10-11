@@ -11,6 +11,10 @@ $scrollbarSize: 12px;
     position: absolute;
     display: inline-block;
 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
     &.vertical {
       width: $scrollbarSize;
       right: 0;

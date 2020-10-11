@@ -25,6 +25,47 @@
       }
     }
   }
+
+  .custom-cell-renderer {
+    display: inline-block;
+    width: calc(100% - 5px);
+    height: 100%;
+    text-align: left;
+    padding-right: 5px; 
+
+    &.string {
+      text-align: center;
+    }
+
+    &.number{
+      text-align: right;
+    }
+
+    &.euro {
+      text-align: right;
+      font-weight: bold;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: darkred;
+      font-size: 12px;
+      &::after {
+        content: ' €'
+      }
+    }
+
+    &.row-num {
+      color: dodgerblue;
+      text-align: right;
+      font-family: "Lucida Console", Monaco, monospace;
+      font-size: 14px;
+    }
+
+    &.sentence {
+      text-align: left;
+      font-style: italic;
+      font-family: "Trebuchet MS", Helvetica, sans-serif;
+      color: darkslategray;
+    }
+  }
 }
 
 .default-table-container {
@@ -36,5 +77,3 @@
 
   background-color: khaki;
 }
-
-

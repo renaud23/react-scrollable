@@ -3,7 +3,7 @@ import Tr from "../components/tr";
 import TrContent from "./tr-content";
 import { TableContext } from "../state-management";
 
-function BodyContent() {
+function BodyContent({ cellRenderer }) {
   const [state] = useContext(TableContext);
   const { vertical, rows } = state;
   const { nb, start } = vertical;
@@ -13,7 +13,12 @@ function BodyContent() {
       const { __height } = row;
       return (
         <Tr key={i} height={__height}>
-          <TrContent row={row} index={start + i} height={__height} />
+          <TrContent
+            row={row}
+            index={start + i}
+            height={__height}
+            cellRenderer={cellRenderer}
+          />
         </Tr>
       );
     });

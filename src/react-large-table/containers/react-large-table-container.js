@@ -9,7 +9,7 @@ import HeaderContent from "./header-content";
 import { TableContext, actions } from "../state-management";
 import classnames from "classnames";
 
-function ReactLargeTableContainer({ className }) {
+function ReactLargeTableContainer({ className, cellRenderer }) {
   const [state, dispatch] = useContext(TableContext);
   const { header, horizontal, vertical, rows, headerHeight } = state;
 
@@ -76,7 +76,7 @@ function ReactLargeTableContainer({ className }) {
             </Tr>
           </THead>
           <TBody>
-            <BodyContent />
+            <BodyContent cellRenderer={cellRenderer} />
           </TBody>
         </Table>
       </ReactScrollable>
