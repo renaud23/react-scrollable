@@ -3,13 +3,13 @@ $scrollbarTrackBgColor: rgba(52, 158, 19, 0.6);
 $scrollbarSize: 12px;
 
 .react-scrollable-container {
-  z-index: 1;
   &:focus {
     outline: none;
   }
   .react-scrollbar {
     position: absolute;
     display: inline-block;
+    z-index: 1;
 
     -moz-user-select: -moz-none;
     -khtml-user-select: none;

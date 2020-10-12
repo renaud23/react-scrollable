@@ -1,4 +1,5 @@
 .custom-large-table-theme {
+  background-color: khaki;
   thead {
     th {
       border-right: solid 1px black;
@@ -31,13 +32,13 @@
     width: calc(100% - 5px);
     height: 100%;
     text-align: left;
-    padding-right: 5px; 
+    padding-right: 5px;
 
     &.string {
       text-align: center;
     }
 
-    &.number{
+    &.number {
       text-align: right;
     }
 
@@ -48,7 +49,7 @@
       color: darkred;
       font-size: 12px;
       &::after {
-        content: ' €'
+        content: " €";
       }
     }
 
@@ -74,6 +75,4 @@
 
   overflow: hidden;
   resize: both;
-
-  background-color: khaki;
 }

@@ -17,12 +17,7 @@ export function DefaultTable() {
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
       <div className="default-table-container">
-        <ReactLargeTable
-          className="custom-large-table-theme"
-          data={data}
-          headerHeight={30}
-          treeSize={true}
-        />
+        <ReactLargeTable data={data} headerHeight={30} treeSize={true} />
       </div>
     </>
   );
