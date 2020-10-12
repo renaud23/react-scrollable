@@ -20,7 +20,11 @@ function Th({ children, width, height, index }) {
   return (
     <th
       className="react-large-table-th-el"
-      style={{ width: safeCss(width), height: safeCss(height) }}
+      style={{
+        width: safeCss(width),
+        height: safeCss(height),
+        lineHeight: `${safeCss(height)}px`,
+      }}
     >
       {resizable ? <Track onTrack={onTrackCallback} vertical right /> : null}
       {children}

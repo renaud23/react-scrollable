@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect } from "react";
 import ReactScrollable from "../../react-scrollable";
+import { RowNums } from "../components";
 import Table from "../components/table";
 import THead from "../components/t-head";
 import Tr from "../components/tr";
@@ -9,7 +10,7 @@ import HeaderContent from "./header-content";
 import { TableContext, actions } from "../state-management";
 import classnames from "classnames";
 
-function ReactLargeTableContainer({ className, cellRenderer }) {
+function ReactLargeTableContainer({ className, cellRenderer, rowNums }) {
   const [state, dispatch] = useContext(TableContext);
   const { header, horizontal, vertical, rows, headerHeight, id } = state;
 
@@ -73,30 +74,33 @@ function ReactLargeTableContainer({ className, cellRenderer }) {
   );
 
   return (
-    <div className={classnames("react-large-table", className)}>
-      <ReactScrollable
-        maxWidth={maxWidth}
-        maxHeight={maxHeight}
-        onHorizontalScroll={onHorizontalScrollCallback}
-        onVerticalScroll={onVerticalScrollCallback}
-        verticalScrollPercentRequest={verticalScrollPercentRequest}
-        horizontalScrollPercentRequest={horizontalScrollPercentRequest}
-        onResize={onResizeCallback}
-        middleware={middleware}
-        idContent={id}
-      >
-        <Table>
-          <THead>
-            <Tr heigh={headerHeight}>
-              <HeaderContent />
-            </Tr>
-          </THead>
-          <TBody>
-            <BodyContent cellRenderer={cellRenderer} />
-          </TBody>
-        </Table>
-      </ReactScrollable>
-    </div>
+    <>
+      <div className={classnames("react-large-table", className)}>
+        {rowNums ? <RowNums /> : null}
+        <ReactScrollable
+          maxWidth={maxWidth}
+          maxHeight={maxHeight}
+          onHorizontalScroll={onHorizontalScrollCallback}
+          onVerticalScroll={onVerticalScrollCallback}
+          verticalScrollPercentRequest={verticalScrollPercentRequest}
+          horizontalScrollPercentRequest={horizontalScrollPercentRequest}
+          onResize={onResizeCallback}
+          middleware={middleware}
+          idContent={id}
+        >
+          <Table>
+            <THead>
+              <Tr heigh={headerHeight}>
+                <HeaderContent />
+              </Tr>
+            </THead>
+            <TBody>
+              <BodyContent cellRenderer={cellRenderer} />
+            </TBody>
+          </Table>
+        </ReactScrollable>
+      </div>
+    </>
   );
 }
 

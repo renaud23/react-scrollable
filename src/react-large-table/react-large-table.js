@@ -11,11 +11,12 @@ import PropTypes from "prop-types";
 import "./react-large-table.scss";
 
 function ReactLargeTable({
-  data = {},
+  data,
   headerHeight,
   className,
-  treeSize = false,
+  treeSize,
   cellRenderer,
+  rowNums,
 }) {
   const [state, dispatch] = useReducer(reducer, { ...INITIAL_STATE });
   const { rows, header } = data;
@@ -32,6 +33,7 @@ function ReactLargeTable({
       <ReactLargeTableContainer
         className={className}
         cellRenderer={cellRenderer}
+        rowNums={rowNums}
       />
     </TableContext.Provider>
   );
@@ -60,6 +62,7 @@ ReactLargeTable.prototype = {
   className: PropTypes.string,
   treeSize: PropTypes.bool,
   cellRenderer: PropTypes.func,
+  rowNums: PropTypes.bool,
 };
 
 ReactLargeTable.defaultProps = {
@@ -67,6 +70,7 @@ ReactLargeTable.defaultProps = {
   className: undefined,
   treeSize: false,
   cellRenderer: DefaultCellRenderer,
+  rowNums: false,
 };
 
 export default ReactLargeTable;

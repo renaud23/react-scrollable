@@ -1,7 +1,11 @@
 .react-large-table {
+  display: flex;
+  flex-direction: row;
   height: 100%;
   width: 100%;
 
+  div,
+  span,
   table,
   thead,
   tbody,
@@ -11,7 +15,8 @@
     margin: 0;
     padding: 0;
     border: 0;
-    outline: 0; 
+    outline: 0;
+    line-height: 0;
     vertical-align: baseline;
   }
 
@@ -24,8 +29,7 @@
     overflow: hidden;
 
     thead {
-      display: block; 
-      background-color: snow;
+      display: block;
       position: absolute;
       top: 0;
       z-index: 0;
@@ -34,8 +38,7 @@
         display: block;
         width: max-content;
 
-        th {
-          height: 100%;
+        th { 
           display: inline-block;
           position: relative;
           overflow: hidden;
