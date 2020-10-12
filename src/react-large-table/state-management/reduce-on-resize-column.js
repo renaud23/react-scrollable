@@ -20,7 +20,10 @@ function reduce(state, action) {
   const { delta, index } = payload;
   const { header } = state;
 
-  return { ...state, header: refillHeader(header, delta, index) };
+  return {
+    ...state,
+    header: refillHeader(header, delta, index),
+  };
 }
 
 export default reduce;
