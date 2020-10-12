@@ -13,41 +13,24 @@ function getHeight({ __height }) {
   return __height;
 }
 
-function reduceWidth(state, width) {
-  const { viewportWidth, horizontal } = state;
-  if (viewportWidth === undefined) {
-    return {
-      ...state,
-      viewportWidth: width,
-      horizontal: resolveScrollbar(horizontal, width, getWidth),
-    };
+function reduceSize(scrollbar, size, getSize) {
+  if (scrollbar.size === undefined) {
+    return resolveScrollbar({ ...scrollbar, size }, getSize);
   }
-  const next = resolveScrollPercent(horizontal, width);
-  const seuil = computeSeuil(next, width);
+  const next = resolveScrollPercent({ ...scrollbar, size });
+  const seuil = computeSeuil(next);
 
-  return {
-    ...state,
-    viewportWidth: width,
-    horizontal: resolveNb(next, width, seuil),
-  };
+  return resolveNb(next, seuil);
 }
 
-function reduceHeight(state, height) {
-  const { viewportHeight, vertical, headerHeight } = state;
-  if (viewportHeight === undefined) {
-    return {
-      ...state,
-      viewportHeight: height,
-      vertical: resolveScrollbar(vertical, height - headerHeight, getHeight),
-    };
-  }
-  const next = resolveScrollPercent(vertical, height - headerHeight);
-  const seuil = computeSeuil(next, height - headerHeight);
-  return {
-    ...state,
-    viewportHeight: height,
-    vertical: resolveNb(next, height - headerHeight, seuil),
-  };
+function reduceWidth(state, size) {
+  const { horizontal } = state;
+  return { ...state, horizontal: reduceSize(horizontal, size, getWidth) };
+}
+
+function reduceHeight(state, size) {
+  const { vertical } = state;
+  return { ...state, vertical: reduceSize(vertical, size, getHeight) };
 }
 
 function reduceBoth(state, width, height) {
@@ -57,16 +40,18 @@ function reduceBoth(state, width, height) {
 function reduce(state, action) {
   const { payload } = action;
   const { width, height } = payload;
-  const { viewportWidth, viewportHeight } = state;
+  const { horizontal, vertical, headerHeight } = state;
+  const { size: viewportWidth } = horizontal;
+  const { size: viewportHeight } = vertical;
 
-  if (viewportWidth !== width && viewportHeight !== height) {
-    return reduceBoth(state, width, height);
+  if (viewportWidth !== width && viewportHeight + headerHeight !== height) {
+    return reduceBoth(state, width, height - headerHeight);
   }
   if (viewportWidth !== width) {
     return reduceWidth(state, width);
   }
   if (viewportHeight !== height) {
-    return reduceHeight(state, height);
+    return reduceHeight(state, height - headerHeight);
   }
   return state;
 }

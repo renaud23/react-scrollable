@@ -7,13 +7,12 @@ function getSize({ width }) {
 function reduce(state, action) {
   const { payload } = action;
   const { percent } = payload;
-  const { horizontal, viewportWidth } = state;
+  const { horizontal } = state;
 
   return {
     ...state,
     horizontal: resolveScrollbar(
       { ...horizontal, scrollPercent: percent },
-      viewportWidth,
       getSize
     ),
   };

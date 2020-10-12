@@ -3,8 +3,11 @@ import { computeScrollbarScrollPercent } from "../common-reducers";
 function resolve(scrollbar, action) {
   const { payload } = action;
   const { delta } = payload;
-  const { tPos, size, tSize } = scrollbar;
-  const next = Math.min(Math.max(tPos + delta / size, 0), size - tSize);
+  const { tPos, size, tSize, max } = scrollbar;
+  const next = Math.min(
+    Math.max(tPos + delta * (size / (1 + max)), 0),
+    size - tSize
+  );
   return computeScrollbarScrollPercent({ ...scrollbar, tPos: next });
 }
 

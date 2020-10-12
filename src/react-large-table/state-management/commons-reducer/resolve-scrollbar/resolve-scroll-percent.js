@@ -1,6 +1,6 @@
-function resolve(scrollbar, viewportSize) {
-  const { maxSize, start, cumulsSize, margin } = scrollbar;
-  const percent = (cumulsSize[start] - margin) / (maxSize - viewportSize);
+function resolve(scrollbar) {
+  const { maxSize, start, cumulsSize, margin, size } = scrollbar;
+  const percent = (cumulsSize[start] - margin) / (maxSize - size);
   return { ...scrollbar, scrollPercent: percent, scrollRequest: { percent } };
 }
 

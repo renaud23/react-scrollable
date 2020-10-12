@@ -1,7 +1,7 @@
-function compute(scrollbar, viewportSize) {
-  const { scrollPercent, maxSize } = scrollbar;
-  if (maxSize && viewportSize) {
-    return scrollPercent * (maxSize - viewportSize);
+function compute(scrollbar) {
+  const { scrollPercent, maxSize, size } = scrollbar;
+  if (maxSize && size) {
+    return scrollPercent * (maxSize - size);
   }
   return 0;
 }

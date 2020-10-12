@@ -1,6 +1,7 @@
 function initializeScrollbar() {
   return {
     maxSize: 0,
+    size: undefined,
     cumulsSize: undefined,
     treeSize: undefined,
     start: undefined,
@@ -18,9 +19,6 @@ const INITIAL_STATE = {
   rows: [],
   headerHeight: undefined,
   treeSize: false,
-
-  viewportWidth: undefined,
-  viewportHeight: undefined,
 
   horizontal: initializeScrollbar(),
   vertical: initializeScrollbar(),

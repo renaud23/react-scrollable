@@ -17,101 +17,83 @@ const BINDED_KEYS = {
   end: "End",
 };
 
-function moveScrollbar(scrollbar, delta, viewportSize) {
+function moveScrollbar(scrollbar, delta) {
   const { start, max, nb } = scrollbar;
-  const next = resolveScrollPercent(
-    {
-      ...scrollbar,
-      start: Math.max(Math.min(start + delta, max - nb), 0),
-      margin: 0,
-    },
-    viewportSize
-  );
-  const seuil = computeSeuil(next, viewportSize);
-
-  return resolveNb(next, viewportSize, seuil);
+  const next = resolveScrollPercent({
+    ...scrollbar,
+    start: Math.max(Math.min(start + delta, max - nb), 0),
+    margin: 0,
+  });
+  const seuil = computeSeuil(next);
+  return resolveNb(next, seuil);
 }
 
-function moveScrollbarPixels(scrollbar, delta, viewportSize) {
-  const { maxSize } = scrollbar;
-  const seuil = computeSeuil(scrollbar, viewportSize);
-  const next = Math.min(Math.max(seuil + delta, 0), maxSize - viewportSize);
+function moveScrollbarPixels(scrollbar, delta) {
+  const { maxSize, size } = scrollbar;
+  const seuil = computeSeuil(scrollbar);
+  const next = Math.min(Math.max(seuil + delta, 0), maxSize - size);
   return {
     ...resolveScrollPercent(
-      resolveNb(
-        resolveMargin(resolveStart(scrollbar, next), next),
-
-        viewportSize,
-        next
-      ),
-      viewportSize
+      resolveNb(resolveMargin(resolveStart(scrollbar, next), next), next)
     ),
   };
 }
 
-function forceScrollbar(scrollbar, percent, viewportSize) {
-  const { maxSize } = scrollbar;
-  const seuil = percent * (maxSize - viewportSize);
+function forceScrollbar(scrollbar, percent) {
+  const { maxSize, size } = scrollbar;
+  const seuil = percent * (maxSize - size);
   return {
-    ...resolveNb(
-      resolveMargin(resolveStart(scrollbar, seuil), seuil),
-      viewportSize,
-      seuil
-    ),
+    ...resolveNb(resolveMargin(resolveStart(scrollbar, seuil), seuil), seuil),
     scrollRequest: { percent },
   };
 }
 
 function reduceArrowDown(state) {
-  const { vertical, viewportHeight, headerHeight } = state;
-  const viewportSize = viewportHeight - headerHeight;
-  return { ...state, vertical: moveScrollbar(vertical, 1, viewportSize) };
+  const { vertical } = state;
+  return { ...state, vertical: moveScrollbar(vertical, 1) };
 }
 
 function reduceArrowUp(state) {
-  const { vertical, viewportHeight, headerHeight } = state;
-  const viewportSize = viewportHeight - headerHeight;
-  return { ...state, vertical: moveScrollbar(vertical, -1, viewportSize) };
+  const { vertical } = state;
+  return { ...state, vertical: moveScrollbar(vertical, -1) };
 }
 
 function reduceArrowLeft(state) {
-  const { horizontal, viewportWidth } = state;
-  return { ...state, horizontal: moveScrollbar(horizontal, -1, viewportWidth) };
+  const { horizontal } = state;
+  return { ...state, horizontal: moveScrollbar(horizontal, -1) };
 }
 
 function reduceArrowRight(state) {
-  const { horizontal, viewportWidth } = state;
-  return { ...state, horizontal: moveScrollbar(horizontal, 1, viewportWidth) };
+  const { horizontal } = state;
+  return { ...state, horizontal: moveScrollbar(horizontal, 1) };
 }
 
 function reducePageUp(state) {
-  const { vertical, viewportHeight, headerHeight } = state;
-  const viewportSize = viewportHeight - headerHeight;
+  const { vertical } = state;
+  const { size } = vertical;
   return {
     ...state,
-    vertical: moveScrollbarPixels(vertical, -viewportSize, viewportSize),
+    vertical: moveScrollbarPixels(vertical, -size),
   };
 }
 
 function reducePageDown(state) {
-  const { vertical, viewportHeight, headerHeight } = state;
-  const viewportSize = viewportHeight - headerHeight;
+  const { vertical } = state;
+  const { size } = vertical;
   return {
     ...state,
-    vertical: moveScrollbarPixels(vertical, viewportSize, viewportSize),
+    vertical: moveScrollbarPixels(vertical, size),
   };
 }
 
 function reduceHome(state) {
-  const { vertical, viewportHeight, headerHeight } = state;
-  const viewportSize = viewportHeight - headerHeight;
-  return { ...state, vertical: forceScrollbar(vertical, 0, viewportSize) };
+  const { vertical } = state;
+  return { ...state, vertical: forceScrollbar(vertical, 0) };
 }
 
 function reduceEnd(state) {
-  const { vertical, viewportHeight, headerHeight } = state;
-  const viewportSize = viewportHeight - headerHeight;
-  return { ...state, vertical: forceScrollbar(vertical, 1, viewportSize) };
+  const { vertical } = state;
+  return { ...state, vertical: forceScrollbar(vertical, 1) };
 }
 
 function reduce(state, action) {

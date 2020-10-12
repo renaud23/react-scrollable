@@ -10,18 +10,19 @@ function getWidth({ width }) {
 }
 
 function reduce(state) {
-  const { horizontal, header, treeSize, viewportWidth } = state;
+  const { horizontal, header, treeSize } = state;
   const { start } = horizontal;
-
+  const max = header.length;
   if (start !== undefined) {
-    const next = resolveScrollPercent(
-      { ...horizontal, ...resolveRefreshData(header, getWidth, treeSize) },
-      viewportWidth
-    );
-    const seuil = computeSeuil(next, viewportWidth);
+    const next = resolveScrollPercent({
+      ...horizontal,
+      max,
+      ...resolveRefreshData(header, getWidth, treeSize),
+    });
+    const seuil = computeSeuil(next);
     return {
       ...state,
-      horizontal: resolveNb(next, viewportWidth, seuil),
+      horizontal: resolveNb(next, seuil),
     };
   }
 
@@ -29,6 +30,7 @@ function reduce(state) {
     ...state,
     horizontal: {
       ...horizontal,
+      max,
       ...resolveRefreshData(header, getWidth, treeSize),
     },
   };
