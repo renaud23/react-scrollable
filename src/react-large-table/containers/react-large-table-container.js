@@ -11,7 +11,7 @@ import classnames from "classnames";
 
 function ReactLargeTableContainer({ className, cellRenderer }) {
   const [state, dispatch] = useContext(TableContext);
-  const { header, horizontal, vertical, rows, headerHeight } = state;
+  const { header, horizontal, vertical, rows, headerHeight, id } = state;
 
   const {
     maxSize: maxWidth,
@@ -83,6 +83,7 @@ function ReactLargeTableContainer({ className, cellRenderer }) {
         horizontalScrollPercentRequest={horizontalScrollPercentRequest}
         onResize={onResizeCallback}
         middleware={middleware}
+        idContent={id}
       >
         <Table>
           <THead>

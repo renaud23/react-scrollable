@@ -13,6 +13,7 @@ function initializeScrollbar() {
 }
 
 const INITIAL_STATE = {
+  id: undefined,
   header: [],
   rows: [],
   headerHeight: undefined,

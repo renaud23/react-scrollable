@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TableContext } from "../state-management";
 
 function Table({ children }) {
-  return <table className="react-large-table-table-el">{children}</table>;
+  const [{ id }] = useContext(TableContext);
+  return (
+    <table className="react-large-table-table-el" id={id}>
+      {children}
+    </table>
+  );
 }
 
 export default Table;
