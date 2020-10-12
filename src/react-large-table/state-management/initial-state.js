@@ -5,6 +5,7 @@ function initializeScrollbar() {
     treeSize: undefined,
     start: undefined,
     nb: undefined,
+    max: undefined,
     margin: undefined,
     scrollPercent: 0,
     scrollRequest: undefined,

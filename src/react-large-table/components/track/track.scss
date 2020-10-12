@@ -2,6 +2,10 @@
   .react-large-table-track {
     position: absolute;
 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
     &.vertical {
       z-index: 1;
       display: inline-block;

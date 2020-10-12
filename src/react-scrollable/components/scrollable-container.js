@@ -1,4 +1,10 @@
-import React, { useCallback, useReducer, useEffect, useRef } from "react";
+import React, {
+  useCallback,
+  useReducer,
+  useEffect,
+  useRef,
+  useMemo,
+} from "react";
 import PropTypes from "prop-types";
 import { useResizeObserver } from "./common-tools";
 import {
@@ -9,7 +15,8 @@ import {
 } from "./state-management";
 import { ScrollbarVertical, ScrollbarHorizontal } from "./scrollbar";
 import "./scrollable-container.scss";
-import compose from "./state-management/reducers/compose";
+
+const __middleware = (next) => (action) => next(action);
 
 function ScrollableContainer({
   children,
@@ -21,25 +28,33 @@ function ScrollableContainer({
   onHorizontalScroll = () => null,
   onVerticalScroll = () => null,
   onResize = () => null,
-  middleware,
+  middleware = __middleware,
 }) {
   const scrollbarVEl = useRef();
   const scrollbarHEl = useRef();
-  const [state, dispatch] = useReducer(
-    middleware ? compose(reducers, middleware) : reducers,
-    INITIAL_STATE
+  const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
+
+  const dispatch = useMemo(
+    function () {
+      return middleware(__dispatch);
+    },
+    [__dispatch, middleware]
   );
+
   const { vertical, horizontal, refresh } = state;
   const { drag: verticalDrag, scrollPercent: verticalPercent } = vertical;
   const { drag: horizontalDrag, scrollPercent: horizontalPercent } = horizontal;
 
   /* USE CALLBACK */
 
-  const onKeyDownCallback = useCallback(function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-    dispatch(actions.onKeyDown(e.key));
-  }, []);
+  const onKeyDownCallback = useCallback(
+    function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      dispatch(actions.onKeyDown(e.key));
+    },
+    [dispatch]
+  );
 
   const onResizeCallback = useCallback(
     function (viewportWidth, viewportHeight) {
@@ -61,19 +76,31 @@ function ScrollableContainer({
   );
 
   /* */
-  const onMDHcbk = useCallback(function (clientPos) {
-    dispatch(actions.onHorizontalStartDrag(clientPos));
-  }, []);
-  const onMDVcbk = useCallback(function (clientPos) {
-    dispatch(actions.onVerticalStartDrag(clientPos));
-  }, []);
+  const onMDHcbk = useCallback(
+    function (clientPos) {
+      dispatch(actions.onHorizontalStartDrag(clientPos));
+    },
+    [dispatch]
+  );
+  const onMDVcbk = useCallback(
+    function (clientPos) {
+      dispatch(actions.onVerticalStartDrag(clientPos));
+    },
+    [dispatch]
+  );
   /* */
-  const onBarMouseDownVer = useCallback(function (clientPos) {
-    dispatch(actions.onVerticalMouseDown(clientPos));
-  }, []);
-  const onBarMouseDownHor = useCallback(function (clientPos) {
-    dispatch(actions.onHorizontalMouseDown(clientPos));
-  }, []);
+  const onBarMouseDownVer = useCallback(
+    function (clientPos) {
+      dispatch(actions.onVerticalMouseDown(clientPos));
+    },
+    [dispatch]
+  );
+  const onBarMouseDownHor = useCallback(
+    function (clientPos) {
+      dispatch(actions.onHorizontalMouseDown(clientPos));
+    },
+    [dispatch]
+  );
 
   const onmouseupCbk = useCallback(
     function () {
@@ -84,7 +111,7 @@ function ScrollableContainer({
         dispatch(actions.onHorizontalStopDrag());
       }
     },
-    [verticalDrag, horizontalDrag]
+    [verticalDrag, horizontalDrag, dispatch]
   );
   const onmousemoveCbk = useCallback(
     function (e) {
@@ -97,19 +124,22 @@ function ScrollableContainer({
         dispatch(actions.onHorizontalDrag(e.clientX));
       }
     },
-    [verticalDrag, horizontalDrag]
+    [verticalDrag, horizontalDrag, dispatch]
   );
 
-  const onWheelCallback = useCallback(function (e) {
-    dispatch(actions.onWheel(e.deltaY));
-  }, []);
+  const onWheelCallback = useCallback(
+    function (e) {
+      dispatch(actions.onWheel(e.deltaY));
+    },
+    [dispatch]
+  );
   /* USE EFFECT */
   useEffect(
     function () {
       const { percent } = verticalScrollPercentRequest || {};
       dispatch(actions.onVerticalScrollPercentRequest(percent));
     },
-    [verticalScrollPercentRequest]
+    [verticalScrollPercentRequest, dispatch]
   );
 
   useEffect(
@@ -119,7 +149,7 @@ function ScrollableContainer({
         dispatch(actions.onHorizontalScrollPercentRequest(percent));
       }
     },
-    [horizontalScrollPercentRequest]
+    [horizontalScrollPercentRequest, dispatch]
   );
 
   /* USE EFFECT */
@@ -144,7 +174,7 @@ function ScrollableContainer({
       dispatch(actions.onInit(maxWidth, maxHeight));
       dispatch(actions.onRefreshViewport());
     },
-    [maxWidth, maxHeight]
+    [maxWidth, maxHeight, dispatch]
   );
 
   useEffect(

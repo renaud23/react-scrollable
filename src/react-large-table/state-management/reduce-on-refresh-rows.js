@@ -6,9 +6,14 @@ function getHeight({ __height }) {
 
 function reduce(state) {
   const { vertical, rows, treeSize } = state;
+  const max = rows.length;
   return {
     ...state,
-    vertical: { ...vertical, ...resolveRefreshData(rows, getHeight, treeSize) },
+    vertical: {
+      ...vertical,
+      max,
+      ...resolveRefreshData(rows, getHeight, treeSize),
+    },
   };
 }
 

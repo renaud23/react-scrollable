@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import ReactScrollable from "../../react-scrollable";
 import Table from "../components/table";
 import THead from "../components/t-head";
@@ -6,11 +6,7 @@ import Tr from "../components/tr";
 import TBody from "../components/t-body";
 import BodyContent from "./body-content";
 import HeaderContent from "./header-content";
-import {
-  TableContext,
-  actions,
-  createKeyboardMiddleWare,
-} from "../state-management";
+import { TableContext, actions } from "../state-management";
 import classnames from "classnames";
 
 function ReactLargeTableContainer({ className, cellRenderer }) {
@@ -62,8 +58,17 @@ function ReactLargeTableContainer({ className, cellRenderer }) {
     [rows, dispatch]
   );
 
-  const onMiddleWareCallback = useMemo(
-    () => createKeyboardMiddleWare(dispatch),
+  const middleware = useCallback(
+    (next) => (action) => {
+      const { type, payload } = action;
+
+      if (type === "react-scrollable/on-key-down") {
+        const { key } = payload;
+        dispatch(actions.onKeyDown(key));
+        return null;
+      }
+      return next(action);
+    },
     [dispatch]
   );
 
@@ -77,7 +82,7 @@ function ReactLargeTableContainer({ className, cellRenderer }) {
         verticalScrollPercentRequest={verticalScrollPercentRequest}
         horizontalScrollPercentRequest={horizontalScrollPercentRequest}
         onResize={onResizeCallback}
-        middleware={onMiddleWareCallback}
+        middleware={middleware}
       >
         <Table>
           <THead>
