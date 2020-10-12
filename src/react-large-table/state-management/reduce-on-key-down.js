@@ -75,13 +75,13 @@ function reduceArrowUp(state) {
 }
 
 function reduceArrowLeft(state) {
-  const { horizontal } = state;
-  return { ...state, horizontal: moveScrollbar(horizontal, -1) };
+  const { horizontal, viewportWidth } = state;
+  return { ...state, horizontal: moveScrollbar(horizontal, -1, viewportWidth) };
 }
 
 function reduceArrowRight(state) {
-  const { horizontal } = state;
-  return { ...state, horizontal: moveScrollbar(horizontal, 1) };
+  const { horizontal, viewportWidth } = state;
+  return { ...state, horizontal: moveScrollbar(horizontal, 1, viewportWidth) };
 }
 
 function reducePageUp(state) {

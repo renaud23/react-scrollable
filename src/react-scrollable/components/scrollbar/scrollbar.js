@@ -62,8 +62,8 @@ export default React.forwardRef(function Scrollbar(
       ref={containerEl}
       role="scrollbar"
       aria-valuemin={0}
-      aria-valuemax={1}
-      aria-valuenow={scrollPercent}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(scrollPercent * 100)}
       aria-controls={idContent}
       aria-orientation={vertical ? "vertical" : "horizontal"}
       className={classnames("react-scrollbar", className, {

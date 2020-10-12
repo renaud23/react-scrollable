@@ -5,7 +5,7 @@ import classnames from "classnames";
 import "./custom-large-table.scss";
 
 const __WIDTH__ = 50;
-const __HEIGHT__ = 1000;
+const __HEIGHT__ = 10000;
 
 const data = generate(__WIDTH__, __HEIGHT__);
 
