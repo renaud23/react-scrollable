@@ -9,19 +9,19 @@
     background-color: transparent;
     .header-corner-container {
       position: absolute;
-      overflow: hidden;
+      overflow: hidden; 
       width: 100%;
 
       .header-corner {
         width: 100%;
-        height: 100%;
-        background-color: snow;
+        height: 100%; 
+        z-index: 1;
       }
     }
-    .rows {
-      .container {
+    .row-nums-rows-rows {
+      .row-nums-rows-container {
         overflow: hidden;
-        .nums {
+        .row-nums-rows-nums {
           display: inline-block;
         }
       }

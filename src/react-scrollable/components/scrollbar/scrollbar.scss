@@ -48,8 +48,7 @@ $scrollbarSize: 12px;
     .react-scrollbar-track {
       &.vertical {
         background-color: $scrollbarTrackBgColor;
-        width: calc(100% - 2px);
-        margin-left: 1px;
+        width: 100%; 
       }
 
       &.horizontal {

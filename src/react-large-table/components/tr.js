@@ -1,9 +1,13 @@
 import React from "react";
+import classnames from "classnames";
 import { safeCss } from "../commons";
 
-function Tr({ children, height }) {
+function Tr({ children, height, odd }) {
   return (
-    <tr className="react-large-table-tr-el" style={{ height: safeCss(height) }}>
+    <tr
+      className={classnames("react-large-table-tr-el", { odd })}
+      style={{ height: safeCss(height) }}
+    >
       {children}
     </tr>
   );

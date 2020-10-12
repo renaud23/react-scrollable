@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import classnames from "classnames";
 import { TableContext } from "../../state-management";
 import { safeCss } from "../../commons";
 import "./row-nums.scss";
@@ -8,6 +9,7 @@ function Corner({ height }) {
     <div
       className="header-corner-container"
       style={{ height: safeCss(height) }}
+      aria-hidden={true}
     >
       <div className="header-corner"></div>
     </div>
@@ -16,8 +18,16 @@ function Corner({ height }) {
 
 function Row({ height, index }) {
   return (
-    <div style={{ height: safeCss(height) }} className="container">
-      <div style={{ lineHeight: `${safeCss(height)}px` }} className="nums">
+    <div
+      style={{ height: safeCss(height) }}
+      className={classnames("row-nums-rows-container", {
+        odd: index % 2 === 1,
+      })}
+    >
+      <div
+        style={{ lineHeight: `${safeCss(height)}px` }}
+        className="row-nums-rows-nums"
+      >
         {index}
       </div>
     </div>
@@ -39,7 +49,7 @@ function RowNums() {
       <div className="row-nums">
         <Corner height={headerHeight} />
         <div
-          className="rows"
+          className="row-nums-rows"
           style={{ marginTop: safeCss(margin + headerHeight) }}
         >
           {nums}

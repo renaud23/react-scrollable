@@ -12,7 +12,7 @@ function BodyContent({ cellRenderer }) {
       const row = rows[start + i];
       const { __height } = row;
       return (
-        <Tr key={i} height={__height}>
+        <Tr key={i} height={__height} odd={i % 2 === 1}>
           <TrContent
             row={row}
             index={start + i}

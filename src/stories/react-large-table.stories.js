@@ -46,7 +46,7 @@ export function WithRowNumsTable() {
         <ReactLargeTable
           className="custom-large-table-theme"
           data={data}
-          headerHeight={30}
+          headerHeight={50}
           cellRenderer={CustomCellRenderer}
           rowNums={true}
         />
@@ -66,7 +66,7 @@ export function CustomCellTable() {
         <ReactLargeTable
           className="custom-large-table-theme"
           data={data}
-          headerHeight={30}
+          headerHeight={50}
           cellRenderer={CustomCellRenderer}
         />
       </div>
