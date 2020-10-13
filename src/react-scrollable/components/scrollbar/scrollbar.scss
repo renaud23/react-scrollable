@@ -2,6 +2,8 @@ $scrollbarBgColor: rgba(100, 120, 90, 0.4);
 $scrollbarTrackBgColor: rgba(52, 158, 19, 0.6);
 $scrollbarSize: 12px;
 
+ 
+
 .react-scrollable-container {
   &:focus {
     outline: none;
@@ -30,17 +32,24 @@ $scrollbarSize: 12px;
       width: calc(100% - 12px);
       bottom: 0;
       height: $scrollbarSize;
-      background-color: transparent;
+
+       
+      // animation: fadOut 0.5s;
+      // opacity: 0;
+      // background-color: transparent;
 
       &.hidden {
-        height: 0;
+        // height: 0;
+        // opacity: 0;
       }
 
       &:hover,
       &.on-drag {
         background-color: $scrollbarBgColor;
+        opacity: 1; 
         .react-scrollbar-track {
           background-color: $scrollbarTrackBgColor;
+        
         }
       }
     }
@@ -52,7 +61,7 @@ $scrollbarSize: 12px;
       }
 
       &.horizontal {
-        background-color: transparent;
+        // background-color: transparent;
         height: 100%;
 
         &:hover,

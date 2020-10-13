@@ -1,17 +1,23 @@
 $trackBgColor: rgba(47, 79, 79, 0.5);
 $trackBgColorHover: DarkSlateGray;
+$headerBgColor: Sienna;
 
 .custom-large-table-theme {
   background-color: khaki;
   thead {
-    padding-bottom: 2px;
-    background-color: saddlebrown;
+    background-color: $headerBgColor;
     th {
-      border-right: solid 1px black;
-      border-bottom: thick double $trackBgColorHover;
-      background-color: transparent;
-      color: bisque;
-      line-height: 28px;
+      .th-el-container {
+        margin-top: 0;
+        display: block;
+        height: calc(100% - 5px);
+        width: calc(100% - 1px);
+        border-right: solid 1px black;
+        border-bottom: thick double $trackBgColorHover;
+        background-color: transparent;
+        color: bisque;
+        line-height: 28px;
+      }
     }
   }
 
@@ -20,19 +26,14 @@ $trackBgColorHover: DarkSlateGray;
       &.odd {
         background-color: DarkKhaki;
       }
-      td {
-        border-right: dotted 1px black;
-        border-bottom: solid 1px black;
-        height: calc(100% - 1px);
-      }
     }
   }
 
   .react-scrollable-container {
     .react-scrollbar {
       &.vertical {
-        height: calc(100% - 66px);
-        margin-top: 54px;
+        height: calc(100% - 62px);
+        margin-top: 50px;
       }
     }
   }
@@ -43,25 +44,28 @@ $trackBgColorHover: DarkSlateGray;
     max-width: 70px;
     .header-corner-container {
       top: 0;
-      border-bottom: thick double $trackBgColorHover;
-      border-right: thick double $trackBgColorHover;
-      width: calc(100% - 5px);
-      background-color: snow;
+     
       .header-corner {
-        background-color: saddlebrown;
+        height: calc(100% - 5px);
+        width: 100%;
+        background-color: $headerBgColor;
+        border-bottom: thick double $trackBgColorHover;
+        border-right: thick double $trackBgColorHover;
+        width: calc(100% - 5px);
+        
       }
     }
     // padding-top: 1px;
-    .row-nums-rows {
-      .row-nums-rows-container {
+    .row-nums-body {
+      .row-container {
         background-color: snow;
         border-right: thick double $trackBgColorHover;
         &.odd {
-          .row-nums-rows-nums {
+          .row {
             // background-color: Sienna;
           }
         }
-        .row-nums-rows-nums {
+        .row {
           border-bottom: solid 1px black;
           background-color: Peru;
           color: PaleGoldenRod;
@@ -80,10 +84,13 @@ $trackBgColorHover: DarkSlateGray;
 
   /*  */
   .custom-cell-renderer {
-    display: inline-block;
-    width: calc(100% - 5px);
+    display:  block; 
     text-align: left;
     padding-right: 5px;
+    border-right: dotted 1px black;
+    border-bottom: solid 1px black;
+    height: calc(100% - 1px);
+    width: calc(100% - 6px);
 
     &.string {
       text-align: center;
@@ -149,7 +156,7 @@ $trackBgColorHover: DarkSlateGray;
         }
 
         &.horizontal {
-          background-color: transparent;
+          // background-color: transparent;
           &:hover,
           &.on-drag {
             background-color: $trackBgColorHover;
