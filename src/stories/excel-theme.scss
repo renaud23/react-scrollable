@@ -1,0 +1,123 @@
+@mixin heading() {
+  display: block;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  background-color: lightgray;
+  border-right: solid 1px slategray;
+  border-bottom: solid 1px slategray;
+}
+
+.excel-theme {
+  thead {
+    th {
+      .th-el-container {
+        @include heading();
+        line-height: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      &.odd {
+      }
+    }
+  }
+
+  .react-scrollable-container {
+    .react-scrollbar {
+      &.vertical {
+        height: calc(100% - 62px);
+        margin-top: 50px;
+      }
+    }
+  }
+
+  /* */
+  .excel-theme-cell {
+    display: block;
+    border-right: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+    background-color: snow;
+  }
+
+  /* */
+  .row-nums {
+    .header-corner-container {
+      top: 0;
+
+      .header-corner {
+        @include heading();
+        line-height: 50px;
+      }
+    }
+
+    .row-nums-body {
+      .row-container {
+        &.odd {
+          .row {
+          }
+        }
+        .row {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 12px;
+          padding: 0 2px;
+          text-align: center;
+          min-width: 30px;
+          display: block;
+          width: calc(100% - 5px);
+          
+          background-color: lightgray;
+          border-right: solid 1px slategray;
+          border-bottom: solid 1px slategray;
+          height: calc(100% - 1px);
+        }
+      }
+    }
+  }
+
+  /* */
+  .react-scrollable-container {
+    .react-scrollbar {
+      &.vertical {
+        background-color: rgba(220, 220, 220, 0.4);
+      }
+
+      &.horizontal {
+        &:hover, &.on-drag {
+          background-color: rgba(220, 220, 220, 0.4);
+          .react-scrollbar-track {
+            background-color: slategray;
+            &.horizontal {
+              &:hover,
+              &.on-drag {
+                background-color: slategray;
+              }
+            }
+          }
+        }
+      }
+
+      .react-scrollbar-track {
+        &.vertical {
+          background-color: slategray;
+          &:hover,
+          &.on-drag {
+            background-color: slategray;
+          }
+        }
+
+        &.horizontal {
+          &:hover,
+          &.on-drag {
+            background-color: slategray;
+          }
+        }
+      }
+    }
+  }
+}

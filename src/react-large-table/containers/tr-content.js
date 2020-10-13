@@ -14,7 +14,7 @@ function Content({ row, index, height, cellRenderer: CellRenderer }) {
     const { width, path } = column;
     const cell = path in row ? row[path] : undefined;
     return (
-      <Td key={i} width={width} height={height}>
+      <Td key={`${startColumn + i} - ${index}`} width={width} height={height}>
         <CellRenderer
           column={startColumn + i}
           row={index}

@@ -9,13 +9,14 @@ function BodyContent({ cellRenderer }) {
   const { nb, start } = vertical;
   if (nb) {
     return new Array(nb).fill(null).map(function (_, i) {
-      const row = rows[start + i];
+      const index = start + i;
+      const row = rows[index];
       const { __height } = row;
       return (
-        <Tr key={i} height={__height} odd={i % 2 === 1}>
+        <Tr key={index} height={__height} odd={i % 2 === 1}>
           <TrContent
             row={row}
-            index={start + i}
+            index={index}
             height={__height}
             cellRenderer={cellRenderer}
           />

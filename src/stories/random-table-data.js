@@ -41,6 +41,7 @@ function generate(nbCols, nbRows) {
           [path]: {
             type,
             value: getRandomValue(type, i),
+            editable: true,
           },
         };
       },

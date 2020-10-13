@@ -1,8 +1,10 @@
 import React from "react";
-import ReactLargeTable from "../react-large-table";
+import ReactLargeTable, { ReactLargeTableWritable } from "../react-large-table";
 import generate from "./random-table-data";
 import classnames from "classnames";
 import "./custom-large-table.scss";
+import "./excel-theme.scss";
+import "./custom-cell-renderer.scss";
 
 const __WIDTH__ = 80;
 const __HEIGHT__ = 10000;
@@ -68,6 +70,23 @@ export function CustomCellTable() {
           data={data}
           headerHeight={50}
           cellRenderer={CustomCellRenderer}
+        />
+      </div>
+    </>
+  );
+}
+
+export function WritableTable() {
+  return (
+    <>
+      <div className="default-table-container">
+        <ReactLargeTableWritable
+          className="excel-theme"
+          data={data}
+          headerHeight={50}
+          cellRenderer={CustomCellRenderer}
+          getValue={({ value }) => value}
+          setValue={(o, value) => (typeof o === "object" ? { ...o, value } : o)}
         />
       </div>
     </>

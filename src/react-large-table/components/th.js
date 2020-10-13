@@ -23,11 +23,10 @@ function Th({ children, width, height, index }) {
       style={{
         width: safeCss(width),
         height: safeCss(height),
-        lineHeight: `${safeCss(height)}px`,
       }}
     >
       {resizable ? <Track onTrack={onTrackCallback} vertical right /> : null}
-      <span className="th-el-container">{children}</span>
+      {children}
     </th>
   );
 }
