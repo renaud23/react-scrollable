@@ -1,5 +1,5 @@
 import React from "react";
-import ReactLargeTable, { ReactLargeTableWritable } from "../react-large-table";
+import ReactLargeTable, { ReactLargeEditableTable } from "../react-large-table";
 import generate from "./random-table-data";
 import classnames from "classnames";
 import "./custom-large-table.scss";
@@ -80,7 +80,7 @@ export function WritableTable() {
   return (
     <>
       <div className="default-table-container">
-        <ReactLargeTableWritable
+        <ReactLargeEditableTable
           className="excel-theme"
           data={data}
           headerHeight={50}
