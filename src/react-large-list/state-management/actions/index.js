@@ -22,3 +22,6 @@ export const onHorizontalScroll = (percent) => ({
   type: ON_HORIZONTAL_SCROLL,
   payload: { percent },
 });
+
+export const ON_KEY_DOWN = "react-large-scrollable/on-keydown";
+export const onKeydown = (key) => ({ type: ON_KEY_DOWN, payload: { key } });

@@ -50,6 +50,19 @@ function LargeScrollableContainer({ children, data, id }) {
     [data]
   );
 
+  const middleware = useCallback(
+    (next) => (action) => {
+      const { type, payload } = action;
+      if (type === "react-scrollable/on-key-down") {
+        const { key } = payload;
+        dispatch(actions.onKeydown(key));
+        return null;
+      }
+      return next(action);
+    },
+    [dispatch]
+  );
+
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
       <ReactScrollable
@@ -60,7 +73,7 @@ function LargeScrollableContainer({ children, data, id }) {
         verticalScrollPercentRequest={verticalScrollRequest}
         horizontalScrollPercentRequest={horizontalScrollRequest}
         onResize={onResizeCallback}
-        middleware={undefined}
+        middleware={middleware}
         idContent={id}
       >
         {React.cloneElement(React.Children.only(children), {

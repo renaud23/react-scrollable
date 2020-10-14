@@ -3,6 +3,7 @@ import reduceOnResize from "./reduce-on-resize";
 import reduceOnRefreshData from "./reduce-on-refresh-data";
 import reduceOnVerticalScroll from "./reduce-on-vertical-scroll";
 import reduceOnHorizontalScroll from "./reduce-on-horizontal-scroll";
+import reduceOnKeydown from "./reduce-on-keydown";
 
 function reduce(state, action) {
   const { type } = action;
@@ -15,6 +16,8 @@ function reduce(state, action) {
       return reduceOnVerticalScroll(state, action);
     case actions.ON_HORIZONTAL_SCROLL:
       return reduceOnHorizontalScroll(state, action);
+    case actions.ON_KEY_DOWN:
+      return reduceOnKeydown(state, action);
     default:
       return state;
   }

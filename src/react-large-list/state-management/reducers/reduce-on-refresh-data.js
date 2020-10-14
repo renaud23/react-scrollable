@@ -1,7 +1,7 @@
 import { computeCumulsSize } from "./commons-reducers";
 
 function getHeight({ __height }) {
-  return __height || 20;
+  return __height || 0;
 }
 
 function reduceVertical(state, action) {
@@ -13,7 +13,6 @@ function reduceVertical(state, action) {
     const cumulsSize = computeCumulsSize(list, getHeight);
     const max = list.length;
     const maxSize = cumulsSize[cumulsSize.length - 1];
-
     return {
       ...state,
       vertical: { ...vertical, cumulsSize, max, maxSize },
@@ -32,14 +31,14 @@ function reduceHorizontal(state, action) {
   const { payload } = action;
   const { data } = payload;
   const { offsetChar, list } = data;
-
   if (offsetChar !== old || list !== oldList) {
     const max = list.reduce(function (curr, o) {
       return Math.max(getWidth(o), curr);
     }, 0);
-    const cumulsSize = new Array(max + 1)
-      .fill(null)
-      .map((_, i) => i * offsetChar);
+    const cumulsSize = computeCumulsSize(
+      new Array(max).fill(null),
+      () => offsetChar
+    );
     const maxSize = cumulsSize[max - 1];
     return {
       ...state,
