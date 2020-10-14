@@ -10,8 +10,20 @@ import {
 function LargeScrollableContainer({ children, data, id }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { horizontal, vertical } = state;
-  const { maxSize: maxHeight, scrollRequest: verticalScrollRequest } = vertical;
-  const { maxSize: maxWidth } = horizontal;
+  const {
+    maxSize: maxHeight,
+    scrollRequest: verticalScrollRequest,
+    start: verticalStart,
+    margin: marginTop,
+    nb: verticalNb,
+  } = vertical;
+  const {
+    maxSize: maxWidth,
+    scrollRequest: horizontalScrollRequest,
+    start: horizontalStart,
+    margin: marginLeft,
+    nb: horizontalNb,
+  } = horizontal;
 
   const onResizeCallback = useCallback(function (width, height) {
     dispatch(actions.onResize(width, height));
@@ -46,13 +58,18 @@ function LargeScrollableContainer({ children, data, id }) {
         onHorizontalScroll={onHorizontalScrollCallback}
         onVerticalScroll={onVerticalScrollCallback}
         verticalScrollPercentRequest={verticalScrollRequest}
-        horizontalScrollPercentRequest={undefined}
+        horizontalScrollPercentRequest={horizontalScrollRequest}
         onResize={onResizeCallback}
         middleware={undefined}
         idContent={id}
       >
         {React.cloneElement(React.Children.only(children), {
-          ...vertical,
+          verticalStart,
+          marginTop,
+          verticalNb,
+          horizontalStart,
+          marginLeft,
+          horizontalNb,
         })}
       </ReactScrollable>
     </ScrollableContext.Provider>

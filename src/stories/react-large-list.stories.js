@@ -3,14 +3,17 @@ import ReactLargeList from "../react-large-list";
 import generateRandomList from "./random-entities";
 import "./custom-large-list.scss";
 
-const __LIST_LENGTH__ = 100;
+const __LIST_LENGTH__ = 10000;
 const randomList = generateRandomList(__LIST_LENGTH__);
 
 export function DefaultLargeList() {
   return (
-    <div className="react-large-list-container">
-      <ReactLargeList list={randomList} />
-    </div>
+    <>
+      <p>A large list of {__LIST_LENGTH__} items.</p>
+      <div className="react-large-list-container">
+        <ReactLargeList list={randomList} />
+      </div>
+    </>
   );
 }
 

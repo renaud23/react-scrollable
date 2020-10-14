@@ -13,7 +13,8 @@ function resolveScrollable(scrollable, size) {
 }
 
 function resolveWidth(state, width) {
-  return state;
+  const { horizontal } = state;
+  return { ...state, horizontal: resolveScrollable(horizontal, width) };
 }
 
 function resolverHeight(state, height) {

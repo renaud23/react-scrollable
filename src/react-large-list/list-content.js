@@ -30,25 +30,41 @@ function DefaultItemRenderer({ item, height }) {
 /* */
 function ContentList({
   list,
-  start,
-  nb,
-  margin,
+  id,
+  verticalStart,
+  marginTop,
+  verticalNb,
+  horizontalStart,
+  marginLeft,
+  offsetChar,
   itemRenderer: ItemRenderer = DefaultItemRenderer,
 }) {
-  if (nb) {
-    const contentLi = new Array(nb).fill(null).map(function (_, i) {
-      const item = list[start + i];
+  if (verticalNb) {
+    const contentLi = new Array(verticalNb).fill(null).map(function (_, i) {
+      const index = verticalStart + i;
+      const item = list[index];
       const { __height } = item;
       const height = safeCss(__height);
       return (
-        <li key={start + i} style={{ height }}>
+        <li key={index} style={{ height }}>
           <ItemRenderer item={item} height={height} />
         </li>
       );
     });
-    return <ul style={{ marginTop: safeCss(margin) }}>{contentLi}</ul>;
+
+    return (
+      <ul
+        id={id}
+        style={{
+          marginTop: safeCss(marginTop),
+          marginLeft: safeCss(marginLeft - offsetChar * horizontalStart),
+        }}
+      >
+        {contentLi}
+      </ul>
+    );
   }
-  return <ul></ul>;
+  return <ul id={id}></ul>;
 }
 
 export default React.memo(ContentList);
