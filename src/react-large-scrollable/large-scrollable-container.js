@@ -1,13 +1,18 @@
 import React, { useReducer, useEffect, useCallback } from "react";
-import ReactScrollable from "../../react-scrollable";
+import ReactScrollable from "../react-scrollable";
 import {
   ScrollableContext,
   reducer,
   INITIAL_STATE,
   actions,
-} from "../state-management";
+} from "./state-management";
 
-function LargeScrollableContainer({ children, data, id }) {
+function LargeScrollableContainer({
+  children,
+  id,
+  vertical: verticalScrollable,
+  horizontal: horizontalScrollable,
+}) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { horizontal, vertical } = state;
   const {
@@ -45,9 +50,16 @@ function LargeScrollableContainer({ children, data, id }) {
 
   useEffect(
     function () {
-      dispatch(actions.onRefreshData(data));
+      dispatch(actions.onRefreshVerticalScrollable(verticalScrollable));
     },
-    [data]
+    [verticalScrollable]
+  );
+
+  useEffect(
+    function () {
+      dispatch(actions.onRefreshHorizontalScrollable(horizontalScrollable));
+    },
+    [horizontalScrollable]
   );
 
   const middleware = useCallback(
