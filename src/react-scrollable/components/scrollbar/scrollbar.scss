@@ -33,14 +33,10 @@ $scrollbarSize: 12px;
       bottom: 0;
       height: $scrollbarSize;
 
-       
-      // animation: fadOut 0.5s;
-      // opacity: 0;
-      // background-color: transparent;
+  
 
       &.hidden {
-        // height: 0;
-        // opacity: 0;
+        height: 0; 
       }
 
       &:hover,
