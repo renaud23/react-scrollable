@@ -5,17 +5,9 @@ import {
   computeSeuil,
 } from "./commons-reducer";
 
-function getWidth({ width }) {
-  return width;
-}
-
-function getHeight({ __height }) {
-  return __height;
-}
-
 function reduceSize(scrollbar, size, getSize) {
   if (scrollbar.size === undefined) {
-    return resolveScrollbar({ ...scrollbar, size }, getSize);
+    return resolveScrollbar({ ...scrollbar, size });
   }
   const next = resolveScrollPercent({ ...scrollbar, size });
   const seuil = computeSeuil(next);
@@ -25,12 +17,12 @@ function reduceSize(scrollbar, size, getSize) {
 
 function reduceWidth(state, size) {
   const { horizontal } = state;
-  return { ...state, horizontal: reduceSize(horizontal, size, getWidth) };
+  return { ...state, horizontal: reduceSize(horizontal, size) };
 }
 
 function reduceHeight(state, size) {
   const { vertical } = state;
-  return { ...state, vertical: reduceSize(vertical, size, getHeight) };
+  return { ...state, vertical: reduceSize(vertical, size) };
 }
 
 function reduceBoth(state, width, height) {

@@ -3,7 +3,6 @@ import { computeScrollbarPos } from "../common-reducers";
 function resolve(scrollbar, action) {
   const { payload } = action;
   const { percent } = payload;
-
   if (percent !== undefined) {
     return computeScrollbarPos({ ...scrollbar, scrollPercent: percent });
   }

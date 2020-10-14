@@ -5,8 +5,10 @@ function resolve(scrollbar, action) {
   const { clientPos } = payload;
   const { size, tSize } = scrollbar;
   const tPos = Math.min(clientPos, size - tSize);
-
-  return computeScrollbarScrollPercent({ ...scrollbar, tPos });
+  if (size > tSize) {
+    return computeScrollbarScrollPercent({ ...scrollbar, tPos });
+  }
+  return scrollbar;
 }
 
 export function reduceOnVerticalMouseDown(state, action) {
