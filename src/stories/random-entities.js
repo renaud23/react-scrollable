@@ -51,7 +51,11 @@ export function getSentence(sentence = "", current) {
 
 function generate(how) {
   return new Array(how).fill(null).map(function (_, i) {
-    return { id: `Element-${i}`, content: getSentence() };
+    return {
+      id: `Element-${i}`,
+      value: getSentence(),
+      __height: 20 + randomInt(20),
+    };
   });
 }
 

@@ -1,0 +1,28 @@
+.react-large-list {
+  height: 100%;
+  width: 100%;
+
+  ul,
+  li,
+  div,
+  span {
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: 1em;
+    list-style: none;
+  }
+
+  ul li {
+      width: fit-content;
+    .default-item-renderer {
+        display: block;
+        background-color: lavender;
+        width: 100%;
+        height: calc(100% - 1px);
+        border-bottom: solid 1px lightblue;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+  }
+}

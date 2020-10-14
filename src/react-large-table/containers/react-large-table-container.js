@@ -62,7 +62,6 @@ function ReactLargeTableContainer({ className, cellRenderer, rowNums }) {
   const middleware = useCallback(
     (next) => (action) => {
       const { type, payload } = action;
-
       if (type === "react-scrollable/on-key-down") {
         const { key } = payload;
         dispatch(actions.onKeyDown(key));
@@ -74,33 +73,31 @@ function ReactLargeTableContainer({ className, cellRenderer, rowNums }) {
   );
 
   return (
-    <>
-      <div className={classnames("react-large-table", className)}>
-        {rowNums ? <RowNums /> : null}
-        <ReactScrollable
-          maxWidth={maxWidth}
-          maxHeight={maxHeight}
-          onHorizontalScroll={onHorizontalScrollCallback}
-          onVerticalScroll={onVerticalScrollCallback}
-          verticalScrollPercentRequest={verticalScrollPercentRequest}
-          horizontalScrollPercentRequest={horizontalScrollPercentRequest}
-          onResize={onResizeCallback}
-          middleware={middleware}
-          idContent={id}
-        >
-          <Table>
-            <THead>
-              <Tr heigh={headerHeight}>
-                <HeaderContent />
-              </Tr>
-            </THead>
-            <TBody>
-              <BodyContent cellRenderer={cellRenderer} />
-            </TBody>
-          </Table>
-        </ReactScrollable>
-      </div>
-    </>
+    <div className={classnames("react-large-table", className)}>
+      {rowNums ? <RowNums /> : null}
+      <ReactScrollable
+        maxWidth={maxWidth}
+        maxHeight={maxHeight}
+        onHorizontalScroll={onHorizontalScrollCallback}
+        onVerticalScroll={onVerticalScrollCallback}
+        verticalScrollPercentRequest={verticalScrollPercentRequest}
+        horizontalScrollPercentRequest={horizontalScrollPercentRequest}
+        onResize={onResizeCallback}
+        middleware={middleware}
+        idContent={id}
+      >
+        <Table>
+          <THead>
+            <Tr heigh={headerHeight}>
+              <HeaderContent />
+            </Tr>
+          </THead>
+          <TBody>
+            <BodyContent cellRenderer={cellRenderer} />
+          </TBody>
+        </Table>
+      </ReactScrollable>
+    </div>
   );
 }
 
