@@ -12,6 +12,7 @@ function LargeScrollableContainer({
   id,
   vertical: verticalScrollable,
   horizontal: horizontalScrollable,
+  treeSize = true,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { horizontal, vertical } = state;
@@ -50,16 +51,20 @@ function LargeScrollableContainer({
 
   useEffect(
     function () {
-      dispatch(actions.onRefreshVerticalScrollable(verticalScrollable));
+      dispatch(
+        actions.onRefreshVerticalScrollable(verticalScrollable, treeSize)
+      );
     },
-    [verticalScrollable]
+    [verticalScrollable, treeSize]
   );
 
   useEffect(
     function () {
-      dispatch(actions.onRefreshHorizontalScrollable(horizontalScrollable));
+      dispatch(
+        actions.onRefreshHorizontalScrollable(horizontalScrollable, treeSize)
+      );
     },
-    [horizontalScrollable]
+    [horizontalScrollable, treeSize]
   );
 
   const middleware = useCallback(

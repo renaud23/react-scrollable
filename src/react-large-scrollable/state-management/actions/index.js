@@ -12,9 +12,9 @@ export const onVerticalScroll = (percent) => ({
 
 export const ON_REFRESH_VERTICAL_SCROLLABLE =
   "react-large-scrollable/on-refresh-vertical-scrollable";
-export const onRefreshVerticalScrollable = (scrollable) => ({
+export const onRefreshVerticalScrollable = (scrollable, treeSize) => ({
   type: ON_REFRESH_VERTICAL_SCROLLABLE,
-  payload: { scrollable },
+  payload: { scrollable, treeSize },
 });
 
 export const ON_HORIZONTAL_SCROLL =
@@ -26,9 +26,9 @@ export const onHorizontalScroll = (percent) => ({
 
 export const ON_REFRESH_HORIZONTAL_SCROLLABLE =
   "react-large-scrollable/on-refresh-horizontal-scrollable";
-export const onRefreshHorizontalScrollable = (scrollable) => ({
+export const onRefreshHorizontalScrollable = (scrollable, treeSize) => ({
   type: ON_REFRESH_HORIZONTAL_SCROLLABLE,
-  payload: { scrollable },
+  payload: { scrollable, treeSize },
 });
 
 export const ON_KEY_DOWN = "react-large-scrollable/on-keydown";

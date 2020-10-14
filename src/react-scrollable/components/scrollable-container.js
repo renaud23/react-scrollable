@@ -222,8 +222,8 @@ function ScrollableContainer({
 }
 
 ScrollableContainer.propTypes = {
-  maxWidth: PropTypes.number.isRequired,
-  maxHeight: PropTypes.number.isRequired,
+  maxWidth: PropTypes.number,
+  maxHeight: PropTypes.number,
   verticalScrollPercentRequest: PropTypes.shape({
     percent: PropTypes.number.isRequired,
   }),

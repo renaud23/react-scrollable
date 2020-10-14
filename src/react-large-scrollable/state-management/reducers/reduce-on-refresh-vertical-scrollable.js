@@ -1,8 +1,18 @@
+import { computeTreeSize } from "./commons-reducers";
+
 function reduce(state, action) {
   const { payload } = action;
-  const { scrollable } = payload;
+  const { scrollable, treeSize } = payload;
   const { vertical } = state;
-  return { ...state, vertical: { ...vertical, ...scrollable } };
+  const { cumulsSize } = scrollable;
+  return {
+    ...state,
+    vertical: {
+      ...vertical,
+      ...scrollable,
+      treeSize: treeSize ? computeTreeSize(cumulsSize) : undefined,
+    },
+  };
 }
 
 export default reduce;
