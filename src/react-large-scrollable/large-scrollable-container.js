@@ -13,6 +13,7 @@ function LargeScrollableContainer({
   vertical: verticalScrollable,
   horizontal: horizontalScrollable,
   treeSize = true,
+  onResize,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { horizontal, vertical } = state;
@@ -31,9 +32,15 @@ function LargeScrollableContainer({
     nb: horizontalNb,
   } = horizontal;
 
-  const onResizeCallback = useCallback(function (width, height) {
-    dispatch(actions.onResize(width, height));
-  }, []);
+  const onResizeCallback = useCallback(
+    function (width, height) {
+      dispatch(actions.onResize(width, height));
+      if (onResize) {
+        onResize(width, height);
+      }
+    },
+    [onResize]
+  );
 
   const onVerticalScrollCallback = useCallback(
     function (percent) {
@@ -79,7 +86,6 @@ function LargeScrollableContainer({
     },
     [dispatch]
   );
-
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
       <ReactScrollable

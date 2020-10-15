@@ -1,4 +1,4 @@
-import computeCumulsSize from "./compute-cumuls-size";
+import { computeCumulsSize } from "../../commons-scrollable";
 
 function getWidth({ __width }) {
   return __width || 0;

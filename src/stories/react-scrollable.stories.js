@@ -32,13 +32,13 @@ export function SmallDrawable() {
 export function CompleteExample() {
   /* */
 
-  const largeText = getRandomText(10000);
+  const largeText = getRandomText(100, 20);
 
   return (
     <>
       <h1>Large scrollable text of 10000 lines and a line height of 32px.</h1>
-      <div className="custom-large-text">
-        <ReactLargeText value={largeText} lineHeight={32} />
+      <div className="large-text-container">
+        <ReactLargeText value={largeText} lineHeight={22} />
       </div>
       <p>It use a custom component and a scrollable div.</p>
     </>
