@@ -1,4 +1,4 @@
-.custom-large-text {
+.large-text-container {
   font-family: "Courier New", Courier, monospace;
   font-size: 18px;
   background-color: khaki;
@@ -7,7 +7,8 @@
   height: 300px;
 
   overflow: hidden;
-  resize: both;
+  resize:  vertical;
+  line-height: 22px;;
 
   padding: 10px 10px;
   border-radius: 10px;

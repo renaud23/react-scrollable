@@ -1,135 +1,156 @@
-import React, { useCallback, useEffect, useReducer } from "react";
-import ScrollableContainer from "../react-scrollable";
-import * as actions from "./actions";
+import React, { useState, useCallback, useEffect } from "react";
 import { OffsetChar } from "../commons-scrollable";
-import reducer, { INITIAL_STATE } from "./reducer";
+import LargeScrollableContainer from "../react-large-scrollable";
+import { computeCumulsSize } from "../commons-scrollable";
 import "./react-large-text.scss";
 
-function ReactLargeText({ value, lineHeight, offsetChar }) {
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const {
-    maxWidth,
-    maxHeight,
-    viewportHeight,
-    nbLines,
-    startLine,
-    marginTop,
-    marginLeft,
-    verticalScrollPercentRequest,
-    horizontalScrollPercentRequest,
-    id,
-  } = state;
+let __INDEX_ID__ = 1;
 
-  const onKeyDownCallback = useCallback(function (e) {
-    if (e.key === "ArrowDown") {
-      dispatch(actions.onArrowDown());
-    } else if (e.key === "ArrowUp") {
-      dispatch(actions.onArrowUp());
-    } else if (e.key === "ArrowLeft") {
-      dispatch(actions.onArrowLeft());
-    } else if (e.key === "ArrowRight") {
-      dispatch(actions.onArrowRight());
-    } else if (e.key === "PageUp") {
-      dispatch(actions.onPageUp());
-    } else if (e.key === "PageDown") {
-      dispatch(actions.onPageDown());
-    }
-  }, []);
+function ContentText({ rows, verticalStart, marginTop, verticalNb }) {
+  const lines = new Array(verticalNb).fill(null).map(function (_, i) {
+    const index = verticalStart + i;
+    return <div key={index}>{rows[index]}</div>;
+  });
+  return <div style={{ marginTop }}>{lines}</div>;
+}
 
-  const onResizeCallback = useCallback(function (width, height) {
-    dispatch(actions.onResize(width, height));
-  }, []);
+function initializeScrollable() {
+  return { max: undefined, maxSize: undefined, cumulsSize: undefined };
+}
 
-  const onHorizontalScroll = useCallback(function (percent) {
-    dispatch(actions.onHorizontalScroll(percent));
-  }, []);
-  const onVerticalScroll = useCallback(function (percent) {
-    dispatch(actions.onVerticalScroll(percent));
+function getId() {
+  return `react-large-table-${__INDEX_ID__++}`;
+}
+
+function consumeWords(words, max, current = 0) {
+  const [next, ...rest] = words;
+  if (next && current + next.length < max) {
+    const [s, n] = consumeWords(rest, max, current + next.length + 1);
+    return [`${next} ${s}`, n];
+  }
+  return ["", words];
+}
+
+function fillRows(words, max) {
+  // if (words.length) {
+  //   const [row, rest] = consumeWords(words, max);
+  //   return [row, ...fillRows(rest, max)];
+  // }
+  // return [];
+
+  const rows = [];
+  let stack = [...words];
+  while (stack.length) {
+    const [row, rest] = consumeWords(stack, max);
+    rows.push(row);
+    stack = rest;
+  }
+  return rows;
+}
+
+function computeRows(text, lineChar) {
+  if (lineChar) {
+    const paragraphes = text.split(`\r\n`).filter(({ length }) => length > 0);
+
+    return paragraphes.reduce(function (current, paragraphe) {
+      const words = paragraphe.split(" ");
+
+      const rows = fillRows(words, lineChar);
+
+      return [...current, ...rows];
+    }, []);
+  }
+  return [];
+}
+
+function computeVertical(rows, lineHeight) {
+  const max = rows.length;
+  const maxSize = max * lineHeight;
+  const cumulsSize = computeCumulsSize(
+    new Array(max).fill(null),
+    () => lineHeight
+  );
+
+  return { max, maxSize, cumulsSize };
+}
+
+function computeHorizontal(viewportWidth, offsetChar) {
+  const max = Math.trunc(viewportWidth / offsetChar);
+  const maxSize = viewportWidth;
+  const cumulsSize = computeCumulsSize(
+    new Array(max).fill(null),
+    () => offsetChar
+  );
+  return { max, maxSize, cumulsSize };
+}
+
+function ReactLargeText({ offsetChar, value, lineHeight, onCompute }) {
+  const [vertical, setVertical] = useState(initializeScrollable);
+  const [rows, setRows] = useState([]);
+  const [horizontal, setHorizontal] = useState(initializeScrollable);
+  const [viewportWidth, setViewportWidth] = useState(undefined);
+  const [id] = useState(getId);
+
+  const onResize = useCallback(function (width) {
+    setViewportWidth(width);
   }, []);
 
   useEffect(
     function () {
-      dispatch(actions.onInit({ lines: value, lineHeight, offsetChar }));
+      if (viewportWidth) {
+        setHorizontal(computeHorizontal(viewportWidth, offsetChar));
+      }
     },
-    [value, lineHeight, offsetChar]
+    [viewportWidth, offsetChar]
   );
 
   useEffect(
     function () {
-      dispatch(actions.onRefreshViewportSize());
+      if (rows.length) {
+        setVertical(computeVertical(rows, lineHeight));
+      }
     },
-    [value, lineHeight, viewportHeight]
+    [rows, lineHeight]
+  );
+
+  useEffect(
+    function () {
+      if (horizontal) {
+        const { max } = horizontal;
+        const nr = computeRows(value, max);
+        setRows(nr);
+
+        if (onCompute) {
+          onCompute(nr);
+        }
+      }
+    },
+    [horizontal, value, onCompute]
   );
 
   return (
-    <div
-      className="react-large-text"
-      onKeyDown={onKeyDownCallback}
-      tabIndex="0"
-      id={id}
-    >
-      <ScrollableContainer
-        maxWidth={maxWidth}
-        maxHeight={maxHeight}
-        onHorizontalScroll={onHorizontalScroll}
-        onVerticalScroll={onVerticalScroll}
-        verticalScrollPercentRequest={verticalScrollPercentRequest}
-        horizontalScrollPercentRequest={horizontalScrollPercentRequest}
-        onResize={onResizeCallback}
-        idContent={id}
+    <div className="react-large-text">
+      <LargeScrollableContainer
+        id={id}
+        vertical={vertical}
+        horizontal={horizontal}
+        onResize={onResize}
+        treeSize
       >
-        <ScrollableContent
-          nbLines={nbLines}
-          lines={value}
-          startLine={startLine}
-          lineHeight={lineHeight}
-          marginTop={marginTop}
-          marginLeft={marginLeft}
-          maxWidth={maxWidth}
-        />
-      </ScrollableContainer>
+        <ContentText rows={rows} />
+      </LargeScrollableContainer>
     </div>
   );
 }
 
-function ScrollableContent({
-  lines,
-  startLine,
-  nbLines,
-  lineHeight,
-  marginTop,
-  marginLeft,
-  maxWidth,
-}) {
-  const el = nbLines
-    ? new Array(nbLines).fill(null).map(function (_, i) {
-        const content = lines[startLine + i];
-        return (
-          <div
-            className="react-large-text-line"
-            style={{ height: lineHeight, width: maxWidth }}
-            key={i}
-          >
-            {content}
-          </div>
-        );
-      })
-    : null;
-
-  return (
-    <div
-      className="react-large-text-content"
-      style={{ marginTop: `${marginTop || 0}px`, marginLeft: marginLeft || 0 }}
-    >
-      {el}
-    </div>
-  );
-}
-
-export default ({ value, lineHeight }) => {
+export default ({ value, lineHeight, onCompute }) => {
   return (
     <OffsetChar>
-      <ReactLargeText value={value} lineHeight={lineHeight} />
+      <ReactLargeText
+        value={value}
+        lineHeight={lineHeight}
+        onCompute={onCompute}
+      />
     </OffsetChar>
   );
 };

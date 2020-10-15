@@ -1,8 +1,23 @@
+import { computeTreeSize, resolveFromScrollPercent } from "./commons-reducers";
+
 function reduce(state, action) {
   const { payload } = action;
-  const { scrollable } = payload;
+  const { scrollable, treeSize } = payload;
   const { vertical } = state;
-  return { ...state, vertical: { ...vertical, ...scrollable } };
+  const { start } = vertical;
+  const { cumulsSize } = scrollable;
+
+  const next = {
+    ...vertical,
+    ...scrollable,
+    treeSize: treeSize ? computeTreeSize(cumulsSize) : undefined,
+  };
+
+  if (start === undefined) {
+    return { ...state, vertical: resolveFromScrollPercent(next) };
+  }
+
+  return { ...state, vertical: next };
 }
 
 export default reduce;

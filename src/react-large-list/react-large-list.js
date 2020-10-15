@@ -3,6 +3,7 @@ import classnames from "classnames";
 import ListContent from "./list-content";
 import { OffsetChar } from "../commons-scrollable";
 import LargeScrollableContainer from "../react-large-scrollable";
+import { computeVertical, computeHorizontal } from "./commons-list";
 import "./react-large-list.scss";
 
 let __REACT_LARGE_LIST_INDEX__ = 1;
@@ -13,44 +14,6 @@ function getId() {
 
 function initializeScrollable() {
   return { max: undefined, maxSize: undefined, cumulsSize: undefined };
-}
-
-function getHeight({ __height }) {
-  return __height || 0;
-}
-
-function getWidth({ __width }) {
-  return __width || 0;
-}
-
-function computeCumulsSize(array, getSize) {
-  return array.reduce(
-    function (current, o) {
-      const size = getSize(o);
-      const last = current[current.length - 1];
-      return [...current, last + size];
-    },
-    [0]
-  );
-}
-
-function computeVertical(list) {
-  const cumulsSize = computeCumulsSize(list, getHeight);
-  const max = list.length;
-  const maxSize = cumulsSize[cumulsSize.length - 1];
-  return { cumulsSize, max, maxSize };
-}
-
-function computeHorizontal(list, offsetChar) {
-  const max = list.reduce(function (curr, o) {
-    return Math.max(getWidth(o), curr);
-  }, 0);
-  const cumulsSize = computeCumulsSize(
-    new Array(max).fill(null),
-    () => offsetChar
-  );
-  const maxSize = cumulsSize[max - 1];
-  return { cumulsSize, max, maxSize };
 }
 
 /* */

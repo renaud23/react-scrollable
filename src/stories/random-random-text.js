@@ -49,10 +49,15 @@ export function getSentence(sentence = "", current) {
   return sentence;
 }
 
-function getRandomText(length) {
-  return new Array(length).fill(null).map(function (_, i) {
-    return `${i + 1} - ${getSentence().trim()}`;
-  });
+function getRandomText(n, m) {
+  return new Array(n)
+    .fill(null)
+    .map(function (_) {
+      return new Array(m).fill(null).reduce(function (p) {
+        return `${getSentence().trim()}. ${p}`;
+      }, `\r\n`);
+    })
+    .join();
 }
 
 export default getRandomText;

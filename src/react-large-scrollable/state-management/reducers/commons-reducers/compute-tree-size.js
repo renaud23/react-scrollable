@@ -1,20 +1,23 @@
 function computeTree(cumuls, step = cumuls, index = 0) {
-  const { length } = step;
-  if (step === 1) {
-    return { min: cumuls[index], max: cumuls[index + 1], index };
+  if (cumuls) {
+    const { length } = step;
+    if (step === 1) {
+      return { min: cumuls[index], max: cumuls[index + 1], index };
+    }
+    const middle = Math.trunc(length / 2);
+    const next = index + middle;
+    const smaller = step.slice(0, middle);
+    const bigger =
+      next === cumuls.length - 1 ? [] : step.slice(middle + 1, length);
+    return {
+      index: next,
+      min: cumuls[next],
+      max: cumuls[next + 1],
+      left: smaller.length ? computeTree(cumuls, smaller, index) : undefined,
+      right: bigger.length ? computeTree(cumuls, bigger, next + 1) : undefined,
+    };
   }
-  const middle = Math.trunc(length / 2);
-  const next = index + middle;
-  const smaller = step.slice(0, middle);
-  const bigger =
-    next === cumuls.length - 1 ? [] : step.slice(middle + 1, length);
-  return {
-    index: next,
-    min: cumuls[next],
-    max: cumuls[next + 1],
-    left: smaller.length ? computeTree(cumuls, smaller, index) : undefined,
-    right: bigger.length ? computeTree(cumuls, bigger, next + 1) : undefined,
-  };
+  return undefined;
 }
 
 // export function findInTreeSize(tree, seuil) {
