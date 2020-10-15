@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import ReactLargeText from "../react-large-text";
-import getRandomText from "./random-random-text";
 import ScrollableContainer from "../react-scrollable";
+import TEXT from "./text";
 import "./custom-scrollable.scss";
 
 function SimpleScrollable({ width, height }) {
@@ -31,16 +31,21 @@ export function SmallDrawable() {
 
 export function CompleteExample() {
   /* */
-
-  const largeText = getRandomText(100, 20);
-
+  const [nb, setNb] = useState(undefined);
+  const onCompute = useCallback(function (rows) {
+    console.log(rows.nb);
+    setNb(rows.length);
+  }, []);
   return (
     <>
-      <h1>Large scrollable text of 10000 lines and a line height of 32px.</h1>
+      <h1>Text with {nb} rows.</h1>
       <div className="large-text-container">
-        <ReactLargeText value={largeText} lineHeight={22} />
+        <ReactLargeText value={TEXT} lineHeight={22} onCompute={onCompute} />
       </div>
-      <p>It use a custom component and a scrollable div.</p>
+      <p>
+        It use a custom component and a scrollable div. You can't resize
+        horizontally. Too costly.
+      </p>
     </>
   );
 }

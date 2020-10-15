@@ -7,7 +7,6 @@ import "./react-large-text.scss";
 let __INDEX_ID__ = 1;
 
 function ContentText({ rows, verticalStart, marginTop, verticalNb }) {
-  // console.log({ rows, verticalStart, marginTop, verticalNb });
   const lines = new Array(verticalNb).fill(null).map(function (_, i) {
     const index = verticalStart + i;
     return <div key={index}>{rows[index]}</div>;
@@ -23,21 +22,42 @@ function getId() {
   return `react-large-table-${__INDEX_ID__++}`;
 }
 
-function reduceParagraphe(paragraphe, width) {
-  const start = paragraphe.substr(0, width);
-  const end = paragraphe.substr(width);
-  if (end.length) {
-    return [start, ...reduceParagraphe(end, width)];
+function consumeWords(words, max, current = 0) {
+  const [next, ...rest] = words;
+  if (next && current + next.length < max) {
+    const [s, n] = consumeWords(rest, max, current + next.length + 1);
+    return [`${next} ${s}`, n];
   }
+  return ["", words];
+}
 
-  return [start];
+function fillRows(words, max) {
+  // if (words.length) {
+  //   const [row, rest] = consumeWords(words, max);
+  //   return [row, ...fillRows(rest, max)];
+  // }
+  // return [];
+
+  const rows = [];
+  let stack = [...words];
+  while (stack.length) {
+    const [row, rest] = consumeWords(stack, max);
+    rows.push(row);
+    stack = rest;
+  }
+  return rows;
 }
 
 function computeRows(text, lineChar) {
   if (lineChar) {
-    const paragraphes = text.split(`\r\n`);
+    const paragraphes = text.split(`\r\n`).filter(({ length }) => length > 0);
+
     return paragraphes.reduce(function (current, paragraphe) {
-      return [...current, ...reduceParagraphe(paragraphe, lineChar)];
+      const words = paragraphe.split(" ");
+
+      const rows = fillRows(words, lineChar);
+
+      return [...current, ...rows];
     }, []);
   }
   return [];
@@ -64,7 +84,7 @@ function computeHorizontal(viewportWidth, offsetChar) {
   return { max, maxSize, cumulsSize };
 }
 
-function ReactLargeText({ offsetChar, value, lineHeight }) {
+function ReactLargeText({ offsetChar, value, lineHeight, onCompute }) {
   const [vertical, setVertical] = useState(initializeScrollable);
   const [rows, setRows] = useState([]);
   const [horizontal, setHorizontal] = useState(initializeScrollable);
@@ -97,10 +117,15 @@ function ReactLargeText({ offsetChar, value, lineHeight }) {
     function () {
       if (horizontal) {
         const { max } = horizontal;
-        setRows(computeRows(value, max));
+        const nr = computeRows(value, max);
+        setRows(nr);
+
+        if (onCompute) {
+          onCompute(nr);
+        }
       }
     },
-    [horizontal, value]
+    [horizontal, value, onCompute]
   );
 
   return (
@@ -110,6 +135,7 @@ function ReactLargeText({ offsetChar, value, lineHeight }) {
         vertical={vertical}
         horizontal={horizontal}
         onResize={onResize}
+        treeSize
       >
         <ContentText rows={rows} />
       </LargeScrollableContainer>
@@ -117,10 +143,14 @@ function ReactLargeText({ offsetChar, value, lineHeight }) {
   );
 }
 
-export default ({ value, lineHeight }) => {
+export default ({ value, lineHeight, onCompute }) => {
   return (
     <OffsetChar>
-      <ReactLargeText value={value} lineHeight={lineHeight} />
+      <ReactLargeText
+        value={value}
+        lineHeight={lineHeight}
+        onCompute={onCompute}
+      />
     </OffsetChar>
   );
 };
