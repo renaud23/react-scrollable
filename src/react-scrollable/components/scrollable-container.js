@@ -18,6 +18,10 @@ import "./scrollable-container.scss";
 
 const __middleware = (next) => (action) => next(action);
 
+function defaultOnResize(w, h) {
+  return [w, h];
+}
+
 function ScrollableContainer({
   children,
   maxWidth,
@@ -25,10 +29,10 @@ function ScrollableContainer({
   verticalScrollPercentRequest,
   horizontalScrollPercentRequest,
   idContent,
-  onHorizontalScroll = () => null,
-  onVerticalScroll = () => null,
-  onResize = () => null,
-  middleware = __middleware,
+  onHorizontalScroll,
+  onVerticalScroll,
+  onResize,
+  middleware,
 }) {
   const scrollbarVEl = useRef();
   const scrollbarHEl = useRef();
@@ -65,7 +69,6 @@ function ScrollableContainer({
       const { height } = scrollbarVEl.current
         ? scrollbarVEl.current.getBoundingClientRect()
         : {};
-
       const [vpw, vph] = onResize(viewportWidth, viewportHeight);
       dispatch(
         actions.onResize({
@@ -239,6 +242,7 @@ ScrollableContainer.propTypes = {
   onHorizontalScroll: PropTypes.func,
   onVerticalScroll: PropTypes.func,
   onResize: PropTypes.func,
+  middleware: PropTypes.func,
 };
 
 ScrollableContainer.defaultProps = {
@@ -246,8 +250,9 @@ ScrollableContainer.defaultProps = {
   horizontalScrollPercentRequest: undefined,
   onHorizontalScroll: () => null,
   onVerticalScroll: () => null,
-  onResize: () => null,
+  onResize: defaultOnResize,
   idContent: "",
+  middleware: __middleware,
 };
 
 export default ScrollableContainer;

@@ -8,7 +8,7 @@ import "./excel-theme.scss";
 import "./custom-cell-renderer.scss";
 
 const __WIDTH__ = 2;
-const __HEIGHT__ = 2;
+const __HEIGHT__ = 200;
 
 const data = generate(__WIDTH__, __HEIGHT__);
 
