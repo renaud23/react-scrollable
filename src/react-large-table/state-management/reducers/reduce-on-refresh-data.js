@@ -1,4 +1,4 @@
-import { computeCumulsSize } from "../../../commons-scrollable";
+import resolveScrollableData from "./refresh-scrollable-data";
 
 function getHeight({ __height }) {
   return __height;
@@ -6,20 +6,6 @@ function getHeight({ __height }) {
 
 function getWidth({ width }) {
   return width;
-}
-
-function computeVertical(rows = []) {
-  const cumulsSize = computeCumulsSize(rows, getHeight);
-  const max = rows.length;
-  const maxSize = cumulsSize[max];
-  return { max, maxSize, cumulsSize };
-}
-
-function computeHorizontal(header = []) {
-  const cumulsSize = computeCumulsSize(header, getWidth);
-  const max = header.length;
-  const maxSize = cumulsSize[max];
-  return { max, maxSize, cumulsSize };
 }
 
 function reduce(state, action) {
@@ -30,8 +16,10 @@ function reduce(state, action) {
     const { rows: rOld, header: hOld } = state;
     return {
       ...state,
-      vertical: rows !== rOld ? computeVertical(rows) : vertical,
-      horizontal: header !== hOld ? computeHorizontal(header) : horizontal,
+      vertical:
+        rows !== rOld ? resolveScrollableData(rows, getHeight) : vertical,
+      horizontal:
+        header !== hOld ? resolveScrollableData(header, getWidth) : horizontal,
       header,
       rows,
       headerHeight,

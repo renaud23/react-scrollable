@@ -5,7 +5,7 @@ export const onRefreshData = (data, headerHeight, treeSize) => ({
 });
 
 export const ON_RESIZE_COLUMN = "react-large-table/on-resize-column";
-export const onResizeColumn = (delta) => ({
+export const onResizeColumn = (index, delta) => ({
   type: ON_RESIZE_COLUMN,
-  payload: { delta },
+  payload: { index, delta },
 });

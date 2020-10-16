@@ -20,7 +20,7 @@ function ReactLargeTable({
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
-  const { rows, header } = data;
+  const { header, rows } = state;
 
   useEffect(
     function () {
@@ -35,7 +35,6 @@ function ReactLargeTable({
     },
     [headerHeight]
   );
-
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div className={classnames("react-large-table", className)}>
