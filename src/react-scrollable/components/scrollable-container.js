@@ -66,11 +66,16 @@ function ScrollableContainer({
         ? scrollbarVEl.current.getBoundingClientRect()
         : {};
 
+      const [vpw, vph] = onResize(viewportWidth, viewportHeight);
       dispatch(
-        actions.onResize({ width, height, viewportWidth, viewportHeight })
+        actions.onResize({
+          width,
+          height,
+          viewportWidth: vpw,
+          viewportHeight: vph,
+        })
       );
       dispatch(actions.onRefreshViewport());
-      onResize(viewportWidth, viewportHeight);
     },
     [dispatch, scrollbarHEl, scrollbarVEl, onResize]
   );

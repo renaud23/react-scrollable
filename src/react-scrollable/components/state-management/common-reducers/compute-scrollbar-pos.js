@@ -4,7 +4,6 @@ function computeScrollbarPos(scrollbar) {
     Math.min(scrollPercent * (size - tSize), size - tSize),
     0
   );
-
   return { ...scrollbar, tPos };
 }
 

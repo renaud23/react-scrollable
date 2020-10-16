@@ -33,7 +33,6 @@ export function CompleteExample() {
   /* */
   const [nb, setNb] = useState(undefined);
   const onCompute = useCallback(function (rows) {
-    console.log(rows.nb);
     setNb(rows.length);
   }, []);
   return (

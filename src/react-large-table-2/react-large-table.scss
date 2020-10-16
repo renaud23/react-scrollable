@@ -1,0 +1,76 @@
+.react-large-table-2 {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+
+  div,
+  span,
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    line-height: 0;
+    vertical-align: baseline;
+    line-height: normal;
+  }
+
+  table {
+    border-spacing: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    thead {
+      display: block;
+      position: absolute;
+      top: 0;
+
+      tr {
+        display: block;
+        width: max-content;
+
+        th {
+          display: inline-block;
+          position: relative;
+          overflow: hidden;
+          height: 100%;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    tbody {
+      display: block;
+      overflow: hidden;
+
+      tr {
+        display: block;
+        width: max-content;
+        td {
+          display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  /* */
+  // .react-scrollable-container {
+  //   .react-scrollbar {
+  //     &.vertical {
+  //       height: calc(100% - 62px);
+  //       margin-top: 50px;
+  //     }
+  //   }
+  // }
+}
