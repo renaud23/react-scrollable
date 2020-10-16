@@ -1,76 +1,62 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useCallback } from "react";
+import LargeScrollableContainer from "../react-large-scrollable";
+import TableContent from "./table-content";
 import {
   TableContext,
-  reducer,
+  reducers,
   INITIAL_STATE,
   actions,
 } from "./state-management";
-import { ReactLargeTableContainer } from "./containers";
-import { DefaultCellRenderer } from "./containers";
-import PropTypes from "prop-types";
+import classnames from "classnames";
+import { DefaultCellRenderer } from "./table-components";
 import "./react-large-table.scss";
 
 function ReactLargeTable({
   data,
   headerHeight,
+  treeSize = true,
   className,
-  treeSize,
-  cellRenderer,
-  rowNums,
+  cellRenderer = DefaultCellRenderer,
 }) {
-  const [state, dispatch] = useReducer(reducer, { ...INITIAL_STATE });
+  const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
+  const { vertical, horizontal, id } = state;
   const { rows, header } = data;
 
   useEffect(
     function () {
-      dispatch(actions.onInit({ rows, header, headerHeight, treeSize }));
+      dispatch(actions.onRefreshData(data, headerHeight, treeSize));
     },
-    [rows, header, headerHeight, treeSize]
+    [data, headerHeight, treeSize]
+  );
+
+  const onResizeCallback = useCallback(
+    function (width, height) {
+      return [width, height - headerHeight];
+    },
+    [headerHeight]
   );
 
   return (
     <TableContext.Provider value={[state, dispatch]}>
-      <ReactLargeTableContainer
-        className={className}
-        cellRenderer={cellRenderer}
-        rowNums={rowNums}
-      />
+      <div className={classnames("react-large-table", className)}>
+        <LargeScrollableContainer
+          id={id}
+          vertical={vertical}
+          horizontal={horizontal}
+          onResize={onResizeCallback}
+          treeSize={treeSize}
+        >
+          <TableContent
+            rows={rows}
+            header={header}
+            headerHeight={headerHeight}
+            cellRenderer={cellRenderer}
+            id={id}
+          />
+        </LargeScrollableContainer>
+      </div>
     </TableContext.Provider>
   );
 }
-
-ReactLargeTable.prototype = {
-  data: PropTypes.shape({
-    header: PropTypes.arrayOf(
-      PropTypes.shape({
-        width: PropTypes.number.isRequired,
-        label: PropTypes.string,
-      }).isRequired
-    ),
-    rows: PropTypes.arrayOf(
-      PropTypes.shape({
-        __height: PropTypes.number.isRequired,
-        value: PropTypes.oneOf([
-          PropTypes.string,
-          PropTypes.string,
-          PropTypes.bool,
-        ]),
-      })
-    ),
-  }).isRequired,
-  headerHeight: PropTypes.number,
-  className: PropTypes.string,
-  treeSize: PropTypes.bool,
-  cellRenderer: PropTypes.func,
-  rowNums: PropTypes.bool,
-};
-
-ReactLargeTable.defaultProps = {
-  headerHeight: 30,
-  className: undefined,
-  treeSize: false,
-  cellRenderer: DefaultCellRenderer,
-  rowNums: false,
-};
 
 export default ReactLargeTable;

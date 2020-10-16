@@ -1,13 +1,12 @@
 import React from "react";
-// import ReactLargeTable, { ReactLargeEditableTable } from "../react-large-table";
-import ReactLargeTable2 from "../react-large-table-2";
+import ReactLargeTable from "../react-large-table";
 import generate from "./random-table-data";
 import classnames from "classnames";
 import "./custom-large-table.scss";
 import "./excel-theme.scss";
 import "./custom-cell-renderer.scss";
 
-const __WIDTH__ = 2;
+const __WIDTH__ = 20;
 const __HEIGHT__ = 200;
 
 const data = generate(__WIDTH__, __HEIGHT__);
@@ -20,7 +19,7 @@ export function DefaultTable() {
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
       <div className="default-table-container">
-        <ReactLargeTable2 data={data} headerHeight={30} treeSize={false} />
+        <ReactLargeTable data={data} headerHeight={30} treeSize={false} />
       </div>
     </>
   );
@@ -45,8 +44,8 @@ export function WithRowNumsTable() {
         A large table of {__WIDTH__} columns and {__HEIGHT__} rows,
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
-      <div className="default-table-container-2">
-        <ReactLargeTable2
+      <div className="default-table-container">
+        <ReactLargeTable
           className="custom-large-table-theme"
           data={data}
           headerHeight={50}
@@ -66,7 +65,7 @@ export function CustomCellTable() {
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
       <div className="default-table-container">
-        <ReactLargeTable2
+        <ReactLargeTable
           className="custom-large-table-theme"
           data={data}
           headerHeight={50}
@@ -100,6 +99,6 @@ export function CustomCellTable() {
 
 export default {
   title: "react-large-table",
-  component: ReactLargeTable2,
+  component: ReactLargeTable,
   argTypes: {},
 };

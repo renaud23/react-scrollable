@@ -16,7 +16,7 @@ function RowContent({
       const { width, path } = th;
       const cell = path in row ? row[path] : {};
       return (
-        <Td key={`${index} - ${j}`} width={width}>
+        <Td key={`${index} - ${start + j}`} width={width}>
           <Cell
             cell={cell}
             row={index}

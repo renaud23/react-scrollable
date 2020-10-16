@@ -1,27 +1,13 @@
-function initializeScrollbar() {
-  return {
-    maxSize: 0,
-    size: undefined,
-    cumulsSize: undefined,
-    treeSize: undefined,
-    start: undefined,
-    nb: undefined,
-    max: undefined,
-    margin: undefined,
-    scrollPercent: 0,
-    scrollRequest: undefined,
-  };
-}
+import { initializeScrollable } from "../../commons-scrollable";
 
 const INITIAL_STATE = {
-  id: undefined,
-  header: [],
-  rows: [],
-  headerHeight: undefined,
+  row: undefined,
+  header: undefined,
   treeSize: false,
+  headerHeight: undefined,
 
-  horizontal: initializeScrollbar(),
-  vertical: initializeScrollbar(),
+  horizontal: initializeScrollable(),
+  vertical: initializeScrollable(),
 };
 
 export default INITIAL_STATE;
