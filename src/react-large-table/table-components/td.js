@@ -9,4 +9,4 @@ function Td({ children, width }) {
   );
 }
 
-export default Td;
+export default React.memo(Td);

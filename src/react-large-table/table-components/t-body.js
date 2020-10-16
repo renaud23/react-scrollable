@@ -15,4 +15,4 @@ function Tbody({ children, marginLeft, marginTop }) {
   );
 }
 
-export default Tbody;
+export default React.memo(Tbody);

@@ -9,6 +9,7 @@ import {
 } from "./state-management";
 import classnames from "classnames";
 import { DefaultCellRenderer } from "./table-components";
+import { RowNums } from "./table-components";
 import "./react-large-table.scss";
 
 function ReactLargeTable({
@@ -17,6 +18,7 @@ function ReactLargeTable({
   treeSize = true,
   className,
   cellRenderer = DefaultCellRenderer,
+  rowNums = false,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
@@ -38,6 +40,7 @@ function ReactLargeTable({
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div className={classnames("react-large-table", className)}>
+        {rowNums ? <RowNums /> : null}
         <LargeScrollableContainer
           id={id}
           vertical={vertical}

@@ -9,3 +9,9 @@ export const onResizeColumn = (index, delta) => ({
   type: ON_RESIZE_COLUMN,
   payload: { index, delta },
 });
+
+export const ON_VERTICAL_SCROLL = "react-large-table/on-vertical-scroll";
+export const onVerticalScroll = (start, nb, margin) => ({
+  type: ON_VERTICAL_SCROLL,
+  payload: { start, nb, margin },
+});

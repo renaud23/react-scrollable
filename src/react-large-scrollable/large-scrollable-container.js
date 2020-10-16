@@ -40,7 +40,6 @@ function LargeScrollableContainer({
     function (width, height) {
       const [w, h] = onResize(width, height);
       dispatch(actions.onResize(w, h));
-
       return [w, h];
     },
     [onResize]
@@ -78,7 +77,7 @@ function LargeScrollableContainer({
     [horizontalScrollable, treeSize]
   );
 
-  const middleware = useCallback(
+  const middleware_ = useCallback(
     (next) => (action) => {
       const { type, payload } = action;
       if (type === "react-scrollable/on-key-down") {
@@ -100,7 +99,7 @@ function LargeScrollableContainer({
         verticalScrollPercentRequest={verticalScrollRequest}
         horizontalScrollPercentRequest={horizontalScrollRequest}
         onResize={onResizeCallback}
-        middleware={middleware}
+        middleware={middleware_}
         idContent={id}
       >
         {React.cloneElement(React.Children.only(children), {

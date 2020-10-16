@@ -8,4 +8,4 @@ function Table({ id, children }) {
   );
 }
 
-export default Table;
+export default React.memo(Table);

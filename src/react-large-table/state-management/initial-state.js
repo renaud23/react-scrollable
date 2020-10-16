@@ -1,10 +1,11 @@
 import { initializeScrollable } from "../../commons-scrollable";
 
 const INITIAL_STATE = {
-  row: undefined,
+  rows: undefined,
   header: undefined,
   treeSize: false,
   headerHeight: undefined,
+  rowNums: { start: undefined, nb: undefined },
 
   horizontal: initializeScrollable(),
   vertical: initializeScrollable(),

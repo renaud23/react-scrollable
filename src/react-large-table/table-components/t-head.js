@@ -12,4 +12,4 @@ function Thead({ children, height, marginLeft }) {
   );
 }
 
-export default Thead;
+export default React.memo(Thead);

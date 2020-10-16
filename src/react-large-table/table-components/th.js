@@ -29,17 +29,4 @@ function Th({ children, width, height, index }) {
   );
 }
 
-export default Th;
-
-// import React from "react";
-// import { safeCss } from "../../commons-scrollable";
-
-// function Th({ children, width }) {
-//   return (
-//     <th style={{ width: safeCss(width) }} className="react-large-table-th">
-//       <div className="th-el-container">{children}</div>
-//     </th>
-//   );
-// }
-
-// export default Th;
+export default React.memo(Th);

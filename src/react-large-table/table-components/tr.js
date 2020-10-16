@@ -13,4 +13,4 @@ function Tr({ children, height, odd, even }) {
   );
 }
 
-export default Tr;
+export default React.memo(Tr);

@@ -6,8 +6,8 @@ import "./custom-large-table.scss";
 import "./excel-theme.scss";
 import "./custom-cell-renderer.scss";
 
-const __WIDTH__ = 20;
-const __HEIGHT__ = 200;
+const __WIDTH__ = 80;
+const __HEIGHT__ = 20000;
 
 const data = generate(__WIDTH__, __HEIGHT__);
 

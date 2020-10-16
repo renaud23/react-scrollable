@@ -20,7 +20,6 @@ function reduce(state, action) {
   if (start === undefined) {
     return { ...state, horizontal: resolveFromScrollPercent(next) };
   }
-  console.log("ici");
   return {
     ...state,
     horizontal: resolveFromStart(next),

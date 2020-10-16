@@ -24,4 +24,4 @@ function CellRenderer({ column, row, cell, height }) {
   );
 }
 
-export default CellRenderer;
+export default React.memo(CellRenderer);
