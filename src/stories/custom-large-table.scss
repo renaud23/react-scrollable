@@ -65,28 +65,15 @@ $headerBgColor: Sienna;
     }
     // padding-top: 1px;
     .row-nums-body {
-      padding-top: 1px;
       background-color: Peru;
-      .row-container { 
+      .row-container {
         border-right: thick double $trackBgColorHover;
- 
-        &.odd {
-          .row {
-            // background-color: Sienna;
-          }
-        }
+
         .row {
           border-bottom: solid 1px black;
-          
           color: PaleGoldenRod;
-          // font-family: Arial, Helvetica, sans-serif;
-          // font-weight: bold;
-          // font-size: 12px;
-          // padding-right: 2px;
-          // text-align: right;
-          // display: inline-block; 
           height: calc(100% - 1px);
-          width: calc(100%  );
+          width: calc(100%);
         }
       }
     }
@@ -138,14 +125,6 @@ $headerBgColor: Sienna;
 
   overflow: hidden;
   resize: both;
-}
 
-.default-table-container-2 {
-  width: 400px;
-  height: 300px;
-
-  overflow: hidden;
-  resize: both;
-
-  
+  background-color: lightgoldenrodyellow;
 }

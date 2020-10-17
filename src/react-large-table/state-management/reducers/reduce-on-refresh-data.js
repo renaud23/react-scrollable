@@ -1,12 +1,5 @@
 import resolveScrollableData from "./refresh-scrollable-data";
-
-function getHeight({ __height }) {
-  return __height;
-}
-
-function getWidth({ width }) {
-  return width;
-}
+import { getHeight, getWidth } from "../../commons-table";
 
 function reduce(state, action) {
   const { payload } = action;
