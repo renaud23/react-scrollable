@@ -1,7 +1,10 @@
 function resolve(scrollbar) {
   const { maxSize, start, cumulsSize, margin, size, max } = scrollbar;
   if (cumulsSize && cumulsSize.length && maxSize > size) {
-    const percent = (cumulsSize[start] - margin) / (maxSize - size);
+    const percent = Math.min(
+      (cumulsSize[start] - margin) / (maxSize - size),
+      1.0
+    );
 
     return { ...scrollbar, scrollPercent: percent, scrollRequest: { percent } };
   }
