@@ -27,7 +27,7 @@ function generate(nbCols, nbRows) {
     const type = __TYPES__[randomInt(__TYPES__.length)];
     return {
       path: `column${i + 1}`,
-      width: __MIN_WIDTH__ + randomInt(100),
+      __width: __MIN_WIDTH__ + randomInt(100),
       label: `${getRandomWord()} ${type} ${i + 1}`,
       type,
       resizable: true,
