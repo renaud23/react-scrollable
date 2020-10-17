@@ -28,6 +28,6 @@ function reduce(state, action) {
 
 export default function (state, action) {
   const next = reduce(state, action);
-  // console.log({ action, next });
+  // console.log({ action, state, next });
   return next;
 }

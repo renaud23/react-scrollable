@@ -1,10 +1,9 @@
 import resolveScrollPercent from "./resolve-scroll-percent";
-import computeSeuil from "./compute-seuil";
-import resolveNb from "./resolve-nb";
+import resolveFromScrollPercent from "./resolve-scrollbar-from-scroll-percent";
 
 function resolve(scrollbar) {
   const next = resolveScrollPercent(scrollbar);
-  return resolveNb(next, computeSeuil(next));
+  return resolveFromScrollPercent(next);
 }
 
 export default resolve;

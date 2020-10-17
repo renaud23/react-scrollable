@@ -1,0 +1,28 @@
+.react-large-table {
+  .row-nums {
+    display: table;
+    position: relative;
+    height: 100%; 
+
+    background-color: transparent;
+    .header-corner-container {
+      position: absolute;
+      overflow: hidden; 
+      width: 100%;
+
+      .header-corner {
+     
+     
+      }
+    }
+    .row-nums-body {
+      .row-container {
+        overflow: hidden;
+        .row {
+          display: inline-block;
+          line-height: normal;
+        }
+      }
+    }
+  }
+}

@@ -3,10 +3,10 @@ import { resolveFromScrollPercent, resolveFromStart } from "./commons-reducers";
 function resolveScrollable(scrollable, size) {
   const { size: prec } = scrollable;
   if (prec === undefined) {
-    return resolveFromScrollPercent({ ...scrollable, size });
+    return resolveFromScrollPercent({ ...scrollable, size: size });
   }
   if (size !== prec) {
-    return resolveFromStart({ ...scrollable, size });
+    return resolveFromStart({ ...scrollable, size: size });
   }
 
   return scrollable;

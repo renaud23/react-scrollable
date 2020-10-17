@@ -1,4 +1,8 @@
-import { computeTreeSize, resolveFromScrollPercent } from "./commons-reducers";
+import {
+  computeTreeSize,
+  resolveFromScrollPercent,
+  resolveFromStart,
+} from "./commons-reducers";
 
 function reduce(state, action) {
   const { payload } = action;
@@ -16,10 +20,9 @@ function reduce(state, action) {
   if (start === undefined) {
     return { ...state, horizontal: resolveFromScrollPercent(next) };
   }
-
   return {
     ...state,
-    horizontal: next,
+    horizontal: resolveFromStart(next),
   };
 }
 
