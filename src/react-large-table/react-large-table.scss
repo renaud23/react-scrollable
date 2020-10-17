@@ -18,6 +18,7 @@
     outline: 0;
     line-height: 0;
     vertical-align: baseline;
+    line-height: normal;
   }
 
   table {
@@ -32,21 +33,17 @@
       display: block;
       position: absolute;
       top: 0;
-      z-index: 0;
 
       tr {
         display: block;
         width: max-content;
 
-        th { 
+        th {
           display: inline-block;
           position: relative;
           overflow: hidden;
+          height: 100%;
           white-space: nowrap;
-
-          &.waiting {
-            display: none;
-          }
         }
       }
     }
@@ -58,25 +55,23 @@
       tr {
         display: block;
         width: max-content;
-
         td {
           display: inline-block;
           overflow: hidden;
           white-space: nowrap;
-
-          &.waiting {
-            display: none;
-          }
-
-          .default-cell-renderer {
-            display: inline-block;
-            width: calc(100% - 5px);
-            height: 100%;
-            text-align: right;
-            padding-right: 5px;
-          }
+          height: 100%;
         }
       }
     }
   }
+
+  /* */
+  // .react-scrollable-container {
+  //   .react-scrollbar {
+  //     &.vertical {
+  //       height: calc(100% - 62px);
+  //       margin-top: 50px;
+  //     }
+  //   }
+  // }
 }

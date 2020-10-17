@@ -1,10 +1,17 @@
 import { computeScrollbarPos } from "../common-reducers";
 
+function safePercent(percent) {
+  return Math.min(1.0, Math.max(0, percent));
+}
+
 function resolve(scrollbar, action) {
   const { payload } = action;
   const { percent } = payload;
   if (percent !== undefined) {
-    return computeScrollbarPos({ ...scrollbar, scrollPercent: percent });
+    return computeScrollbarPos({
+      ...scrollbar,
+      scrollPercent: safePercent(percent),
+    });
   }
   return scrollbar;
 }

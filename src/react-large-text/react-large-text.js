@@ -1,21 +1,30 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { OffsetChar } from "../commons-scrollable";
+import { OffsetChar, initializeScrollable } from "../commons-scrollable";
 import LargeScrollableContainer from "../react-large-scrollable";
 import { computeCumulsSize } from "../commons-scrollable";
 import "./react-large-text.scss";
 
 let __INDEX_ID__ = 1;
 
-function ContentText({ rows, verticalStart, marginTop, verticalNb }) {
-  const lines = new Array(verticalNb).fill(null).map(function (_, i) {
-    const index = verticalStart + i;
-    return <div key={index}>{rows[index]}</div>;
-  });
-  return <div style={{ marginTop }}>{lines}</div>;
+function Line({ content }) {
+  return (
+    <>
+      {content}
+      <br />
+    </>
+  );
 }
 
-function initializeScrollable() {
-  return { max: undefined, maxSize: undefined, cumulsSize: undefined };
+function ContentText({ rows, verticalStart, marginTop, verticalNb, height }) {
+  const lines = new Array(verticalNb).fill(null).map(function (_, i) {
+    const index = verticalStart + i;
+    return <Line content={rows[index]} key={index} />;
+  });
+  return (
+    <p style={{ marginTop, lineHeight: `${height}px` }} className="content">
+      {lines}
+    </p>
+  );
 }
 
 function getId() {
@@ -32,12 +41,6 @@ function consumeWords(words, max, current = 0) {
 }
 
 function fillRows(words, max) {
-  // if (words.length) {
-  //   const [row, rest] = consumeWords(words, max);
-  //   return [row, ...fillRows(rest, max)];
-  // }
-  // return [];
-
   const rows = [];
   let stack = [...words];
   while (stack.length) {
@@ -91,8 +94,9 @@ function ReactLargeText({ offsetChar, value, lineHeight, onCompute }) {
   const [viewportWidth, setViewportWidth] = useState(undefined);
   const [id] = useState(getId);
 
-  const onResize = useCallback(function (width) {
+  const onResize = useCallback(function (width, height) {
     setViewportWidth(width);
+    return [width, height];
   }, []);
 
   useEffect(
@@ -137,7 +141,7 @@ function ReactLargeText({ offsetChar, value, lineHeight, onCompute }) {
         onResize={onResize}
         treeSize
       >
-        <ContentText rows={rows} />
+        <ContentText rows={rows} height={lineHeight} />
       </LargeScrollableContainer>
     </div>
   );

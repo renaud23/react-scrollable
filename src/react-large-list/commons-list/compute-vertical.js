@@ -7,7 +7,7 @@ function getHeight({ __height }) {
 function compute(list) {
   const cumulsSize = computeCumulsSize(list, getHeight);
   const max = list.length;
-  const maxSize = cumulsSize[cumulsSize.length - 1];
+  const maxSize = cumulsSize[max];
   return { cumulsSize, max, maxSize };
 }
 

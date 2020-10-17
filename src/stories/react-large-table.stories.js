@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import ReactLargeTable, { ReactLargeEditableTable } from "../react-large-table";
+import ReactLargeTable from "../react-large-table";
+import ReactLargeTableEditable from "../react-large-table-editable";
 import generate from "./random-table-data";
 import classnames from "classnames";
 import "./custom-large-table.scss";
 import "./excel-theme.scss";
 import "./custom-cell-renderer.scss";
 
-const __WIDTH__ = 80;
-const __HEIGHT__ = 10000;
+const __WIDTH__ = 10;
+const __HEIGHT__ = 200;
 
 const data = generate(__WIDTH__, __HEIGHT__);
 
@@ -19,7 +20,7 @@ export function DefaultTable() {
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
       <div className="default-table-container">
-        <ReactLargeTable data={data} headerHeight={30} treeSize={true} />
+        <ReactLargeTable data={data} headerHeight={30} treeSize={false} />
       </div>
     </>
   );
@@ -82,7 +83,7 @@ export function EditableTable() {
     <>
       <p>{last ? `${last.value} at [${last.row}, ${last.column}]` : null}</p>
       <div className="default-table-container">
-        <ReactLargeEditableTable
+        <ReactLargeTableEditable
           className="excel-theme"
           data={data}
           headerHeight={50}
