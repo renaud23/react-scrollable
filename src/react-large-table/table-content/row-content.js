@@ -1,6 +1,6 @@
 import React from "react";
 import { Td } from "../table-components";
-import { getWidth } from "../commons-table";
+import { getWidth, getCell } from "../commons-table";
 
 function RowContent({
   row,
@@ -14,9 +14,8 @@ function RowContent({
   if (nb) {
     return new Array(nb).fill(null).map(function (_, j) {
       const th = header[start + j];
-      const { path } = th;
       const width = getWidth(th);
-      const cell = path in row ? row[path] : {};
+      const cell = getCell(th, row);
       return (
         <Td key={`${index} - ${start + j}`} width={width}>
           <Cell
