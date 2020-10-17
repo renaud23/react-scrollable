@@ -11,8 +11,10 @@ function getWidth({ width }) {
 function reduce(state, action) {
   const { payload } = action;
   const { data, headerHeight, treeSize } = payload;
+
   if (typeof data === "object") {
-    const { header, rows, vertical, horizontal } = data;
+    const { header, rows } = data;
+    const { vertical, horizontal } = state;
     const { rows: rOld, header: hOld } = state;
     return {
       ...state,

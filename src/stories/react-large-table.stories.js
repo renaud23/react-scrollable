@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactLargeTable from "../react-large-table";
+import ReactLargeTableEditable from "../react-large-table-editable";
 import generate from "./random-table-data";
 import classnames from "classnames";
 import "./custom-large-table.scss";
@@ -76,26 +77,26 @@ export function CustomCellTable() {
   );
 }
 
-// export function EditableTable() {
-//   const [last, setLast] = useState(undefined);
-//   return (
-//     <>
-//       <p>{last ? `${last.value} at [${last.row}, ${last.column}]` : null}</p>
-//       <div className="default-table-container">
-//         <ReactLargeEditableTable
-//           className="excel-theme"
-//           data={data}
-//           headerHeight={50}
-//           cellRenderer={CustomCellRenderer}
-//           rowNums={true}
-//           getValue={({ value }) => value}
-//           setValue={(o, value) => (typeof o === "object" ? { ...o, value } : o)}
-//           onChange={(value, row, column) => setLast({ value, row, column })}
-//         />
-//       </div>
-//     </>
-//   );
-// }
+export function EditableTable() {
+  const [last, setLast] = useState(undefined);
+  return (
+    <>
+      <p>{last ? `${last.value} at [${last.row}, ${last.column}]` : null}</p>
+      <div className="default-table-container">
+        <ReactLargeTableEditable
+          className="excel-theme"
+          data={data}
+          headerHeight={50}
+          cellRenderer={CustomCellRenderer}
+          rowNums={true}
+          getValue={({ value }) => value}
+          setValue={(o, value) => (typeof o === "object" ? { ...o, value } : o)}
+          onChange={(value, row, column) => setLast({ value, row, column })}
+        />
+      </div>
+    </>
+  );
+}
 
 export default {
   title: "react-large-table",
