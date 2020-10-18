@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import classnames from "classnames";
 import { TableContext } from "../../state-management";
 import { safeCss } from "../../../commons-scrollable";
+import Row from "./row";
 import "./row-nums.scss";
 
 function RowNumContainer({ children, margin, headerHeight }) {
@@ -24,19 +24,6 @@ function RowNumContainer({ children, margin, headerHeight }) {
   );
 }
 
-function Row({ height, index }) {
-  return (
-    <div
-      style={{ height: safeCss(height) }}
-      className={classnames("row-container", {
-        odd: index % 2 === 1,
-      })}
-    >
-      <div className="row">{index}</div>
-    </div>
-  );
-}
-
 function RowNums() {
   const [state] = useContext(TableContext);
   const { headerHeight, rowNums, rows } = state;
@@ -44,7 +31,7 @@ function RowNums() {
   if (nb && rows.length) {
     const nums = new Array(nb).fill(null).map(function (_, i) {
       const { __height } = rows[start + i];
-      return <Row key={i} height={__height} index={start + i + 1} />;
+      return <Row key={i} height={__height} index={start + i} />;
     });
     return (
       <RowNumContainer margin={margin} headerHeight={headerHeight}>
