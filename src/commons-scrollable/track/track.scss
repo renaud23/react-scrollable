@@ -39,16 +39,17 @@
     .track-bar {
       &.vertical {
         position: fixed;
-        z-index: 1;
+        display: block;
+        top: 0;
         height: 100%;
         border-right: solid 2px fuchsia;
       }
 
       &.horizontal {
-        position: fixed;
-        z-index: 1;
+        position: fixed;        
         width: 100%;
         border-top: solid 2px fuchsia;
+        left: 0;
       }
     }
   }

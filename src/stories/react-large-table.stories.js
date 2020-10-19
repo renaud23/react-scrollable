@@ -7,8 +7,8 @@ import "./custom-large-table.scss";
 import "./excel-theme.scss";
 import "./custom-cell-renderer.scss";
 
-const __WIDTH__ = 20;
-const __HEIGHT__ = 1000;
+const __WIDTH__ = 50;
+const __HEIGHT__ = 8000;
 
 const data = generate(__WIDTH__, __HEIGHT__);
 
@@ -22,6 +22,11 @@ export function DefaultTable() {
       <div className="default-table-container">
         <ReactLargeTable data={data} headerHeight={30} treeSize={false} />
       </div>
+      <code>
+        const data = &#123; header: [ &#123; path, label, __width, ... &#125;,
+        ...], rows: [ &#123; [path]: &#123; __height,... &#125;,... &#125;,...]
+        &#125;
+      </code>
     </>
   );
 }
