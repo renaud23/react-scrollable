@@ -20,7 +20,9 @@
   }
 
   tbody {
+    background-color: ghostwhite; 
     tr {
+
       &.odd {
       }
     }
@@ -42,7 +44,6 @@
     border-bottom: solid 1px lightgray;
     width: calc(100% - 1px);
     height: calc(100% - 1px);
-    background-color: snow;
   }
 
   /* */
@@ -120,4 +121,15 @@
       }
     }
   }
+}
+
+
+.scrollable-component-example {
+  width: 500px;
+  height: 150px;
+
+  background-color: peachpuff;
+
+  overflow: hidden;
+  resize: both;
 }

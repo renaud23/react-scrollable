@@ -16,7 +16,7 @@ function LargeScrollableContainer({
   id,
   vertical: verticalScrollable,
   horizontal: horizontalScrollable,
-  treeSize = true,
+  treeSize,
   onResize = onResizeDefaultHook,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
@@ -114,5 +114,11 @@ function LargeScrollableContainer({
     </ScrollableContext.Provider>
   );
 }
+
+LargeScrollableContainer.defaultProps = {
+  vertical: {},
+  horizontal: {},
+  treeSize: false,
+};
 
 export default LargeScrollableContainer;

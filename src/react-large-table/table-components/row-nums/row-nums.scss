@@ -2,22 +2,22 @@
   .row-nums {
     display: table;
     position: relative;
-    height: 100%; 
+    height: 100%;
 
     background-color: transparent;
     .header-corner-container {
       position: absolute;
-      overflow: hidden; 
+      overflow: hidden;
       width: 100%;
-
+      z-index: 1;
       .header-corner {
-     
-     
       }
     }
-    .row-nums-body {
+    .row-nums-body { 
       .row-container {
         overflow: hidden;
+        position: relative;
+        z-index: 0;
         .row {
           display: inline-block;
           line-height: normal;

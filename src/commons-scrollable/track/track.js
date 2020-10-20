@@ -79,7 +79,12 @@ function Track({ onTrack, vertical, horizontal, right, left, top, bottom }) {
       })}
       onMouseDown={onmousedown}
     >
-      {track ? <div className="track-bar" style={style}></div> : null}
+      {track ? (
+        <div
+          className={classnames("track-bar", { vertical, horizontal })}
+          style={style}
+        ></div>
+      ) : null}
     </div>
   );
 }
@@ -93,10 +98,12 @@ Track.propTypes = {
 };
 
 Track.defaultProps = {
-  vertical: true,
-  right: true,
+  vertical: false,
+  right: false,
   left: false,
-  horizontal: true,
+  horizontal: false,
+  bottom: false,
+  top: false,
 };
 
 export default Track;

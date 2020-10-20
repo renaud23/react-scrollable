@@ -22,18 +22,35 @@
       }
     }
     &.horizontal {
+      z-index: 1;
+      display: inline-block;
+      background-color: transparent;
+      height: 6px;
+      cursor: row-resize;
+      width: 100%;
       &.top {
       }
 
       &.bottom {
+        bottom: 0;
       }
     }
 
     .track-bar {
-      position: fixed;
-      z-index: 1;
-      height: 100%;
-      border-right: solid 2px fuchsia;
+      &.vertical {
+        position: fixed;
+        display: block;
+        top: 0;
+        height: 100%;
+        border-right: solid 2px fuchsia;
+      }
+
+      &.horizontal {
+        position: fixed;        
+        width: 100%;
+        border-top: solid 2px fuchsia;
+        left: 0;
+      }
     }
   }
 }

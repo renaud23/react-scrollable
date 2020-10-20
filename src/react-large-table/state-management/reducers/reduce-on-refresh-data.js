@@ -1,12 +1,5 @@
 import resolveScrollableData from "./refresh-scrollable-data";
-
-function getHeight({ __height }) {
-  return __height;
-}
-
-function getWidth({ width }) {
-  return width;
-}
+import { getHeight, getWidth, getId } from "../../commons-table";
 
 function reduce(state, action) {
   const { payload } = action;
@@ -14,8 +7,7 @@ function reduce(state, action) {
 
   if (typeof data === "object") {
     const { header, rows } = data;
-    const { vertical, horizontal } = state;
-    const { rows: rOld, header: hOld } = state;
+    const { vertical, horizontal, id, rows: rOld, header: hOld } = state;
     return {
       ...state,
       vertical:
@@ -26,6 +18,7 @@ function reduce(state, action) {
       rows,
       headerHeight,
       treeSize,
+      id: getId(id),
     };
   }
   return { ...state, headerHeight, treeSize };
