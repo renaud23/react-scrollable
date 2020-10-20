@@ -1,0 +1,53 @@
+.react-large-tree {
+  height: 100%;
+  width: 100%;
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+  }
+}
+
+li {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.default-row-renderer {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  .tree-node-indent {
+    display: inline-block;
+    height: 100%;
+    width: 20px;
+    &.bar {
+      background-image: url("./bar.png");
+      background-size: cover;
+      min-width: 20px;
+    }
+    &.tee {
+      background-image: url("./tee.png");
+      background-size: cover;
+      min-width: 20px;
+    }
+    &.end {
+      background-image: url("./end.png");
+      background-size: cover;
+      min-width: 20px;
+    }
+  }
+
+  .libelle {
+    border-bottom: solid 1px black;
+    background-color: lime;
+    display: inline-block;
+    height: calc(100% - 1px);
+    line-height: 28px;
+    white-space: nowrap;
+  }
+}
