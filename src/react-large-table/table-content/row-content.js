@@ -21,7 +21,7 @@ function RowContent({
           <Cell
             cell={cell}
             row={index}
-            column={j}
+            column={start + j}
             height={height}
             width={width}
           />
