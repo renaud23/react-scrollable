@@ -1,9 +1,11 @@
 function count(cumTab, index, max) {
   if (index < cumTab.length - 1) {
-    const start = cumTab[index];
-    if (start < max) {
-      return 1 + count(cumTab, index + 1, max);
+    let how = 1;
+    while (how + index < cumTab.length - 1 && cumTab[how + index] < max) {
+      how++;
     }
+
+    return how;
   }
   return 0;
 }
