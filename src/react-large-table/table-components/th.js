@@ -24,7 +24,7 @@ function Th({ children, width, height, index }) {
       }}
     >
       {resizable ? <Track onTrack={onTrackCallback} vertical right /> : null}
-      <div className="th-el-container">{children}</div>
+      {children}
     </th>
   );
 }

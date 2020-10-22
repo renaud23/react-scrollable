@@ -4,3 +4,4 @@ export { default as getWidth } from "./get-width";
 export { default as setWidth } from "./set-width";
 export { default as setHeight } from "./set-height";
 export { default as getCell } from "./get-cell";
+export { default as useDispatch } from "./use-dispatch";

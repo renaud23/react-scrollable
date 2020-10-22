@@ -37,6 +37,7 @@
       tr {
         display: block;
         width: max-content;
+       
 
         th {
           display: inline-block;
@@ -55,6 +56,8 @@
       tr {
         display: block;
         width: max-content;
+        position: relative;
+        
         td {
           display: inline-block;
           overflow: hidden;

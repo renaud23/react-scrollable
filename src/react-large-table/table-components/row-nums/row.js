@@ -1,10 +1,11 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback } from "react";
 import classnames from "classnames";
 import { TableContext, actions } from "../../state-management";
 import { safeCss, Track } from "../../../commons-scrollable";
+import { useDispatch } from "../../commons-table";
 
 function Row({ height, index }) {
-  const dispatch = useContext(TableContext)[1];
+  const dispatch = useDispatch(TableContext);
 
   const onTrackCallback = useCallback(
     function (delta) {
