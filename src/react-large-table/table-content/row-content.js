@@ -17,7 +17,12 @@ function RowContent({
       const width = getWidth(th);
       const cell = getCell(th, row);
       return (
-        <Td key={`${index} - ${start + j}`} width={width}>
+        <Td
+          key={`${index} - ${start + j}`}
+          width={width}
+          row={index}
+          first={j === 0}
+        >
           <Cell
             cell={cell}
             row={index}

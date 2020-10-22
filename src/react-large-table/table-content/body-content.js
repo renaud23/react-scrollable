@@ -22,14 +22,7 @@ function BodyContent({
       const { __height } = row;
       const even = isEven(index);
       return (
-        <Tr
-          key={index}
-          height={__height}
-          odd={!even}
-          even={even}
-          index={index}
-          resizable
-        >
+        <Tr key={index} height={__height} odd={!even} even={even}>
           <RowContent
             cellRenderer={cellRenderer}
             header={header}
