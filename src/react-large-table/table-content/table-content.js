@@ -9,6 +9,7 @@ function TableContent({
   rows,
   headerHeight,
   cellRenderer,
+  headerRenderer,
   id,
   marginLeft,
   horizontalStart,
@@ -32,6 +33,7 @@ function TableContent({
             header={header}
             start={horizontalStart}
             nb={horizontalNb}
+            headerRenderer={headerRenderer}
           />
         </Tr>
       </Thead>

@@ -10,15 +10,17 @@ import {
 import classnames from "classnames";
 import { DefaultCellRenderer } from "./table-components";
 import { RowNums } from "./table-components";
+import { DefaultHeaderRenderer } from "./table-components";
 import "./react-large-table.scss";
 
 function ReactLargeTable({
   data,
   headerHeight,
-  treeSize = true,
+  treeSize,
   className,
-  cellRenderer = DefaultCellRenderer,
-  rowNums = false,
+  cellRenderer,
+  headerRenderer,
+  rowNums,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
@@ -53,6 +55,7 @@ function ReactLargeTable({
             header={header}
             headerHeight={headerHeight}
             cellRenderer={cellRenderer}
+            headerRenderer={headerRenderer}
             id={id}
           />
         </LargeScrollableContainer>
@@ -60,5 +63,12 @@ function ReactLargeTable({
     </TableContext.Provider>
   );
 }
+
+ReactLargeTable.defaultProps = {
+  treeSize: true,
+  cellRenderer: DefaultCellRenderer,
+  headerRenderer: DefaultHeaderRenderer,
+  rowNums: false,
+};
 
 export default ReactLargeTable;

@@ -17,70 +17,72 @@ function getStyle(vertical, tPos, tSize) {
  *
  * @param {*} param0
  */
-export default React.forwardRef(function Scrollbar(
-  {
-    className,
-    vertical = false,
-    pSize,
-    tPos,
-    tSize,
-    max,
-    drag,
-    idContent,
-    scrollPercent,
-    onTrackMouseDown = () => null,
-    onBarMouseDown = () => null,
-  },
-  containerEl
-) {
-  const onMouseDownTrackCallback = useCallback(
-    function (e) {
-      e.stopPropagation();
-      if (e.button === 0) {
-        const clientPos = vertical ? e.clientY : e.clientX;
-        onTrackMouseDown(clientPos);
-      }
+export default React.memo(
+  React.forwardRef(function Scrollbar(
+    {
+      className,
+      vertical = false,
+      pSize,
+      tPos,
+      tSize,
+      max,
+      drag,
+      idContent,
+      scrollPercent,
+      onTrackMouseDown = () => null,
+      onBarMouseDown = () => null,
     },
-    [onTrackMouseDown, vertical]
-  );
+    containerEl
+  ) {
+    const onMouseDownTrackCallback = useCallback(
+      function (e) {
+        e.stopPropagation();
+        if (e.button === 0) {
+          const clientPos = vertical ? e.clientY : e.clientX;
+          onTrackMouseDown(clientPos);
+        }
+      },
+      [onTrackMouseDown, vertical]
+    );
 
-  const onMouseDownBarCallback = useCallback(
-    function (e) {
-      e.stopPropagation();
-      if (e.button === 0) {
-        const { left, top } = e.target.getBoundingClientRect();
-        const clientPos = vertical ? e.clientY - top : e.clientX - left;
-        onBarMouseDown(clientPos);
-      }
-    },
-    [onBarMouseDown, vertical]
-  );
+    const onMouseDownBarCallback = useCallback(
+      function (e) {
+        e.stopPropagation();
+        if (e.button === 0) {
+          const { left, top } = e.target.getBoundingClientRect();
+          const clientPos = vertical ? e.clientY - top : e.clientX - left;
+          onBarMouseDown(clientPos);
+        }
+      },
+      [onBarMouseDown, vertical]
+    );
 
-  const hidden = pSize >= max;
-  return (
-    <div
-      ref={containerEl}
-      role="scrollbar"
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-valuenow={Math.round(scrollPercent * 100)}
-      aria-controls={idContent}
-      aria-orientation={vertical ? "vertical" : "horizontal"}
-      className={classnames("react-scrollbar", className, {
-        hidden,
-        "on-drag": drag,
-      })}
-      onMouseDown={onMouseDownBarCallback}
-    >
-      {hidden ? null : (
-        <div
-          className={classnames("react-scrollbar-track", className, {
-            "on-drag": drag,
-          })}
-          style={getStyle(vertical, tPos, tSize)}
-          onMouseDown={onMouseDownTrackCallback}
-        />
-      )}
-    </div>
-  );
-});
+    const hidden = pSize >= max;
+    return (
+      <div
+        ref={containerEl}
+        role="scrollbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(scrollPercent * 100)}
+        aria-controls={idContent}
+        aria-orientation={vertical ? "vertical" : "horizontal"}
+        className={classnames("react-scrollbar", className, {
+          hidden,
+          "on-drag": drag,
+        })}
+        onMouseDown={onMouseDownBarCallback}
+      >
+        {hidden ? null : (
+          <div
+            className={classnames("react-scrollbar-track", className, {
+              "on-drag": drag,
+            })}
+            style={getStyle(vertical, tPos, tSize)}
+            onMouseDown={onMouseDownTrackCallback}
+          />
+        )}
+      </div>
+    );
+  })
+);
