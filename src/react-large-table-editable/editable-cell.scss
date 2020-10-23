@@ -5,7 +5,9 @@
     height: 100%;
     cursor: text;
 
-     
+     &.selected {
+       background-color: skyblue;
+     }
  
     input {
       display: block;

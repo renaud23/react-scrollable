@@ -8,6 +8,7 @@ import {
   INITIAL_STATE,
   actions,
   createTableMiddleware,
+  EditableContext,
 } from "./state-management";
 
 import "./editable-cell.scss";
@@ -83,15 +84,17 @@ function Table({
   );
 
   return (
-    <ReactLargeTable
-      className={classnames("editable-table", className)}
-      data={data}
-      headerHeight={headerHeight}
-      rowNums={rowNums}
-      cellRenderer={cellMemo}
-      onChangeData={onChangeData}
-      middleware={middlewareMemo}
-    />
+    <EditableContext.Provider value={[state, dispatch]}>
+      <ReactLargeTable
+        className={classnames("editable-table", className)}
+        data={data}
+        headerHeight={headerHeight}
+        rowNums={rowNums}
+        cellRenderer={cellMemo}
+        onChangeData={onChangeData}
+        middleware={middlewareMemo}
+      />
+    </EditableContext.Provider>
   );
 }
 

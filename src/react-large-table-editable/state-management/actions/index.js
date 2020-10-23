@@ -9,3 +9,8 @@ export const onSelectRow = (index) => ({
   type: ON_SELECT_ROW,
   payload: { index },
 });
+
+export const ON_RESET_SELECTION = "editable-table/on-reset-selection";
+export const onResetSelection = (index) => ({
+  type: ON_RESET_SELECTION,
+});
