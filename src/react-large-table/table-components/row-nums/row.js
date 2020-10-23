@@ -14,9 +14,18 @@ function Row({ height, index }) {
     [dispatch, index]
   );
 
+  const onClick = useCallback(
+    function (e) {
+      e.stopPropagation();
+      dispatch(actions.onClickRowNum(index));
+    },
+    [dispatch, index]
+  );
+
   return (
     <div
       style={{ height: safeCss(height) }}
+      onClick={onClick}
       className={classnames("row-container", {
         odd: index % 2 === 1,
       })}

@@ -1,9 +1,17 @@
 import React, { useMemo, useEffect, useCallback, useReducer } from "react";
+import classnames from "classnames";
 import PropTypes from "prop-types";
 import ReactLargeTable, { DefaultCellRenderer } from "../react-large-table";
 import createEditableCellRenderer from "./create-editable-cell-renderer";
-import { reducers, INITIAL_STATE, actions } from "./state-management";
+import {
+  reducers,
+  INITIAL_STATE,
+  actions,
+  createTableMiddleware,
+} from "./state-management";
+
 import "./editable-cell.scss";
+import "./editable-table.scss";
 
 function refillRows(rows, newCell, row, path) {
   const next = [...rows];
@@ -67,14 +75,22 @@ function Table({
     [cellRenderer, getValue, setValueCallback]
   );
 
+  const middlewareMemo = useMemo(
+    function () {
+      return createTableMiddleware(dispatch);
+    },
+    [dispatch]
+  );
+
   return (
     <ReactLargeTable
-      className={className}
+      className={classnames("editable-table", className)}
       data={data}
       headerHeight={headerHeight}
       rowNums={rowNums}
       cellRenderer={cellMemo}
       onChangeData={onChangeData}
+      middleware={middlewareMemo}
     />
   );
 }

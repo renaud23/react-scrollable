@@ -21,3 +21,10 @@ export const onVerticalScroll = (start, nb, margin) => ({
   type: ON_VERTICAL_SCROLL,
   payload: { start, nb, margin },
 });
+
+/* */
+export const ON_CLICK_ROW_NUM = "react-large-table/on-click-row-num";
+export const onClickRowNum = (index) => ({
+  type: ON_CLICK_ROW_NUM,
+  payload: { index },
+});
