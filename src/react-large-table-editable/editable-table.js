@@ -11,7 +11,7 @@ function refillRows(rows, newCell, row, path) {
   return next;
 }
 
-function Writable({
+function Table({
   data,
   rowNums,
   className,
@@ -23,6 +23,12 @@ function Writable({
 }) {
   const [data_, setData] = useState(data);
   const { rows, header } = data_;
+
+  const onChangeData = useCallback(function (h, r) {
+    if (h !== header || r !== rows) {
+      setData({ header: h, rows: r });
+    }
+  }, []);
   /* */
   const setValueCallback = useCallback(
     function (cell, value, row, column) {
@@ -59,11 +65,12 @@ function Writable({
       headerHeight={headerHeight}
       rowNums={rowNums}
       cellRenderer={cellMemo}
+      onChangeData={onChangeData}
     />
   );
 }
 
-Writable.propTypes = {
+Table.propTypes = {
   data: PropTypes.shape({
     header: PropTypes.array.isRequired,
     rows: PropTypes.array.isRequired,
@@ -78,11 +85,11 @@ Writable.propTypes = {
   onChange: PropTypes.func,
 };
 
-Writable.defaultProps = {
+Table.defaultProps = {
   cellRenderer: DefaultCellRenderer,
   rowNums: true,
   className: undefined,
   headerHeight: 30,
 };
 
-export default Writable;
+export default Table;

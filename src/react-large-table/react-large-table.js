@@ -13,6 +13,8 @@ import { RowNums } from "./table-components";
 import { DefaultHeaderRenderer } from "./table-components";
 import "./react-large-table.scss";
 
+function onChangeDataDefault() {}
+
 function ReactLargeTable({
   data,
   headerHeight,
@@ -21,10 +23,20 @@ function ReactLargeTable({
   cellRenderer,
   headerRenderer,
   rowNums,
+  onChangeData = onChangeDataDefault,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
   const { header, rows } = state;
+
+  useEffect(
+    function () {
+      if (header && rows) {
+        onChangeData(header, rows);
+      }
+    },
+    [header, rows, onChangeData]
+  );
 
   useEffect(
     function () {
@@ -69,6 +81,7 @@ ReactLargeTable.defaultProps = {
   cellRenderer: DefaultCellRenderer,
   headerRenderer: DefaultHeaderRenderer,
   rowNums: false,
+  onchangeData: onChangeDataDefault,
 };
 
 export default ReactLargeTable;
