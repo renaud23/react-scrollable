@@ -25,9 +25,7 @@ function Table({
   const { rows, header } = data_;
 
   const onChangeData = useCallback(function (h, r) {
-    if (h !== header || r !== rows) {
-      setData({ header: h, rows: r });
-    }
+    setData({ header: h, rows: r });
   }, []);
   /* */
   const setValueCallback = useCallback(
