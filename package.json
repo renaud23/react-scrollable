@@ -4,6 +4,7 @@
   "version": "v0.1.8",
   "license": "MIT",
   "author": "renaud.genevois",
+  "homepage": "https://renaud23.github.io/react-scrollable/",
   "repository": {
     "type": "git",
     "url": "https://github.com/renaud23/react-scrollable.git"
