@@ -16,3 +16,15 @@ jobs:
         api_key: $NPM_TOKEN
         on:
           tags: true
+    - stage: storybook
+      script:
+        - yarn build-storybook
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        local_dir: build
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        target_branch: gh-pages
+        on:
+          branch: master
