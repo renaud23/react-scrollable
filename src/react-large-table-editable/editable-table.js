@@ -1,8 +1,18 @@
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useEffect, useCallback, useReducer } from "react";
+import classnames from "classnames";
 import PropTypes from "prop-types";
 import ReactLargeTable, { DefaultCellRenderer } from "../react-large-table";
 import createEditableCellRenderer from "./create-editable-cell-renderer";
+import {
+  reducers,
+  INITIAL_STATE,
+  actions,
+  createTableMiddleware,
+  EditableContext,
+} from "./state-management";
+
 import "./editable-cell.scss";
+import "./editable-table.scss";
 
 function refillRows(rows, newCell, row, path) {
   const next = [...rows];
@@ -11,8 +21,8 @@ function refillRows(rows, newCell, row, path) {
   return next;
 }
 
-function Writable({
-  data,
+function Table({
+  data: dataFromProps,
   rowNums,
   className,
   headerHeight,
@@ -21,23 +31,37 @@ function Writable({
   getValue,
   onChange,
 }) {
-  const [data_, setData] = useState(data);
-  const { rows, header } = data_;
+  const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
+  const { data } = state;
+  const onChangeData = useCallback(function (h, r) {
+    dispatch(actions.onUpdateData({ header: h, rows: r }));
+  }, []);
   /* */
   const setValueCallback = useCallback(
     function (cell, value, row, column) {
       const current = getValue(cell);
       if (current !== value) {
         const newCell = setValue(cell, value);
+        const { rows, header } = data;
         const { path } = header[column];
-        setData({
-          header,
-          rows: refillRows(rows, newCell, row, path),
-        });
+        dispatch(
+          actions.onUpdateData({
+            header,
+            rows: refillRows(rows, newCell, row, path),
+          })
+        );
         onChange(value, row, column);
       }
     },
-    [setValue, onChange, getValue, rows, header]
+    [setValue, onChange, getValue, data]
+  );
+
+  /* */
+  useEffect(
+    function () {
+      dispatch(actions.onUpdateData(dataFromProps));
+    },
+    [dataFromProps]
   );
 
   /* */
@@ -52,18 +76,29 @@ function Writable({
     [cellRenderer, getValue, setValueCallback]
   );
 
+  const middlewareMemo = useMemo(
+    function () {
+      return createTableMiddleware(dispatch);
+    },
+    [dispatch]
+  );
+
   return (
-    <ReactLargeTable
-      className={className}
-      data={data_}
-      headerHeight={headerHeight}
-      rowNums={rowNums}
-      cellRenderer={cellMemo}
-    />
+    <EditableContext.Provider value={[state, dispatch]}>
+      <ReactLargeTable
+        className={classnames("editable-table", className)}
+        data={data}
+        headerHeight={headerHeight}
+        rowNums={rowNums}
+        cellRenderer={cellMemo}
+        onChangeData={onChangeData}
+        middleware={middlewareMemo}
+      />
+    </EditableContext.Provider>
   );
 }
 
-Writable.propTypes = {
+Table.propTypes = {
   data: PropTypes.shape({
     header: PropTypes.array.isRequired,
     rows: PropTypes.array.isRequired,
@@ -78,11 +113,11 @@ Writable.propTypes = {
   onChange: PropTypes.func,
 };
 
-Writable.defaultProps = {
+Table.defaultProps = {
   cellRenderer: DefaultCellRenderer,
   rowNums: true,
   className: undefined,
   headerHeight: 30,
 };
 
-export default Writable;
+export default Table;

@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useCallback } from "react";
+import React, { useReducer, useEffect, useCallback, useMemo } from "react";
 import LargeScrollableContainer from "../react-large-scrollable";
 import TableContent from "./table-content";
 import {
@@ -13,6 +13,10 @@ import { RowNums } from "./table-components";
 import { DefaultHeaderRenderer } from "./table-components";
 import "./react-large-table.scss";
 
+function onChangeDataDefault() {}
+
+const middlewareDefault = (next) => (action) => next(action);
+
 function ReactLargeTable({
   data,
   headerHeight,
@@ -21,16 +25,34 @@ function ReactLargeTable({
   cellRenderer,
   headerRenderer,
   rowNums,
+  onChangeData = onChangeDataDefault,
+  middleware = middlewareDefault,
 }) {
-  const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
+  const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
   const { header, rows } = state;
+
+  const dispatch = useMemo(
+    function () {
+      return middleware(__dispatch);
+    },
+    [__dispatch, middleware]
+  );
+
+  useEffect(
+    function () {
+      if (header && rows) {
+        onChangeData(header, rows);
+      }
+    },
+    [header, rows, onChangeData]
+  );
 
   useEffect(
     function () {
       dispatch(actions.onRefreshData(data, headerHeight, treeSize));
     },
-    [data, headerHeight, treeSize]
+    [data, headerHeight, treeSize, dispatch]
   );
 
   const onResizeCallback = useCallback(
@@ -39,6 +61,7 @@ function ReactLargeTable({
     },
     [headerHeight]
   );
+
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div className={classnames("react-large-table", className)}>
@@ -69,6 +92,7 @@ ReactLargeTable.defaultProps = {
   cellRenderer: DefaultCellRenderer,
   headerRenderer: DefaultHeaderRenderer,
   rowNums: false,
+  onchangeData: onChangeDataDefault,
 };
 
 export default ReactLargeTable;

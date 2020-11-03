@@ -1,0 +1,20 @@
+import * as actions from "../actions";
+import reduceOnUpdateData from "./reduce-on-update-data";
+import reduceOnSelectRow from "./reduce-on-select-row";
+import reduceOnResetSelection from "./reduce-on-reset-selection";
+
+function reducer(state, action) {
+  const { type } = action;
+  switch (type) {
+    case actions.ON_UPDATE_DATA:
+      return reduceOnUpdateData(state, action);
+    case actions.ON_SELECT_ROW:
+      return reduceOnSelectRow(state, action);
+    case actions.ON_RESET_SELECTION:
+      return reduceOnResetSelection(state, action);
+    default:
+      return state;
+  }
+}
+
+export default reducer;
