@@ -1,0 +1,9 @@
+.react-large-table {
+  &.editable-table {
+    table {
+      thead {
+        cursor: default;
+      }
+    }
+  }
+}
