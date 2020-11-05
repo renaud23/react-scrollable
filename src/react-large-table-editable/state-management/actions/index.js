@@ -4,13 +4,37 @@ export const onUpdateData = (data) => ({
   payload: { data },
 });
 
-export const ON_SELECT_ROW = "editable-table/on-select-row";
-export const onSelectRow = (index) => ({
-  type: ON_SELECT_ROW,
-  payload: { index },
-});
+// export const ON_SELECT_ROW = "editable-table/on-select-row";
+// export const onSelectRow = (index) => ({
+//   type: ON_SELECT_ROW,
+//   payload: { index },
+// });
+
+// export const ON_SELECT_COLUMN = "editable-table/on-select-column";
+// export const onSelectColumn = (index) => ({
+//   type: ON_SELECT_COLUMN,
+//   payload: { index },
+// });
 
 export const ON_RESET_SELECTION = "editable-table/on-reset-selection";
 export const onResetSelection = (index) => ({
   type: ON_RESET_SELECTION,
+});
+
+export const ON_START_DRAG = "editable-table/on-start-drag";
+export const onStartDrag = (args) => ({
+  type: ON_START_DRAG,
+  payload: { ...args },
+});
+
+export const ON_EXPEND_DRAG = "editable-table/on-expend-drag";
+export const onExpendDrag = (args) => ({
+  type: ON_EXPEND_DRAG,
+  payload: { ...args },
+});
+
+export const ON_STOP_DRAG = "editable-table/on-stop-drag";
+export const onStopDrag = (args) => ({
+  type: ON_STOP_DRAG,
+  payload: { ...args },
 });

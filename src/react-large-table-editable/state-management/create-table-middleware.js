@@ -1,12 +1,12 @@
 import { actions as tableActions } from "../../react-large-table";
-import * as actions from "./actions";
+// import * as actions from "./actions";
 
 const create = (dispatch) => (next) => (action) => {
-  const { type, payload } = action;
+  const { type } = action;
   switch (type) {
     case tableActions.ON_CLICK_ROW_NUM:
-      const { index } = payload;
-      dispatch(actions.onSelectRow(index));
+      // const { index } = payload;
+      // dispatch(actions.onSelectRow(index));
       break;
     default:
       return next(action);

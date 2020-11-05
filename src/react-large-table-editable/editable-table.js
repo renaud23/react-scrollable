@@ -10,7 +10,7 @@ import {
   createTableMiddleware,
   EditableContext,
 } from "./state-management";
-
+import HeaderRenderer from "./header-renderer";
 import "./editable-cell.scss";
 import "./editable-table.scss";
 
@@ -83,6 +83,16 @@ function Table({
     [dispatch]
   );
 
+  //
+  const onDocumentMouseUp = useCallback(function () {}, []);
+
+  useEffect(function () {
+    document.addEventListener("mouseup", onDocumentMouseUp);
+    return () => {
+      document.removeEventListener("mouseup", onDocumentMouseUp);
+    };
+  });
+
   return (
     <EditableContext.Provider value={[state, dispatch]}>
       <ReactLargeTable
@@ -93,6 +103,8 @@ function Table({
         cellRenderer={cellMemo}
         onChangeData={onChangeData}
         middleware={middlewareMemo}
+        headerRenderer={HeaderRenderer}
+        onMouseLeave={function () {}}
       />
     </EditableContext.Provider>
   );

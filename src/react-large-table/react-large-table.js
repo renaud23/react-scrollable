@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect, useCallback, useMemo } from "react";
 import LargeScrollableContainer from "../react-large-scrollable";
 import TableContent from "./table-content";
+import PropTypes from "prop-types";
 import {
   TableContext,
   reducers,
@@ -15,6 +16,8 @@ import "./react-large-table.scss";
 
 function onChangeDataDefault() {}
 
+function onMouseLeaveDefault() {}
+
 const middlewareDefault = (next) => (action) => next(action);
 
 function ReactLargeTable({
@@ -25,8 +28,9 @@ function ReactLargeTable({
   cellRenderer,
   headerRenderer,
   rowNums,
-  onChangeData = onChangeDataDefault,
-  middleware = middlewareDefault,
+  onChangeData,
+  middleware,
+  onMouseLeave,
 }) {
   const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
@@ -64,7 +68,10 @@ function ReactLargeTable({
 
   return (
     <TableContext.Provider value={[state, dispatch]}>
-      <div className={classnames("react-large-table", className)}>
+      <div
+        className={classnames("react-large-table", className)}
+        onMouseLeave={onMouseLeave}
+      >
         {rowNums ? <RowNums /> : null}
         <LargeScrollableContainer
           id={id}
@@ -87,12 +94,43 @@ function ReactLargeTable({
   );
 }
 
+ReactLargeTable.propTypes = {
+  data: PropTypes.shape({
+    header: PropTypes.arrayOf(
+      PropTypes.shape({
+        __width: PropTypes.number.isRequired,
+        path: PropTypes.string,
+        label: PropTypes.string,
+      })
+    ),
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        __height: PropTypes.number.isRequired,
+        value: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.object,
+          PropTypes.number,
+        ]),
+      })
+    ),
+  }),
+  headerHeight: PropTypes.number.isRequired,
+  treeSize: PropTypes.bool,
+  cellRenderer: PropTypes.func,
+  headerRenderer: PropTypes.func,
+  rowNums: PropTypes.bool,
+  onchangeData: PropTypes.func,
+};
+
 ReactLargeTable.defaultProps = {
+  data: { header: undefined, rows: undefined },
   treeSize: true,
   cellRenderer: DefaultCellRenderer,
   headerRenderer: DefaultHeaderRenderer,
   rowNums: false,
-  onchangeData: onChangeDataDefault,
+  onChangeData: onChangeDataDefault,
+  middleware: middlewareDefault,
+  onMouseLeave: onMouseLeaveDefault,
 };
 
 export default ReactLargeTable;

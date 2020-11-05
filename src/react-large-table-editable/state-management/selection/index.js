@@ -18,6 +18,10 @@ export function selectRow(index) {
   };
 }
 
+export function selectColumn(index) {
+  return { rule: { column: index, row: _ANY_ } };
+}
+
 function matchOne(one, index) {
   if (one === undefined || index === undefined) {
     return false;
@@ -35,11 +39,24 @@ function matchOne(one, index) {
   return false;
 }
 
+function matchCell({ row, column }, i, j) {
+  const [sx, ex] = column;
+  const [sy, ey] = row;
+  if (j >= sx && j <= ex && i >= sy && i <= ey) {
+    return true;
+  }
+  return false;
+}
+
 export function matchRule({ rule } = {}, i, j) {
   if (rule) {
-    const { row, column } = rule;
-    let matchRow = matchOne(row, i);
-    let matchCol = matchOne(column, j);
+    const { row, column, cell } = rule;
+    if (cell) {
+      return matchCell(cell, i, j);
+    }
+
+    const matchRow = matchOne(row, i);
+    const matchCol = matchOne(column, j);
 
     return matchRow && matchCol;
   }
