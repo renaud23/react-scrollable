@@ -11,7 +11,7 @@ import {
 import classnames from "classnames";
 import { DefaultCellRenderer } from "./table-components";
 import { RowNums } from "./table-components";
-import { DefaultHeaderRenderer } from "./table-components";
+import { DefaultHeaderRenderer, RowNumRenderer } from "./table-components";
 import "./react-large-table.scss";
 
 function onChangeDataDefault() {}
@@ -31,6 +31,7 @@ function ReactLargeTable({
   onChangeData,
   middleware,
   onMouseLeave,
+  rowNumRenderer,
 }) {
   const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
@@ -65,14 +66,13 @@ function ReactLargeTable({
     },
     [headerHeight]
   );
-
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div
         className={classnames("react-large-table", className)}
         onMouseLeave={onMouseLeave}
       >
-        {rowNums ? <RowNums /> : null}
+        {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}
         <LargeScrollableContainer
           id={id}
           vertical={vertical}
@@ -118,6 +118,7 @@ ReactLargeTable.propTypes = {
   treeSize: PropTypes.bool,
   cellRenderer: PropTypes.func,
   headerRenderer: PropTypes.func,
+  rowNumRenderer: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   rowNums: PropTypes.bool,
   onchangeData: PropTypes.func,
 };
@@ -127,6 +128,7 @@ ReactLargeTable.defaultProps = {
   treeSize: true,
   cellRenderer: DefaultCellRenderer,
   headerRenderer: DefaultHeaderRenderer,
+  rowNumRenderer: RowNumRenderer,
   rowNums: false,
   onChangeData: onChangeDataDefault,
   middleware: middlewareDefault,

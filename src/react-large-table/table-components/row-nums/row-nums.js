@@ -24,14 +24,21 @@ function RowNumContainer({ children, margin, headerHeight }) {
   );
 }
 
-function RowNums() {
+function RowNums({ rowNumRenderer }) {
   const [state] = useContext(TableContext);
   const { headerHeight, rowNums, rows } = state;
   const { nb, start, margin } = rowNums;
   if (nb && rows.length) {
     const nums = new Array(nb).fill(null).map(function (_, i) {
       const { __height } = rows[start + i];
-      return <Row key={i} height={__height} index={start + i} />;
+      return (
+        <Row
+          rowNumRenderer={rowNumRenderer}
+          key={i}
+          height={__height}
+          index={start + i}
+        />
+      );
     });
     return (
       <RowNumContainer margin={margin} headerHeight={headerHeight}>
