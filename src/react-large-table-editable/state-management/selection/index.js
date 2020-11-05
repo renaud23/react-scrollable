@@ -92,6 +92,10 @@ function getCellSelection(anchor, extent) {
   return undefined;
 }
 
+function getRowSelection(anchor, extent) {
+  return { rule: { row: getOrderedRange(anchor.row, extent.row) } };
+}
+
 function getHeadSelection(anchor, extent) {
   return { rule: { column: getOrderedRange(anchor.column, extent.column) } };
 }
@@ -103,6 +107,8 @@ export function getSelection(anchor, extent) {
       return getCellSelection(anchor, extent);
     } else if (type === "head") {
       return getHeadSelection(anchor, extent);
+    } else if (type === "row") {
+      return getRowSelection(anchor, extent);
     }
   }
   return undefined;
