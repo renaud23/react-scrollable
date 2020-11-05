@@ -14,7 +14,7 @@
 
 .react-large-table{display:flex;flex-direction:row;height:100%;width:100%}.react-large-table div,.react-large-table span,.react-large-table table,.react-large-table thead,.react-large-table tbody,.react-large-table tr,.react-large-table th,.react-large-table td{margin:0;padding:0;border:0;outline:0;line-height:0;vertical-align:baseline;line-height:normal}.react-large-table table{border-spacing:0;display:block;width:100%;height:100%;overflow:hidden}.react-large-table table thead{display:block;position:absolute;z-index:1;top:0}.react-large-table table thead tr{display:block;width:-webkit-max-content;width:-moz-max-content;width:max-content}.react-large-table table thead tr th{display:inline-block;position:relative;overflow:hidden;height:100%;white-space:nowrap}.react-large-table table tbody{display:block;overflow:hidden}.react-large-table table tbody tr{display:block;width:-webkit-max-content;width:-moz-max-content;width:max-content;position:relative;z-index:0}.react-large-table table tbody tr td{display:inline-block;overflow:hidden;white-space:nowrap;height:100%}
 
-.react-large-table .editable-cell{display:block;width:100%;height:100%;cursor:text}.react-large-table .editable-cell.selected{background-color:skyblue}.react-large-table .editable-cell input{display:block;width:calc(100% - 4px);height:calc(100% - 2px);border:0;margin:0;padding:0;border:solid black 1px;outline:none;text-align:right;padding-right:2px}
+.react-large-table .th-el-container{-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none}.react-large-table .editable-cell{display:block;width:100%;height:100%;cursor:text;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none}.react-large-table .editable-cell.selected{background-color:skyblue}.react-large-table .editable-cell input{display:block;width:calc(100% - 4px);height:calc(100% - 2px);border:0;margin:0;padding:0;border:solid black 1px;outline:none;text-align:right;padding-right:2px}
 
 .react-large-table.editable-table table thead{cursor:default}
 
@@ -29,4 +29,4 @@
 .react-large-text{overflow:hidden;width:100%;height:100%}.react-large-text .react-large-text-content .react-large-text-line{line-height:inherit;white-space:nowrap;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}
 
 
-/*# sourceMappingURL=main.f0c9962e.chunk.css.map*/
+/*# sourceMappingURL=main.3fef3f50.chunk.css.map*/
