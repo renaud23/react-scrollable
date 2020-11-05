@@ -5,6 +5,14 @@
     -webkit-user-select: none;
   }
 
+  .row-nums {
+    .row {
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+    }
+  }
+
   .editable-cell {
     display: block;
     width: 100%;

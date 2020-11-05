@@ -6,4 +6,5 @@ export { default as Th } from "./th";
 export { default as Td } from "./td";
 export { default as DefaultCellRenderer } from "./default-cell-renderer";
 export { default as DefaultHeaderRenderer } from "./default-header-renderer";
+export { default as RowNumRenderer } from "./default-row-num-renderer";
 export { default as RowNums } from "./row-nums";

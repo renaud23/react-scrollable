@@ -7,10 +7,10 @@ import {
   reducers,
   INITIAL_STATE,
   actions,
-  createTableMiddleware,
   EditableContext,
 } from "./state-management";
 import HeaderRenderer from "./header-renderer";
+import RowNumRenderer from "./row-num-renderer";
 import "./editable-cell.scss";
 import "./editable-table.scss";
 
@@ -76,13 +76,6 @@ function Table({
     [cellRenderer, getValue, setValueCallback]
   );
 
-  const middlewareMemo = useMemo(
-    function () {
-      return createTableMiddleware(dispatch);
-    },
-    [dispatch]
-  );
-
   //
   const onDocumentMouseUp = useCallback(function () {}, []);
 
@@ -102,8 +95,8 @@ function Table({
         rowNums={rowNums}
         cellRenderer={cellMemo}
         onChangeData={onChangeData}
-        middleware={middlewareMemo}
         headerRenderer={HeaderRenderer}
+        rowNumRenderer={RowNumRenderer}
         onMouseLeave={function () {}}
       />
     </EditableContext.Provider>
