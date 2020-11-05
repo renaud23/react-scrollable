@@ -54,11 +54,56 @@ export function matchRule({ rule } = {}, i, j) {
     if (cell) {
       return matchCell(cell, i, j);
     }
-
     const matchRow = matchOne(row, i);
     const matchCol = matchOne(column, j);
 
-    return matchRow && matchCol;
+    return matchRow || matchCol;
   }
   return false;
+}
+
+/* */
+function isEquals(anchor, extent) {
+  return (
+    anchor.type === extent.type &&
+    anchor.column === extent.column &&
+    anchor.row === extent.row
+  );
+}
+
+function getOrderedRange(anchor, extent) {
+  const min = Math.min(anchor, extent);
+  const max = Math.max(anchor, extent);
+
+  return createRange(min, max);
+}
+
+function getCellSelection(anchor, extent) {
+  if (!isEquals(anchor, extent)) {
+    return {
+      rule: {
+        cell: {
+          row: getOrderedRange(anchor.row, extent.row),
+          column: getOrderedRange(anchor.column, extent.column),
+        },
+      },
+    };
+  }
+  return undefined;
+}
+
+function getHeadSelection(anchor, extent) {
+  return { rule: { column: getOrderedRange(anchor.column, extent.column) } };
+}
+
+export function getSelection(anchor, extent) {
+  if (extent && anchor) {
+    const { type } = anchor;
+    if (type === "cell") {
+      return getCellSelection(anchor, extent);
+    } else if (type === "head") {
+      return getHeadSelection(anchor, extent);
+    }
+  }
+  return undefined;
 }
