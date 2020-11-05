@@ -32,7 +32,7 @@ function Table({
   onChange,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
-  const { data } = state;
+  const { data, drag } = state;
   const onChangeData = useCallback(function (h, r) {
     dispatch(actions.onUpdateData({ header: h, rows: r }));
   }, []);
@@ -77,7 +77,14 @@ function Table({
   );
 
   //
-  const onDocumentMouseUp = useCallback(function () {}, []);
+  const onDocumentMouseUp = useCallback(
+    function () {
+      if (drag) {
+        dispatch(actions.onStopDrag());
+      }
+    },
+    [drag]
+  );
 
   useEffect(function () {
     document.addEventListener("mouseup", onDocumentMouseUp);

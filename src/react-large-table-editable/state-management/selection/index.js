@@ -82,6 +82,7 @@ function getCellSelection(anchor, extent) {
   if (!isEquals(anchor, extent)) {
     return {
       rule: {
+        type: "cell",
         cell: {
           row: getOrderedRange(anchor.row, extent.row),
           column: getOrderedRange(anchor.column, extent.column),
@@ -93,11 +94,18 @@ function getCellSelection(anchor, extent) {
 }
 
 function getRowSelection(anchor, extent) {
-  return { rule: { row: getOrderedRange(anchor.row, extent.row) } };
+  return {
+    rule: { type: "row", row: getOrderedRange(anchor.row, extent.row) },
+  };
 }
 
 function getHeadSelection(anchor, extent) {
-  return { rule: { column: getOrderedRange(anchor.column, extent.column) } };
+  return {
+    rule: {
+      type: "head",
+      column: getOrderedRange(anchor.column, extent.column),
+    },
+  };
 }
 
 export function getSelection(anchor, extent) {
