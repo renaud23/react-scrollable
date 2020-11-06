@@ -14,9 +14,7 @@ import { RowNums } from "./table-components";
 import { DefaultHeaderRenderer, RowNumRenderer } from "./table-components";
 import "./react-large-table.scss";
 
-function onChangeDataDefault() {}
-
-function onMouseLeaveDefault() {}
+function onEmptyHook() {}
 
 const middlewareDefault = (next) => (action) => next(action);
 
@@ -27,11 +25,12 @@ function ReactLargeTable({
   className,
   cellRenderer,
   headerRenderer,
-  rowNums,
-  onChangeData,
-  middleware,
-  onMouseLeave,
   rowNumRenderer,
+  rowNums,
+  middleware,
+  onChangeData,
+  onMouseLeave,
+  onMouseEnter,
 }) {
   const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
@@ -71,6 +70,7 @@ function ReactLargeTable({
       <div
         className={classnames("react-large-table", className)}
         onMouseLeave={onMouseLeave}
+        onMouseEnter={onMouseEnter}
       >
         {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}
         <LargeScrollableContainer
@@ -130,9 +130,10 @@ ReactLargeTable.defaultProps = {
   headerRenderer: DefaultHeaderRenderer,
   rowNumRenderer: RowNumRenderer,
   rowNums: false,
-  onChangeData: onChangeDataDefault,
   middleware: middlewareDefault,
-  onMouseLeave: onMouseLeaveDefault,
+  onChangeData: onEmptyHook,
+  onMouseLeave: onEmptyHook,
+  onMouseEnter: onEmptyHook,
 };
 
 export default ReactLargeTable;
