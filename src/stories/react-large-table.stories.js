@@ -51,13 +51,7 @@ export function WithRowNumsTable() {
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
       <div className="default-table-container">
-        <ReactLargeTable
-          className="custom-large-table-theme"
-          data={data}
-          headerHeight={50}
-          cellRenderer={CustomCellRenderer}
-          rowNums={true}
-        />
+        <ReactLargeTable data={data} headerHeight={50} rowNums={true} />
       </div>
     </>
   );
