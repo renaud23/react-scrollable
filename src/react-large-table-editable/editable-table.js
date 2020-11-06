@@ -32,7 +32,13 @@ function Table({
   onChange,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
-  const { data, drag, mouseOut } = state;
+  const {
+    data,
+    drag,
+    mouseOut,
+    verticalScrollRequest,
+    horizontalScrollRequest,
+  } = state;
   const onChangeData = useCallback(function (h, r) {
     dispatch(actions.onUpdateData({ header: h, rows: r }));
   }, []);
@@ -123,6 +129,8 @@ function Table({
         onChangeData={onChangeData}
         headerRenderer={HeaderRenderer}
         rowNumRenderer={RowNumRenderer}
+        verticalScrollRequest={verticalScrollRequest}
+        horizontalScrollRequest={horizontalScrollRequest}
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseEnter}
       />

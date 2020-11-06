@@ -5,6 +5,9 @@ const INITIAL_STATE = {
   anchor: undefined,
   extent: undefined,
   mouseOut: false,
+
+  verticalScrollRequest: undefined,
+  horizontalScrollRequest: undefined,
 };
 
 export default INITIAL_STATE;

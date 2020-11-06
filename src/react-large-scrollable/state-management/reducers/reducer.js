@@ -5,6 +5,8 @@ import reduceOnHorizontalScroll from "./reduce-on-horizontal-scroll";
 import reduceOnRefreshVerticalScrollable from "./reduce-on-refresh-vertical-scrollable";
 import reduceOnRefreshHorizontalScrollable from "./reduce-on-refresh-horizontal-scrollable";
 import reduceOnKeydown from "./reduce-on-keydown";
+import reduceOnVerticalScrollRequest from "./reduce-on-vertical-scroll-request";
+import reduceOnHorizontalScrollRequest from "./reduce-on-horizontal-scroll-request";
 
 function reduce(state, action) {
   const { type } = action;
@@ -19,6 +21,10 @@ function reduce(state, action) {
       return reduceOnRefreshVerticalScrollable(state, action);
     case actions.ON_REFRESH_HORIZONTAL_SCROLLABLE:
       return reduceOnRefreshHorizontalScrollable(state, action);
+    case actions.ON_VERTICAL_SCROLL_REQUEST:
+      return reduceOnVerticalScrollRequest(state, action);
+    case actions.ON_HORIZONTAL_SCROLL_REQUEST:
+      return reduceOnHorizontalScrollRequest(state, action);
     case actions.ON_KEY_DOWN:
       return reduceOnKeydown(state, action);
     default:
