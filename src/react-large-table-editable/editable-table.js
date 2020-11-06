@@ -32,7 +32,7 @@ function Table({
   onChange,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
-  const { data, drag } = state;
+  const { data, drag, mouseOut } = state;
   const onChangeData = useCallback(function (h, r) {
     dispatch(actions.onUpdateData({ header: h, rows: r }));
   }, []);
@@ -77,6 +77,23 @@ function Table({
   );
 
   //
+
+  // cally
+  const onMouseLeave = useCallback(function () {
+    dispatch(actions.onMouseLeave());
+  }, []);
+  const onMouseEnter = useCallback(function () {
+    dispatch(actions.onMouseEnter());
+  }, []);
+  const onDocumentMouseMove = useCallback(
+    function (e) {
+      const { clientX, clientY } = e;
+      if (drag && mouseOut) {
+        dispatch(actions.onDragOut({ clientX, clientY }));
+      }
+    },
+    [drag, mouseOut]
+  );
   const onDocumentMouseUp = useCallback(
     function () {
       if (drag) {
@@ -88,8 +105,10 @@ function Table({
 
   useEffect(function () {
     document.addEventListener("mouseup", onDocumentMouseUp);
+    document.addEventListener("mousemove", onDocumentMouseMove);
     return () => {
       document.removeEventListener("mouseup", onDocumentMouseUp);
+      document.removeEventListener("mousemove", onDocumentMouseMove);
     };
   });
 
@@ -104,7 +123,8 @@ function Table({
         onChangeData={onChangeData}
         headerRenderer={HeaderRenderer}
         rowNumRenderer={RowNumRenderer}
-        onMouseLeave={function () {}}
+        onMouseLeave={onMouseLeave}
+        onMouseEnter={onMouseEnter}
       />
     </EditableContext.Provider>
   );

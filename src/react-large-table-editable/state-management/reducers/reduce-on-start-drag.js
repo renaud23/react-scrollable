@@ -5,7 +5,6 @@ function reduce(state, action) {
   const { type, column, row, clientX, clientY } = payload;
   const anchor = { type, column, row, clientX, clientY };
   const selection = getSelection(anchor, anchor);
-
   return {
     ...state,
     drag: true,

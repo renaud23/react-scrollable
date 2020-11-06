@@ -31,6 +31,8 @@ function ReactLargeTable({
   onChangeData,
   onMouseLeave,
   onMouseEnter,
+
+  verticalScrollRequest,
 }) {
   const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
@@ -57,6 +59,15 @@ function ReactLargeTable({
       dispatch(actions.onRefreshData(data, headerHeight, treeSize));
     },
     [data, headerHeight, treeSize, dispatch]
+  );
+
+  useEffect(
+    function () {
+      if (verticalScrollRequest) {
+        // console.log(verticalScrollRequest);
+      }
+    },
+    [verticalScrollRequest]
   );
 
   const onResizeCallback = useCallback(

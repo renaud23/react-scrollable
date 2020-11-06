@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   drag: false,
   anchor: undefined,
   extent: undefined,
+  mouseOut: false,
 };
 
 export default INITIAL_STATE;

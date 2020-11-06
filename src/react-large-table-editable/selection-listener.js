@@ -26,7 +26,7 @@ function SelectionListener({
       }}
       onMouseEnter={function (e) {
         if (drag) {
-          dispatch(actions.onExpendDrag({ type, column, row }));
+          dispatch(actions.onDrag({ type, column, row }));
         }
       }}
       onClick={onClick}
