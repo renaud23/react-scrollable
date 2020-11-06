@@ -63,13 +63,6 @@ export function matchRule({ rule } = {}, i, j) {
 }
 
 /* */
-function isEquals(anchor, extent) {
-  return (
-    anchor.type === extent.type &&
-    anchor.column === extent.column &&
-    anchor.row === extent.row
-  );
-}
 
 function getOrderedRange(anchor, extent) {
   const min = Math.min(anchor, extent);
@@ -79,25 +72,30 @@ function getOrderedRange(anchor, extent) {
 }
 
 function getCellSelection(anchor, extent) {
-  if (!isEquals(anchor, extent)) {
-    return {
-      rule: {
-        cell: {
-          row: getOrderedRange(anchor.row, extent.row),
-          column: getOrderedRange(anchor.column, extent.column),
-        },
+  return {
+    rule: {
+      type: "cell",
+      cell: {
+        row: getOrderedRange(anchor.row, extent.row),
+        column: getOrderedRange(anchor.column, extent.column),
       },
-    };
-  }
-  return undefined;
+    },
+  };
 }
 
 function getRowSelection(anchor, extent) {
-  return { rule: { row: getOrderedRange(anchor.row, extent.row) } };
+  return {
+    rule: { type: "row", row: getOrderedRange(anchor.row, extent.row) },
+  };
 }
 
 function getHeadSelection(anchor, extent) {
-  return { rule: { column: getOrderedRange(anchor.column, extent.column) } };
+  return {
+    rule: {
+      type: "head",
+      column: getOrderedRange(anchor.column, extent.column),
+    },
+  };
 }
 
 export function getSelection(anchor, extent) {

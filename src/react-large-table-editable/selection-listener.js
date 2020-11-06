@@ -3,7 +3,7 @@ import { EditableContext, actions } from "./state-management";
 
 function onClickDefault() {}
 
-function Listener({
+function SelectionListener({
   children,
   className,
   type,
@@ -18,17 +18,15 @@ function Listener({
       className={className}
       onMouseDown={function (e) {
         if (e.button === 0) {
-          dispatch(actions.onStartDrag({ type, column, row }));
+          const { clientX, clientY } = e;
+          dispatch(
+            actions.onStartDrag({ type, column, row, clientX, clientY })
+          );
         }
       }}
       onMouseEnter={function (e) {
         if (drag) {
           dispatch(actions.onExpendDrag({ type, column, row }));
-        }
-      }}
-      onMouseUp={function (e) {
-        if (e.button === 0) {
-          dispatch(actions.onStopDrag());
         }
       }}
       onClick={onClick}
@@ -38,4 +36,4 @@ function Listener({
   );
 }
 
-export default Listener;
+export default SelectionListener;
