@@ -10,7 +10,7 @@ function reduce(state, action) {
     ...state,
     drag: true,
     anchor,
-    extent: undefined,
+    extent: anchor,
     selection: selection,
   };
 }
