@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import classnames from "classnames";
 import SelectionListener from "./selection-listener";
-import { EditableContext } from "./state-management";
+import { EditableContext } from "../state-management";
 
 function isInSelection(selection, index) {
   if (selection) {

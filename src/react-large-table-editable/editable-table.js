@@ -9,9 +9,7 @@ import {
   actions,
   EditableContext,
 } from "./state-management";
-import HeaderRenderer from "./header-renderer";
-import RowNumRenderer from "./row-num-renderer";
-import "./editable-cell.scss";
+import { HeaderRenderer, RowNumRenderer } from "./components";
 import "./editable-table.scss";
 
 function refillRows(rows, newCell, row, path) {
