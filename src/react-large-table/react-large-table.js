@@ -14,9 +14,7 @@ import { RowNums } from "./table-components";
 import { DefaultHeaderRenderer, RowNumRenderer } from "./table-components";
 import "./react-large-table.scss";
 
-function onChangeDataDefault() {}
-
-function onMouseLeaveDefault() {}
+function onEmptyHook() {}
 
 const middlewareDefault = (next) => (action) => next(action);
 
@@ -27,11 +25,14 @@ function ReactLargeTable({
   className,
   cellRenderer,
   headerRenderer,
-  rowNums,
-  onChangeData,
-  middleware,
-  onMouseLeave,
   rowNumRenderer,
+  rowNums,
+  middleware,
+  onChangeData,
+  onMouseLeave,
+  onMouseEnter,
+  horizontalScrollRequest,
+  verticalScrollRequest,
 }) {
   const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
@@ -60,6 +61,24 @@ function ReactLargeTable({
     [data, headerHeight, treeSize, dispatch]
   );
 
+  useEffect(
+    function () {
+      if (verticalScrollRequest) {
+        dispatch(actions.onVerticalScrollRequest(verticalScrollRequest));
+      }
+    },
+    [verticalScrollRequest, dispatch]
+  );
+
+  useEffect(
+    function () {
+      if (horizontalScrollRequest) {
+        dispatch(actions.onHorizontalScrollRequest(horizontalScrollRequest));
+      }
+    },
+    [horizontalScrollRequest, dispatch]
+  );
+
   const onResizeCallback = useCallback(
     function (width, height) {
       return [width, height - headerHeight];
@@ -71,6 +90,7 @@ function ReactLargeTable({
       <div
         className={classnames("react-large-table", className)}
         onMouseLeave={onMouseLeave}
+        onMouseEnter={onMouseEnter}
       >
         {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}
         <LargeScrollableContainer
@@ -130,9 +150,10 @@ ReactLargeTable.defaultProps = {
   headerRenderer: DefaultHeaderRenderer,
   rowNumRenderer: RowNumRenderer,
   rowNums: false,
-  onChangeData: onChangeDataDefault,
   middleware: middlewareDefault,
-  onMouseLeave: onMouseLeaveDefault,
+  onChangeData: onEmptyHook,
+  onMouseLeave: onEmptyHook,
+  onMouseEnter: onEmptyHook,
 };
 
 export default ReactLargeTable;

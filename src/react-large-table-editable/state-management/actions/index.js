@@ -27,9 +27,9 @@ export const onStartDrag = (args) => ({
   payload: { ...args },
 });
 
-export const ON_EXPEND_DRAG = "editable-table/on-expend-drag";
-export const onExpendDrag = (args) => ({
-  type: ON_EXPEND_DRAG,
+export const ON_DRAG = "editable-table/on-drag";
+export const onDrag = (args) => ({
+  type: ON_DRAG,
   payload: { ...args },
 });
 
@@ -38,3 +38,15 @@ export const onStopDrag = (args) => ({
   type: ON_STOP_DRAG,
   payload: { ...args },
 });
+
+export const ON_DRAG_OUT = "editable-table/on-drag-out";
+export const onDragOut = (args) => ({
+  type: ON_DRAG_OUT,
+  payload: { ...args },
+});
+
+export const ON_MOUSE_LEAVE = "editable-table/on-mouse-leave";
+export const onMouseLeave = () => ({ type: ON_MOUSE_LEAVE });
+
+export const ON_MOUSE_ENTER = "editable-table/on-mouse-enter";
+export const onMouseEnter = () => ({ type: ON_MOUSE_ENTER });

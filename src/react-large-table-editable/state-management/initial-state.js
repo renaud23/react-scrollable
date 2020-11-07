@@ -4,6 +4,10 @@ const INITIAL_STATE = {
   drag: false,
   anchor: undefined,
   extent: undefined,
+  mouseOut: false,
+
+  verticalScrollRequest: undefined,
+  horizontalScrollRequest: undefined,
 };
 
 export default INITIAL_STATE;
