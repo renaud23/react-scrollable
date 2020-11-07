@@ -8,6 +8,9 @@ const INITIAL_STATE = {
 
   verticalScrollRequest: undefined,
   horizontalScrollRequest: undefined,
+
+  dragOutTask: undefined,
+  dragOutDirection: undefined,
 };
 
 export default INITIAL_STATE;

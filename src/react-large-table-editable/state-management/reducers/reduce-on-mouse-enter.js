@@ -1,5 +1,9 @@
 function reduce(state) {
-  return { ...state, mouseOut: false };
+  const { dragOutTask } = state;
+  if (dragOutTask) {
+    window.clearInterval(dragOutTask);
+  }
+  return { ...state, dragOutTask: undefined, mouseOut: false };
 }
 
 export default reduce;

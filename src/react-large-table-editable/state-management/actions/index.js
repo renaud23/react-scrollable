@@ -46,7 +46,13 @@ export const onDragOut = (args) => ({
 });
 
 export const ON_MOUSE_LEAVE = "editable-table/on-mouse-leave";
-export const onMouseLeave = () => ({ type: ON_MOUSE_LEAVE });
+export const onMouseLeave = (dragOutTask) => ({
+  type: ON_MOUSE_LEAVE,
+  payload: { dragOutTask },
+});
 
 export const ON_MOUSE_ENTER = "editable-table/on-mouse-enter";
 export const onMouseEnter = () => ({ type: ON_MOUSE_ENTER });
+
+export const ON_DRAG_OUT_TASK_PULSE = "editable-table/on-drag-out-task_pulse";
+export const onDragOutTaskPulse = () => ({ type: ON_DRAG_OUT_TASK_PULSE });
