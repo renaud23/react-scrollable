@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import classnames from "classnames";
-import { EditableContext, actions } from "./state-management";
+import { EditableContext } from "./state-management";
+import SelectionListener from "./selection-listener";
 import { matchRule } from "./state-management";
 import InputField from "./input-field";
 
@@ -14,24 +15,23 @@ function EditableCell({
   setValue,
   cellRenderer: Cell,
 }) {
-  const [state, dispatch] = useContext(EditableContext);
+  const [state] = useContext(EditableContext);
   const { selection } = state;
   const [edit, setEdit] = useState(false);
+  const onClick = useCallback(function () {
+    setEdit(true);
+  }, []);
 
   if (!edit) {
     return (
-      <span
+      <SelectionListener
         className={classnames("editable-cell", "excel-theme-cell", {
           selected: matchRule(selection, row, column),
         })}
-        onClick={(e) => {
-          if (e.button === 0) {
-            setEdit(true);
-            if (selection) {
-              dispatch(actions.onResetSelection());
-            }
-          }
-        }}
+        type="cell"
+        row={row}
+        column={column}
+        onClick={onClick}
       >
         <Cell
           cell={cell}
@@ -40,11 +40,16 @@ function EditableCell({
           width={width}
           height={height}
         />
-      </span>
+      </SelectionListener>
     );
   }
   return (
-    <span className={classnames("editable-cell", "excel-theme-cell")}>
+    <span
+      className={classnames("editable-cell", "excel-theme-cell")}
+      type="cell"
+      row={row}
+      column={column}
+    >
       <InputField
         cell={cell}
         getValue={getValue}

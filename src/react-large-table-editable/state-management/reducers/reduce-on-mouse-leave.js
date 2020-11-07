@@ -1,5 +1,5 @@
 function reduce(state) {
-  return { ...state, selection: undefined };
+  return { ...state, mouseOut: true };
 }
 
 export default reduce;

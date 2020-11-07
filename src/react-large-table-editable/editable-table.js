@@ -7,10 +7,10 @@ import {
   reducers,
   INITIAL_STATE,
   actions,
-  createTableMiddleware,
   EditableContext,
 } from "./state-management";
-
+import HeaderRenderer from "./header-renderer";
+import RowNumRenderer from "./row-num-renderer";
 import "./editable-cell.scss";
 import "./editable-table.scss";
 
@@ -32,7 +32,13 @@ function Table({
   onChange,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
-  const { data } = state;
+  const {
+    data,
+    drag,
+    mouseOut,
+    verticalScrollRequest,
+    horizontalScrollRequest,
+  } = state;
   const onChangeData = useCallback(function (h, r) {
     dispatch(actions.onUpdateData({ header: h, rows: r }));
   }, []);
@@ -76,12 +82,41 @@ function Table({
     [cellRenderer, getValue, setValueCallback]
   );
 
-  const middlewareMemo = useMemo(
-    function () {
-      return createTableMiddleware(dispatch);
+  //
+
+  // cally
+  const onMouseLeave = useCallback(function () {
+    dispatch(actions.onMouseLeave());
+  }, []);
+  const onMouseEnter = useCallback(function () {
+    dispatch(actions.onMouseEnter());
+  }, []);
+  const onDocumentMouseMove = useCallback(
+    function (e) {
+      const { clientX, clientY } = e;
+      if (drag && mouseOut) {
+        dispatch(actions.onDragOut({ clientX, clientY }));
+      }
     },
-    [dispatch]
+    [drag, mouseOut]
   );
+  const onDocumentMouseUp = useCallback(
+    function () {
+      if (drag) {
+        dispatch(actions.onStopDrag());
+      }
+    },
+    [drag]
+  );
+
+  useEffect(function () {
+    document.addEventListener("mouseup", onDocumentMouseUp);
+    document.addEventListener("mousemove", onDocumentMouseMove);
+    return () => {
+      document.removeEventListener("mouseup", onDocumentMouseUp);
+      document.removeEventListener("mousemove", onDocumentMouseMove);
+    };
+  });
 
   return (
     <EditableContext.Provider value={[state, dispatch]}>
@@ -92,7 +127,12 @@ function Table({
         rowNums={rowNums}
         cellRenderer={cellMemo}
         onChangeData={onChangeData}
-        middleware={middlewareMemo}
+        headerRenderer={HeaderRenderer}
+        rowNumRenderer={RowNumRenderer}
+        verticalScrollRequest={verticalScrollRequest}
+        horizontalScrollRequest={horizontalScrollRequest}
+        onMouseLeave={onMouseLeave}
+        onMouseEnter={onMouseEnter}
       />
     </EditableContext.Provider>
   );

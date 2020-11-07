@@ -28,3 +28,17 @@ export const onClickRowNum = (index) => ({
   type: ON_CLICK_ROW_NUM,
   payload: { index },
 });
+
+export const ON_VERTICAL_SCROLL_REQUEST =
+  "react-large-table/on-vertical-scroll-request";
+export const onVerticalScrollRequest = ({ delta }) => ({
+  type: ON_VERTICAL_SCROLL_REQUEST,
+  payload: { delta },
+});
+
+export const ON_HORIZONTAL_SCROLL_REQUEST =
+  "react-large-table/on-horizontal-scroll-request";
+export const onHorizontalScrollRequest = ({ delta }) => ({
+  type: ON_HORIZONTAL_SCROLL_REQUEST,
+  payload: { delta },
+});

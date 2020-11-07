@@ -33,3 +33,17 @@ export const onRefreshHorizontalScrollable = (scrollable, treeSize) => ({
 
 export const ON_KEY_DOWN = "react-large-scrollable/on-keydown";
 export const onKeydown = (key) => ({ type: ON_KEY_DOWN, payload: { key } });
+
+export const ON_VERTICAL_SCROLL_REQUEST =
+  "react-large-scrollable/on-vertical-scroll-request";
+export const onVerticalScrollRequest = ({ delta }) => ({
+  type: ON_VERTICAL_SCROLL_REQUEST,
+  payload: { delta },
+});
+
+export const ON_HORIZONTAL_SCROLL_REQUEST =
+  "react-large-scrollable/on-horizontal-scroll-request";
+export const onHorizontalScrollRequest = ({ delta }) => ({
+  type: ON_HORIZONTAL_SCROLL_REQUEST,
+  payload: { delta },
+});

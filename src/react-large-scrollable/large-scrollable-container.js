@@ -59,6 +59,18 @@ function LargeScrollableContainer({
     [dispatch]
   );
 
+  /* */
+  const { scrollRequest: vOuterScrollRequest } = verticalScrollable;
+  useEffect(
+    function () {
+      if (vOuterScrollRequest) {
+        if (vOuterScrollRequest) {
+          dispatch(actions.onVerticalScrollRequest(vOuterScrollRequest));
+        }
+      }
+    },
+    [vOuterScrollRequest]
+  );
   useEffect(
     function () {
       dispatch(
@@ -68,6 +80,15 @@ function LargeScrollableContainer({
     [verticalScrollable, treeSize]
   );
 
+  const { scrollRequest: hOuterScrollRequest } = horizontalScrollable;
+  useEffect(
+    function () {
+      if (hOuterScrollRequest) {
+        dispatch(actions.onHorizontalScrollRequest(hOuterScrollRequest));
+      }
+    },
+    [hOuterScrollRequest]
+  );
   useEffect(
     function () {
       dispatch(
@@ -77,6 +98,7 @@ function LargeScrollableContainer({
     [horizontalScrollable, treeSize]
   );
 
+  /* */
   const middleware_ = useCallback(
     (next) => (action) => {
       const { type, payload } = action;

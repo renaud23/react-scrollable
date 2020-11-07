@@ -4,7 +4,7 @@ import { TableContext, actions } from "../../state-management";
 import { safeCss, Track } from "../../../commons-scrollable";
 import { useDispatch } from "../../commons-table";
 
-function Row({ height, index }) {
+function Row({ height, index, rowNumRenderer: RowNum }) {
   const dispatch = useDispatch(TableContext);
 
   const onTrackCallback = useCallback(
@@ -31,7 +31,7 @@ function Row({ height, index }) {
       })}
     >
       <Track onTrack={onTrackCallback} horizontal bottom />
-      <div className="row">{index + 1}</div>
+      <RowNum index={index} />
     </div>
   );
 }
