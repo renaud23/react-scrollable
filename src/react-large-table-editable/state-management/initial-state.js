@@ -11,6 +11,7 @@ const INITIAL_STATE = {
 
   dragOutTask: undefined,
   dragOutDirection: undefined,
+  tableRect: undefined,
 };
 
 export default INITIAL_STATE;

@@ -1,8 +1,8 @@
 function reduce(state, action) {
   const { payload } = action;
-  const { dragOutTask } = payload;
+  const { dragOutTask, tableRect } = payload;
 
-  return { ...state, dragOutTask, mouseOut: true };
+  return { ...state, dragOutTask, tableRect, mouseOut: true };
 }
 
 export default reduce;

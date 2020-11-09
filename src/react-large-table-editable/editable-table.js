@@ -93,12 +93,13 @@ function Table({
   );
 
   const onMouseLeave = useCallback(
-    function () {
+    function (e) {
       if (!dragOutTask && drag) {
+        const tableRect = e.target.getBoundingClientRect();
         const task = window.setInterval(function () {
           dispatch(actions.onDragOutTaskPulse());
         }, 100);
-        dispatch(actions.onMouseLeave(task));
+        dispatch(actions.onMouseLeave(task, tableRect));
       }
     },
     [dragOutTask, drag]
@@ -110,9 +111,10 @@ function Table({
 
   const onDocumentMouseMove = useCallback(
     function (e) {
-      const { clientX, clientY } = e;
+      const { clientX, clientY, offsetY, offsetX } = e;
+
       if (drag && mouseOut) {
-        dispatch(actions.onDragOut({ clientX, clientY }));
+        dispatch(actions.onDragOut({ clientX, clientY, offsetY, offsetX }));
       }
     },
     [drag, mouseOut]

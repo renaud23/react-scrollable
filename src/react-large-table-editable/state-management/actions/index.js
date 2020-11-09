@@ -46,9 +46,9 @@ export const onDragOut = (args) => ({
 });
 
 export const ON_MOUSE_LEAVE = "editable-table/on-mouse-leave";
-export const onMouseLeave = (dragOutTask) => ({
+export const onMouseLeave = (dragOutTask, tableRect) => ({
   type: ON_MOUSE_LEAVE,
-  payload: { dragOutTask },
+  payload: { dragOutTask, tableRect },
 });
 
 export const ON_MOUSE_ENTER = "editable-table/on-mouse-enter";
