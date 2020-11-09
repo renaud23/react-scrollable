@@ -6,6 +6,7 @@ function reduce(state) {
   if (dragOutTask) {
     window.clearInterval(dragOutTask);
   }
+
   return {
     ...state,
     drag: false,

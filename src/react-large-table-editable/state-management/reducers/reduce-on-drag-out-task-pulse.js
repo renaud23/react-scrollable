@@ -1,17 +1,23 @@
+import { expandSelection, getSelection } from "../selection";
+
 function getDelta(delta) {
   return delta !== 0 ? { delta } : undefined;
 }
 
 function reduce(state) {
-  const { dragOutDirection } = state;
+  const { dragOutDirection, extent, anchor } = state;
 
-  if (dragOutDirection) {
+  if (dragOutDirection && anchor) {
     const { dx, dy } = dragOutDirection;
-
+    const deltaX = getDelta(dx);
+    const deltaY = getDelta(dy);
+    const nExtent = expandSelection(extent, deltaX, deltaY);
     return {
       ...state,
-      horizontalScrollRequest: getDelta(dx),
-      verticalScrollRequest: getDelta(dy),
+      extent: nExtent,
+      selection: getSelection(anchor, nExtent),
+      horizontalScrollRequest: deltaX,
+      verticalScrollRequest: deltaY,
     };
   }
   return {
