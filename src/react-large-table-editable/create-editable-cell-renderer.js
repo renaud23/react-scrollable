@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import EditableCell from "./editable-cell";
+import { EditableCell } from "./components";
 
 function create(Cell, getValue, setValue) {
   return function EditableCellRenderer({ cell, row, column, width, height }) {

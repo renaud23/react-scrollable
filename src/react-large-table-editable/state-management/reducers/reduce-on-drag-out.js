@@ -1,18 +1,23 @@
 function reduce(state, action) {
-  const { anchor } = state;
-  const { clientX: anchorX, clientY: anchorY } = anchor;
   const { payload } = action;
   const { clientX, clientY } = payload;
-  const dx = clientX - anchorX;
-  const dy = clientY - anchorY;
+  const { anchor, tableRect } = state;
 
-  if (Math.abs(dx) > Math.abs(dy)) {
-    const delta = Math.abs(dx) / dx;
-    return { ...state, horizontalScrollRequest: { delta } };
+  if (anchor && tableRect) {
+    const { clientX: anchorX, clientY: anchorY } = anchor;
+    const dx = clientX - anchorX;
+    const dy = clientY - anchorY;
+    const { width, height } = tableRect;
+
+    if (Math.abs(dx / width) > Math.abs(dy / height)) {
+      const delta = Math.abs(dx) / dx;
+      return { ...state, dragOutDirection: { dx: delta, dy: 0 } };
+    }
+
+    const delta = Math.abs(dy) / dy;
+    return { ...state, dragOutDirection: { dx: 0, dy: delta } };
   }
-
-  const delta = Math.abs(dy) / dy;
-  return { ...state, verticalScrollRequest: { delta } };
+  return state;
 }
 
 export default reduce;

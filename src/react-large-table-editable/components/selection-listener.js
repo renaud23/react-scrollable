@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { EditableContext, actions } from "./state-management";
+import { EditableContext, actions } from "../state-management";
 
-function onClickDefault() {}
+function onClickDefault() { }
 
 function SelectionListener({
   children,

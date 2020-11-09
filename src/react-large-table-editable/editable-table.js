@@ -9,9 +9,7 @@ import {
   actions,
   EditableContext,
 } from "./state-management";
-import HeaderRenderer from "./header-renderer";
-import RowNumRenderer from "./row-num-renderer";
-import "./editable-cell.scss";
+import { HeaderRenderer, RowNumRenderer } from "./components";
 import "./editable-table.scss";
 
 function refillRows(rows, newCell, row, path) {
@@ -38,6 +36,7 @@ function Table({
     mouseOut,
     verticalScrollRequest,
     horizontalScrollRequest,
+    dragOutTask,
   } = state;
   const onChangeData = useCallback(function (h, r) {
     dispatch(actions.onUpdateData({ header: h, rows: r }));
@@ -70,6 +69,17 @@ function Table({
     [dataFromProps]
   );
 
+  useEffect(
+    function () {
+      return () => {
+        if (dragOutTask) {
+          window.clearInterval(dragOutTask);
+        }
+      };
+    },
+    [dragOutTask]
+  );
+
   /* */
   const cellMemo = useMemo(
     function () {
@@ -82,24 +92,34 @@ function Table({
     [cellRenderer, getValue, setValueCallback]
   );
 
-  //
+  const onMouseLeave = useCallback(
+    function (e) {
+      if (!dragOutTask && drag) {
+        const tableRect = e.target.getBoundingClientRect();
+        const task = window.setInterval(function () {
+          dispatch(actions.onDragOutTaskPulse());
+        }, 100);
+        dispatch(actions.onMouseLeave(task, tableRect));
+      }
+    },
+    [dragOutTask, drag]
+  );
 
-  // cally
-  const onMouseLeave = useCallback(function () {
-    dispatch(actions.onMouseLeave());
-  }, []);
   const onMouseEnter = useCallback(function () {
     dispatch(actions.onMouseEnter());
   }, []);
+
   const onDocumentMouseMove = useCallback(
     function (e) {
-      const { clientX, clientY } = e;
+      const { clientX, clientY, offsetY, offsetX } = e;
+
       if (drag && mouseOut) {
-        dispatch(actions.onDragOut({ clientX, clientY }));
+        dispatch(actions.onDragOut({ clientX, clientY, offsetY, offsetX }));
       }
     },
     [drag, mouseOut]
   );
+
   const onDocumentMouseUp = useCallback(
     function () {
       if (drag) {
