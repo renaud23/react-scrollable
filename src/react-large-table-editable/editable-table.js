@@ -10,6 +10,7 @@ import {
   EditableContext,
 } from "./state-management";
 import { HeaderRenderer, RowNumRenderer } from "./components";
+import { getPath } from "../react-large-table/commons-table";
 import "./editable-table.scss";
 
 function refillRows(rows, newCell, row, path) {
@@ -48,7 +49,7 @@ function Table({
       if (current !== value) {
         const newCell = setValue(cell, value);
         const { rows, header } = data;
-        const { path } = header[column];
+        const path = getPath(header[column]);
         dispatch(
           actions.onUpdateData({
             header,
