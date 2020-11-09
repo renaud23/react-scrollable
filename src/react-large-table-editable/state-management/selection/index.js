@@ -50,9 +50,9 @@ function matchCell({ row, column }, i, j) {
 
 export function matchRule({ rule } = {}, i, j) {
   if (rule) {
-    const { row, column, cell } = rule;
-    if (cell) {
-      return matchCell(cell, i, j);
+    const { row, column, type } = rule;
+    if (type === "cell") {
+      return matchCell(rule, i, j);
     }
     const matchRow = matchOne(row, i);
     const matchCol = matchOne(column, j);
@@ -63,6 +63,32 @@ export function matchRule({ rule } = {}, i, j) {
 }
 
 /* */
+
+function moveRow(extent, d) {
+  if (d) {
+    const { delta } = d;
+    const { row } = extent;
+    return { ...extent, row: row + delta };
+  }
+  return extent;
+}
+
+function moveColumn(extent, d) {
+  if (d) {
+    const { delta } = d;
+    const { column } = extent;
+    return { ...extent, column: column + delta };
+  }
+  return extent;
+}
+
+export function expandSelection(extent, deltaX, deltaY) {
+  if (extent) {
+    return moveColumn(moveRow(extent, deltaY), deltaX);
+  }
+
+  return extent;
+}
 
 function getOrderedRange(anchor, extent) {
   const min = Math.min(anchor, extent);
@@ -75,10 +101,8 @@ function getCellSelection(anchor, extent) {
   return {
     rule: {
       type: "cell",
-      cell: {
-        row: getOrderedRange(anchor.row, extent.row),
-        column: getOrderedRange(anchor.column, extent.column),
-      },
+      row: getOrderedRange(anchor.row, extent.row),
+      column: getOrderedRange(anchor.column, extent.column),
     },
   };
 }

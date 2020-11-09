@@ -1,9 +1,9 @@
 import React, { useState, useContext, useCallback } from "react";
 import classnames from "classnames";
-import { EditableContext } from "./state-management";
 import SelectionListener from "./selection-listener";
-import { matchRule } from "./state-management";
+import { matchRule, EditableContext } from "../state-management";
 import InputField from "./input-field";
+import "./editable-cell.scss";
 
 function EditableCell({
   cell,

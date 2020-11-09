@@ -6,6 +6,7 @@ import reduceOnDragOut from "./reduce-on-drag-out";
 import reduceOnStopDrag from "./reduce-on-stop-drag";
 import reduceOnMouseLeave from "./reduce-on-mouse-leave";
 import reduceOnMouseEnter from "./reduce-on-mouse-enter";
+import reduceOndragOutTaskPulse from "./reduce-on-drag-out-task-pulse";
 
 function reducer(state, action) {
   const { type } = action;
@@ -24,6 +25,8 @@ function reducer(state, action) {
       return reduceOnMouseLeave(state, action);
     case actions.ON_MOUSE_ENTER:
       return reduceOnMouseEnter(state, action);
+    case actions.ON_DRAG_OUT_TASK_PULSE:
+      return reduceOndragOutTaskPulse(state, action);
     default:
       return state;
   }

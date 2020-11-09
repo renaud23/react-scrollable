@@ -84,7 +84,7 @@ function ReactLargeTable({
       return [width, height - headerHeight];
     },
     [headerHeight]
-  );
+  ); 
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div
@@ -145,7 +145,7 @@ ReactLargeTable.propTypes = {
 
 ReactLargeTable.defaultProps = {
   data: { header: undefined, rows: undefined },
-  treeSize: true,
+  treeSize: false,
   cellRenderer: DefaultCellRenderer,
   headerRenderer: DefaultHeaderRenderer,
   rowNumRenderer: RowNumRenderer,

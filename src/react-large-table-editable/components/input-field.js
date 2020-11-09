@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { safeCss } from "../commons-scrollable";
+import { safeCss } from "../../commons-scrollable";
 
 function InputField({ cell, setValue, row, column, getValue, height, onBlur }) {
   const inputEl = useRef();

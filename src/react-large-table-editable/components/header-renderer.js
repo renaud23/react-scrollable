@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import classnames from "classnames";
 import SelectionListener from "./selection-listener";
-import { EditableContext } from "./state-management";
+import { EditableContext } from "../state-management";
+import { getLabel } from "../../react-large-table/commons-table";
 
 function isInSelection(selection, index) {
   if (selection) {
@@ -19,7 +20,7 @@ function isInSelection(selection, index) {
 
 function Renderer({ column, index }) {
   const [state] = useContext(EditableContext);
-  const { label } = column;
+  const label = getLabel(column);
   const { selection } = state;
   const selected = isInSelection(selection, index);
 
