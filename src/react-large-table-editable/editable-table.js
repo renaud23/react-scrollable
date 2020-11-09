@@ -10,7 +10,7 @@ import {
   EditableContext,
 } from "./state-management";
 import { HeaderRenderer, RowNumRenderer } from "./components";
-import { getPath } from "../commons-scrollable";
+import { getPath } from "../react-large-table/commons-table";
 import "./editable-table.scss";
 
 function refillRows(rows, newCell, row, path) {

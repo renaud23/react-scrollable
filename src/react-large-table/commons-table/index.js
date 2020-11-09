@@ -5,3 +5,5 @@ export { default as setWidth } from "./set-width";
 export { default as setHeight } from "./set-height";
 export { default as getCell } from "./get-cell";
 export { default as useDispatch } from "./use-dispatch";
+export { default as getPath } from "./get-path";
+export { default as getLabel } from "./get-label";

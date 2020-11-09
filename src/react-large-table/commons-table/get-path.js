@@ -1,5 +1,5 @@
 function getPath(column) {
-  if (column) {
+  if (typeof column === "object") {
     const { path } = column;
     return path;
   }

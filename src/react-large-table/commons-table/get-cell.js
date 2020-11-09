@@ -1,4 +1,4 @@
-import { getPath } from "../../commons-scrollable";
+import getPath from "./get-path";
 
 function getCell(column, row) {
   const path = getPath(column);
