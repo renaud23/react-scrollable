@@ -3,7 +3,6 @@ import classnames from "classnames";
 import SelectionListener from "./selection-listener";
 import { matchRule, EditableContext } from "../state-management";
 import InputField from "./input-field";
-import "./editable-cell.scss";
 
 function EditableCell({
   cell,
@@ -44,12 +43,7 @@ function EditableCell({
     );
   }
   return (
-    <span
-      className={classnames("editable-cell", "excel-theme-cell")}
-      type="cell"
-      row={row}
-      column={column}
-    >
+    <span className={classnames("editable-cell", "excel-theme-cell")}>
       <InputField
         cell={cell}
         getValue={getValue}
