@@ -21,15 +21,17 @@ function refillHeader(header, delta, index) {
 function reduce(state, action) {
   const { payload } = action;
   const { delta, index } = payload;
-  const { header } = state;
-  const headerNext = refillHeader(header, delta, index);
-
-  if (delta !== 0) {
-    return {
-      ...state,
-      header: headerNext,
-      horizontal: resolveScrollableData(headerNext, getWidth),
-    };
+  const { header, horizontal } = state;
+  const { fixed } = horizontal;
+  if (!fixed) {
+    const headerNext = refillHeader(header, delta, index);
+    if (delta !== 0) {
+      return {
+        ...state,
+        header: headerNext,
+        horizontal: resolveScrollableData(headerNext, getWidth),
+      };
+    }
   }
   return state;
 }

@@ -1,5 +1,5 @@
-import React  from "react";
-import ReactLargeTable from "../react-large-table"; 
+import React from "react";
+import ReactLargeTable from "../react-large-table";
 import generate from "./random-table-data";
 import classnames from "classnames";
 import "./custom-large-table.scss";
@@ -75,7 +75,33 @@ export function CustomCellTable() {
   );
 }
 
-
+export function FixedRowHeightTable() {
+  const how = 10;
+  const data__ = new Array(how).fill(null).reduce(
+    function ({ header, rows }) {
+      return { header, rows: [...rows, ...data.rows] };
+    },
+    { ...data }
+  );
+  return (
+    <>
+      <p>
+        A large table of {__WIDTH__} columns and {__HEIGHT__ * how} rows,
+        {__WIDTH__ * __HEIGHT__} cells. Fixed row height, for very large table !
+      </p>
+      <div className="default-table-container">
+        <ReactLargeTable
+          className="custom-large-table-theme"
+          data={data__}
+          headerHeight={50}
+          rowHeight={40}
+          rowNums={true}
+          cellRenderer={CustomCellRenderer}
+        />
+      </div>
+    </>
+  );
+}
 
 export default {
   title: "react-large-table",

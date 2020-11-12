@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect, useCallback } from "react";
 import ReactScrollable from "../react-scrollable";
+import PropTypes from "prop-types";
 import {
   ScrollableContext,
   reducer,
@@ -137,7 +138,24 @@ function LargeScrollableContainer({
   );
 }
 
+const scrollableProps = PropTypes.shape({
+  max: PropTypes.number,
+  maxSize: PropTypes.number,
+  cumulsSize: PropTypes.arrayOf(PropTypes.number),
+  fixed: PropTypes.bool,
+  fixedValue: PropTypes.number,
+});
+
+LargeScrollableContainer.propTypes = {
+  id: PropTypes.string,
+  vertical: scrollableProps.isRequired,
+  horizontal: scrollableProps.isRequired,
+  treeSize: PropTypes.bool,
+  onResize: PropTypes.func,
+};
+
 LargeScrollableContainer.defaultProps = {
+  id: undefined,
   vertical: {},
   horizontal: {},
   treeSize: false,

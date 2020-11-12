@@ -8,6 +8,7 @@ function TableContent({
   header,
   rows,
   headerHeight,
+  rowHeight,
   cellRenderer,
   headerRenderer,
   id,
@@ -43,6 +44,7 @@ function TableContent({
           header={header}
           startRow={verticalStart}
           nbRows={verticalNb}
+          rowHeight={rowHeight}
           startColumns={horizontalStart}
           nbColumns={horizontalNb}
           cellRenderer={cellRenderer}
