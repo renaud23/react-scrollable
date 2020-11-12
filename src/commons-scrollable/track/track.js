@@ -13,18 +13,19 @@ function getStyle(vertical, pos) {
 function Track({ onTrack, vertical, horizontal, right, left, top, bottom }) {
   const [track, setTrack] = useState(false);
   const [clientPos, setClientPos] = useState(undefined);
-  const [currentPos, setCurrentPos] = useState(undefined);
   const onmousemove = useCallback(
     function (e) {
       if (track) {
         if (vertical) {
-          setCurrentPos(e.clientX);
+          setClientPos(e.clientX);
+          onTrack(e.clientX - clientPos);
         } else {
-          setCurrentPos(e.clientY);
+          setClientPos(e.clientY);
+          onTrack(e.clientY - clientPos);
         }
       }
     },
-    [track, vertical]
+    [track, vertical, clientPos, onTrack]
   );
   const onmousedown = useCallback(
     function (e) {
@@ -33,10 +34,8 @@ function Track({ onTrack, vertical, horizontal, right, left, top, bottom }) {
 
       if (vertical) {
         setClientPos(e.clientX);
-        setCurrentPos(e.clientX);
       } else {
         setClientPos(e.clientY);
-        setCurrentPos(e.clientY);
       }
     },
     [vertical]
@@ -46,14 +45,9 @@ function Track({ onTrack, vertical, horizontal, right, left, top, bottom }) {
       if (track) {
         e.stopPropagation();
         setTrack(false);
-        if (vertical) {
-          onTrack(e.clientX - clientPos);
-        } else {
-          onTrack(e.clientY - clientPos);
-        }
       }
     },
-    [track, vertical, onTrack, clientPos]
+    [track]
   );
 
   useEffect(function () {
@@ -65,7 +59,7 @@ function Track({ onTrack, vertical, horizontal, right, left, top, bottom }) {
     };
   });
 
-  const style = getStyle(vertical, currentPos);
+  const style = getStyle(vertical, clientPos);
   return (
     <div
       aria-hidden="true"

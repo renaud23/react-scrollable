@@ -76,7 +76,7 @@ export function CustomCellTable() {
 }
 
 export function FixedRowHeightTable() {
-  const how = 10;
+  const how = 9;
   const data__ = new Array(how).fill(null).reduce(
     function ({ header, rows }) {
       return { header, rows: [...rows, ...data.rows] };
@@ -86,7 +86,7 @@ export function FixedRowHeightTable() {
   return (
     <>
       <p>
-        A large table of {__WIDTH__} columns and {__HEIGHT__ * how} rows,
+        A large table of {__WIDTH__} columns and {__HEIGHT__ * (how + 1)} rows,
         {__WIDTH__ * __HEIGHT__} cells. Fixed row height, for very large table !
       </p>
       <div className="default-table-container">
@@ -94,7 +94,7 @@ export function FixedRowHeightTable() {
           className="custom-large-table-theme"
           data={data__}
           headerHeight={50}
-          rowHeight={40}
+          rowHeight={32}
           rowNums={true}
           cellRenderer={CustomCellRenderer}
         />
