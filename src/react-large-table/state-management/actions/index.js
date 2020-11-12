@@ -1,7 +1,7 @@
 export const ON_REFRESH_DATA = "react-large-table/on-refresh-data";
-export const onRefreshData = (data, headerHeight, treeSize) => ({
+export const onRefreshData = (data, headerHeight, rowHeight, treeSize) => ({
   type: ON_REFRESH_DATA,
-  payload: { data, headerHeight, treeSize },
+  payload: { data, headerHeight, rowHeight, treeSize },
 });
 
 export const ON_RESIZE_COLUMN = "react-large-table/on-resize-column";

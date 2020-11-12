@@ -10,8 +10,17 @@ function count(cumTab, index, max) {
   return 0;
 }
 
+function countFixed(scrollbar, seuil) {
+  const { fixedValue, start, size } = scrollbar;
+  return Math.ceil((seuil + size) / fixedValue) - start;
+}
+
 function compute(scrollbar, seuil) {
-  const { cumulsSize, start, size } = scrollbar;
+  const { cumulsSize, start, size, fixed } = scrollbar;
+  if (fixed) {
+    const nb = countFixed(scrollbar, seuil);
+    return { ...scrollbar, nb };
+  }
   if (cumulsSize) {
     const nb = count(cumulsSize, start, seuil + size);
     return { ...scrollbar, nb };
