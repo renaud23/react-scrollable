@@ -55,7 +55,10 @@ function ScrollableContainer({
   const onKeyDownCallback = useCallback(
     function (e) {
       e.stopPropagation();
+      e.preventDefault();
       dispatch(actions.onKeyDown(e.key));
+
+      return false;
     },
     [dispatch]
   );

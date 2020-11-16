@@ -89,9 +89,7 @@ function ResponsiveDiv({
       className={className}
       onWheel={onWheel}
       onKeyDown={onKeyDown}
-      // onTouchStart={onTouchStart}
-      // onTouchMove={onTouchMove}
-      // onTouchEnd={onTouchEnd}
+      tabIndex="0"
     >
       {children}
     </div>
