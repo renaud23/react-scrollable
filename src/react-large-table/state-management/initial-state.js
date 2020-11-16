@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   header: undefined,
   treeSize: false,
   headerHeight: undefined,
+  rowHeight: undefined,
   rowNums: { start: undefined, nb: undefined },
 
   horizontal: initializeScrollable(),

@@ -21,6 +21,7 @@ const middlewareDefault = (next) => (action) => next(action);
 function ReactLargeTable({
   data,
   headerHeight,
+  rowHeight,
   treeSize,
   className,
   cellRenderer,
@@ -56,9 +57,9 @@ function ReactLargeTable({
 
   useEffect(
     function () {
-      dispatch(actions.onRefreshData(data, headerHeight, treeSize));
+      dispatch(actions.onRefreshData(data, headerHeight, rowHeight, treeSize));
     },
-    [data, headerHeight, treeSize, dispatch]
+    [data, headerHeight, rowHeight, treeSize, dispatch]
   );
 
   useEffect(
@@ -84,7 +85,7 @@ function ReactLargeTable({
       return [width, height - headerHeight];
     },
     [headerHeight]
-  ); 
+  );
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div
@@ -104,6 +105,7 @@ function ReactLargeTable({
             rows={rows}
             header={header}
             headerHeight={headerHeight}
+            rowHeight={rowHeight}
             cellRenderer={cellRenderer}
             headerRenderer={headerRenderer}
             id={id}
@@ -135,6 +137,7 @@ ReactLargeTable.propTypes = {
     ),
   }),
   headerHeight: PropTypes.number.isRequired,
+  rowHeight: PropTypes.number,
   treeSize: PropTypes.bool,
   cellRenderer: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   headerRenderer: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -150,6 +153,7 @@ ReactLargeTable.defaultProps = {
   headerRenderer: DefaultHeaderRenderer,
   rowNumRenderer: RowNumRenderer,
   rowNums: false,
+  rowHeight: undefined,
   middleware: middlewareDefault,
   onChangeData: onEmptyHook,
   onMouseLeave: onEmptyHook,

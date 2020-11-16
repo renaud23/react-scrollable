@@ -14,6 +14,7 @@ import {
   actions,
 } from "./state-management";
 import { ScrollbarVertical, ScrollbarHorizontal } from "./scrollbar";
+import ResponsiveDiv from "./responsive-div";
 import "./scrollable-container.scss";
 
 const __middleware = (next) => (action) => next(action);
@@ -96,18 +97,12 @@ function ScrollableContainer({
     [dispatch]
   );
   /* */
-  const onBarMouseDownVer = useCallback(
-    function (clientPos) {
-      dispatch(actions.onVerticalMouseDown(clientPos));
-    },
-    [dispatch]
-  );
-  const onBarMouseDownHor = useCallback(
-    function (clientPos) {
-      dispatch(actions.onHorizontalMouseDown(clientPos));
-    },
-    [dispatch]
-  );
+  const onBarMouseDownVer = function (clientPos) {
+    dispatch(actions.onVerticalMouseDown(clientPos));
+  };
+  const onBarMouseDownHor = function (clientPos) {
+    dispatch(actions.onHorizontalMouseDown(clientPos));
+  };
 
   const onmouseupCbk = useCallback(
     function () {
@@ -134,12 +129,10 @@ function ScrollableContainer({
     [verticalDrag, horizontalDrag, dispatch]
   );
 
-  const onWheelCallback = useCallback(
-    function (e) {
-      dispatch(actions.onWheel(e.deltaY));
-    },
-    [dispatch]
-  );
+  const onWheelCallback = function (e) {
+    dispatch(actions.onWheel(e.deltaY));
+  };
+
   /* USE EFFECT */
   useEffect(
     function () {
@@ -201,10 +194,9 @@ function ScrollableContainer({
   const containerEl = useResizeObserver(onResizeCallback);
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
-      <div
+      <ResponsiveDiv
         ref={containerEl}
         className="react-scrollable-container"
-        tabIndex="-1"
         onWheel={onWheelCallback}
         onKeyDown={onKeyDownCallback}
       >
@@ -223,7 +215,7 @@ function ScrollableContainer({
           idContent={idContent}
         />
         {children}
-      </div>
+      </ResponsiveDiv>
     </ScrollableContext.Provider>
   );
 }

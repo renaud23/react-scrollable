@@ -85,3 +85,15 @@ export const onWheel = (delta) => ({ type: ON_WHEEL, payload: { delta } });
 
 export const ON_KEYDOWN = "react-scrollable/on-key-down";
 export const onKeyDown = (key) => ({ type: ON_KEYDOWN, payload: { key } });
+
+export const ON_HORIZONTAL_TOUCH = "react-scrollable/on-horizontal-touch";
+export const onHorizontalTouch = (delta) => ({
+  type: ON_HORIZONTAL_TOUCH,
+  payload: { delta },
+});
+
+export const ON_VERTICAL_TOUCH = "react-scrollable/on-vertical-touch";
+export const onVerticalTouch = (delta) => ({
+  type: ON_VERTICAL_TOUCH,
+  payload: { delta },
+});

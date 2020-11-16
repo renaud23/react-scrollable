@@ -8,10 +8,11 @@ function refillRows(rows, delta, index) {
   const next = [...rows];
   const row = rows[index];
   const height = getHeight(row) || __ROW_MIN_HEIGHT__;
-  next[index] = setHeight(
-    row,
-    Math.max(Math.min(height + delta, __ROW_MAX_HEIGHT__), __ROW_MIN_HEIGHT__)
+  const nHeight = Math.max(
+    Math.min(height + delta, __ROW_MAX_HEIGHT__),
+    __ROW_MIN_HEIGHT__
   );
+  next[index] = setHeight(row, nHeight);
 
   return next;
 }
@@ -19,16 +20,18 @@ function refillRows(rows, delta, index) {
 function reduce(state, action) {
   const { payload } = action;
   const { delta, index } = payload;
-  const { rows } = state;
+  const { rows, vertical } = state;
+  const { fixed } = vertical;
+  if (!fixed) {
+    if (delta !== 0) {
+      const nRows = refillRows(rows, delta, index);
 
-  if (delta !== 0) {
-    const rowsNext = refillRows(rows, delta, index);
-
-    return {
-      ...state,
-      rows: rowsNext,
-      vertical: resolveScrollableData(rowsNext, getHeight),
-    };
+      return {
+        ...state,
+        rows: nRows,
+        vertical: resolveScrollableData(nRows, getHeight),
+      };
+    }
   }
   return state;
 }

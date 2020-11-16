@@ -7,7 +7,7 @@ function reduce(state, action) {
   return {
     ...state,
     refresh: true,
-    vertical: resolveScrollbarMove(vertical, delta),
+    vertical: resolveScrollbarMove(vertical, delta, Math.abs(delta)),
   };
 }
 
