@@ -3,13 +3,6 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import "./track.scss";
 
-function getStyle(vertical, pos) {
-  if (vertical) {
-    return { left: pos };
-  }
-  return { top: pos };
-}
-
 function Track({ onTrack, vertical, horizontal, right, left, top, bottom }) {
   const [track, setTrack] = useState(false);
   const [clientPos, setClientPos] = useState(undefined);
@@ -59,7 +52,6 @@ function Track({ onTrack, vertical, horizontal, right, left, top, bottom }) {
     };
   });
 
-  const style = getStyle(vertical, clientPos);
   return (
     <div
       aria-hidden="true"
@@ -72,14 +64,7 @@ function Track({ onTrack, vertical, horizontal, right, left, top, bottom }) {
         bottom,
       })}
       onMouseDown={onmousedown}
-    >
-      {track ? (
-        <div
-          className={classnames("track-bar", { vertical, horizontal })}
-          style={style}
-        ></div>
-      ) : null}
-    </div>
+    ></div>
   );
 }
 
