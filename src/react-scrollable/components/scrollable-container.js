@@ -85,7 +85,7 @@ function ScrollableContainer({
     },
     [dispatch, scrollbarHEl, scrollbarVEl, onResize]
   );
-
+  const containerEl = useResizeObserver(onResizeCallback);
   /* */
   const onMDHcbk = useCallback(
     function (clientPos) {
@@ -132,9 +132,13 @@ function ScrollableContainer({
     [verticalDrag, horizontalDrag, dispatch]
   );
 
-  const onWheelCallback = function (e) {
-    dispatch(actions.onWheel(e.deltaY));
-  };
+  const onWheelCallback = useCallback(
+    function (e) {
+      e.preventDefault();
+      dispatch(actions.onWheel(e.deltaY));
+    },
+    [dispatch]
+  );
 
   /* USE EFFECT */
   useEffect(
@@ -192,15 +196,29 @@ function ScrollableContainer({
     [onmouseupCbk, onmousemoveCbk]
   );
 
+  useEffect(
+    function () {
+      const { current } = containerEl;
+      if (current) {
+        current.addEventListener("wheel", onWheelCallback, false);
+      }
+      return function () {
+        if (onWheelCallback) {
+          current.removeEventListener("wheel", onWheelCallback);
+        }
+      };
+    },
+    [containerEl, onWheelCallback]
+  );
+
   /* *** */
 
-  const containerEl = useResizeObserver(onResizeCallback);
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
       <ResponsiveDiv
         ref={containerEl}
         className="react-scrollable-container"
-        onWheel={onWheelCallback}
+        // onWheel={onWheelCallback}
         onKeyDown={onKeyDownCallback}
       >
         <ScrollbarVertical
