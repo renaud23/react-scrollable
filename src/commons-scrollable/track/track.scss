@@ -39,7 +39,7 @@
 
     .track-bar {
       &.vertical {
-        position: fixed;
+        position: absolute;
         display: block;
         top: 0;
         height: 100%;
@@ -47,7 +47,7 @@
       }
 
       &.horizontal {
-        position: fixed;        
+        position: absolute;        
         width: 100%;
         border-top: solid 2px fuchsia;
         left: 0;
