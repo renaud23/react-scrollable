@@ -218,7 +218,6 @@ function ScrollableContainer({
       <ResponsiveDiv
         ref={containerEl}
         className="react-scrollable-container"
-        // onWheel={onWheelCallback}
         onKeyDown={onKeyDownCallback}
       >
         <ScrollbarVertical

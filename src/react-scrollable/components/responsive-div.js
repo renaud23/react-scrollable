@@ -13,6 +13,14 @@ function getClientPos(e) {
 
 function emptyCallback() {}
 
+const DELTA_Y = [];
+
+function applyDeltaY(callback) {
+  if (DELTA_Y.length) {
+    callback(DELTA_Y.shift());
+  }
+}
+
 function ResponsiveDiv({
   children,
   containerEl,
@@ -35,6 +43,28 @@ function ResponsiveDiv({
     setDy(0);
   }, []);
 
+  const apply = useCallback(
+    function (delta) {
+      dispatch(actions.onVerticalTouch(delta));
+    },
+    [dispatch]
+  );
+
+  const schedule = useCallback(
+    function () {
+      applyDeltaY(apply);
+    },
+    [apply]
+  );
+
+  useEffect(
+    function () {
+      const interval = window.setInterval(schedule, 10);
+      return () => window.clearInterval(interval);
+    },
+    [schedule]
+  );
+
   const onTouchMove = useCallback(
     function (e) {
       e.preventDefault();
@@ -56,16 +86,18 @@ function ResponsiveDiv({
   useEffect(
     function () {
       if (dx !== undefined && dy !== undefined) {
-        if (Math.abs(dx) > Math.abs(dy)) {
-          dispatch(actions.onHorizontalTouch(dx));
-          setDx(0);
-          setDy(0);
-        } else {
-          if (Math.abs(dy) > 10) {
+        if (Math.abs(dy) > Math.abs(dx)) {
+          if (Math.abs(dy) > 30) {
+            DELTA_Y.push(dy);
+          } else {
             dispatch(actions.onVerticalTouch(dy));
-            setDy(0);
             setDx(0);
+            setDy(0);
           }
+        } else {
+          dispatch(actions.onHorizontalTouch(dx));
+          setDy(0);
+          setDx(0);
         }
       }
     },
