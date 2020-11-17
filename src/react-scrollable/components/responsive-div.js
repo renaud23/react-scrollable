@@ -21,36 +21,36 @@ function ResponsiveDiv({
   onKeyDown,
 }) {
   const dispatch = useDispatch(ScrollableContext);
-  const [posX, setPosX] = useState(undefined);
-  const [posY, setPosY] = useState(undefined);
+  const [clientX, setClientX] = useState(undefined);
+  const [clientY, setClientY] = useState(undefined);
   const [dx, setDx] = useState(undefined);
   const [dy, setDy] = useState(undefined);
+
+  const onTouchStart = useCallback(function (e) {
+    e.preventDefault();
+    const [x, y] = getClientPos(e);
+    setClientX(x);
+    setClientY(y);
+    setDx(0);
+    setDy(0);
+  }, []);
 
   const onTouchMove = useCallback(
     function (e) {
       e.preventDefault();
       const [x, y] = getClientPos(e);
-      if (posX !== undefined && posY !== undefined) {
-        setDx(posX - x);
-        setDy(posY - y);
-      }
-      setPosY(y);
-      setPosX(x);
+      setClientX(x);
+      setClientY(y);
+      setDx(clientX - x);
+      setDy(clientY - y + dy);
     },
-    [posX, posY]
+    [clientX, clientY, dy]
   );
-
-  const onTouchStart = useCallback(function (e) {
-    e.preventDefault();
-    const [x, y] = getClientPos(e);
-    setPosX(x);
-    setPosY(y);
-  }, []);
 
   const onTouchEnd = useCallback(function (e) {
     e.preventDefault();
-    setPosX(undefined);
-    setPosY(undefined);
+    setClientX(undefined);
+    setClientY(undefined);
   }, []);
 
   useEffect(
@@ -58,8 +58,14 @@ function ResponsiveDiv({
       if (dx !== undefined && dy !== undefined) {
         if (Math.abs(dx) > Math.abs(dy)) {
           dispatch(actions.onHorizontalTouch(dx));
+          setDx(0);
+          setDy(0);
         } else {
-          dispatch(actions.onVerticalTouch(dy));
+          if (Math.abs(dy) > 10) {
+            dispatch(actions.onVerticalTouch(dy));
+            setDy(0);
+            setDx(0);
+          }
         }
       }
     },
@@ -73,14 +79,17 @@ function ResponsiveDiv({
         current.addEventListener("touchstart", onTouchStart, false);
         current.addEventListener("touchend", onTouchEnd, false);
         current.addEventListener("touchmove", onTouchMove, false);
+        // current.addEventListener("touchcancel", onTouchCanceled);
       }
+
       return () => {
         current.removeEventListener("touchstart", onTouchStart);
         current.removeEventListener("touchend", onTouchEnd);
         current.removeEventListener("touchmove", onTouchMove);
+        // current.removeEventListener("touchcancel", onTouchCanceled);
       };
     },
-    [containerEl, onTouchStart, onTouchMove, onTouchEnd]
+    [containerEl, onTouchMove, onTouchEnd, onTouchStart]
   );
 
   return (
