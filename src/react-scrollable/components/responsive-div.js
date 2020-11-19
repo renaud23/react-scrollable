@@ -13,14 +13,6 @@ function getClientPos(e) {
 
 function emptyCallback() {}
 
-const DELTA_Y = [];
-
-function applyDeltaY(callback) {
-  if (DELTA_Y.length) {
-    callback(DELTA_Y.shift());
-  }
-}
-
 function ResponsiveDiv({
   children,
   containerEl,
@@ -29,79 +21,57 @@ function ResponsiveDiv({
   onKeyDown,
 }) {
   const dispatch = useDispatch(ScrollableContext);
-  const [clientX, setClientX] = useState(undefined);
-  const [clientY, setClientY] = useState(undefined);
-  const [dx, setDx] = useState(undefined);
-  const [dy, setDy] = useState(undefined);
+  const [previousPos, setPreviousPos] = useState(undefined);
+  const [clientPos, setClientPos] = useState(undefined);
+  const [delta, setDelta] = useState(undefined);
 
   const onTouchStart = useCallback(function (e) {
     e.preventDefault();
-    const [x, y] = getClientPos(e);
-    setClientX(x);
-    setClientY(y);
-    setDx(0);
-    setDy(0);
+    const pos = getClientPos(e);
+    setPreviousPos(undefined);
+    setClientPos(pos);
   }, []);
-
-  const apply = useCallback(
-    function (delta) {
-      dispatch(actions.onVerticalTouch(delta));
-    },
-    [dispatch]
-  );
-
-  const schedule = useCallback(
-    function () {
-      applyDeltaY(apply);
-    },
-    [apply]
-  );
-
-  useEffect(
-    function () {
-      const interval = window.setInterval(schedule, 10);
-      return () => window.clearInterval(interval);
-    },
-    [schedule]
-  );
 
   const onTouchMove = useCallback(
     function (e) {
       e.preventDefault();
-      const [x, y] = getClientPos(e);
-      setClientX(x);
-      setClientY(y);
-      setDx(clientX - x);
-      setDy(clientY - y + dy);
+      const pos = getClientPos(e);
+      setPreviousPos(clientPos);
+      setClientPos(pos);
     },
-    [clientX, clientY, dy]
+    [clientPos]
   );
 
   const onTouchEnd = useCallback(function (e) {
     e.preventDefault();
-    setClientX(undefined);
-    setClientY(undefined);
   }, []);
 
   useEffect(
     function () {
-      if (dx !== undefined && dy !== undefined) {
-        if (Math.abs(dy) > Math.abs(dx)) {
-          if (Math.abs(dy) > 30) {
-            DELTA_Y.push(dy);
-          } else {
-            dispatch(actions.onVerticalTouch(dy));
-            setDx(0);
-            setDy(0);
-          }
-        } else {
+      if (previousPos) {
+        setDelta([
+          previousPos[0] - clientPos[0],
+          previousPos[1] - clientPos[1],
+        ]);
+      } else {
+        setDelta([0, 0]);
+      }
+    },
+    [clientPos, previousPos]
+  );
+
+  useEffect(
+    function () {
+      if (delta) {
+        const [dx, dy] = delta;
+        if (Math.abs(dx) > Math.abs(dy)) {
           dispatch(actions.onHorizontalTouch(dx));
-          setDy(0);
-          setDx(0);
+        } else {
+          dispatch(actions.onVerticalTouch(dy));
         }
       }
     },
-    [dx, dy, dispatch]
+    [delta, dispatch]
   );
 
   useEffect(
