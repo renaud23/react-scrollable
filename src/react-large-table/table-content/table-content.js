@@ -18,6 +18,9 @@ function TableContent({
   marginTop,
   verticalStart,
   verticalNb,
+  focused,
+  onFocus,
+  onBlur,
 }) {
   const dispatch = useContext(TableContext)[1];
   useEffect(
@@ -25,6 +28,17 @@ function TableContent({
       dispatch(actions.onVerticalScroll(verticalStart, verticalNb, marginTop));
     },
     [verticalStart, verticalNb, marginTop, dispatch]
+  );
+
+  useEffect(
+    function () {
+      if (focused) {
+        onFocus();
+      } else {
+        onBlur();
+      }
+    },
+    [focused, onFocus, onBlur]
   );
   return (
     <Table id={id}>
@@ -53,5 +67,13 @@ function TableContent({
     </Table>
   );
 }
+
+function emptyCallback() {}
+
+TableContent.defaultProps = {
+  focused: false,
+  onFocus: emptyCallback,
+  onBlur: emptyCallback,
+};
 
 export default TableContent;

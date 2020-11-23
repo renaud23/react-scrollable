@@ -34,6 +34,8 @@ function ScrollableContainer({
   onVerticalScroll,
   onResize,
   middleware,
+  onFocus,
+  onBlur,
 }) {
   const scrollbarVEl = useRef();
   const scrollbarHEl = useRef();
@@ -219,6 +221,8 @@ function ScrollableContainer({
         ref={containerEl}
         className="react-scrollable-container"
         onKeyDown={onKeyDownCallback}
+        onFocus={onFocus}
+        onBlur={onBlur}
       >
         <ScrollbarVertical
           ref={scrollbarVEl}

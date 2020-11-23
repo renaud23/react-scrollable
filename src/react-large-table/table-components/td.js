@@ -1,10 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { safeCss, Track } from "../../commons-scrollable";
 import { TableContext, actions } from "../state-management";
-import { useDispatch } from "../commons-table";
 
 function Td({ children, width, row, first }) {
-  const dispatch = useDispatch(TableContext);
+  const [state, dispatch] = useContext(TableContext);
+  const { rows } = state;
+  const { resizable } = rows[row];
   const onTrackCallback = useCallback(
     function (delta) {
       dispatch(actions.onResizeRow(row, delta));
@@ -14,7 +15,9 @@ function Td({ children, width, row, first }) {
   return (
     <td style={{ width: safeCss(width) }} className="react-large-table-td">
       {children}
-      {first ? <Track onTrack={onTrackCallback} horizontal bottom /> : null}
+      {first && resizable ? (
+        <Track onTrack={onTrackCallback} horizontal bottom />
+      ) : null}
     </td>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactLargeTable from "../react-large-table";
 import generate from "./random-table-data";
 import classnames from "classnames";
@@ -56,19 +56,22 @@ export function WithRowNumsTable() {
   );
 }
 
-export function CustomCellTable() {
+export function CustomThemeTable() {
+  const [focused, setFocused] = useState(false);
   return (
     <>
       <p>
         A large table of {__WIDTH__} columns and {__HEIGHT__} rows,
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
-      <div className="default-table-container">
+      <div className={classnames("default-table-container", { focused })}>
         <ReactLargeTable
           className="custom-large-table-theme"
           data={data}
           headerHeight={50}
           cellRenderer={CustomCellRenderer}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
         />
       </div>
     </>
