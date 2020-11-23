@@ -32,12 +32,14 @@ function ReactLargeTable({
   onChangeData,
   onMouseLeave,
   onMouseEnter,
+  onFocus,
+  onBlur,
   horizontalScrollRequest,
   verticalScrollRequest,
 }) {
   const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
-  const { header, rows } = state;
+  const { header, rows, focused } = state;
 
   const dispatch = useMemo(
     function () {
@@ -86,10 +88,26 @@ function ReactLargeTable({
     },
     [headerHeight]
   );
+
+  const onFocusCallback = useCallback(
+    function () {
+      dispatch(actions.onFocus());
+      onFocus();
+    },
+    [dispatch, onFocus]
+  );
+  const onBlurCallback = useCallback(
+    function () {
+      dispatch(actions.onBlur());
+      onBlur();
+    },
+    [dispatch, onBlur]
+  );
+
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div
-        className={classnames("react-large-table", className)}
+        className={classnames("react-large-table", className, { focused })}
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseEnter}
       >
@@ -109,6 +127,8 @@ function ReactLargeTable({
             cellRenderer={cellRenderer}
             headerRenderer={headerRenderer}
             id={id}
+            onFocus={onFocusCallback}
+            onBlur={onBlurCallback}
           />
         </LargeScrollableContainer>
       </div>
@@ -144,6 +164,8 @@ ReactLargeTable.propTypes = {
   rowNumRenderer: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   rowNums: PropTypes.bool,
   onchangeData: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
 };
 
 ReactLargeTable.defaultProps = {
@@ -158,6 +180,8 @@ ReactLargeTable.defaultProps = {
   onChangeData: onEmptyHook,
   onMouseLeave: onEmptyHook,
   onMouseEnter: onEmptyHook,
+  onFocus: onEmptyHook,
+  onBlur: onEmptyHook,
 };
 
 export default ReactLargeTable;

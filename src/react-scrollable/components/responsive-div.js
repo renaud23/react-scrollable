@@ -19,6 +19,8 @@ function ResponsiveDiv({
   className,
   onWheel,
   onKeyDown,
+  onFocus,
+  onBlur,
 }) {
   const dispatch = useDispatch(ScrollableContext);
   const [previousPos, setPreviousPos] = useState(undefined);
@@ -81,14 +83,12 @@ function ResponsiveDiv({
         current.addEventListener("touchstart", onTouchStart, false);
         current.addEventListener("touchend", onTouchEnd, false);
         current.addEventListener("touchmove", onTouchMove, false);
-        // current.addEventListener("touchcancel", onTouchCanceled);
       }
 
       return () => {
         current.removeEventListener("touchstart", onTouchStart);
         current.removeEventListener("touchend", onTouchEnd);
         current.removeEventListener("touchmove", onTouchMove);
-        // current.removeEventListener("touchcancel", onTouchCanceled);
       };
     },
     [containerEl, onTouchMove, onTouchEnd, onTouchStart]
@@ -101,6 +101,8 @@ function ResponsiveDiv({
       onWheel={onWheel}
       onKeyDown={onKeyDown}
       tabIndex="0"
+      onFocus={onFocus}
+      onBlur={onBlur}
     >
       {children}
     </div>
@@ -110,6 +112,8 @@ function ResponsiveDiv({
 ResponsiveDiv.defaultProps = {
   onWheel: emptyCallback,
   onKeyDown: emptyCallback,
+  onFocus: emptyCallback,
+  onBlur: emptyCallback,
 };
 
 export default React.forwardRef(function ScrollbarVertical(props, ref) {
