@@ -10,6 +10,8 @@ const INITIAL_STATE = {
 
   horizontal: initializeScrollable(),
   vertical: initializeScrollable(),
+
+  focused: false,
 };
 
 export default INITIAL_STATE;

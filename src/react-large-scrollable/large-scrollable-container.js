@@ -18,10 +18,10 @@ function LargeScrollableContainer({
   vertical: verticalScrollable,
   horizontal: horizontalScrollable,
   treeSize,
-  onResize = onResizeDefaultHook,
+  onResize,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const { horizontal, vertical } = state;
+  const { horizontal, vertical, focused } = state;
   const {
     maxSize: maxHeight,
     scrollRequest: verticalScrollRequest,
@@ -112,6 +112,15 @@ function LargeScrollableContainer({
     },
     [dispatch]
   );
+
+  const onFocusCallback = function () {
+    dispatch(actions.onFocus());
+  };
+
+  const onBlurCallback = function () {
+    dispatch(actions.onBlur());
+  };
+
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
       <ReactScrollable
@@ -124,6 +133,8 @@ function LargeScrollableContainer({
         onResize={onResizeCallback}
         middleware={middleware_}
         idContent={id}
+        onFocus={onFocusCallback}
+        onBlur={onBlurCallback}
       >
         {React.cloneElement(React.Children.only(children), {
           verticalStart,
@@ -132,6 +143,7 @@ function LargeScrollableContainer({
           horizontalStart,
           marginLeft,
           horizontalNb,
+          focused,
         })}
       </ReactScrollable>
     </ScrollableContext.Provider>
@@ -159,6 +171,7 @@ LargeScrollableContainer.defaultProps = {
   vertical: {},
   horizontal: {},
   treeSize: false,
+  onResize: onResizeDefaultHook,
 };
 
 export default LargeScrollableContainer;

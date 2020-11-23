@@ -45,7 +45,7 @@ function generate(nbCols, nbRows) {
           },
         };
       },
-      { __height: 30 + randomInt(60) }
+      { __height: 30 + randomInt(60), resizable: true }
     );
   });
   return { header, rows };
