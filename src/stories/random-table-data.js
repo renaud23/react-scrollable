@@ -35,7 +35,7 @@ function generate(nbCols, nbRows) {
   });
   const rows = new Array(nbRows).fill(null).map(function (_, i) {
     return header.reduce(
-      function (a, { path, type }, j) {
+      function (a, { path, type }) {
         return {
           ...a,
           [path]: {

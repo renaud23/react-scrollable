@@ -7,7 +7,8 @@ $headerBgColor: Sienna;
 
   thead {
     background-color: $headerBgColor;
-    th {
+    box-shadow:   2px 0 4px 0 maroon;
+    th {  
       .th-el-container {
         margin-top: 0;
         display: block;
@@ -52,6 +53,10 @@ $headerBgColor: Sienna;
   .row-nums {
     min-width: 70px;
     max-width: 70px;
+
+    box-shadow: 2px 0 4px -2px maroon;
+    z-index: 2;
+
     .header-corner-container {
       top: 0;
 
@@ -67,6 +72,7 @@ $headerBgColor: Sienna;
     // padding-top: 1px;
     .row-nums-body {
       background-color: Peru;
+      
       .row-container {
         border-right: thick double $trackBgColorHover;
 
