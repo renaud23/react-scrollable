@@ -5,8 +5,14 @@ $lightColor: #eeeeee;
 $mediumColor: #bcbcbc;
 $hightColor: #999999;
 
+@mixin preventSelect() {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+}
+
 .arrow {
-  border-right:  solid black;
+  border-right: solid black;
   border-bottom: solid black;
 
   border-width: 0 2px 2px 0;
@@ -18,7 +24,6 @@ $hightColor: #999999;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
     margin: 5px 3px;
-    
   }
 
   &.left {
@@ -31,7 +36,6 @@ $hightColor: #999999;
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
     margin: 6px 5px;
-    
   }
 
   &.bottom {
@@ -47,7 +51,9 @@ $hightColor: #999999;
   height: 100%;
 
   .react-scrollbar-ex {
+    @include preventSelect();
     display: flex;
+
     &.horizontal {
       flex-direction: row;
       position: absolute;
@@ -70,26 +76,19 @@ $hightColor: #999999;
       height: $scrollbarSize;
       background-color: $lightColor;
 
-
       &.disabled {
-         .arrow {
-          border-right:  solid  $mediumColor;
+        .arrow {
+          border-right: solid $mediumColor;
           border-bottom: solid $mediumColor;
         }
       }
-
 
       &:hover {
         background-color: $mediumColor;
         &.disabled {
           background-color: $lightColor;
         }
-       
       }
-
-     
-
-       
     }
 
     .react-scrollbar-ex-content {

@@ -1,20 +1,12 @@
 import React from "react";
 import classnames from "classnames";
+import ScrollbarTrack from "./scrollbar-track";
 
 function getContentStyle(horizontal, size, ref) {
   if (horizontal) {
     return { width: size, height: ref };
   }
   return { width: ref, height: size };
-}
-
-function getTrackStyle(horizontal, scrollbar) {
-  const { trackPos, trackSize } = scrollbar;
-
-  if (horizontal) {
-    return { marginLeft: trackPos, width: trackSize };
-  }
-  return { marginTop: trackPos, height: trackSize };
 }
 
 function ScrollbarContent({ horizontal, scrollbar }) {
@@ -29,13 +21,7 @@ function ScrollbarContent({ horizontal, scrollbar }) {
       })}
       style={getContentStyle(horizontal, contentWidth, ref)}
     >
-      <div
-        className={classnames("react-scrollbar-ex-track", {
-          horizontal,
-          vertical: !horizontal,
-        })}
-        style={getTrackStyle(horizontal, scrollbar)}
-      ></div>
+      <ScrollbarTrack horizontal={horizontal} scrollbar={scrollbar} />
     </div>
   );
 }

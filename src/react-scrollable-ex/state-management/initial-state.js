@@ -7,6 +7,8 @@ function initalize() {
     size: undefined,
     trackSize: undefined,
     trackPos: 0,
+
+    percent: 0,
   };
 }
 

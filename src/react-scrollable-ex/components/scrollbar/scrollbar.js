@@ -5,7 +5,7 @@ import ScrollbarButton from "./scrollbar-button";
 import { ScrollableContext, actions } from "../../state-management";
 import ScrollbarContent from "./scrollbar-content";
 
-function ScrollbarContentContainer({ horizontal, scrollbar, children }) {
+function ScrollbarContentContainer({ scrollbar, children }) {
   const { ref, sizeMax } = scrollbar;
   const contentWidth = sizeMax - 2 * ref;
   if (contentWidth > 0) {

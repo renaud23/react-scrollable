@@ -17,3 +17,15 @@ export const onUpdateProps = (props) => ({
   type: ON_UPDATE_PROPS,
   payload: { ...props },
 });
+
+export const ON_VERTICAL_SCROLL = "react-scrollable-ex/on-vertical-scroll";
+export const onVerticalScroll = (delta) => ({
+  type: ON_VERTICAL_SCROLL,
+  payload: { delta },
+});
+
+export const ON_HORIZONTAL_SCROLL = "react-scrollable-ex/on-horizontal-scroll";
+export const onHorizontalScroll = (delta) => ({
+  type: ON_HORIZONTAL_SCROLL,
+  payload: { delta },
+});
