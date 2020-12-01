@@ -4,6 +4,7 @@ import { useResizeObserver } from "../../../commons-scrollable";
 import ScrollbarButton from "./scrollbar-button";
 import { ScrollableContext, actions } from "../../state-management";
 import ScrollbarContent from "./scrollbar-content";
+import { BUTTON_TYPES } from "./scrollbar-button";
 
 function ScrollbarContentContainer({ scrollbar, children }) {
   const { ref, sizeMax } = scrollbar;
@@ -42,12 +43,12 @@ function Scrollbar({ horizontal = true }) {
     >
       <ScrollbarContentContainer horizontal={horizontal} scrollbar={scrollbar}>
         <ScrollbarButton
-          className={horizontal ? "left" : "top"}
+          type={horizontal ? BUTTON_TYPES.left : BUTTON_TYPES.top}
           disabled={trackPos === 0}
         />
         <ScrollbarContent horizontal={horizontal} scrollbar={scrollbar} />
         <ScrollbarButton
-          className={horizontal ? "right" : "bottom"}
+          type={horizontal ? BUTTON_TYPES.right : BUTTON_TYPES.bottom}
           disabled={trackPos === size - trackSize}
         />
       </ScrollbarContentContainer>

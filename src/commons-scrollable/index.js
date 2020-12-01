@@ -6,3 +6,4 @@ export { default as initializeScrollable } from "./initialize-scrollable";
 export { default as Track } from "./track";
 export { default as useDispatch } from "./use-dispatch";
 export { default as useResizeObserver } from "./use-resize-observer";
+export { default as getDeltaAmplitude } from "./get-delta-amplitude";
