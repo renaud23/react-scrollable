@@ -23,9 +23,9 @@ function ScrollbarContent({ horizontal, scrollbar }) {
         const { left, top } = e.target.getBoundingClientRect();
         const trackPos = horizontal ? e.clientX - left : e.clientY - top;
         if (horizontal) {
-          dispatch(actions.onHorizontalScrollTo(trackPos));
+          dispatch(actions.onHorizontalScrollTo({ trackPos }));
         } else {
-          dispatch(actions.onVerticalScrollTo(trackPos));
+          dispatch(actions.onVerticalScrollTo({ trackPos }));
         }
       }
     },

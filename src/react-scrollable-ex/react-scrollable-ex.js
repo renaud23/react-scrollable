@@ -20,6 +20,8 @@ function ReactScrollableEx({
   maxHeight,
   onHorizontalScroll,
   onVerticalScroll,
+  verticalScrollRequest,
+  horizontalScrollRequest,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal } = state;
@@ -47,6 +49,26 @@ function ReactScrollableEx({
     [maxWidth, maxHeight]
   );
 
+  useEffect(
+    function () {
+      if (verticalScrollRequest) {
+        const { percent } = verticalScrollRequest;
+        dispatch(actions.onVerticalScrollTo({ percent }));
+      }
+    },
+    [verticalScrollRequest, dispatch]
+  );
+
+  useEffect(
+    function () {
+      if (horizontalScrollRequest) {
+        const { percent } = horizontalScrollRequest;
+        dispatch(actions.onHorizontalScrollTo({ percent }));
+      }
+    },
+    [horizontalScrollRequest, dispatch]
+  );
+
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
       <ScrollableContainer>
@@ -63,6 +85,17 @@ ReactScrollableEx.propTypes = {
   maxHeight: PropTypes.number.isRequired,
   onHorizontalScroll: PropTypes.func.isRequired,
   onVerticalScroll: PropTypes.func.isRequired,
+  verticalScrollRequest: PropTypes.shape({
+    percent: PropTypes.number.isRequired,
+  }),
+  horizontalScrollRequest: PropTypes.shape({
+    percent: PropTypes.number.isRequired,
+  }),
+};
+
+ReactScrollableEx.defaultProps = {
+  verticalScrollRequest: undefined,
+  horizontalScrollRequest: undefined,
 };
 
 export default ReactScrollableEx;

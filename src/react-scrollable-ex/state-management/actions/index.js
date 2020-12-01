@@ -32,14 +32,14 @@ export const onHorizontalScroll = (delta) => ({
 
 export const ON_VERTICAL_SCROLL_TO =
   "react-scrollable-ex/on-vertical-scroll-to";
-export const onVerticalScrollTo = (trackPos) => ({
+export const onVerticalScrollTo = ({ trackPos, percent }) => ({
   type: ON_VERTICAL_SCROLL_TO,
-  payload: { trackPos },
+  payload: { trackPos, percent },
 });
 
 export const ON_HORIZONTAL_SCROLL_TO =
   "react-scrollable-ex/on-horizontal-scroll-to";
-export const onHorizontalScrollTo = (trackPos) => ({
+export const onHorizontalScrollTo = ({ trackPos, percent }) => ({
   type: ON_HORIZONTAL_SCROLL_TO,
-  payload: { trackPos },
+  payload: { trackPos, percent },
 });

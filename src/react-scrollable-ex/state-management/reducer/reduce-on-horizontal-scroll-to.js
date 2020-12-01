@@ -1,10 +1,19 @@
-import { computeScrollTo } from "./commons-reducer";
+import { computeScrollTo, computeTrackPosFromPercent } from "./commons-reducer";
 
 function reduce(state, action) {
   const { payload } = action;
-  const { trackPos } = payload;
+  const { trackPos, percent } = payload;
   const { horizontal } = state;
-  return { ...state, horizontal: computeScrollTo(horizontal, trackPos) };
+  if (percent !== undefined) {
+    return {
+      ...state,
+      horizontal: computeTrackPosFromPercent(horizontal, percent),
+    };
+  }
+  if (trackPos) {
+    return { ...state, horizontal: computeScrollTo(horizontal, trackPos) };
+  }
+  return state;
 }
 
 export default reduce;
