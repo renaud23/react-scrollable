@@ -54,6 +54,9 @@ function ScrollbarTrack({ horizontal, scrollbar }) {
     },
     [drag]
   );
+  const onClickCallback = function (e) {
+    e.stopPropagation();
+  };
 
   useEffect(
     function () {
@@ -76,6 +79,7 @@ function ScrollbarTrack({ horizontal, scrollbar }) {
       })}
       style={getStyle(horizontal, scrollbar)}
       onMouseDown={onMouseDownCallback}
+      onClick={onClickCallback}
     ></div>
   );
 }

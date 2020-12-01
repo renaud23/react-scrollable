@@ -4,6 +4,8 @@ import reduceOnHorizontalScrollbarResize from "./reduce-on-horizontal-scrollbar-
 import reduceOnUpdateProps from "./reduce-on-update-props";
 import reduceOnHorizontalScroll from "./reduce-on-horizontal-scroll";
 import reduceOnVerticalScroll from "./reduce-on-vertical-scroll";
+import reduceOnHorizontalScrollTo from "./reduce-on-horizontal-scroll-to";
+import reduceOnVerticalScrollTo from "./reduce-on-vertical-scroll-to";
 
 function reducer(state, action) {
   const { type } = action;
@@ -17,6 +19,10 @@ function reducer(state, action) {
       return reduceOnVerticalScroll(state, action);
     case actions.ON_HORIZONTAL_SCROLL:
       return reduceOnHorizontalScroll(state, action);
+    case actions.ON_VERTICAL_SCROLL_TO:
+      return reduceOnVerticalScrollTo(state, action);
+    case actions.ON_HORIZONTAL_SCROLL_TO:
+      return reduceOnHorizontalScrollTo(state, action);
     case actions.ON_UPDATE_PROPS:
       return reduceOnUpdateProps(state, action);
     default:

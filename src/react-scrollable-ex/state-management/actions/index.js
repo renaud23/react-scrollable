@@ -29,3 +29,17 @@ export const onHorizontalScroll = (delta) => ({
   type: ON_HORIZONTAL_SCROLL,
   payload: { delta },
 });
+
+export const ON_VERTICAL_SCROLL_TO =
+  "react-scrollable-ex/on-vertical-scroll-to";
+export const onVerticalScrollTo = (trackPos) => ({
+  type: ON_VERTICAL_SCROLL_TO,
+  payload: { trackPos },
+});
+
+export const ON_HORIZONTAL_SCROLL_TO =
+  "react-scrollable-ex/on-horizontal-scroll-to";
+export const onHorizontalScrollTo = (trackPos) => ({
+  type: ON_HORIZONTAL_SCROLL_TO,
+  payload: { trackPos },
+});

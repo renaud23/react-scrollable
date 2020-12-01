@@ -100,9 +100,15 @@ $hightColor: #999999;
           margin-left: 2px;
           width: calc(100% - 4px);
         }
+
         &.horizontal {
           margin-top: 2px;
           height: calc(100% - 4px);
+        }
+
+        &:hover,
+        &.drag {
+          background-color: $hightColor;
         }
       }
     }
