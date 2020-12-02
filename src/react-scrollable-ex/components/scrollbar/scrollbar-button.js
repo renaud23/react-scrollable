@@ -51,13 +51,15 @@ function ScrollbarButton({ type, disabled = false }) {
   );
 
   const onMousDownCallback = useCallback(
-    function () {
-      if (!disabled) {
-        setMove(true);
-        if (task) {
-          window.clearInterval(task);
+    function (e) {
+      if (e.button === 0) {
+        if (!disabled) {
+          setMove(true);
+          if (task) {
+            window.clearInterval(task);
+          }
+          setTask(window.setInterval(triggerMove, 30));
         }
-        setTask(window.setInterval(triggerMove, 30));
       }
     },
     [disabled, triggerMove, task]
