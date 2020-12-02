@@ -15,6 +15,8 @@ const DELTA_BASE = 100;
 function ScrollbarButton({ type, disabled = false, buttonProvider: Button }) {
   const [state, dispatch] = useContext(ScrollableContext);
   const { horizontal, vertical } = state;
+  const { ref: width } = vertical;
+  const { ref: height } = horizontal;
   const [move, setMove] = useState(false);
   const [task, setTask] = useState(undefined);
   const triggerMove = useCallback(
@@ -93,7 +95,7 @@ function ScrollbarButton({ type, disabled = false, buttonProvider: Button }) {
       aria-hidden="true"
       onMouseDown={onMousDownCallback}
     >
-      <Button type={type} disabled={disabled} />
+      <Button width={width} height={height} type={type} disabled={disabled} />
     </div>
   );
 }
