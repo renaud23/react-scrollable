@@ -11,7 +11,7 @@ import {
   HorizontalScrollbar,
   VerticalScrollbar,
 } from "./components";
-
+import { DefaultButtonProvider } from "./components";
 import "./react-scrollable-ex.scss";
 
 function ReactScrollableEx({
@@ -23,6 +23,7 @@ function ReactScrollableEx({
   verticalScrollRequest,
   horizontalScrollRequest,
   focused,
+  buttonProvider,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal } = state;
@@ -73,8 +74,8 @@ function ReactScrollableEx({
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
       <ScrollableContainer>
-        <HorizontalScrollbar />
-        <VerticalScrollbar />
+        <HorizontalScrollbar buttonProvider={buttonProvider} />
+        <VerticalScrollbar buttonProvider={buttonProvider} />
         {children}
       </ScrollableContainer>
     </ScrollableContext.Provider>
@@ -93,12 +94,14 @@ ReactScrollableEx.propTypes = {
     percent: PropTypes.number.isRequired,
   }),
   focused: PropTypes.bool,
+  buttonProvider: PropTypes.func,
 };
 
 ReactScrollableEx.defaultProps = {
   verticalScrollRequest: undefined,
   horizontalScrollRequest: undefined,
   focused: false,
+  buttonProvider: DefaultButtonProvider,
 };
 
 export default ReactScrollableEx;

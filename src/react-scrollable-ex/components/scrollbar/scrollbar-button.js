@@ -12,7 +12,7 @@ export const BUTTON_TYPES = {
 
 const DELTA_BASE = 100;
 
-function ScrollbarButton({ type, disabled = false }) {
+function ScrollbarButton({ type, disabled = false, buttonProvider: Button }) {
   const [state, dispatch] = useContext(ScrollableContext);
   const { horizontal, vertical } = state;
   const [move, setMove] = useState(false);
@@ -87,13 +87,13 @@ function ScrollbarButton({ type, disabled = false }) {
 
   return (
     <div
-      className={classnames("react-scrollbar-ex-button", type, {
+      className={classnames("react-scrollbar-ex-button-container", type, {
         disabled,
       })}
       aria-hidden="true"
       onMouseDown={onMousDownCallback}
     >
-      <i className={classnames("arrow", type, { disabled })}></i>
+      <Button type={type} disabled={disabled} />
     </div>
   );
 }

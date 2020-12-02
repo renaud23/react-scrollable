@@ -15,7 +15,7 @@ function ScrollbarContentContainer({ scrollbar, children }) {
   return null;
 }
 
-function Scrollbar({ horizontal = true }) {
+function Scrollbar({ horizontal, buttonProvider }) {
   const [state, dispatch] = useContext(ScrollableContext);
   const { horizontal: hScrollbar, vertical: vScrollbar } = state;
   const scrollbar = horizontal ? hScrollbar : vScrollbar;
@@ -44,11 +44,13 @@ function Scrollbar({ horizontal = true }) {
         <ScrollbarButton
           type={horizontal ? BUTTON_TYPES.left : BUTTON_TYPES.top}
           disabled={trackPos === 0 || trackSize === undefined}
+          buttonProvider={buttonProvider}
         />
         <ScrollbarContent horizontal={horizontal} scrollbar={scrollbar} />
         <ScrollbarButton
           type={horizontal ? BUTTON_TYPES.right : BUTTON_TYPES.bottom}
           disabled={trackPos === size - trackSize || trackSize === undefined}
+          buttonProvider={buttonProvider}
         />
       </ScrollbarContentContainer>
     </div>
