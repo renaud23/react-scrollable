@@ -9,6 +9,7 @@ function initalize() {
     trackPos: 0,
 
     percent: 0,
+    focused: false,
   };
 }
 

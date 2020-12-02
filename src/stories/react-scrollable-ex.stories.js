@@ -38,7 +38,7 @@ function CreateOne({ width, height }) {
           }}
           verticalScrollRequest={verticalScrollRequest}
         >
-          <div className="content">{`${width} x ${height}`}</div>
+          <div className="content">{`${width}px X ${height}px`}</div>
         </ReactScrollableEx>
       </div>
     </>

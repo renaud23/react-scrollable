@@ -1,11 +1,12 @@
 import React, { useEffect, useCallback, useRef, useContext } from "react";
+import classnames from "classnames";
 import { getDeltaAmplitude } from "../../commons-scrollable";
 import { ScrollableContext, actions } from "../state-management";
 
 function ScrollableContainer({ children }) {
   const containerEl = useRef();
   const [state, dispatch] = useContext(ScrollableContext);
-  const { vertical } = state;
+  const { vertical, focused } = state;
   const onWheel = useCallback(
     function (e) {
       e.preventDefault();
@@ -27,7 +28,10 @@ function ScrollableContainer({ children }) {
     [containerEl, onWheel]
   );
   return (
-    <div ref={containerEl} className="react-scrollable-ex">
+    <div
+      ref={containerEl}
+      className={classnames("react-scrollable-ex", { focused })}
+    >
       {children}
     </div>
   );

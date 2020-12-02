@@ -8,11 +8,12 @@ function updateOne(scrollbar, max) {
 
 function reduce(state, action) {
   const { payload } = action;
-  const { maxWidth, maxHeight } = payload;
+  const { maxWidth, maxHeight, focused } = payload;
   const { horizontal, vertical } = state;
 
   return {
     ...state,
+    focused,
     horizontal: updateOne(horizontal, maxWidth),
     vertical: updateOne(vertical, maxHeight),
   };
