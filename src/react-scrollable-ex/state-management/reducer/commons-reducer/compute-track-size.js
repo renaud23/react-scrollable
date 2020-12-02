@@ -7,7 +7,7 @@ function compute(scrollbar) {
     const trackPos = percent * (size - trackSize);
     return { ...scrollbar, trackSize, trackPos };
   }
-  return scrollbar;
+  return { ...scrollbar, trackSize: undefined, trackPos: undefined };
 }
 
 export default compute;

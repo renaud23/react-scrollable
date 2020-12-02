@@ -32,7 +32,6 @@ function Scrollbar({ horizontal = true }) {
     [horizontal, dispatch]
   );
   const containerEl = useResizeObserver(onResizeCallback);
-
   return (
     <div
       ref={containerEl}
@@ -44,12 +43,12 @@ function Scrollbar({ horizontal = true }) {
       <ScrollbarContentContainer horizontal={horizontal} scrollbar={scrollbar}>
         <ScrollbarButton
           type={horizontal ? BUTTON_TYPES.left : BUTTON_TYPES.top}
-          disabled={trackPos === 0}
+          disabled={trackPos === 0 || trackSize === undefined}
         />
         <ScrollbarContent horizontal={horizontal} scrollbar={scrollbar} />
         <ScrollbarButton
           type={horizontal ? BUTTON_TYPES.right : BUTTON_TYPES.bottom}
-          disabled={trackPos === size - trackSize}
+          disabled={trackPos === size - trackSize || trackSize === undefined}
         />
       </ScrollbarContentContainer>
     </div>

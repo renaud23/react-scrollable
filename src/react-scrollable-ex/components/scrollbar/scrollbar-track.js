@@ -14,7 +14,7 @@ function getStyle(horizontal, scrollbar) {
 
 function ScrollbarTrack({ horizontal, scrollbar }) {
   const dispatch = useDispatch(ScrollableContext);
-
+  const { trackSize, size } = scrollbar;
   const [drag, setDrag] = useState(false);
   const [clientPos, setClientPos] = useState(undefined);
 
@@ -69,19 +69,21 @@ function ScrollbarTrack({ horizontal, scrollbar }) {
     },
     [onMouseMoveCallback, onMouseUpCallback]
   );
-
-  return (
-    <div
-      className={classnames("react-scrollbar-ex-track", {
-        horizontal,
-        vertical: !horizontal,
-        drag,
-      })}
-      style={getStyle(horizontal, scrollbar)}
-      onMouseDown={onMouseDownCallback}
-      onClick={onClickCallback}
-    ></div>
-  );
+  if (trackSize !== undefined && trackSize < size) {
+    return (
+      <div
+        className={classnames("react-scrollbar-ex-track", {
+          horizontal,
+          vertical: !horizontal,
+          drag,
+        })}
+        style={getStyle(horizontal, scrollbar)}
+        onMouseDown={onMouseDownCallback}
+        onClick={onClickCallback}
+      ></div>
+    );
+  }
+  return null;
 }
 
 export default ScrollbarTrack;
