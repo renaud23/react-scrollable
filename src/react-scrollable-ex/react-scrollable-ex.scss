@@ -113,4 +113,14 @@ $hightColor: #999999;
       }
     }
   }
+
+  .scrollabe-ex-corner {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: solid 1px $mediumColor;
+    width: 14px;
+    height: 14px;
+    background-color: $lightColor;
+  }
 }

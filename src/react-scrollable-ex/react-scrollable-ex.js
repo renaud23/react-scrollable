@@ -13,6 +13,7 @@ import {
 } from "./components";
 import { DefaultButtonProvider } from "./components";
 import "./react-scrollable-ex.scss";
+import { Corner } from "./components";
 
 function ReactScrollableEx({
   children,
@@ -76,6 +77,7 @@ function ReactScrollableEx({
       <ScrollableContainer>
         <HorizontalScrollbar buttonProvider={buttonProvider} />
         <VerticalScrollbar buttonProvider={buttonProvider} />
+        <Corner />
         {children}
       </ScrollableContainer>
     </ScrollableContext.Provider>
