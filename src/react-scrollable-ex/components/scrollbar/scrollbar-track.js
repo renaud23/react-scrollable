@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import classnames from "classnames";
-import { useDispatch } from "../../../commons-scrollable";
+import { useDispatch, safeCss } from "../../../commons-scrollable";
 import { actions, ScrollableContext } from "../../state-management";
 
 function getStyle(horizontal, scrollbar) {
   const { trackPos, trackSize } = scrollbar;
 
   if (horizontal) {
-    return { marginLeft: trackPos, width: trackSize };
+    return { marginLeft: safeCss(trackPos), width: trackSize };
   }
-  return { marginTop: trackPos, height: trackSize };
+  return { marginTop: safeCss(trackPos), height: trackSize };
 }
 
 function ScrollbarTrack({ horizontal, scrollbar }) {

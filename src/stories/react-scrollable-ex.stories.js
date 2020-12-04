@@ -1,11 +1,13 @@
 import React, { useState, useCallback } from "react";
 import ReactScrollableEx from "../react-scrollable-ex";
+import Switch from "./switch";
 import "./custom-scrollable.scss";
 import "./cubik-theme.scss";
 
 function CreateOne({ width, height, className }) {
   const [verticalScrollPercent, setVerticalScrollPercent] = useState(0);
   const [verticalScrollRequest, setVerticalScrollRequest] = useState(undefined);
+
   const onUp = useCallback(
     function () {
       setVerticalScrollRequest({ percent: verticalScrollPercent + 0.1 });
@@ -29,14 +31,14 @@ function CreateOne({ width, height, className }) {
         </button>
         <input type="text" disabled={true} value={verticalScrollPercent} />
       </div>
-      <div className="simple-scrollable-example">
+      <div className={"simple-scrollable-example"}>
         <ReactScrollableEx
           maxWidth={width}
           maxHeight={height}
           className={className}
           onHorizontalScroll={() => null}
           onVerticalScroll={function (percent) {
-            setVerticalScrollPercent(percent);
+            setVerticalScrollPercent(percent || 0);
           }}
           verticalScrollRequest={verticalScrollRequest}
         >
@@ -56,7 +58,17 @@ export function ScrollableSmallExExample() {
 }
 
 export function ScrollableCustomTheme() {
-  return <CreateOne className="cubik-with-button" width={1500} height={8000} />;
+  const [withButtons, setWithButtons] = useState(false);
+  return (
+    <>
+      <Switch label="With buttons" onChange={(on) => setWithButtons(on)} />
+      <CreateOne
+        className={withButtons ? "cubik-with-button" : "cubik-without-button"}
+        width={1500}
+        height={8000}
+      />
+    </>
+  );
 }
 
 export default {

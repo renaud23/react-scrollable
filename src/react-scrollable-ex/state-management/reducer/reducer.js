@@ -9,7 +9,6 @@ import reduceOnVerticalScrollTo from "./reduce-on-vertical-scroll-to";
 
 function reducer(state, action) {
   const { type } = action;
-
   switch (type) {
     case actions.ON_VERTICAL_SCROLLBAR_RESIZE:
       return reduceOnVerticalScrollbarResize(state, action);
