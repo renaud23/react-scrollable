@@ -24,7 +24,7 @@ function ReactScrollableEx({
   verticalScrollRequest,
   horizontalScrollRequest,
   focused,
-  buttonProvider,
+  buttonProvider = DefaultButtonProvider,
   className,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
