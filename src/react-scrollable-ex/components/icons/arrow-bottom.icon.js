@@ -1,6 +1,6 @@
 import React from "react";
 
-function Icon({ width = 32, height = 32, color = "#000" }) {
+function Icon({ width = 32, height = 32 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,6 @@ function Icon({ width = 32, height = 32, color = "#000" }) {
     >
       <g>
         <path
-          fill={color}
           fillOpacity="1"
           stroke="none"
           strokeLinecap="butt"

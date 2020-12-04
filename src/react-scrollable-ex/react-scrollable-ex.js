@@ -25,6 +25,7 @@ function ReactScrollableEx({
   horizontalScrollRequest,
   focused,
   buttonProvider,
+  className,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal } = state;
@@ -74,7 +75,7 @@ function ReactScrollableEx({
 
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
-      <ScrollableContainer>
+      <ScrollableContainer className={className}>
         <HorizontalScrollbar buttonProvider={buttonProvider} />
         <VerticalScrollbar buttonProvider={buttonProvider} />
         <Corner />
@@ -97,6 +98,7 @@ ReactScrollableEx.propTypes = {
   }),
   focused: PropTypes.bool,
   buttonProvider: PropTypes.func,
+  className: PropTypes.string,
 };
 
 ReactScrollableEx.defaultProps = {
@@ -104,6 +106,7 @@ ReactScrollableEx.defaultProps = {
   horizontalScrollRequest: undefined,
   focused: false,
   buttonProvider: DefaultButtonProvider,
+  className: undefined,
 };
 
 export default ReactScrollableEx;

@@ -3,7 +3,7 @@ import classnames from "classnames";
 import { getDeltaAmplitude } from "../../commons-scrollable";
 import { ScrollableContext, actions } from "../state-management";
 
-function ScrollableContainer({ children }) {
+function ScrollableContainer({ children, className }) {
   const containerEl = useRef();
   const [state, dispatch] = useContext(ScrollableContext);
   const { vertical, focused } = state;
@@ -30,7 +30,7 @@ function ScrollableContainer({ children }) {
   return (
     <div
       ref={containerEl}
-      className={classnames("react-scrollable-ex", { focused })}
+      className={classnames("react-scrollable-ex", className, { focused })}
     >
       {children}
     </div>

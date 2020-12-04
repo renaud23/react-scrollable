@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from "react";
 import ReactScrollableEx from "../react-scrollable-ex";
 import "./custom-scrollable.scss";
+import "./cubik-theme.scss";
 
-function CreateOne({ width, height }) {
+function CreateOne({ width, height, className }) {
   const [verticalScrollPercent, setVerticalScrollPercent] = useState(0);
   const [verticalScrollRequest, setVerticalScrollRequest] = useState(undefined);
   const onUp = useCallback(
@@ -32,6 +33,7 @@ function CreateOne({ width, height }) {
         <ReactScrollableEx
           maxWidth={width}
           maxHeight={height}
+          className={className}
           onHorizontalScroll={() => null}
           onVerticalScroll={function (percent) {
             setVerticalScrollPercent(percent);
@@ -51,6 +53,10 @@ export function ScrollableExExample() {
 
 export function ScrollableSmallExExample() {
   return <CreateOne width={150} height={150} />;
+}
+
+export function ScrollableCustomTheme() {
+  return <CreateOne className="cubik-with-button" width={1500} height={8000} />;
 }
 
 export default {

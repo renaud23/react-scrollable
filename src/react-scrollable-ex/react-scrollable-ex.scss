@@ -11,40 +11,6 @@ $hightColor: #999999;
   -webkit-user-select: none;
 }
 
-.arrow {
-  border-right: solid black;
-  border-bottom: solid black;
-
-  border-width: 0 2px 2px 0;
-  display: inline-block;
-  position: absolute;
-  padding: 2px;
-
-  &.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    margin: 5px 3px;
-  }
-
-  &.left {
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-    margin: 5px 6px;
-  }
-
-  &.top {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-    margin: 6px 5px;
-  }
-
-  &.bottom {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    margin: 3px 5px;
-  }
-}
-
 .react-scrollable-ex {
   position: relative;
   width: 100%;
@@ -75,6 +41,13 @@ $hightColor: #999999;
       width: $scrollbarSize;
       height: $scrollbarSize;
       background-color: $lightColor;
+
+      .react-scrollbar-ex-button {
+        fill: black;
+        &.disabled {
+          fill: $mediumColor;
+        }
+      }
 
       &.disabled {
         .arrow {

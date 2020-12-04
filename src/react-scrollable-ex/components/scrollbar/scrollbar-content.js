@@ -6,9 +6,9 @@ import ScrollbarTrack from "./scrollbar-track";
 
 function getContentStyle(horizontal, size, ref) {
   if (horizontal) {
-    return { width: size, height: ref };
+    return { width: size };
   }
-  return { width: ref, height: size };
+  return { height: size };
 }
 
 function ScrollbarContent({ horizontal, scrollbar }) {
