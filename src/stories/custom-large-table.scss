@@ -7,7 +7,7 @@ $headerBgColor: Sienna;
 
   thead {
     background-color: $headerBgColor;
-    box-shadow:   2px 0 4px 0 maroon;
+    box-shadow:   2px 0 4px 0 black;
     th {  
       .th-el-container {
         margin-top: 0;
@@ -54,7 +54,7 @@ $headerBgColor: Sienna;
     min-width: 70px;
     max-width: 70px;
 
-    box-shadow: 2px 0 4px -2px maroon;
+    box-shadow: 2px 0 4px -2px black;
     z-index: 2;
 
     .header-corner-container {

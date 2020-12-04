@@ -1,0 +1,29 @@
+.switch {
+  display: inline-block;
+  width: 28px;
+  height: 16px;
+  border: solid gray 1px;
+  border-radius: 10px 10px;
+  position: relative;
+  margin: 0px 5px;
+  vertical-align: middle;
+  padding: 2px 2px;
+
+  .label {
+    position: absolute;
+    white-space: nowrap;
+    margin-top: -18px;
+  }
+
+  .button-bascule {
+    background-color: lightgrey;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px 8px;
+    cursor: pointer;
+    &.on {
+      float: right;
+      background-color: royalblue;
+    }
+  }
+}
