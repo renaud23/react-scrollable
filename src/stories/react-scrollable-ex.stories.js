@@ -23,11 +23,11 @@ function CreateOne({ width, height, className }) {
   return (
     <>
       <div className="toolbar">
-        <button className="fab" onClick={onUp}>
-          +
-        </button>
         <button className="fab" onClick={onDown}>
           -
+        </button>
+        <button className="fab" onClick={onUp}>
+          +
         </button>
         <input type="text" disabled={true} value={verticalScrollPercent} />
       </div>
