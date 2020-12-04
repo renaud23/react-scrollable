@@ -15,6 +15,8 @@ import { DefaultButtonProvider } from "./components";
 import "./react-scrollable-ex.scss";
 import { Corner } from "./components";
 
+function emptyCallback() {}
+
 function ReactScrollableEx({
   children,
   maxWidth,
@@ -24,8 +26,11 @@ function ReactScrollableEx({
   verticalScrollRequest,
   horizontalScrollRequest,
   focused,
-  buttonProvider = DefaultButtonProvider,
   className,
+  buttonProvider = DefaultButtonProvider,
+  onFocus = emptyCallback,
+  onBlur = emptyCallback,
+  onKeyDown = emptyCallback,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal } = state;
@@ -75,7 +80,12 @@ function ReactScrollableEx({
 
   return (
     <ScrollableContext.Provider value={[state, dispatch]}>
-      <ScrollableContainer className={className}>
+      <ScrollableContainer
+        className={className}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+      >
         <HorizontalScrollbar buttonProvider={buttonProvider} />
         <VerticalScrollbar buttonProvider={buttonProvider} />
         <Corner />
