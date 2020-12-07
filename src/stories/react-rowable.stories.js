@@ -22,7 +22,7 @@ export function ReactRowableDefault() {
   const [horizontal] = useState(buildScrollableData(100, 200));
   const [focused, setFocused] = useState(false);
   return (
-    <div className={classnames("react-rowable-container", { focused })}>
+    <div className={classnames("react-rowable-example", { focused })}>
       <ReactRowable
         id={"id"}
         vertical={vertical}

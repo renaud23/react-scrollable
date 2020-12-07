@@ -38,7 +38,7 @@ function CreateOne({ width, height, className }) {
           className={className}
           onHorizontalScroll={() => null}
           onVerticalScroll={function (percent) {
-            setVerticalScrollPercent(percent || 0);
+            setVerticalScrollPercent(percent);
           }}
           verticalScrollRequest={verticalScrollRequest}
         >
