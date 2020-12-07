@@ -32,6 +32,7 @@ function Scrollbar({ horizontal, buttonProvider }) {
     [horizontal, dispatch]
   );
   const containerEl = useResizeObserver(onResizeCallback);
+
   return (
     <div
       ref={containerEl}
