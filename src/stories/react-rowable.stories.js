@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import classnames from "classnames";
 import ReactRowable from "../react-rowable";
 import RowableScrollableContent from "./rowable-scrollable-content";
 import "./react-rowable.scss";
-import "./custom-scrollable.scss";
 
 function buildScrollableData(nb, size) {
   return {
@@ -20,9 +20,16 @@ function buildScrollableData(nb, size) {
 export function ReactRowableDefault() {
   const [vertical] = useState(buildScrollableData(100, 60));
   const [horizontal] = useState(buildScrollableData(100, 200));
+  const [focused, setFocused] = useState(false);
   return (
-    <div className="simple-scrollable-example-container">
-      <ReactRowable id={"id"} vertical={vertical} horizontal={horizontal}>
+    <div className={classnames("react-rowable-container", { focused })}>
+      <ReactRowable
+        id={"id"}
+        vertical={vertical}
+        horizontal={horizontal}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+      >
         <RowableScrollableContent vertical={vertical} horizontal={horizontal} />
       </ReactRowable>
     </div>

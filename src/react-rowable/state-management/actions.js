@@ -43,9 +43,3 @@ export const onHorizontalScrollRequest = ({ delta }) => ({
   type: ON_HORIZONTAL_SCROLL_REQUEST,
   payload: { delta },
 });
-
-export const ON_FOCUS = "react-rowable/on-focus";
-export const onFocus = () => ({ type: ON_FOCUS });
-
-export const ON_BLUR = "react-rowable/on-blur";
-export const onBlur = () => ({ type: ON_BLUR });

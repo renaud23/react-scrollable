@@ -24,8 +24,8 @@ function ReactRowable({
   horizontal: horizontalRowable,
   onResize: onResizeRoot = emptyResizeCallback,
   treeSize = false,
-  onBlur,
-  onFocus,
+  onBlur = emptyCallback,
+  onFocus = emptyCallback,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal, focused } = state;
@@ -74,8 +74,18 @@ function ReactRowable({
   );
 
   const onKeyDown = useCallback(function () {}, []);
-  const onFocusCallback = useCallback(function () {}, []);
-  const onBlurCallback = useCallback(function () {}, []);
+  const onFocusCallback = useCallback(
+    function () {
+      onFocus();
+    },
+    [onFocus]
+  );
+  const onBlurCallback = useCallback(
+    function () {
+      onBlur();
+    },
+    [onBlur]
+  );
 
   useEffect(
     function () {

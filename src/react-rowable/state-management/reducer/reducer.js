@@ -7,8 +7,6 @@ import reduceOnRefreshHorizontalRowable from "./reduce-on-refresh-horizontal-row
 import reduceOnVerticalScrollRequest from "./reduce-on-vertical-scroll-request";
 import reduceOnHorizontalScrollRequest from "./reduce-on-horizontal-scroll-request";
 // import reduceOnKeydown from "./reduce-on-keydown";
-import reduceOnBlur from "./reduce-on-blur";
-import reduceOnFocus from "./reduce-on-focus";
 
 function reduce(state, action) {
   const { type } = action;
@@ -29,10 +27,6 @@ function reduce(state, action) {
       return reduceOnHorizontalScrollRequest(state, action);
     // case actions.ON_KEY_DOWN:
     //   return reduceOnKeydown(state, action);
-    case actions.ON_FOCUS:
-      return reduceOnFocus(state, action);
-    case actions.ON_BLUR:
-      return reduceOnBlur(state, action);
     default:
       return state;
   }
