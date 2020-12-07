@@ -8,14 +8,13 @@ import {
   actions,
 } from "./state-management";
 import ReactScrollable from "../react-scrollable-ex";
+import isBindedKey from "./is-binded-key";
 
 function emptyResizeCallback(w, h) {
   return [w, h];
 }
 
-function emptyCallback() {
-  // console.log("blur/focus");
-}
+function emptyCallback() {}
 
 function ReactRowable({
   children,
@@ -26,6 +25,7 @@ function ReactRowable({
   treeSize = false,
   onBlur = emptyCallback,
   onFocus = emptyCallback,
+  onKeyDown = emptyCallback,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal, focused } = state;
@@ -73,7 +73,20 @@ function ReactRowable({
     [dispatch]
   );
 
-  const onKeyDown = useCallback(function () {}, []);
+  const onKeyDownCallback = useCallback(
+    function (e) {
+      const prevents = onKeyDown(e);
+      if (prevents !== false) {
+        const { key } = e;
+        if (isBindedKey(key)) {
+          e.preventDefault();
+          dispatch(actions.onKeydown(key));
+        }
+        return false;
+      }
+    },
+    [onKeyDown]
+  );
   const onFocusCallback = useCallback(
     function () {
       onFocus();
@@ -129,7 +142,7 @@ function ReactRowable({
         horizontalScrollRequest={horizontalScrollRequest}
         onFocus={onFocusCallback}
         onBlur={onBlurCallback}
-        onKeyDown={onKeyDown}
+        onKeyDown={onKeyDownCallback}
         ref={containerEl}
       >
         {React.cloneElement(React.Children.only(children), {

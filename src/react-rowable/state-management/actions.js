@@ -43,3 +43,6 @@ export const onHorizontalScrollRequest = ({ delta }) => ({
   type: ON_HORIZONTAL_SCROLL_REQUEST,
   payload: { delta },
 });
+
+export const ON_KEY_DOWN = "react-rowable/on-keydown";
+export const onKeydown = (key) => ({ type: ON_KEY_DOWN, payload: { key } });

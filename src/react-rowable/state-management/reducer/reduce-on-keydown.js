@@ -1,15 +1,5 @@
 import { resolveFromStart, resolveFromScrollPercent } from "./commons-reducers";
-
-const BINDED_KEYS = {
-  arrowDown: "ArrowDown",
-  arrowUp: "ArrowUp",
-  arrowLeft: "ArrowLeft",
-  arrowRight: "ArrowRight",
-  pageUp: "PageUp",
-  pageDown: "PageDown",
-  home: "Home",
-  end: "End",
-};
+import BINDED_KEYS from "../../binded-key";
 
 function moveScrollbar(scrollbar, delta) {
   const { start, max, nb } = scrollbar;
