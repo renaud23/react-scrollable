@@ -18,25 +18,32 @@ function ReactRowable({
   id,
   vertical: verticalRowable,
   horizontal: horizontalRowable,
+
   onResize: onResizeRoot = emptyCallback,
   treeSize = false,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal, focused } = state;
   const {
-    // scrollRequest: verticalScrollRequest,
+    scrollRequest: verticalScrollRequest,
     start: verticalStart,
     margin: marginTop,
     nb: verticalNb,
   } = vertical;
   const {
-    // scrollRequest: horizontalScrollRequest,
+    scrollRequest: horizontalScrollRequest,
     start: horizontalStart,
     margin: marginLeft,
     nb: horizontalNb,
   } = horizontal;
-  const { maxSize: maxHeight } = verticalRowable;
-  const { maxSize: maxWidth } = horizontalRowable;
+  const {
+    maxSize: maxHeight,
+    scrollRequest: verticalOuterScrollRequest,
+  } = verticalRowable;
+  const {
+    maxSize: maxWidth,
+    scrollRequest: horizontalOuterScrollRequest,
+  } = horizontalRowable;
   /* */
   const onResize = useCallback(
     function (width, height) {
@@ -77,6 +84,24 @@ function ReactRowable({
     },
     [horizontalRowable, treeSize]
   );
+  useEffect(
+    function () {
+      if (verticalOuterScrollRequest) {
+        dispatch(actions.onHorizontalScrollRequest(verticalOuterScrollRequest));
+      }
+    },
+    [verticalOuterScrollRequest]
+  );
+  useEffect(
+    function () {
+      if (horizontalOuterScrollRequest) {
+        dispatch(
+          actions.onHorizontalScrollRequest(horizontalOuterScrollRequest)
+        );
+      }
+    },
+    [horizontalOuterScrollRequest]
+  );
 
   return (
     <RowableContext.Provider value={[state, dispatch]}>
@@ -85,6 +110,8 @@ function ReactRowable({
         maxHeight={maxHeight}
         onVerticalScroll={onVerticalScroll}
         onHorizontalScroll={onHorizontalScroll}
+        verticalScrollRequest={verticalScrollRequest}
+        horizontalScrollRequest={horizontalScrollRequest}
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyDown={onKeyDown}

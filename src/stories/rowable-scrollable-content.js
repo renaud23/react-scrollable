@@ -24,7 +24,7 @@ function RowableScrollableContent({
       const width = hCumuls[startCell + 1] - hCumuls[startCell];
 
       return (
-        <td style={{ width }}>
+        <td style={{ width }} key={startCell}>
           <div className="cell-content">{`[${start},${startCell}]`}</div>
         </td>
       );
