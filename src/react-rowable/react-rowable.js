@@ -9,8 +9,12 @@ import {
 } from "./state-management";
 import ReactScrollable from "../react-scrollable-ex";
 
-function emptyCallback(w, h) {
+function emptyResizeCallback(w, h) {
   return [w, h];
+}
+
+function emptyCallback() {
+  // console.log("blur/focus");
 }
 
 function ReactRowable({
@@ -18,9 +22,10 @@ function ReactRowable({
   id,
   vertical: verticalRowable,
   horizontal: horizontalRowable,
-
-  onResize: onResizeRoot = emptyCallback,
+  onResize: onResizeRoot = emptyResizeCallback,
   treeSize = false,
+  onBlur,
+  onFocus,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal, focused } = state;
@@ -69,8 +74,8 @@ function ReactRowable({
   );
 
   const onKeyDown = useCallback(function () {}, []);
-  const onFocus = useCallback(function () {}, []);
-  const onBlur = useCallback(function () {}, []);
+  const onFocusCallback = useCallback(function () {}, []);
+  const onBlurCallback = useCallback(function () {}, []);
 
   useEffect(
     function () {
@@ -112,21 +117,20 @@ function ReactRowable({
         onHorizontalScroll={onHorizontalScroll}
         verticalScrollRequest={verticalScrollRequest}
         horizontalScrollRequest={horizontalScrollRequest}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={onFocusCallback}
+        onBlur={onBlurCallback}
         onKeyDown={onKeyDown}
+        ref={containerEl}
       >
-        <div ref={containerEl} className="react-rowable-content-container">
-          {React.cloneElement(React.Children.only(children), {
-            verticalStart,
-            marginTop,
-            verticalNb,
-            horizontalStart,
-            marginLeft,
-            horizontalNb,
-            focused,
-          })}
-        </div>
+        {React.cloneElement(React.Children.only(children), {
+          verticalStart,
+          marginTop,
+          verticalNb,
+          horizontalStart,
+          marginLeft,
+          horizontalNb,
+          focused,
+        })}
       </ReactScrollable>
     </RowableContext.Provider>
   );
@@ -147,6 +151,9 @@ ReactRowable.propTypes = {
   onResize: PropTypes.func,
 };
 
-ReactScrollable.defaultProps = {};
+ReactScrollable.defaultProps = {
+  onBlur: emptyCallback,
+  onFocus: emptyCallback,
+};
 
 export default ReactRowable;

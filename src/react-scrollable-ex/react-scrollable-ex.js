@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import {
   reducer,
@@ -17,25 +17,30 @@ import { Corner } from "./components";
 
 function emptyCallback() {}
 
-function ReactScrollableEx({
-  children,
-  maxWidth,
-  maxHeight,
-  onHorizontalScroll,
-  onVerticalScroll,
-  verticalScrollRequest,
-  horizontalScrollRequest,
-  focused,
-  className,
-  buttonProvider = DefaultButtonProvider,
-  onFocus = emptyCallback,
-  onBlur = emptyCallback,
-  onKeyDown = emptyCallback,
-}) {
+const ReactScrollableEx = React.forwardRef(function (
+  {
+    children,
+    maxWidth,
+    maxHeight,
+    onHorizontalScroll,
+    onVerticalScroll,
+    verticalScrollRequest,
+    horizontalScrollRequest,
+    focused,
+    className,
+
+    buttonProvider = DefaultButtonProvider,
+    onFocus = emptyCallback,
+    onBlur = emptyCallback,
+    onKeyDown = emptyCallback,
+  },
+  ref
+) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { vertical, horizontal } = state;
   const { percent: vp } = vertical;
   const { percent: hp } = horizontal;
+  const containerEl = useRef();
 
   useEffect(
     function () {
@@ -85,15 +90,16 @@ function ReactScrollableEx({
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyDown={onKeyDown}
+        ref={ref || containerEl}
       >
+        {children}
         <HorizontalScrollbar buttonProvider={buttonProvider} />
         <VerticalScrollbar buttonProvider={buttonProvider} />
         <Corner />
-        {children}
       </ScrollableContainer>
     </ScrollableContext.Provider>
   );
-}
+});
 
 ReactScrollableEx.propTypes = {
   maxWidth: PropTypes.number.isRequired,
