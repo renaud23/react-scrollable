@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from "react";
-import classnames from "classnames";
+import ScrollbarContainer from "./scrollbar-container";
 import { useResizeObserver } from "../../../commons-scrollable";
 import ScrollbarButton from "./scrollbar-button";
 import { ScrollableContext, actions } from "../../state-management";
@@ -17,7 +17,7 @@ function ScrollbarContentContainer({ scrollbar, children }) {
 
 function Scrollbar({ horizontal, buttonProvider }) {
   const [state, dispatch] = useContext(ScrollableContext);
-  const { horizontal: hScrollbar, vertical: vScrollbar } = state;
+  const { horizontal: hScrollbar, vertical: vScrollbar, idContent } = state;
   const scrollbar = horizontal ? hScrollbar : vScrollbar;
   const { trackPos, trackSize, size } = scrollbar;
 
@@ -34,12 +34,11 @@ function Scrollbar({ horizontal, buttonProvider }) {
   const containerEl = useResizeObserver(onResizeCallback);
 
   return (
-    <div
+    <ScrollbarContainer
       ref={containerEl}
-      className={classnames("react-scrollbar-ex", {
-        horizontal,
-        vertical: !horizontal,
-      })}
+      horizontal={horizontal}
+      idContent={idContent}
+      scrollbar={scrollbar}
     >
       <ScrollbarContentContainer horizontal={horizontal} scrollbar={scrollbar}>
         <ScrollbarButton
@@ -54,7 +53,7 @@ function Scrollbar({ horizontal, buttonProvider }) {
           buttonProvider={buttonProvider}
         />
       </ScrollbarContentContainer>
-    </div>
+    </ScrollbarContainer>
   );
 }
 

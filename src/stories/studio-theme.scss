@@ -1,0 +1,61 @@
+/* */
+$primaryColor: DarkRed;
+$secondaryColor: DarkOrange;
+$highlightColor: gold;
+$sizeBar: 6px;
+$refBar: calc(100% - 6px); 
+
+.react-scrollable-ex {
+  &.studio {
+    .react-rowable-container {
+        width: 100%;
+        height: 100%;
+    }
+    .react-scrollbar-ex { 
+      background-color: $primaryColor;
+      &.horizontal {
+        height: $sizeBar;
+        width: $refBar;
+      }
+      &.vertical {
+        height: $refBar;
+        width: $sizeBar;
+      }
+
+      /* BUTTON */
+      .react-scrollbar-ex-button-container {
+        width: 0;
+        height: 0;
+        display: none;
+      }
+
+      /* */
+      .react-scrollbar-ex-content {
+        width:  100%;
+        height:  100%;
+        background-color: $primaryColor;
+        .react-scrollbar-ex-track {
+          &.horizontal,
+          &.vertical {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: $secondaryColor;
+            &:hover,
+            &.drag {
+              background-color: $highlightColor;
+            }
+          }
+        }
+      }
+    }
+
+    /* */
+    .scrollabe-ex-corner {
+      background-color: transparent;
+      width: $sizeBar;
+      height: $sizeBar;
+      border: none; 
+    }
+  }
+}

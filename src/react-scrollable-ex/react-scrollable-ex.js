@@ -27,7 +27,7 @@ function ReactScrollableEx({
   horizontalScrollRequest,
   focused,
   className,
-
+  idContent,
   buttonProvider = DefaultButtonProvider,
   onFocus = emptyCallback,
   onBlur = emptyCallback,
@@ -54,9 +54,11 @@ function ReactScrollableEx({
 
   useEffect(
     function () {
-      dispatch(actions.onUpdateProps({ maxWidth, maxHeight, focused }));
+      dispatch(
+        actions.onUpdateProps({ maxWidth, maxHeight, focused, idContent })
+      );
     },
-    [maxWidth, maxHeight, focused]
+    [maxWidth, maxHeight, focused, idContent]
   );
 
   useEffect(
@@ -99,6 +101,7 @@ function ReactScrollableEx({
 ReactScrollableEx.propTypes = {
   maxWidth: PropTypes.number,
   maxHeight: PropTypes.number,
+  idContent: PropTypes.number,
   onHorizontalScroll: PropTypes.func.isRequired,
   onVerticalScroll: PropTypes.func.isRequired,
   verticalScrollRequest: PropTypes.shape({
@@ -118,6 +121,7 @@ ReactScrollableEx.defaultProps = {
   focused: false,
   buttonProvider: DefaultButtonProvider,
   className: undefined,
+  idContent: undefined,
 };
 
 export default ReactScrollableEx;

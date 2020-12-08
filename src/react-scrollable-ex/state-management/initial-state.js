@@ -14,6 +14,7 @@ function initalize() {
 }
 
 const INITIAL = {
+  idContent: undefined,
   viewportWidth: undefined,
   viewportHeight: undefined,
   horizontal: initalize(),
