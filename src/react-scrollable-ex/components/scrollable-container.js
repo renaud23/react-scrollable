@@ -1,10 +1,12 @@
-import React, { useEffect, useCallback, useRef, useContext } from "react";
+import React, { useEffect, useCallback, useContext } from "react";
 import classnames from "classnames";
 import { getDeltaAmplitude } from "../../commons-scrollable";
 import { ScrollableContext, actions } from "../state-management";
 
-function ScrollableContainer({ children, className }) {
-  const containerEl = useRef();
+const ScrollableContainer = React.forwardRef(function (
+  { children, className, onFocus, onBlur, onKeyDown },
+  containerEl
+) {
   const [state, dispatch] = useContext(ScrollableContext);
   const { vertical, focused } = state;
   const onWheel = useCallback(
@@ -29,12 +31,16 @@ function ScrollableContainer({ children, className }) {
   );
   return (
     <div
+      tabIndex="0"
       ref={containerEl}
       className={classnames("react-scrollable-ex", className, { focused })}
+      onKeyDown={onKeyDown}
+      onFocus={onFocus}
+      onBlur={onBlur}
     >
       {children}
     </div>
   );
-}
+});
 
 export default ScrollableContainer;
