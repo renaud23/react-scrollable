@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect, useCallback, useMemo } from "react";
-import LargeScrollableContainer from "../react-large-scrollable";
+// import LargeScrollableContainer from "../react-large-scrollable";
+import ReactRowable from "../react-rowable";
 import TableContent from "./table-content";
 import PropTypes from "prop-types";
 import {
@@ -10,7 +11,6 @@ import {
 } from "./state-management";
 import classnames from "classnames";
 import { DefaultCellRenderer } from "./table-components";
-import { RowNums } from "./table-components";
 import { DefaultHeaderRenderer, RowNumRenderer } from "./table-components";
 import "./react-large-table.scss";
 
@@ -111,8 +111,8 @@ function ReactLargeTable({
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseEnter}
       >
-        {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}
-        <LargeScrollableContainer
+        {/* {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null} */}
+        <ReactRowable
           id={id}
           vertical={vertical}
           horizontal={horizontal}
@@ -129,8 +129,10 @@ function ReactLargeTable({
             id={id}
             onFocus={onFocusCallback}
             onBlur={onBlurCallback}
+            rowNumRenderer={rowNumRenderer}
+            rowNums={rowNums}
           />
-        </LargeScrollableContainer>
+        </ReactRowable>
       </div>
     </TableContext.Provider>
   );
