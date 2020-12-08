@@ -5,8 +5,6 @@ import reduceOnVerticalScroll from "./reducer-on-vertical-scroll";
 import reduceOnResizeRow from "./reduce-on-resize-row";
 import onReduceVerticalScrollRequest from "./reduce-on-vertical-scroll-request";
 import onReduceOnHorizontalScrollRequest from "./reduce-on-horizontal-scroll-request";
-import reduceOnFocus from "./reduce-on-focus";
-import reduceOnBlur from "./reduce-on-blur";
 
 function reducer(state, action) {
   const { type } = action;
@@ -23,10 +21,6 @@ function reducer(state, action) {
       return onReduceVerticalScrollRequest(state, action);
     case actions.ON_HORIZONTAL_SCROLL_REQUEST:
       return onReduceOnHorizontalScrollRequest(state, action);
-    case actions.ON_FOCUS:
-      return reduceOnFocus(state, action);
-    case actions.ON_BLUR:
-      return reduceOnBlur(state, action);
     default:
       return state;
   }

@@ -20,9 +20,6 @@ function TableContent({
   marginTop,
   verticalStart,
   verticalNb,
-  focused,
-  onFocus,
-  onBlur,
   rowNumRenderer,
   rowNums,
 }) {
@@ -34,16 +31,6 @@ function TableContent({
     [verticalStart, verticalNb, marginTop, dispatch]
   );
 
-  useEffect(
-    function () {
-      if (focused) {
-        onFocus();
-      } else {
-        onBlur();
-      }
-    },
-    [focused, onFocus, onBlur]
-  );
   return (
     <>
       {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}

@@ -39,7 +39,7 @@ function ReactLargeTable({
 }) {
   const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
-  const { header, rows, focused } = state;
+  const { header, rows } = state;
 
   const dispatch = useMemo(
     function () {
@@ -89,35 +89,21 @@ function ReactLargeTable({
     [headerHeight]
   );
 
-  const onFocusCallback = useCallback(
-    function () {
-      dispatch(actions.onFocus());
-      onFocus();
-    },
-    [dispatch, onFocus]
-  );
-  const onBlurCallback = useCallback(
-    function () {
-      dispatch(actions.onBlur());
-      onBlur();
-    },
-    [dispatch, onBlur]
-  );
-
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div
-        className={classnames("react-large-table", className, { focused })}
+        className={classnames("react-large-table", className)}
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseEnter}
       >
-        {/* {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null} */}
         <ReactRowable
           id={id}
           vertical={vertical}
           horizontal={horizontal}
           onResize={onResizeCallback}
           treeSize={treeSize}
+          onFocus={onFocus}
+          onBlur={onBlur}
         >
           <TableContent
             rows={rows}
@@ -127,8 +113,6 @@ function ReactLargeTable({
             cellRenderer={cellRenderer}
             headerRenderer={headerRenderer}
             id={id}
-            onFocus={onFocusCallback}
-            onBlur={onBlurCallback}
             rowNumRenderer={rowNumRenderer}
             rowNums={rowNums}
           />
