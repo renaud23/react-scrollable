@@ -1,5 +1,4 @@
-import React, { useReducer, useEffect, useCallback, useMemo } from "react";
-// import LargeScrollableContainer from "../react-large-scrollable";
+import React, { useReducer, useEffect, useCallback } from "react";
 import ReactRowable from "../react-rowable";
 import TableContent from "./table-content";
 import PropTypes from "prop-types";
@@ -16,8 +15,6 @@ import "./react-large-table.scss";
 
 function onEmptyHook() {}
 
-const middlewareDefault = (next) => (action) => next(action);
-
 function ReactLargeTable({
   data,
   headerHeight,
@@ -28,7 +25,6 @@ function ReactLargeTable({
   headerRenderer,
   rowNumRenderer,
   rowNums,
-  middleware,
   onChangeData,
   onMouseLeave,
   onMouseEnter,
@@ -37,16 +33,9 @@ function ReactLargeTable({
   horizontalScrollRequest,
   verticalScrollRequest,
 }) {
-  const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
+  const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
   const { header, rows } = state;
-
-  const dispatch = useMemo(
-    function () {
-      return middleware(__dispatch);
-    },
-    [__dispatch, middleware]
-  );
 
   useEffect(
     function () {
@@ -162,7 +151,6 @@ ReactLargeTable.defaultProps = {
   rowNumRenderer: RowNumRenderer,
   rowNums: false,
   rowHeight: undefined,
-  middleware: middlewareDefault,
   onChangeData: onEmptyHook,
   onMouseLeave: onEmptyHook,
   onMouseEnter: onEmptyHook,
