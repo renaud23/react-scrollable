@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import classnames from "classnames";
 import BodyContent from "./body-content";
 import HeaderContent from "./header-content";
 import { RowNums } from "../table-components";
@@ -34,7 +33,7 @@ function TableContent({
   return (
     <>
       {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}
-      <Table id={id} className={classnames("", { "rows-nums": rowNums })}>
+      <Table id={id}>
         <Thead height={headerHeight} marginLeft={marginLeft}>
           <Tr height={headerHeight}>
             <HeaderContent

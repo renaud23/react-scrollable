@@ -81,7 +81,9 @@ function ReactLargeTable({
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div
-        className={classnames("react-large-table", className)}
+        className={classnames("react-large-table", className, {
+          "with-rows-nums": rowNums,
+        })}
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseEnter}
       >

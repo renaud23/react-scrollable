@@ -21,16 +21,20 @@
     line-height: normal;
   }
 
+  &.with-rows-nums {
+    .react-rowable-container {
+      width: calc(100% - 96px);
+      table {
+        margin-left: 80px;
+      }
+    }
+  }
+
   .react-rowable-container {
-    width: calc(100% - 96px);
     table {
-      border-spacing: 0;
-      // z-index: 0;
+      border-spacing: 0; 
       display: block;
       width: 100%;
-        &.rows-nums {
-         margin-left: 80px;
-       }
       height: 100%;
       overflow: hidden;
 
