@@ -7,14 +7,10 @@ function getAria(scrollbar) {
   return { min: 0, max: 100, now };
 }
 
-const ScrollbarContainer = React.forwardRef(function (
-  { children, idContent, horizontal, scrollbar },
-  containerEl
-) {
+function ScrollbarContainer({ children, idContent, horizontal, scrollbar }) {
   const { min, max, now } = getAria(scrollbar);
   return (
     <div
-      ref={containerEl}
       role="scrollbar"
       aria-controls={idContent}
       aria-orientation={horizontal ? "horizontal" : "vertical"}
@@ -29,6 +25,6 @@ const ScrollbarContainer = React.forwardRef(function (
       {children}
     </div>
   );
-});
+}
 
 export default ScrollbarContainer;

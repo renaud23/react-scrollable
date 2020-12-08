@@ -9,6 +9,7 @@ import {
 } from "./state-management";
 import ReactScrollable from "../react-scrollable-ex";
 import isBindedKey from "./is-binded-key";
+import "./react-rowable.scss";
 
 function emptyResizeCallback(w, h) {
   return [w, h];

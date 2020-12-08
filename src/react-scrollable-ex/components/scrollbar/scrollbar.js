@@ -6,15 +6,6 @@ import { ScrollableContext, actions } from "../../state-management";
 import ScrollbarContent from "./scrollbar-content";
 import { BUTTON_TYPES } from "./scrollbar-button";
 
-function ScrollbarContentContainer({ scrollbar, children }) {
-  const { ref, sizeMax } = scrollbar;
-  const contentWidth = sizeMax - 2 * ref;
-  if (contentWidth > 0) {
-    return children;
-  }
-  return null;
-}
-
 function Scrollbar({ horizontal, buttonProvider }) {
   const [state, dispatch] = useContext(ScrollableContext);
   const { horizontal: hScrollbar, vertical: vScrollbar, idContent } = state;
@@ -35,24 +26,25 @@ function Scrollbar({ horizontal, buttonProvider }) {
 
   return (
     <ScrollbarContainer
-      ref={containerEl}
       horizontal={horizontal}
       idContent={idContent}
       scrollbar={scrollbar}
     >
-      <ScrollbarContentContainer horizontal={horizontal} scrollbar={scrollbar}>
-        <ScrollbarButton
-          type={horizontal ? BUTTON_TYPES.left : BUTTON_TYPES.top}
-          disabled={trackPos === 0 || trackSize === undefined}
-          buttonProvider={buttonProvider}
-        />
-        <ScrollbarContent horizontal={horizontal} scrollbar={scrollbar} />
-        <ScrollbarButton
-          type={horizontal ? BUTTON_TYPES.right : BUTTON_TYPES.bottom}
-          disabled={trackPos === size - trackSize || trackSize === undefined}
-          buttonProvider={buttonProvider}
-        />
-      </ScrollbarContentContainer>
+      <ScrollbarButton
+        type={horizontal ? BUTTON_TYPES.left : BUTTON_TYPES.top}
+        disabled={trackPos === 0 || trackSize === undefined}
+        buttonProvider={buttonProvider}
+      />
+      <ScrollbarContent
+        horizontal={horizontal}
+        scrollbar={scrollbar}
+        ref={containerEl}
+      />
+      <ScrollbarButton
+        type={horizontal ? BUTTON_TYPES.right : BUTTON_TYPES.bottom}
+        disabled={trackPos === size - trackSize || trackSize === undefined}
+        buttonProvider={buttonProvider}
+      />
     </ScrollbarContainer>
   );
 }

@@ -2,7 +2,6 @@ function initalize() {
   return {
     ref: undefined,
     max: undefined,
-    sizeMax: undefined,
 
     size: undefined,
     trackSize: undefined,

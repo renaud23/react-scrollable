@@ -1,5 +1,6 @@
 $scrollbarMaxSize: calc(100% - 16px);
-$scrollbarSize: 16px;
+$scrollbarSize: calc(100% - 32px);
+$scrollbarRef: 16px;
 
 $lightColor: #eeeeee;
 $mediumColor: #bcbcbc;
@@ -28,7 +29,7 @@ $hightColor: #999999;
       position: absolute;
       bottom: 0;
       width: $scrollbarMaxSize;
-      height: $scrollbarSize;
+      height: $scrollbarRef;
     }
 
     &.vertical {
@@ -37,12 +38,12 @@ $hightColor: #999999;
       top: 0;
       right: 0;
       height: $scrollbarMaxSize;
-      width: $scrollbarSize;
+      width: $scrollbarRef;
     }
 
     .react-scrollbar-ex-button-container {
-      width: $scrollbarSize;
-      height: $scrollbarSize;
+      width: $scrollbarRef;
+      height: $scrollbarRef;
       background-color: $lightColor;
 
       .react-scrollbar-ex-button {
@@ -69,6 +70,14 @@ $hightColor: #999999;
 
     .react-scrollbar-ex-content {
       background-color: $lightColor;
+      &.vertical {
+        height: $scrollbarSize;
+      }
+
+      &.horizontal {
+        width: $scrollbarSize;
+      }
+
       .react-scrollbar-ex-track {
         background-color: $mediumColor;
 

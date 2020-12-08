@@ -101,7 +101,7 @@ function ReactScrollableEx({
 ReactScrollableEx.propTypes = {
   maxWidth: PropTypes.number,
   maxHeight: PropTypes.number,
-  idContent: PropTypes.number,
+  idContent: PropTypes.string,
   onHorizontalScroll: PropTypes.func.isRequired,
   onVerticalScroll: PropTypes.func.isRequired,
   verticalScrollRequest: PropTypes.shape({

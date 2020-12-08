@@ -2,23 +2,28 @@
 $primaryColor: DarkRed;
 $secondaryColor: DarkOrange;
 $highlightColor: gold;
-$sizeBar: 8px;
+$refSize: 6px;
 $padding: 2px;
-$refBar: calc(100% + 6px);
-$refBarButton: calc(100% - 16px);
+$maxSize: calc(100% - 12px);
 
 .react-scrollable-ex {
   &.cubik-without-button {
+    .react-rowable-container {
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+    }
     .react-scrollbar-ex {
-      padding: $padding $padding;
       background-color: $primaryColor;
+
       &.horizontal {
-        height: $sizeBar;
-        width: $refBar;
+        padding: $padding 0 $padding $padding;
+        height: $refSize;
+        width: $maxSize;
       }
       &.vertical {
-        height: $refBar;
-        width: $sizeBar;
+        padding: $padding $padding 0 $padding;
+        height: $maxSize;
+        width: $refSize;
       }
 
       /* BUTTON */
@@ -30,8 +35,9 @@ $refBarButton: calc(100% - 16px);
 
       /* */
       .react-scrollbar-ex-content {
-        width: $sizeBar;
-        height: $sizeBar;
+        width: 100%;
+        height: 100%;
+
         background-color: $primaryColor;
         .react-scrollbar-ex-track {
           &.horizontal,
@@ -48,77 +54,79 @@ $refBarButton: calc(100% - 16px);
         }
       }
     }
-
-    /* */
-    .scrollabe-ex-corner {
-      background-color: $secondaryColor;
-      width: $sizeBar;
-      height: $sizeBar;
-      border: none;
-      margin: $padding $padding;
-    }
   }
 
   /** WITH BUTTON */
   &.cubik-with-button {
     @extend .cubik-without-button;
-    
+    .react-rowable-container {
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+    }
+
     .react-scrollbar-ex {
-        padding: $padding $padding;
       &.horizontal {
-        height: 8px;
-        width: calc(100% - 14px);        
+        padding: 0;
+        height: 10px;
+        width: calc(100% - 10px);
       }
       &.vertical {
-        height: calc(100% - 14px);
-        width: 8px;
+        padding: 0;
+        height: calc(100% - 10px);
+        width: 10px;
       }
+
+      /* CONTENT */
+      .react-scrollbar-ex-content {
+        &.horizontal {
+          width: calc(100% - 4px);
+          height: calc(100% - 4px);
+          margin: 2px 2px;
+        }
+
+        &.vertical {
+          width: calc(100% - 4px);
+          height: calc(100% - 4px);
+          margin: 2px 2px;
+        }
+      }
+
       /* BUTTON */
       .react-scrollbar-ex-button-container {
-        width: $sizeBar;
-        height: $sizeBar;
+        width: 10px;
+        height: 10px;
         display: block;
         background-color: $secondaryColor;
 
-        &.left {
-            margin-right: $padding;
-        }
-        &.right {
-            margin-left: $padding;
-        }
-
-        &.top {
-            margin-bottom: $padding;
-        }
-        &.bottom {
-            margin-top: $padding;
-        }
-
-        .react-scrollbar-ex-button{ 
-            height: 8px;
-            width: 8px;
-            line-height: 6px;
-            fill: black;
-            &.disabled {
-                fill: snow;
-                &:hover {
-                    background-color: $secondaryColor;
-                }
-            }
-
+        .react-scrollbar-ex-button {
+          height: 10px;
+          width: 10px;
+          line-height: 10px;
+          fill: black;
+          &.disabled {
+            fill: snow;
             &:hover {
-                background-color: $highlightColor;
+              background-color: $secondaryColor;
             }
+          }
+
+          &:hover {
+            background-color: $highlightColor;
+          }
         }
       }
     }
+  }
 
+  /* */
+  &.cubik-without-button,
+  &.cubik-with-button {
     .scrollabe-ex-corner {
-        background-color: $secondaryColor;
-        width: $sizeBar;
-        height: $sizeBar;
-        border: 2px solid $primaryColor;
-        margin: 0;
-      }
+      background-color: $secondaryColor;
+      width: $refSize;
+      height: $refSize;
+      border: none;
+      border: solid $primaryColor $padding;
+    }
   }
 }
