@@ -14,8 +14,6 @@
 }
 
 .excel-theme {
-
-  
   &.editable-table {
     .editable-cell {
       display: block;
@@ -47,6 +45,7 @@
   }
 
   thead {
+    box-shadow: 2px 0 4px 0 black;
     th {
       .th-el-container {
         @include heading();
@@ -90,6 +89,8 @@
 
   /* */
   .row-nums {
+    box-shadow: 2px 0 4px -2px black;
+    z-index: 2;
     .header-corner-container {
       top: 0;
 

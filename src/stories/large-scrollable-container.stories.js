@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LargeScrollableContainer from "../react-large-scrollable";
+import RowableScrollableContent from "./rowable-scrollable-content";
 import "./custom-scrollable.scss";
 
 function buildScrollableData(nb, size) {
@@ -8,42 +9,16 @@ function buildScrollableData(nb, size) {
     maxSize: nb * size,
     cumulsSize: new Array(nb).fill(null).reduce(
       function (a, _, i) {
-        return [...a, i * size];
+        return [...a, (i + 1) * size];
       },
       [0]
     ),
   };
 }
 
-function CustomScrollableComponent({
-  verticalStart,
-  marginTop,
-  verticalNb,
-  horizontalStart,
-  marginLeft,
-  horizontalNb,
-}) {
-  return (
-    <div className="simple-scrollable-example-content">
-      <ul>
-        <li>horizontal is scroll to {horizontalStart} of logical columns.</li>
-        <li>vertical is scroll to {verticalStart} of logical columns.</li>
-        <li>
-          {verticalNb} elements can be draw vertically with a top margin of{" "}
-          {marginTop} px.
-        </li>
-        <li>
-          {horizontalNb} elements can be draw horizontally with a left margin of{" "}
-          {marginLeft} px.
-        </li>
-      </ul>
-    </div>
-  );
-}
-
 export function LargeContainer() {
-  const [vertical] = useState(buildScrollableData(1000, 20));
-  const [horizontal] = useState(buildScrollableData(1000, 20));
+  const [vertical] = useState(buildScrollableData(1000, 40));
+  const [horizontal] = useState(buildScrollableData(1000, 200));
   return (
     <>
       <p>
@@ -56,7 +31,10 @@ export function LargeContainer() {
           vertical={vertical}
           horizontal={horizontal}
         >
-          <CustomScrollableComponent />
+          <RowableScrollableContent
+            vertical={vertical}
+            horizontal={horizontal}
+          />
         </LargeScrollableContainer>
       </div>
     </>

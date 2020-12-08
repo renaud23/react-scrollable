@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import classnames from "classnames";
 import ListContent from "./list-content";
 import { OffsetChar } from "../commons-scrollable";
-import LargeScrollableContainer from "../react-large-scrollable";
+import ReactRowable from "../react-rowable";
 import { computeVertical, computeHorizontal } from "./commons-list";
 import "./react-large-list.scss";
 
@@ -22,6 +21,7 @@ function ReactLargeList({ className, list, offsetChar }) {
   const [vertical, setVertical] = useState(initializeScrollable);
   const [horizontal, setHorizontal] = useState(initializeScrollable);
   const [focused, setFocused] = useState(false);
+
   useEffect(
     function () {
       setVertical(computeVertical(list));
@@ -33,27 +33,24 @@ function ReactLargeList({ className, list, offsetChar }) {
   const onFocus = function () {
     setFocused(true);
   };
-
   const onBlur = function () {
     setFocused(false);
   };
-
   return (
-    <div className={classnames("react-large-list", className, { focused })}>
-      <LargeScrollableContainer
+    <ReactRowable
+      id={id}
+      vertical={vertical}
+      horizontal={horizontal}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
+      <ListContent
         id={id}
-        vertical={vertical}
-        horizontal={horizontal}
-      >
-        <ListContent
-          id={id}
-          list={list}
-          offsetChar={offsetChar}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />
-      </LargeScrollableContainer>
-    </div>
+        list={list}
+        offsetChar={offsetChar}
+        focused={focused}
+      />
+    </ReactRowable>
   );
 }
 
