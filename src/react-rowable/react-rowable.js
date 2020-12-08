@@ -144,6 +144,7 @@ function ReactRowable({
         onBlur={onBlurCallback}
         onKeyDown={onKeyDownCallback}
         className={className}
+        idContent={id}
       >
         <div className="react-rowable-container" ref={containerEl}>
           {React.cloneElement(React.Children.only(children), {
@@ -175,7 +176,8 @@ ReactRowable.propTypes = {
   onResize: PropTypes.func,
 };
 
-ReactScrollable.defaultProps = {
+ReactRowable.defaultProps = {
+  id: undefined,
   onBlur: emptyCallback,
   onFocus: emptyCallback,
 };

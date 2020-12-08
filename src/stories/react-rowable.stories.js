@@ -4,6 +4,7 @@ import ReactRowable from "../react-rowable";
 import RowableScrollableContent from "./rowable-scrollable-content";
 import "./react-rowable.scss";
 import "./cubik-theme.scss";
+import "./studio-theme.scss";
 
 function buildScrollableData(nb, size) {
   return {
@@ -33,10 +34,11 @@ export function ReactRowableDefault() {
         <option value="">Par défaut</option>
         <option value="cubik-with-button">Cubik</option>
         <option value="cubik-without-button">Cubik sans bouton</option>
+        <option value="studio">Studio</option>
       </select>
       <div className={classnames("react-rowable-example", { focused })}>
         <ReactRowable
-          id={"id"}
+          id="rowable-example"
           vertical={vertical}
           horizontal={horizontal}
           onFocus={() => setFocused(true)}
