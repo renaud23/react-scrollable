@@ -1,7 +1,9 @@
 .react-large-list-container {
     display:  block;
-    width: 600px;
-    height: 400px;
+    width: 400px;
+    height: 300px;
+    min-width: 50px;
+    min-height: 50px;
     background-color: khaki;
     overflow: hidden;
     resize: both;

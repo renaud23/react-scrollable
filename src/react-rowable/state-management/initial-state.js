@@ -18,5 +18,4 @@ function initializeScrollable() {
 export default {
   horizontal: initializeScrollable(),
   vertical: initializeScrollable(),
-  focused: false,
 };

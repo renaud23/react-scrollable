@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classnames from "classnames";
 import { safeCss } from "../commons-scrollable";
 
@@ -41,19 +41,7 @@ function ContentList({
   itemRenderer: ItemRenderer = DefaultItemRenderer,
   className,
   focused,
-  onFocus,
-  onBlur,
 }) {
-  useEffect(
-    function () {
-      if (focused) {
-        onFocus();
-      } else {
-        onBlur();
-      }
-    },
-    [focused, onBlur, onFocus]
-  );
   if (verticalNb) {
     const contentLi = new Array(verticalNb).fill(null).map(function (_, i) {
       const index = verticalStart + i;
@@ -68,19 +56,25 @@ function ContentList({
     });
 
     return (
-      <ul
-        id={id}
-        className={classnames(className, { focused })}
-        style={{
-          marginTop: safeCss(marginTop),
-          marginLeft: safeCss(marginLeft - offsetChar * horizontalStart),
-        }}
-      >
-        {contentLi}
-      </ul>
+      <div className="react-large-list">
+        <ul
+          id={id}
+          className={classnames(className, { focused })}
+          style={{
+            marginTop: safeCss(marginTop),
+            marginLeft: safeCss(marginLeft - offsetChar * horizontalStart),
+          }}
+        >
+          {contentLi}
+        </ul>
+      </div>
     );
   }
-  return <ul id={id} className={classnames(className)}></ul>;
+  return (
+    <div className="react-large-list">
+      <ul id={id} className={(classnames(className), { focused })}></ul>
+    </div>
+  );
 }
 
 export default React.memo(ContentList);

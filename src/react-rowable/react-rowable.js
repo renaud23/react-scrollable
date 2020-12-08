@@ -19,6 +19,7 @@ function emptyCallback() {}
 function ReactRowable({
   children,
   id,
+  className,
   vertical: verticalRowable,
   horizontal: horizontalRowable,
   onResize: onResizeRoot = emptyResizeCallback,
@@ -28,7 +29,7 @@ function ReactRowable({
   onKeyDown = emptyCallback,
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const { vertical, horizontal, focused } = state;
+  const { vertical, horizontal } = state;
   const {
     scrollRequest: verticalScrollRequest,
     start: verticalStart,
@@ -130,7 +131,6 @@ function ReactRowable({
     },
     [horizontalOuterScrollRequest]
   );
-
   return (
     <RowableContext.Provider value={[state, dispatch]}>
       <ReactScrollable
@@ -143,17 +143,18 @@ function ReactRowable({
         onFocus={onFocusCallback}
         onBlur={onBlurCallback}
         onKeyDown={onKeyDownCallback}
-        ref={containerEl}
+        className={className}
       >
-        {React.cloneElement(React.Children.only(children), {
-          verticalStart,
-          marginTop,
-          verticalNb,
-          horizontalStart,
-          marginLeft,
-          horizontalNb,
-          focused,
-        })}
+        <div className="react-rowable-container" ref={containerEl}>
+          {React.cloneElement(React.Children.only(children), {
+            verticalStart,
+            marginTop,
+            verticalNb,
+            horizontalStart,
+            marginLeft,
+            horizontalNb,
+          })}
+        </div>
       </ReactScrollable>
     </RowableContext.Provider>
   );

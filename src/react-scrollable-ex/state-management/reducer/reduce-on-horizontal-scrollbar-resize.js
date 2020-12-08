@@ -3,7 +3,6 @@ import { updateAll, computeSize, computeTrackSize } from "./commons-reducer";
 function reduce(state, action) {
   const { payload } = action;
   const { horizontal } = state;
-
   return {
     ...state,
     horizontal: computeTrackSize(
