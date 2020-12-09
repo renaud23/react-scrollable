@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import ReactRowable from "../react-rowable";
-import RowableScrollableContent from "./rowable-scrollable-content";
+import { RowableScrollableContent } from "./commons-stories";
 import "./react-rowable.scss";
-import "./cubik-theme.scss";
-import "./studio-theme.scss";
+import "../theme/scrollbar/cubik-theme.scss";
+import "../theme/scrollbar/aqua-theme.scss";
 
 function buildScrollableData(nb, size) {
   return {

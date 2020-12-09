@@ -1,9 +1,9 @@
-import { computeSize, computeTrackSize } from "./commons-reducer";
+import { computeTrackSize } from "./commons-reducer";
 
 function updateOne(scrollbar, max) {
   const { max: current } = scrollbar;
   if (current !== max) {
-    return computeTrackSize(computeSize({ ...scrollbar, max }));
+    return computeTrackSize({ ...scrollbar, max });
   }
   return scrollbar;
 }

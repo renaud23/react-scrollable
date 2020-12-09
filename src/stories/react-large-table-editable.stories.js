@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactLargeTableEditable from "../react-large-table-editable";
-import generate from "./random-table-data";
+import { generateRandomTableData } from "./commons-stories";
 import classnames from "classnames";
 import "./custom-large-table.scss";
 import "./excel-theme.scss";
@@ -10,7 +10,7 @@ import "./editable-cell.scss";
 const __WIDTH__ = 30;
 const __HEIGHT__ = 1000;
 
-const data = generate(__WIDTH__, __HEIGHT__);
+const data = generateRandomTableData(__WIDTH__, __HEIGHT__);
 
 function CustomCellRenderer({ cell, height }) {
   const { value, type } = cell;

@@ -1,4 +1,4 @@
-import { randomInt, getSentence } from "./random-entities";
+import { randomInt, getSentence } from "./random-text";
 
 const __MAX_CHILDREN__ = 30;
 const __MIN_CHILDREN__ = 10;

@@ -1,9 +1,9 @@
 import React from "react";
 import ReactLargeTree from "../react-large-tree";
-import getRandomTree, { computeSize } from "./random-tree-data";
+import { generateRandomTree, computeSize } from "./commons-stories";
 import "./custom-scrollable.scss";
 
-const tree = computeSize(getRandomTree(3));
+const tree = computeSize(generateRandomTree(3));
 
 export function DefaultTree() {
   return (

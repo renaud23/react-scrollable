@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactLargeTable from "../react-large-table";
-import generate from "./random-table-data";
+import { generateRandomTableData } from "./commons-stories";
 import classnames from "classnames";
 import "./custom-large-table.scss";
 import "./excel-theme.scss";
@@ -9,7 +9,7 @@ import "./custom-cell-renderer.scss";
 const __WIDTH__ = 30;
 const __HEIGHT__ = 10000;
 
-const data = generate(__WIDTH__, __HEIGHT__);
+const data = generateRandomTableData(__WIDTH__, __HEIGHT__);
 
 export function DefaultTable() {
   return (
@@ -105,35 +105,6 @@ export function FixedRowHeightTable() {
     </>
   );
 }
-
-// const dataRowSpan = {
-//   header: [
-//     { label: "column A", path: "a", __width: 130, resizable: true },
-//     { label: "column B", path: "b", __width: 130, resizable: true },
-//   ],
-//   rows: [
-//     {
-//       a: { value: "hello", rowSpan: 2 },
-//       b: { value: "world !!!" },
-//       __height: 40,
-//     },
-//     { b: { value: "monde !!!" }, __height: 40 },
-//   ],
-// };
-
-// export function RowSpanTable() {
-//   return (
-//     <>
-//       <div className="default-table-container">
-//         <ReactLargeTable
-//           data={dataRowSpan}
-//           className="custom-large-table-theme"
-//           headerHeight={50}
-//         />
-//       </div>
-//     </>
-//   );
-// }
 
 export default {
   title: "react-large-table",

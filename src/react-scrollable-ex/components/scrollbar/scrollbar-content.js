@@ -4,18 +4,11 @@ import { useDispatch } from "../../../commons-scrollable";
 import { actions, ScrollableContext } from "../../state-management";
 import ScrollbarTrack from "./scrollbar-track";
 
-function getContentStyle(horizontal, size, ref) {
-  if (horizontal) {
-    return { width: size };
-  }
-  return { height: size };
-}
-
-function ScrollbarContent({ horizontal, scrollbar }) {
-  const { ref, sizeMax } = scrollbar;
-  const contentWidth = sizeMax - 2 * ref;
+const ScrollbarContent = React.forwardRef(function (
+  { horizontal, scrollbar },
+  containerEl
+) {
   const dispatch = useDispatch(ScrollableContext);
-
   const onClickCallback = useCallback(
     function (e) {
       e.stopPropagation();
@@ -31,19 +24,18 @@ function ScrollbarContent({ horizontal, scrollbar }) {
     },
     [horizontal, dispatch]
   );
-
   return (
     <div
       className={classnames("react-scrollbar-ex-content", {
         horizontal,
         vertical: !horizontal,
       })}
-      style={getContentStyle(horizontal, contentWidth, ref)}
       onClick={onClickCallback}
+      ref={containerEl}
     >
       <ScrollbarTrack horizontal={horizontal} scrollbar={scrollbar} />
     </div>
   );
-}
+});
 
 export default ScrollbarContent;
