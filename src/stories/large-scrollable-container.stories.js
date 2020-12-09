@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LargeScrollableContainer from "../react-large-scrollable";
-import RowableScrollableContent from "./rowable-scrollable-content";
+import { RowableScrollableContent } from "./commons-stories";
 import "./custom-scrollable.scss";
 
 function buildScrollableData(nb, size) {

@@ -30,6 +30,7 @@ $hightColor: #999999;
       bottom: 0;
       width: $scrollbarMaxSize;
       height: $scrollbarRef;
+      box-shadow: 0 -1px 5px rgba(150,150,150,0.6);
     }
 
     &.vertical {
@@ -39,6 +40,7 @@ $hightColor: #999999;
       right: 0;
       height: $scrollbarMaxSize;
       width: $scrollbarRef;
+      box-shadow:  -1px 0 5px rgba(150,150,150,0.6);   
     }
 
     .react-scrollbar-ex-button-container {

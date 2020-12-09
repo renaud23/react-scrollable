@@ -25,7 +25,7 @@ function RowableScrollableContent({
 
       return (
         <td style={{ width }} key={startCell}>
-          <div className="cell-content">{`[${start},${startCell}]`}</div>
+          <div className="cell-content">{`[${startCell}, ${start}]`}</div>
         </td>
       );
     });
@@ -42,14 +42,18 @@ function RowableScrollableContent({
       </table>
 
       <ul className="layer">
-        <li>horizontal is scroll to {horizontalStart} of logical columns.</li>
+        <li>
+          horizontal is scroll to&nbsp;{horizontalStart} of logical columns.
+        </li>
         <li>vertical is scroll to {verticalStart} of logical columns.</li>
         <li>
-          {verticalNb} elements can be draw vertically with a top margin of
+          {verticalNb} elements can be draw vertically with a top margin
+          of&nbsp;
           {marginTop} px.
         </li>
         <li>
-          {horizontalNb} elements can be draw horizontally with a left margin of
+          {horizontalNb} elements can be draw horizontally with a left margin
+          of&nbsp;
           {marginLeft} px.
         </li>
       </ul>

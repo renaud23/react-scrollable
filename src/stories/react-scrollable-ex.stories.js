@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import ReactScrollableEx from "../react-scrollable-ex";
-import Switch from "./switch";
+import { Switch } from "./commons-stories";
 import "./custom-scrollable.scss";
-import "./cubik-theme.scss";
+import "../theme/scrollbar/cubik-theme.scss";
 
 function CreateOne({ width, height, className }) {
   const [verticalScrollPercent, setVerticalScrollPercent] = useState(0);
