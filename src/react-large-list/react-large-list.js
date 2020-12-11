@@ -43,6 +43,7 @@ function ReactLargeList({ className, list, offsetChar }) {
       horizontal={horizontal}
       onFocus={onFocus}
       onBlur={onBlur}
+      className="react-large-list"
     >
       <ListContent
         id={id}

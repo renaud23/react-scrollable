@@ -13,6 +13,7 @@ function initalize() {
 }
 
 const INITIAL = {
+  drag: false,
   idContent: undefined,
   viewportWidth: undefined,
   viewportHeight: undefined,

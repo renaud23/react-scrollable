@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from "react";
+import React, { useContext, useCallback, useState } from "react";
 import ScrollbarContainer from "./scrollbar-container";
 import { useResizeObserver } from "../../../commons-scrollable";
 import ScrollbarButton from "./scrollbar-button";
@@ -8,6 +8,7 @@ import { BUTTON_TYPES } from "./scrollbar-button";
 
 function Scrollbar({ horizontal, buttonProvider }) {
   const [state, dispatch] = useContext(ScrollableContext);
+  const [drag, setDrag] = useState(false);
   const { horizontal: hScrollbar, vertical: vScrollbar, idContent } = state;
   const scrollbar = horizontal ? hScrollbar : vScrollbar;
   const { trackPos, trackSize, size } = scrollbar;
@@ -29,6 +30,7 @@ function Scrollbar({ horizontal, buttonProvider }) {
       horizontal={horizontal}
       idContent={idContent}
       scrollbar={scrollbar}
+      drag={drag}
     >
       <ScrollbarButton
         type={horizontal ? BUTTON_TYPES.left : BUTTON_TYPES.top}
@@ -39,6 +41,8 @@ function Scrollbar({ horizontal, buttonProvider }) {
         horizontal={horizontal}
         scrollbar={scrollbar}
         ref={containerEl}
+        setDrag={setDrag}
+        drag={drag}
       />
       <ScrollbarButton
         type={horizontal ? BUTTON_TYPES.right : BUTTON_TYPES.bottom}
