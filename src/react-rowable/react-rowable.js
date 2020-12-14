@@ -34,21 +34,25 @@ function ReactRowable({
   const {
     scrollRequest: verticalScrollRequest,
     start: verticalStart,
+    size: refHeight,
     margin: marginTop,
     nb: verticalNb,
   } = vertical;
   const {
     scrollRequest: horizontalScrollRequest,
     start: horizontalStart,
+    size: refWidth,
     margin: marginLeft,
     nb: horizontalNb,
   } = horizontal;
   const {
     maxSize: maxHeight,
+
     scrollRequest: verticalOuterScrollRequest,
   } = verticalRowable;
   const {
     maxSize: maxWidth,
+
     scrollRequest: horizontalOuterScrollRequest,
   } = horizontalRowable;
   /* */
@@ -137,6 +141,8 @@ function ReactRowable({
       <ReactScrollable
         maxWidth={maxWidth}
         maxHeight={maxHeight}
+        refWidth={refWidth}
+        refHeight={refHeight}
         onVerticalScroll={onVerticalScroll}
         onHorizontalScroll={onHorizontalScroll}
         verticalScrollRequest={verticalScrollRequest}

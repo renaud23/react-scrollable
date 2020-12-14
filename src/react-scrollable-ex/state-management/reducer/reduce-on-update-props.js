@@ -1,24 +1,27 @@
 import { computeTrackSize } from "./commons-reducer";
 
-function updateOne(scrollbar, max) {
-  const { max: current } = scrollbar;
-  if (current !== max) {
-    return computeTrackSize({ ...scrollbar, max });
-  }
-  return scrollbar;
+function updateOne(scrollbar, max, refSize) {
+  return computeTrackSize({ ...scrollbar, max, refSize });
 }
 
 function reduce(state, action) {
   const { payload } = action;
-  const { maxWidth, maxHeight, focused, idContent } = payload;
+  const {
+    maxWidth,
+    maxHeight,
+    refWidth,
+    refHeight,
+    focused,
+    idContent,
+  } = payload;
   const { horizontal, vertical } = state;
 
   return {
     ...state,
     focused,
     idContent,
-    horizontal: updateOne(horizontal, maxWidth),
-    vertical: updateOne(vertical, maxHeight),
+    horizontal: updateOne(horizontal, maxWidth, refWidth),
+    vertical: updateOne(vertical, maxHeight, refHeight),
   };
 }
 

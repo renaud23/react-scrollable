@@ -1,9 +1,10 @@
 const TRACK_MIN_SIZE = 10;
 
 function compute(scrollbar) {
-  const { size, max, percent } = scrollbar;
-  if (size < max) {
-    const trackSize = Math.max((size / max) * size, TRACK_MIN_SIZE);
+  const { size, max, percent, refSize } = scrollbar;
+  console.log(refSize);
+  if (refSize < max) {
+    const trackSize = Math.max((refSize / max) * size, TRACK_MIN_SIZE);
     const trackPos = percent * (size - trackSize);
     return { ...scrollbar, trackSize, trackPos };
   }
