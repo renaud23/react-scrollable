@@ -20,8 +20,8 @@ function buildScrollableData(nb, size) {
 }
 
 export function ReactRowableDefault() {
-  const [vertical] = useState(buildScrollableData(3, 70));
-  const [horizontal] = useState(buildScrollableData(2, 250));
+  const [vertical] = useState(buildScrollableData(120, 70));
+  const [horizontal] = useState(buildScrollableData(240, 250));
   const [focused, setFocused] = useState(false);
   const [theme, setTheme] = useState("");
 
