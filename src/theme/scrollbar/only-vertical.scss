@@ -1,0 +1,87 @@
+ 
+
+$lightColor: #eeeeee;
+$mediumColor: #bcbcbc;
+$hightColor: #999999;
+
+.react-scrollable-ex {
+  &.only-vertical {
+    .react-rowable-container {
+      width: calc(100% - 16px);
+      height: 100%;
+    }
+
+    .react-scrollbar-ex {
+      &.horizontal {
+        width: 0;
+        height: 0;
+        box-shadow: 0 -1px 5px rgba(150, 150, 150, 0.6);
+      }
+
+      &.vertical {
+        height: 100%;
+        width: 16px;
+        box-shadow: -1px 0 5px rgba(150, 150, 150, 0.6);
+      }
+
+      .react-scrollbar-ex-button-container {
+        width: 16px;
+        height: 16px; 
+
+        .react-scrollbar-ex-button {
+          fill: black;
+          &.disabled {
+            fill: $mediumColor;
+          }
+        }
+
+        &.disabled {
+          .arrow {
+            border-right: solid $mediumColor;
+            border-bottom: solid $mediumColor;
+          }
+        }
+
+        &:hover {
+          background-color: $mediumColor;
+          &.disabled {
+            background-color: $lightColor;
+          }
+        }
+      }
+
+      .react-scrollbar-ex-content {
+        background-color: $lightColor;
+        &.vertical {
+          height: calc(100% - 32px);
+        }
+
+        &.horizontal {
+          width: 0;
+        }
+
+        .react-scrollbar-ex-track {
+          background-color: $mediumColor;
+
+          &.vertical {
+            margin-left: 2px;
+            width: calc(100% - 4px);
+          }
+
+         
+
+          &:hover,
+          &.drag {
+            background-color: $hightColor;
+          }
+        }
+      }
+    }
+
+    .scrollabe-ex-corner {
+      border: none;
+      width: 0px;
+      height: 0px;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import classnames from "classnames";
 import ListContent from "./list-content";
 import { OffsetChar } from "../commons-scrollable";
 import ReactRowable from "../react-rowable";
@@ -43,7 +44,7 @@ function ReactLargeList({ className, list, offsetChar }) {
       horizontal={horizontal}
       onFocus={onFocus}
       onBlur={onBlur}
-      className="react-large-list"
+      className={classnames("react-large-list")}
     >
       <ListContent
         id={id}
