@@ -5,7 +5,7 @@ import { actions, ScrollableContext } from "../../state-management";
 import ScrollbarTrack from "./scrollbar-track";
 
 const ScrollbarContent = React.forwardRef(function (
-  { horizontal, scrollbar },
+  { horizontal, scrollbar, setDrag, drag },
   containerEl
 ) {
   const dispatch = useDispatch(ScrollableContext);
@@ -29,11 +29,17 @@ const ScrollbarContent = React.forwardRef(function (
       className={classnames("react-scrollbar-ex-content", {
         horizontal,
         vertical: !horizontal,
+        drag,
       })}
       onClick={onClickCallback}
       ref={containerEl}
     >
-      <ScrollbarTrack horizontal={horizontal} scrollbar={scrollbar} />
+      <ScrollbarTrack
+        horizontal={horizontal}
+        scrollbar={scrollbar}
+        drag={drag}
+        setDrag={setDrag}
+      />
     </div>
   );
 });

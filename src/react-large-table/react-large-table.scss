@@ -23,9 +23,13 @@
 
   &.with-rows-nums {
     .react-rowable-container {
-      width: calc(100% - 96px);
-      table {
-        margin-left: 80px;
+      .row-nums{
+        width: 70px;
+      }
+      width: calc(100% - 86px);
+      margin-left: 70px;
+      .row-nums {
+          margin-left: -70px;
       }
     }
   }

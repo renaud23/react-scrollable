@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactLargeTableEditable from "../react-large-table-editable";
 import { generateRandomTableData } from "./commons-stories";
 import classnames from "classnames";
+import "./react-rowable-container.scss";
 import "./custom-large-table.scss";
 import "./excel-theme.scss";
 import "./custom-cell-renderer.scss";
@@ -29,7 +30,7 @@ export function EditableTable() {
   return (
     <>
       <p>{last ? `${last.value} at [${last.row}, ${last.column}]` : null}</p>
-      <div className="default-table-container">
+      <div className="rowable-container-example">
         <ReactLargeTableEditable
           className="excel-theme"
           data={data}

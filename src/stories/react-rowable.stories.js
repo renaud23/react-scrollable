@@ -20,8 +20,8 @@ function buildScrollableData(nb, size) {
 }
 
 export function ReactRowableDefault() {
-  const [vertical] = useState(buildScrollableData(100, 60));
-  const [horizontal] = useState(buildScrollableData(100, 200));
+  const [vertical] = useState(buildScrollableData(3, 70));
+  const [horizontal] = useState(buildScrollableData(2, 250));
   const [focused, setFocused] = useState(false);
   const [theme, setTheme] = useState("");
 
@@ -34,7 +34,7 @@ export function ReactRowableDefault() {
         <option value="">Par défaut</option>
         <option value="cubik-with-button">Cubik</option>
         <option value="cubik-without-button">Cubik sans bouton</option>
-        <option value="studio">Studio</option>
+        <option value="aqua-theme">Studio</option>
       </select>
       <div className={classnames("react-rowable-example", { focused })}>
         <ReactRowable

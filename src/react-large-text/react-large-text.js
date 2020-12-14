@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { OffsetChar, initializeScrollable } from "../commons-scrollable";
-import LargeScrollableContainer from "../react-large-scrollable";
 import { computeCumulsSize } from "../commons-scrollable";
+import ReactRowable from "../react-rowable";
 import "./react-large-text.scss";
+import "../theme/scrollbar/only-vertical.scss";
 
 let __INDEX_ID__ = 1;
 
@@ -54,12 +55,9 @@ function fillRows(words, max) {
 function computeRows(text, lineChar) {
   if (lineChar) {
     const paragraphes = text.split(`\r\n`).filter(({ length }) => length > 0);
-
     return paragraphes.reduce(function (current, paragraphe) {
       const words = paragraphe.split(" ");
-
       const rows = fillRows(words, lineChar);
-
       return [...current, ...rows];
     }, []);
   }
@@ -134,22 +132,23 @@ function ReactLargeText({ offsetChar, value, lineHeight, onCompute }) {
 
   return (
     <div className="react-large-text">
-      <LargeScrollableContainer
+      <ReactRowable
         id={id}
         vertical={vertical}
         horizontal={horizontal}
         onResize={onResize}
+        className="only-vertical"
         treeSize
       >
         <ContentText rows={rows} height={lineHeight} />
-      </LargeScrollableContainer>
+      </ReactRowable>
     </div>
   );
 }
 
-export default ({ value, lineHeight, onCompute }) => {
+export default ({ value, lineHeight, onCompute, className }) => {
   return (
-    <OffsetChar>
+    <OffsetChar className={className}>
       <ReactLargeText
         value={value}
         lineHeight={lineHeight}

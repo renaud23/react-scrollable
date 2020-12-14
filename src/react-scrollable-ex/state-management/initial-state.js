@@ -3,7 +3,8 @@ function initalize() {
     ref: undefined,
     max: undefined,
 
-    size: undefined,
+    refSize: undefined, // content size
+    size: undefined, // size of scrollbar
     trackSize: undefined,
     trackPos: 0,
 
@@ -13,6 +14,7 @@ function initalize() {
 }
 
 const INITIAL = {
+  drag: false,
   idContent: undefined,
   viewportWidth: undefined,
   viewportHeight: undefined,

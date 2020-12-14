@@ -7,7 +7,13 @@ function getAria(scrollbar) {
   return { min: 0, max: 100, now };
 }
 
-function ScrollbarContainer({ children, idContent, horizontal, scrollbar }) {
+function ScrollbarContainer({
+  children,
+  idContent,
+  horizontal,
+  scrollbar,
+  drag,
+}) {
   const { min, max, now } = getAria(scrollbar);
   return (
     <div
@@ -20,6 +26,7 @@ function ScrollbarContainer({ children, idContent, horizontal, scrollbar }) {
       className={classnames("react-scrollbar-ex", {
         horizontal,
         vertical: !horizontal,
+        drag,
       })}
     >
       {children}

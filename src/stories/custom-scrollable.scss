@@ -1,14 +1,14 @@
 .large-text-container {
-  .react-large-text {
-    font-family: "Courier New", Courier, monospace;
-    font-size: 18px;
-    background-color: khaki;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
 
+  .react-large-text {
+    background-color: khaki;
     width: 400px;
     height: 300px;
 
     overflow: hidden;
-    resize: vertical;
+    resize: both;
     line-height: 22px;
     font-size: 18px;
 
@@ -36,8 +36,6 @@
   width: 400px;
   overflow: hidden;
   resize: both;
-
-  
 }
 
 .simple-scrollable-example {
@@ -75,3 +73,7 @@
   }
 }
 
+.scrollable-content-example {
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+}
