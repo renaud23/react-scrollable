@@ -1,0 +1,132 @@
+/* */
+$primaryColor: DarkRed;
+$secondaryColor: DarkOrange;
+$highlightColor: gold;
+$refSize: 6px;
+$padding: 2px;
+$maxSize: calc(100% - 12px);
+
+.react-scrollable-ex {
+  &.cubik-without-button {
+    .react-rowable-container {
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+    }
+    .react-scrollbar-ex {
+      background-color: $primaryColor;
+
+      &.horizontal {
+        padding: $padding 0 $padding $padding;
+        height: $refSize;
+        width: $maxSize;
+      }
+      &.vertical {
+        padding: $padding $padding 0 $padding;
+        height: $maxSize;
+        width: $refSize;
+      }
+
+      /* BUTTON */
+      .react-scrollbar-ex-button-container {
+        width: 0;
+        height: 0;
+        display: none;
+      }
+
+      /* */
+      .react-scrollbar-ex-content {
+        width: 100%;
+        height: 100%;
+
+        background-color: $primaryColor;
+        .react-scrollbar-ex-track {
+          &.horizontal,
+          &.vertical {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: $secondaryColor;
+            &:hover,
+            &.drag {
+              background-color: $highlightColor;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /** WITH BUTTON */
+  &.cubik-with-button {
+    @extend .cubik-without-button;
+    .react-rowable-container {
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+    }
+
+    .react-scrollbar-ex {
+      &.horizontal {
+        padding: 0;
+        height: 10px;
+        width: calc(100% - 10px);
+      }
+      &.vertical {
+        padding: 0;
+        height: calc(100% - 10px);
+        width: 10px;
+      }
+
+      /* CONTENT */
+      .react-scrollbar-ex-content {
+        &.horizontal {
+          width: calc(100% - 4px);
+          height: calc(100% - 4px);
+          margin: 2px 2px;
+        }
+
+        &.vertical {
+          width: calc(100% - 4px);
+          height: calc(100% - 4px);
+          margin: 2px 2px;
+        }
+      }
+
+      /* BUTTON */
+      .react-scrollbar-ex-button-container {
+        width: 10px;
+        height: 10px;
+        display: block;
+        background-color: $secondaryColor;
+
+        .react-scrollbar-ex-button {
+          height: 10px;
+          width: 10px;
+          line-height: 10px;
+          fill: black;
+          &.disabled {
+            fill: snow;
+            &:hover {
+              background-color: $secondaryColor;
+            }
+          }
+
+          &:hover {
+            background-color: $highlightColor;
+          }
+        }
+      }
+    }
+  }
+
+  /* */
+  &.cubik-without-button,
+  &.cubik-with-button {
+    .scrollabe-ex-corner {
+      background-color: $secondaryColor;
+      width: $refSize;
+      height: $refSize;
+      border: none;
+      border: solid $primaryColor $padding;
+    }
+  }
+}

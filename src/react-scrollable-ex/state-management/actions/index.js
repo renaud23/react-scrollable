@@ -1,15 +1,15 @@
 export const ON_HORIZONTAL_SCROLLBAR_RESIZE =
   "react-scrollable-ex/on-horizontal-scrollbar-resize";
-export const onHorizontalScrollbarResize = (sizeMax, ref) => ({
+export const onHorizontalScrollbarResize = (size, ref) => ({
   type: ON_HORIZONTAL_SCROLLBAR_RESIZE,
-  payload: { sizeMax, ref },
+  payload: { size, ref },
 });
 
 export const ON_VERTICAL_SCROLLBAR_RESIZE =
   "react-scrollable-ex/on-vertical-scrollbar-resize";
-export const onVerticalScrollbarResize = (sizeMax, ref) => ({
+export const onVerticalScrollbarResize = (size, ref) => ({
   type: ON_VERTICAL_SCROLLBAR_RESIZE,
-  payload: { sizeMax, ref },
+  payload: { size, ref },
 });
 
 export const ON_UPDATE_PROPS = "react-scrollable-ex/on-update-props";

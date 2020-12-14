@@ -1,0 +1,98 @@
+/* */
+$primaryColor: rgba(200, 200, 250, 0.3);
+$secondaryColor: navy;
+$highlightColor: royalblue;
+$sizeBar: 6px;
+$refBar: calc(100% - 6px);
+
+.react-scrollable-ex {
+  &.aqua-theme {
+    .react-rowable-container {
+      width: 100%;
+      height: 100%;
+    }
+    .react-scrollbar-ex {
+      background-color: $primaryColor;
+      border: solid 1px dimgray;
+      &.horizontal {
+        height: 10px;
+        width: calc(100% - 14px);
+        border-radius: 5px 5px;
+        border: solid 1px transparent;
+        background-color: transparent;
+
+        &:hover,
+        &.drag {
+          background-color: $primaryColor;
+          border: solid 1px dimgray;
+          .react-scrollbar-ex-track {
+            &.horizontal {
+              background-color: $secondaryColor;
+            }
+          }
+        }
+      }
+      &.vertical {
+        height: calc(100% - 14px);
+        width: 10px;
+        border-radius: 5px 5px;
+        box-shadow: none;
+      }
+
+      /* BUTTON */
+      .react-scrollbar-ex-button-container {
+        width: 0;
+        height: 0;
+        display: none;
+      }
+
+      /* */
+      .react-scrollbar-ex-content {
+        margin: 2px 2px;
+        width: calc(100% - 4px);
+        height: calc(100% - 4px);
+        background-color: transparent;
+        .react-scrollbar-ex-track {
+          &.vertical {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            margin: 0;
+            background-color: $secondaryColor;
+            &:hover,
+            &.drag {
+              background-color: $highlightColor;
+              border: none;
+            }
+          }
+
+          &.horizontal {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            margin: 0;
+            background-color: transparent;
+            &:hover {
+              background-color: $secondaryColor;
+              border: none;
+            }
+            &.drag {
+              background-color: $highlightColor;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+
+    /* */
+    .scrollabe-ex-corner {
+      background-color: $primaryColor;
+      width: 8px;
+      height: 8px;
+      border-radius: 0 8px 0 8px;
+      margin: 1px 1px;
+      border: solid 1px dimgray;
+    }
+  }
+}

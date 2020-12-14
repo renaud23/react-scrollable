@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { reducers, INITIAL_STATE, actions } from "./state-management";
-import LargeScrollableContainer from "../react-large-scrollable";
+import ReactRowable from "../react-rowable";
 import Content from "./large-tree-content";
 import "./react-large-tree.scss";
 
@@ -18,9 +18,9 @@ function ReactLargeTree({ root }) {
   );
   return (
     <div className="react-large-tree">
-      <LargeScrollableContainer horizontal={horizontal} vertical={vertical}>
+      <ReactRowable horizontal={horizontal} vertical={vertical}>
         <Content rows={rows} />
-      </LargeScrollableContainer>
+      </ReactRowable>
     </div>
   );
 }

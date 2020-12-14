@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import classnames from "classnames";
 import BodyContent from "./body-content";
 import HeaderContent from "./header-content";
 import { RowNums } from "../table-components";
@@ -20,9 +19,6 @@ function TableContent({
   marginTop,
   verticalStart,
   verticalNb,
-  focused,
-  onFocus,
-  onBlur,
   rowNumRenderer,
   rowNums,
 }) {
@@ -34,20 +30,10 @@ function TableContent({
     [verticalStart, verticalNb, marginTop, dispatch]
   );
 
-  useEffect(
-    function () {
-      if (focused) {
-        onFocus();
-      } else {
-        onBlur();
-      }
-    },
-    [focused, onFocus, onBlur]
-  );
   return (
     <>
       {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}
-      <Table id={id} className={classnames("", { "rows-nums": rowNums })}>
+      <Table id={id}>
         <Thead height={headerHeight} marginLeft={marginLeft}>
           <Tr height={headerHeight}>
             <HeaderContent

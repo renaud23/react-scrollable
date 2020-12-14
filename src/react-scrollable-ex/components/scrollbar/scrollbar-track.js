@@ -12,10 +12,9 @@ function getStyle(horizontal, scrollbar) {
   return { marginTop: safeCss(trackPos), height: trackSize };
 }
 
-function ScrollbarTrack({ horizontal, scrollbar }) {
+function ScrollbarTrack({ horizontal, scrollbar, drag, setDrag }) {
   const dispatch = useDispatch(ScrollableContext);
   const { trackSize, size } = scrollbar;
-  const [drag, setDrag] = useState(false);
   const [clientPos, setClientPos] = useState(undefined);
 
   const onMouseDownCallback = useCallback(
@@ -27,7 +26,7 @@ function ScrollbarTrack({ horizontal, scrollbar }) {
         setClientPos(clientPos);
       }
     },
-    [horizontal]
+    [horizontal, setDrag]
   );
   const onMouseMoveCallback = useCallback(
     function (e) {
@@ -52,7 +51,7 @@ function ScrollbarTrack({ horizontal, scrollbar }) {
         setClientPos(undefined);
       }
     },
-    [drag]
+    [drag, setDrag]
   );
   const onClickCallback = function (e) {
     e.stopPropagation();

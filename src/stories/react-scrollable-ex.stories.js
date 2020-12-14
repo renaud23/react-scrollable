@@ -1,12 +1,23 @@
 import React, { useState, useCallback } from "react";
 import ReactScrollableEx from "../react-scrollable-ex";
-import Switch from "./switch";
+import { useResizeObserver } from "../commons-scrollable";
+import { Switch } from "./commons-stories";
 import "./custom-scrollable.scss";
-import "./cubik-theme.scss";
+import "../theme/scrollbar/cubik-theme.scss";
 
 function CreateOne({ width, height, className }) {
   const [verticalScrollPercent, setVerticalScrollPercent] = useState(0);
   const [verticalScrollRequest, setVerticalScrollRequest] = useState(undefined);
+  const [refSize, setRefSize] = useState({
+    refWidth: undefined,
+    refHeight: undefined,
+  });
+  const { refWidth, refHeight } = refSize;
+
+  const onResize = function (width, height) {
+    setRefSize({ refWidth: width, refHeight: height });
+  };
+  const containerEl = useResizeObserver(onResize);
 
   const onUp = useCallback(
     function () {
@@ -35,6 +46,8 @@ function CreateOne({ width, height, className }) {
         <ReactScrollableEx
           maxWidth={width}
           maxHeight={height}
+          refWidth={refWidth}
+          refHeight={refHeight}
           className={className}
           onHorizontalScroll={() => null}
           onVerticalScroll={function (percent) {
@@ -42,7 +55,10 @@ function CreateOne({ width, height, className }) {
           }}
           verticalScrollRequest={verticalScrollRequest}
         >
-          <div className="content">{`${width}px X ${height}px`}</div>
+          <div
+            className="scrollable-content-example"
+            ref={containerEl}
+          >{`${width}px X ${height}px`}</div>
         </ReactScrollableEx>
       </div>
     </>

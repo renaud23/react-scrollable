@@ -1,5 +1,4 @@
-import React, { useReducer, useEffect, useCallback, useMemo } from "react";
-// import LargeScrollableContainer from "../react-large-scrollable";
+import React, { useReducer, useEffect, useCallback } from "react";
 import ReactRowable from "../react-rowable";
 import TableContent from "./table-content";
 import PropTypes from "prop-types";
@@ -16,8 +15,6 @@ import "./react-large-table.scss";
 
 function onEmptyHook() {}
 
-const middlewareDefault = (next) => (action) => next(action);
-
 function ReactLargeTable({
   data,
   headerHeight,
@@ -28,7 +25,6 @@ function ReactLargeTable({
   headerRenderer,
   rowNumRenderer,
   rowNums,
-  middleware,
   onChangeData,
   onMouseLeave,
   onMouseEnter,
@@ -37,16 +33,9 @@ function ReactLargeTable({
   horizontalScrollRequest,
   verticalScrollRequest,
 }) {
-  const [state, __dispatch] = useReducer(reducers, INITIAL_STATE);
+  const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
   const { vertical, horizontal, id } = state;
-  const { header, rows, focused } = state;
-
-  const dispatch = useMemo(
-    function () {
-      return middleware(__dispatch);
-    },
-    [__dispatch, middleware]
-  );
+  const { header, rows } = state;
 
   useEffect(
     function () {
@@ -89,35 +78,23 @@ function ReactLargeTable({
     [headerHeight]
   );
 
-  const onFocusCallback = useCallback(
-    function () {
-      dispatch(actions.onFocus());
-      onFocus();
-    },
-    [dispatch, onFocus]
-  );
-  const onBlurCallback = useCallback(
-    function () {
-      dispatch(actions.onBlur());
-      onBlur();
-    },
-    [dispatch, onBlur]
-  );
-
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div
-        className={classnames("react-large-table", className, { focused })}
+        className={classnames("react-large-table", className, {
+          "with-rows-nums": rowNums,
+        })}
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseEnter}
       >
-        {/* {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null} */}
         <ReactRowable
           id={id}
           vertical={vertical}
           horizontal={horizontal}
           onResize={onResizeCallback}
           treeSize={treeSize}
+          onFocus={onFocus}
+          onBlur={onBlur}
         >
           <TableContent
             rows={rows}
@@ -127,8 +104,6 @@ function ReactLargeTable({
             cellRenderer={cellRenderer}
             headerRenderer={headerRenderer}
             id={id}
-            onFocus={onFocusCallback}
-            onBlur={onBlurCallback}
             rowNumRenderer={rowNumRenderer}
             rowNums={rowNums}
           />
@@ -178,7 +153,6 @@ ReactLargeTable.defaultProps = {
   rowNumRenderer: RowNumRenderer,
   rowNums: false,
   rowHeight: undefined,
-  middleware: middlewareDefault,
   onChangeData: onEmptyHook,
   onMouseLeave: onEmptyHook,
   onMouseEnter: onEmptyHook,

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import ReactLargeTableEditable from "../react-large-table-editable";
-import generate from "./random-table-data";
+import { generateRandomTableData } from "./commons-stories";
 import classnames from "classnames";
+import "./react-rowable-container.scss";
 import "./custom-large-table.scss";
 import "./excel-theme.scss";
 import "./custom-cell-renderer.scss";
@@ -10,7 +11,7 @@ import "./editable-cell.scss";
 const __WIDTH__ = 30;
 const __HEIGHT__ = 1000;
 
-const data = generate(__WIDTH__, __HEIGHT__);
+const data = generateRandomTableData(__WIDTH__, __HEIGHT__);
 
 function CustomCellRenderer({ cell, height }) {
   const { value, type } = cell;
@@ -29,7 +30,7 @@ export function EditableTable() {
   return (
     <>
       <p>{last ? `${last.value} at [${last.row}, ${last.column}]` : null}</p>
-      <div className="default-table-container">
+      <div className="rowable-container-example">
         <ReactLargeTableEditable
           className="excel-theme"
           data={data}

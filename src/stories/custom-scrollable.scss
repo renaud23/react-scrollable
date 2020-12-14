@@ -1,20 +1,21 @@
 .large-text-container {
-  .react-large-text {
-    font-family: "Courier New", Courier, monospace;
-    font-size: 18px;
-    background-color: khaki;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
 
+  .react-large-text {
+  
+    background-color: khaki;
     width: 400px;
     height: 300px;
 
     overflow: hidden;
-    resize: vertical;
+    resize: both;
     line-height: 22px;
     font-size: 18px;
 
     padding: 10px 10px;
     border-radius: 10px;
-
+    border: solid 1px transparent;
     &:focus-within {
       border: solid 1px saddlebrown;
       -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
@@ -36,8 +37,6 @@
   width: 400px;
   overflow: hidden;
   resize: both;
-
-  
 }
 
 .simple-scrollable-example {
@@ -75,3 +74,7 @@
   }
 }
 
+.scrollable-content-example {
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+}

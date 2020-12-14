@@ -9,6 +9,7 @@ import {
 } from "./state-management";
 import ReactScrollable from "../react-scrollable-ex";
 import isBindedKey from "./is-binded-key";
+import "./react-rowable.scss";
 
 function emptyResizeCallback(w, h) {
   return [w, h];
@@ -33,21 +34,25 @@ function ReactRowable({
   const {
     scrollRequest: verticalScrollRequest,
     start: verticalStart,
+    size: refHeight,
     margin: marginTop,
     nb: verticalNb,
   } = vertical;
   const {
     scrollRequest: horizontalScrollRequest,
     start: horizontalStart,
+    size: refWidth,
     margin: marginLeft,
     nb: horizontalNb,
   } = horizontal;
   const {
     maxSize: maxHeight,
+
     scrollRequest: verticalOuterScrollRequest,
   } = verticalRowable;
   const {
     maxSize: maxWidth,
+
     scrollRequest: horizontalOuterScrollRequest,
   } = horizontalRowable;
   /* */
@@ -136,6 +141,8 @@ function ReactRowable({
       <ReactScrollable
         maxWidth={maxWidth}
         maxHeight={maxHeight}
+        refWidth={refWidth}
+        refHeight={refHeight}
         onVerticalScroll={onVerticalScroll}
         onHorizontalScroll={onHorizontalScroll}
         verticalScrollRequest={verticalScrollRequest}
@@ -144,6 +151,7 @@ function ReactRowable({
         onBlur={onBlurCallback}
         onKeyDown={onKeyDownCallback}
         className={className}
+        idContent={id}
       >
         <div className="react-rowable-container" ref={containerEl}>
           {React.cloneElement(React.Children.only(children), {
@@ -175,7 +183,8 @@ ReactRowable.propTypes = {
   onResize: PropTypes.func,
 };
 
-ReactScrollable.defaultProps = {
+ReactRowable.defaultProps = {
+  id: undefined,
   onBlur: emptyCallback,
   onFocus: emptyCallback,
 };

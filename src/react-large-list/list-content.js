@@ -56,18 +56,18 @@ function ContentList({
     });
 
     return (
-      <div className="react-large-list">
-        <ul
-          id={id}
-          className={classnames(className, { focused })}
-          style={{
-            marginTop: safeCss(marginTop),
-            marginLeft: safeCss(marginLeft - offsetChar * horizontalStart),
-          }}
-        >
-          {contentLi}
-        </ul>
-      </div>
+      // <div className="react-large-list">
+      <ul
+        id={id}
+        className={classnames(className, { focused })}
+        style={{
+          marginTop: safeCss(marginTop),
+          marginLeft: safeCss(marginLeft - offsetChar * horizontalStart),
+        }}
+      >
+        {contentLi}
+      </ul>
+      // </div>
     );
   }
   return (

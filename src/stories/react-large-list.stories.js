@@ -1,6 +1,6 @@
 import React from "react";
 import ReactLargeList from "../react-large-list";
-import generateRandomList from "./random-entities";
+import { generateRandomList } from "./commons-stories";
 import "./custom-large-list.scss";
 
 const __LIST_LENGTH__ = 10000;

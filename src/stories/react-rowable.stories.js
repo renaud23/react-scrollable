@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import ReactRowable from "../react-rowable";
-import RowableScrollableContent from "./rowable-scrollable-content";
+import { RowableScrollableContent } from "./commons-stories";
 import "./react-rowable.scss";
-import "./cubik-theme.scss";
+import "../theme/scrollbar/cubik-theme.scss";
+import "../theme/scrollbar/aqua-theme.scss";
 
 function buildScrollableData(nb, size) {
   return {
@@ -19,8 +20,8 @@ function buildScrollableData(nb, size) {
 }
 
 export function ReactRowableDefault() {
-  const [vertical] = useState(buildScrollableData(100, 60));
-  const [horizontal] = useState(buildScrollableData(100, 200));
+  const [vertical] = useState(buildScrollableData(120, 70));
+  const [horizontal] = useState(buildScrollableData(240, 250));
   const [focused, setFocused] = useState(false);
   const [theme, setTheme] = useState("");
 
@@ -33,10 +34,11 @@ export function ReactRowableDefault() {
         <option value="">Par défaut</option>
         <option value="cubik-with-button">Cubik</option>
         <option value="cubik-without-button">Cubik sans bouton</option>
+        <option value="aqua-theme">Studio</option>
       </select>
       <div className={classnames("react-rowable-example", { focused })}>
         <ReactRowable
-          id={"id"}
+          id="rowable-example"
           vertical={vertical}
           horizontal={horizontal}
           onFocus={() => setFocused(true)}

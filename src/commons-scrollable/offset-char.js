@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
-function OffsetChar({ children }) {
+function OffsetChar({ children, className }) {
   const [offsetChar, setOffsetChar] = useState(undefined);
   const offsetEl = useRef(undefined);
 
@@ -13,8 +13,13 @@ function OffsetChar({ children }) {
     },
     [offsetEl]
   );
+
   if (!offsetChar) {
-    return <span ref={offsetEl}>M</span>;
+    return (
+      <span ref={offsetEl} className={className}>
+        M
+      </span>
+    );
   }
   return (
     <>

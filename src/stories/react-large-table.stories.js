@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import ReactLargeTable from "../react-large-table";
-import generate from "./random-table-data";
+import { generateRandomTableData } from "./commons-stories";
 import classnames from "classnames";
+import "./react-rowable-container.scss";
 import "./custom-large-table.scss";
 import "./excel-theme.scss";
 import "./custom-cell-renderer.scss";
@@ -9,7 +10,7 @@ import "./custom-cell-renderer.scss";
 const __WIDTH__ = 30;
 const __HEIGHT__ = 10000;
 
-const data = generate(__WIDTH__, __HEIGHT__);
+const data = generateRandomTableData(__WIDTH__, __HEIGHT__);
 
 export function DefaultTable() {
   return (
@@ -18,7 +19,7 @@ export function DefaultTable() {
         A large table of {__WIDTH__} columns and {__HEIGHT__} rows,
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
-      <div className="default-table-container">
+      <div className="rowable-container-example">
         <ReactLargeTable data={data} headerHeight={30} treeSize={false} />
       </div>
       <code>
@@ -49,7 +50,7 @@ export function WithRowNumsTable() {
         A large table of {__WIDTH__} columns and {__HEIGHT__} rows,
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
-      <div className="default-table-container">
+      <div className="rowable-container-example">
         <ReactLargeTable data={data} headerHeight={50} rowNums={true} />
       </div>
     </>
@@ -64,7 +65,7 @@ export function CustomThemeTable() {
         A large table of {__WIDTH__} columns and {__HEIGHT__} rows,
         {__WIDTH__ * __HEIGHT__} cells.
       </p>
-      <div className={classnames("default-table-container", { focused })}>
+      <div className={classnames("rowable-container-example", { focused })}>
         <ReactLargeTable
           className="custom-large-table-theme"
           data={data}
@@ -92,7 +93,7 @@ export function FixedRowHeightTable() {
         A large table of {__WIDTH__} columns and {__HEIGHT__ * (how + 1)} rows,
         {__WIDTH__ * __HEIGHT__} cells. Fixed row height, for very large table !
       </p>
-      <div className="default-table-container">
+      <div className="rowable-container-example">
         <ReactLargeTable
           className="custom-large-table-theme"
           data={data__}
@@ -105,35 +106,6 @@ export function FixedRowHeightTable() {
     </>
   );
 }
-
-// const dataRowSpan = {
-//   header: [
-//     { label: "column A", path: "a", __width: 130, resizable: true },
-//     { label: "column B", path: "b", __width: 130, resizable: true },
-//   ],
-//   rows: [
-//     {
-//       a: { value: "hello", rowSpan: 2 },
-//       b: { value: "world !!!" },
-//       __height: 40,
-//     },
-//     { b: { value: "monde !!!" }, __height: 40 },
-//   ],
-// };
-
-// export function RowSpanTable() {
-//   return (
-//     <>
-//       <div className="default-table-container">
-//         <ReactLargeTable
-//           data={dataRowSpan}
-//           className="custom-large-table-theme"
-//           headerHeight={50}
-//         />
-//       </div>
-//     </>
-//   );
-// }
 
 export default {
   title: "react-large-table",

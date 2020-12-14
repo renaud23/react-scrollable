@@ -1,8 +1,9 @@
 import React from "react";
+import classnames from "classnames";
 
-function Table({ id, children }) {
+function Table({ id, children, className }) {
   return (
-    <table className="react-large-table" id={id}>
+    <table className={classnames("react-large-table", className)} id={id}>
       {children}
     </table>
   );
