@@ -27,6 +27,12 @@
     }
     .react-scrollable-ex {
       width: calc(100% - 70px);
+      .react-scrollbar-ex {
+        &.horizontal {
+          width: calc(100% + 54px);
+          margin-left: -70px;
+        }
+      }
     }
   }
 
