@@ -137,7 +137,7 @@ function ReactRowable({
     [horizontalOuterScrollRequest]
   );
   return (
-    <RowableContext.Provider value={[state, dispatch]}>
+    <RowableContext.Provider value={[state, dispatch, containerEl]}>
       <ReactScrollable
         maxWidth={maxWidth}
         maxHeight={maxHeight}

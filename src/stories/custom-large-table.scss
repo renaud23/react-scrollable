@@ -5,6 +5,17 @@ $headerBgColor: Sienna;
 .custom-large-table-theme {
   background-color: khaki;
 
+  .th-dragger {
+    background-color: rgba(160, 82, 45, 0.5);
+    height: 100%;
+    width: 100%;
+    display: block;
+    color: rgba(255, 228, 196, 0.5);
+    line-height: 28px;
+    text-align: center;
+    font-weight: 700;
+  }
+
   thead {
     background-color: $headerBgColor;
     box-shadow: 2px 0 4px 0 black;
@@ -51,9 +62,10 @@ $headerBgColor: Sienna;
 
   /* */
   .row-nums {
-    min-width: 70px;
-    max-width: 70px;
-
+    border-right: thick double $trackBgColorHover;
+    min-width: 65px;
+    max-width: 65px;
+    background-color: Peru;
     box-shadow: 2px 0 4px -2px black;
     z-index: 2;
 
@@ -65,8 +77,8 @@ $headerBgColor: Sienna;
         width: 100%;
         background-color: $headerBgColor;
         border-bottom: thick double $trackBgColorHover;
-        border-right: thick double $trackBgColorHover;
-        width: calc(100% - 5px);
+        //
+        //  width: calc(100% - 5px);
       }
     }
     // padding-top: 1px;
@@ -74,7 +86,7 @@ $headerBgColor: Sienna;
       background-color: Peru;
 
       .row-container {
-        border-right: thick double $trackBgColorHover;
+        // border-right: thick double $trackBgColorHover;
 
         .row {
           border-bottom: solid 1px black;

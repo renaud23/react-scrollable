@@ -5,6 +5,8 @@ import reduceOnVerticalScroll from "./reducer-on-vertical-scroll";
 import reduceOnResizeRow from "./reduce-on-resize-row";
 import onReduceVerticalScrollRequest from "./reduce-on-vertical-scroll-request";
 import onReduceOnHorizontalScrollRequest from "./reduce-on-horizontal-scroll-request";
+import reduceOnStartDragColumn from "./reduce-on-start-drag-column";
+import reduceOnStopDragColumn from "./reduce-on-stop-drag-column";
 
 function reducer(state, action) {
   const { type } = action;
@@ -21,6 +23,10 @@ function reducer(state, action) {
       return onReduceVerticalScrollRequest(state, action);
     case actions.ON_HORIZONTAL_SCROLL_REQUEST:
       return onReduceOnHorizontalScrollRequest(state, action);
+    case actions.ON_START_DRAG_COLUMN:
+      return reduceOnStartDragColumn(state, action);
+    case actions.ON_STOP_DRAG_COLUMN:
+      return reduceOnStopDragColumn(state, action);
     default:
       return state;
   }
