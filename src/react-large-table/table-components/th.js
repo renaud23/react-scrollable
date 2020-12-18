@@ -51,12 +51,15 @@ function Th({ children, width, height, index }) {
           }
           return a;
         }, undefined);
-        console.log(index, onWitch);
+
+        if (onWitch !== undefined) {
+          dispatch(actions.onSwitchColumns(index, onWitch));
+        }
       }
 
       setDrag(false);
     },
-    [head, index]
+    [head, index, dispatch]
   );
 
   return (
@@ -67,7 +70,6 @@ function Th({ children, width, height, index }) {
       }}
       onMouseDown={onMouseDown}
       ref={thEl}
-      onMouseMove={(e) => console.log("enter", index)}
     >
       {drag ? (
         <Dragger {...dragger} onClose={onClose}>

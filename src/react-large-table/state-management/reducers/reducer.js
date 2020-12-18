@@ -9,6 +9,7 @@ import reduceOnStartDragColumn from "./reduce-on-start-drag-column";
 import reduceOnStopDragColumn from "./reduce-on-stop-drag-column";
 import reduceAddEntity from "./reduce-add-entity";
 import reduceRemoveEntity from "./reduce-remove-entity";
+import reduceOnSwitchColumns from "./reduce-on-switch-columns";
 
 function reducer(state, action) {
   const { type } = action;
@@ -33,6 +34,8 @@ function reducer(state, action) {
       return reduceAddEntity(state, action);
     case actions.REMOVE_ENTITY:
       return reduceRemoveEntity(state, action);
+    case actions.ON_SWITCH_COLUMNS:
+      return reduceOnSwitchColumns(state, action);
     default:
       return state;
   }

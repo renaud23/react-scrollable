@@ -1,11 +1,13 @@
 function remove(domEntities, id, type) {
   if (type in domEntities) {
-    return Object.entries(domEntities[type]).reduce(function (a, [k, e]) {
+    const next = Object.entries(domEntities[type]).reduce(function (a, [k, e]) {
       if (k !== id) {
         return { ...a, [k]: e };
       }
       return a;
     }, {});
+
+    return { ...domEntities, [type]: next };
   }
   return domEntities;
 }
