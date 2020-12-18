@@ -13,6 +13,8 @@ const INITIAL_STATE = {
 
   focused: false,
   draggedColumn: undefined,
+
+  domEntities: {},
 };
 
 export default INITIAL_STATE;

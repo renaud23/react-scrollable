@@ -20,19 +20,22 @@ function Dragger({ node, parent, clientX, clientY, onClose, children }) {
 
   const onMouseUp = useCallback(
     function (e) {
-      onClose(true, { top, left, width, height });
+      const { clientX, clientY } = e;
+      onClose(true, { target: e.target, clientX, clientY });
     },
-    [onClose, top, left, width, height]
+    [onClose]
   );
 
   useEffect(
     function () {
       document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
       return () => {
         document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
       };
     },
-    [onMouseMove]
+    [onMouseMove, onMouseUp]
   );
 
   useEffect(
@@ -59,11 +62,7 @@ function Dragger({ node, parent, clientX, clientY, onClose, children }) {
   if (width && height) {
     return (
       <RowablePortal>
-        <div
-          className="dragger"
-          onMouseUp={onMouseUp}
-          style={{ top, left, width, height }}
-        >
+        <div className="dragger" style={{ top, left, width, height }}>
           {children}
         </div>
       </RowablePortal>

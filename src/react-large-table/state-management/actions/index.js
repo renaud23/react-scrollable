@@ -53,3 +53,15 @@ export const ON_STOP_DRAG_COLUMN = "react-large-table/on-stop-drag-column";
 export const onStopDragColumn = () => ({
   type: ON_STOP_DRAG_COLUMN,
 });
+
+export const ADD_ENTITY = "react-large-table/add-entity";
+export const addEntity = (id, type, entity) => ({
+  type: ADD_ENTITY,
+  payload: { id, type, entity },
+});
+
+export const REMOVE_ENTITY = "react-large-table/remove-entity";
+export const removeEntity = (id, type) => ({
+  type: REMOVE_ENTITY,
+  payload: { id, type },
+});

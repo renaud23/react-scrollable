@@ -2,10 +2,10 @@ import React, { useCallback, useContext, useState } from "react";
 import classnames from "classnames";
 import Dragger from "./dragger";
 import { actions } from "../state-management";
-import useElementObserver, { getElements } from "./use-element-observer";
 import { Track, safeCss } from "../../commons-scrollable";
 import { RowableContext } from "../../react-rowable/state-management";
 import { TableContext } from "../state-management";
+import { useKeepDomEntities, useDomEntities } from "../state-management";
 
 function Th({ children, width, height, index }) {
   const [state, dispatch] = useContext(TableContext);
@@ -15,10 +15,8 @@ function Th({ children, width, height, index }) {
   const { header } = state;
   const column = header[index];
   const { resizable = false, label } = column;
-  const [head, setHead] = useState(undefined);
-
-  const ref = useElementObserver(index);
-
+  const head = useDomEntities("th");
+  const thEl = useKeepDomEntities(index, "th");
   const onTrackCallback = useCallback(
     function (delta) {
       dispatch(actions.onResizeColumn(index, delta));
@@ -36,23 +34,21 @@ function Th({ children, width, height, index }) {
         parent: rowableContainer.current,
         onClose,
       });
-      setHead(getElements());
+
       setDrag(true);
     }
   };
 
   const onClose = useCallback(
-    function (refresh, rect) {
-      const { left: draggerLeft } = rect;
+    function (refresh, { clientX }) {
       if (refresh) {
         const onWitch = Object.entries(head).reduce(function (a, [i, e]) {
           if (parseInt(i) !== index) {
             const { left, width } = e.getBoundingClientRect();
-            if (draggerLeft > left && draggerLeft <= left + width) {
+            if (clientX > left && clientX <= left + width) {
               return parseInt(i);
             }
           }
-
           return a;
         }, undefined);
         console.log(index, onWitch);
@@ -70,7 +66,8 @@ function Th({ children, width, height, index }) {
         width: safeCss(width),
       }}
       onMouseDown={onMouseDown}
-      ref={ref}
+      ref={thEl}
+      onMouseMove={(e) => console.log("enter", index)}
     >
       {drag ? (
         <Dragger {...dragger} onClose={onClose}>
