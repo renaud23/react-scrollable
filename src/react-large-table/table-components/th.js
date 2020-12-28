@@ -72,7 +72,12 @@ function Th({ children, width, height, index }) {
       ref={thEl}
     >
       {drag ? (
-        <Dragger {...dragger} onClose={onClose}>
+        <Dragger
+          {...dragger}
+          onClose={onClose}
+          onEnterPortal={(witch) => console.log(witch)}
+          onExitPortal={() => console.log("exit")}
+        >
           <span className="th-dragger">{label}</span>
         </Dragger>
       ) : null}
