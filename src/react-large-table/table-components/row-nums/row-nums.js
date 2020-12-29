@@ -5,7 +5,7 @@ import { getHeight } from "../../commons-table";
 import Row from "./row";
 import "./row-nums.scss";
 
-function RowNumContainer({ children, margin, headerHeight }) {
+function RowNumContainer({ children, headerHeight, margin }) {
   return (
     <div className="row-nums">
       <div
@@ -15,11 +15,10 @@ function RowNumContainer({ children, margin, headerHeight }) {
       >
         <div className="header-corner"></div>
       </div>
-      <div
-        className="row-nums-body"
-        style={{ marginTop: safeCss(margin + headerHeight) }}
-      >
-        {children}
+      <div className="row-nums-body">
+        <div className="row-nums-list" style={{ marginTop: safeCss(margin) }}>
+          {children}
+        </div>
       </div>
     </div>
   );

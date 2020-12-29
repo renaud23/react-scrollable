@@ -7,13 +7,6 @@ import { useDispatch } from "../../commons-table";
 function Row({ height, index, rowNumRenderer: RowNum }) {
   const dispatch = useDispatch(TableContext);
 
-  const onTrackCallback = useCallback(
-    function (delta) {
-      dispatch(actions.onResizeRow(index, delta));
-    },
-    [dispatch, index]
-  );
-
   const onClick = useCallback(
     function (e) {
       e.stopPropagation();
