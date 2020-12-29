@@ -44,9 +44,9 @@ export const onHorizontalScrollRequest = ({ delta }) => ({
 });
 
 export const ON_START_DRAG_COLUMN = "react-large-table/on-start-drag-column";
-export const onStartDragColumn = (index) => ({
+export const onStartDragColumn = (args) => ({
   type: ON_START_DRAG_COLUMN,
-  payload: { index },
+  payload: { ...args },
 });
 
 export const ON_STOP_DRAG_COLUMN = "react-large-table/on-stop-drag-column";

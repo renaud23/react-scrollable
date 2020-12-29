@@ -9,3 +9,4 @@ export { default as DefaultHeaderRenderer } from "./default-header-renderer";
 export { default as RowNumRenderer } from "./default-row-num-renderer";
 export { default as RowNums } from "./row-nums";
 export { default as Dragger, PORTAL_NAMES } from "./dragger";
+export { default as DragAndDropColumn } from "./drag-and-drop-column";
