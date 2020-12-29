@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import BodyContent from "./body-content";
 import HeaderContent from "./header-content";
-import { RowNums } from "../table-components";
 import { Table, Thead, Tr, Tbody } from "../table-components";
 import { TableContext, actions } from "../state-management";
+import { DragAndDropColumn } from "../table-components";
 
 function TableContent({
   header,
@@ -19,8 +19,6 @@ function TableContent({
   marginTop,
   verticalStart,
   verticalNb,
-  rowNumRenderer,
-  rowNums,
 }) {
   const dispatch = useContext(TableContext)[1];
   useEffect(
@@ -32,7 +30,7 @@ function TableContent({
 
   return (
     <>
-      {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}
+      <DragAndDropColumn />
       <Table id={id}>
         <Thead height={headerHeight} marginLeft={marginLeft}>
           <Tr height={headerHeight}>

@@ -12,6 +12,9 @@ const INITIAL_STATE = {
   vertical: initializeScrollable(),
 
   focused: false,
+  draggedColumn: undefined,
+
+  domEntities: {},
 };
 
 export default INITIAL_STATE;

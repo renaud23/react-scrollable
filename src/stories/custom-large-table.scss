@@ -1,13 +1,37 @@
 $trackBgColor: rgba(47, 79, 79, 0.5);
 $trackBgColorHover: DarkSlateGray;
-$headerBgColor: Sienna;
+$headerBgColor: tomato;
+$headerColor: darkred;
+$rowColorEven: honeydew;
+$rowColorOdd: lightblue;
+$boxShadowColor: black;
 
 .custom-large-table-theme {
-  background-color: khaki;
+  background-color: black;
 
+  /* Column dragger */
+  .dragger {
+    opacity: 0.6;
+    margin-left: -1px;
+    border-right: solid 1px black;
+    .th-dragger {
+      background-color: $headerBgColor;
+      border-bottom: thick double $trackBgColorHover;
+      color: $headerColor;
+      border-left: solid 1px black;
+      height: calc(100% - 5px);
+      width: calc(100% - 1px);
+      display: block;
+      line-height: 28px;
+      text-align: center;
+      font-weight: 700;
+    }
+  }
+
+  /* Table */
   thead {
     background-color: $headerBgColor;
-    box-shadow: 2px 0 4px 0 black;
+    box-shadow: 2px 0 6px 0 $boxShadowColor;
     th {
       .th-el-container {
         margin-top: 0;
@@ -17,7 +41,7 @@ $headerBgColor: Sienna;
         border-right: solid 1px black;
         border-bottom: thick double $trackBgColorHover;
         background-color: transparent;
-        color: bisque;
+        color: $headerColor;
         line-height: 28px;
       }
     }
@@ -26,7 +50,11 @@ $headerBgColor: Sienna;
   tbody {
     tr {
       &.odd {
-        background-color: DarkKhaki;
+        background-color: $rowColorEven;
+      }
+
+      &.even {
+        background-color: $rowColorOdd;
       }
 
       td {
@@ -51,10 +79,11 @@ $headerBgColor: Sienna;
 
   /* */
   .row-nums {
-    min-width: 70px;
-    max-width: 70px;
-
-    box-shadow: 2px 0 4px -2px black;
+    border-right: thick double $trackBgColorHover;
+    min-width: 65px;
+    max-width: 65px;
+    background-color: $headerBgColor;
+    box-shadow: 2px 0 6px -2px $boxShadowColor;
     z-index: 2;
 
     .header-corner-container {
@@ -65,20 +94,18 @@ $headerBgColor: Sienna;
         width: 100%;
         background-color: $headerBgColor;
         border-bottom: thick double $trackBgColorHover;
-        border-right: thick double $trackBgColorHover;
-        width: calc(100% - 5px);
       }
     }
-    // padding-top: 1px;
     .row-nums-body {
-      background-color: Peru;
+      background-color: $headerBgColor;
 
       .row-container {
-        border-right: thick double $trackBgColorHover;
-
         .row {
           border-bottom: solid 1px black;
-          color: PaleGoldenRod;
+          color: $headerColor;
+          text-align: center;
+          line-height: normal;
+          lighting-color: honeydew;
           height: calc(100% - 1px);
           width: calc(100%);
         }

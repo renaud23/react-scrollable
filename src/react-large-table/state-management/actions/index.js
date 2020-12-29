@@ -42,3 +42,32 @@ export const onHorizontalScrollRequest = ({ delta }) => ({
   type: ON_HORIZONTAL_SCROLL_REQUEST,
   payload: { delta },
 });
+
+export const ON_START_DRAG_COLUMN = "react-large-table/on-start-drag-column";
+export const onStartDragColumn = (args) => ({
+  type: ON_START_DRAG_COLUMN,
+  payload: { ...args },
+});
+
+export const ON_STOP_DRAG_COLUMN = "react-large-table/on-stop-drag-column";
+export const onStopDragColumn = () => ({
+  type: ON_STOP_DRAG_COLUMN,
+});
+
+export const ADD_ENTITY = "react-large-table/add-entity";
+export const addEntity = (id, type, entity) => ({
+  type: ADD_ENTITY,
+  payload: { id, type, entity },
+});
+
+export const REMOVE_ENTITY = "react-large-table/remove-entity";
+export const removeEntity = (id, type) => ({
+  type: REMOVE_ENTITY,
+  payload: { id, type },
+});
+
+export const ON_SWITCH_COLUMNS = "react-large-table/on-switch-columns";
+export const onSwitchColumns = (one, two) => ({
+  type: ON_SWITCH_COLUMNS,
+  payload: { one, two },
+});

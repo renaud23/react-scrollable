@@ -2,6 +2,7 @@ import React, { useReducer, useEffect, useCallback } from "react";
 import ReactRowable from "../react-rowable";
 import TableContent from "./table-content";
 import PropTypes from "prop-types";
+import { RowNums } from "./table-components";
 import {
   TableContext,
   reducers,
@@ -77,16 +78,17 @@ function ReactLargeTable({
     },
     [headerHeight]
   );
-
+  //
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div
         className={classnames("react-large-table", className, {
-          "with-rows-nums": rowNums,
+          "with-row-nums": rowNums,
         })}
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseEnter}
       >
+        {rowNums ? <RowNums rowNumRenderer={rowNumRenderer} /> : null}
         <ReactRowable
           id={id}
           vertical={vertical}
@@ -105,7 +107,6 @@ function ReactLargeTable({
             headerRenderer={headerRenderer}
             id={id}
             rowNumRenderer={rowNumRenderer}
-            rowNums={rowNums}
           />
         </ReactRowable>
       </div>
