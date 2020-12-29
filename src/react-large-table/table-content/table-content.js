@@ -3,6 +3,7 @@ import BodyContent from "./body-content";
 import HeaderContent from "./header-content";
 import { Table, Thead, Tr, Tbody } from "../table-components";
 import { TableContext, actions } from "../state-management";
+import { DragAndDropColumn } from "../table-components";
 
 function TableContent({
   header,
@@ -28,30 +29,33 @@ function TableContent({
   );
 
   return (
-    <Table id={id}>
-      <Thead height={headerHeight} marginLeft={marginLeft}>
-        <Tr height={headerHeight}>
-          <HeaderContent
+    <>
+      <DragAndDropColumn />
+      <Table id={id}>
+        <Thead height={headerHeight} marginLeft={marginLeft}>
+          <Tr height={headerHeight}>
+            <HeaderContent
+              header={header}
+              start={horizontalStart}
+              nb={horizontalNb}
+              headerRenderer={headerRenderer}
+            />
+          </Tr>
+        </Thead>
+        <Tbody marginTop={marginTop + headerHeight} marginLeft={marginLeft}>
+          <BodyContent
+            rows={rows}
             header={header}
-            start={horizontalStart}
-            nb={horizontalNb}
-            headerRenderer={headerRenderer}
+            startRow={verticalStart}
+            nbRows={verticalNb}
+            rowHeight={rowHeight}
+            startColumns={horizontalStart}
+            nbColumns={horizontalNb}
+            cellRenderer={cellRenderer}
           />
-        </Tr>
-      </Thead>
-      <Tbody marginTop={marginTop + headerHeight} marginLeft={marginLeft}>
-        <BodyContent
-          rows={rows}
-          header={header}
-          startRow={verticalStart}
-          nbRows={verticalNb}
-          rowHeight={rowHeight}
-          startColumns={horizontalStart}
-          nbColumns={horizontalNb}
-          cellRenderer={cellRenderer}
-        />
-      </Tbody>
-    </Table>
+        </Tbody>
+      </Table>
+    </>
   );
 }
 

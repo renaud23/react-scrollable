@@ -1,7 +1,7 @@
 function reduce(state, action) {
   const { payload } = action;
-  const { index } = payload;
-  return { ...state, draggedColumn: index };
+
+  return { ...state, draggedColumn: payload };
 }
 
 export default reduce;
