@@ -5,17 +5,17 @@ import { RowableContext } from "../../react-rowable/state-management";
 import { TableContext } from "../state-management";
 import { useDomEntities } from "../state-management";
 
-function Task({ delay = 250, activate }) {
+function Task({ delay = 25, activate }) {
   useEffect(
     function () {
       let timer;
-      function timing() {
+      function timing(step) {
         timer = window.setTimeout(function () {
-          activate();
-          timing();
+          activate(step);
+          timing(step + 1);
         }, delay);
       }
-      timing();
+      timing(1);
       return function () {
         window.clearTimeout(timer);
       };
@@ -58,17 +58,22 @@ function DragAndDropColumn() {
   );
 
   const activate = useCallback(
-    function () {
-      dispatch(actions.onHorizontalScrollRequest({ ...scrollRequest }));
+    function (step) {
+      const { pixels } = scrollRequest;
+      dispatch(
+        actions.onHorizontalScrollRequest({
+          pixels: Math.min(pixels * step, 100),
+        })
+      );
     },
     [scrollRequest, dispatch]
   );
 
   const onEnterPortal = function (direction) {
     if (direction === PORTAL_NAMES.left) {
-      setScrollRequest({ delta: -1 });
+      setScrollRequest({ pixels: -2 });
     } else if (direction === PORTAL_NAMES.right) {
-      setScrollRequest({ delta: 1 });
+      setScrollRequest({ pixels: 2 });
     }
   };
 
