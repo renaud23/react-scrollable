@@ -89,6 +89,6 @@ export function ScrollableCustomTheme() {
 
 export default {
   title: "react-scrollable-ex",
-  component: ReactScrollableEx,
+  component: ReactScrollable,
   argTypes: {},
 };
