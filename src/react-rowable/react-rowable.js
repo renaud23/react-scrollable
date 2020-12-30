@@ -7,7 +7,7 @@ import {
   INITIAL_STATE,
   actions,
 } from "./state-management";
-import ReactScrollable from "../react-scrollable-ex";
+import ReactScrollable from "../react-scrollable";
 import isBindedKey from "./is-binded-key";
 import "./react-rowable.scss";
 
