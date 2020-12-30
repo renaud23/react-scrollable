@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useEffect, useState } from "react";
 import { actions } from "../state-management";
-import Dragger, { PORTAL_NAMES } from "./dragger";
+import { PORTAL_NAMES, Dragger, isInBoundingRect } from "./drag";
 import { RowableContext } from "../../react-rowable/state-management";
 import { TableContext } from "../state-management";
 import { useDomEntities } from "../state-management";
@@ -34,14 +34,17 @@ function DragAndDropColumn() {
   const { draggedColumn } = state;
 
   const onClose = useCallback(
-    function (refresh, { clientX }) {
+    function (refresh, { clientX, clientY }) {
       if (refresh && draggedColumn) {
         const { index } = draggedColumn;
         const onWitch = Object.entries(head).reduce(function (a, [i, e]) {
-          if (parseInt(i) !== index) {
-            const { left, width } = e.getBoundingClientRect();
-            if (clientX > left && clientX <= left + width) {
-              return parseInt(i);
+          const rect = e.getBoundingClientRect();
+          if (isInBoundingRect(clientX, clientY, rect)) {
+            if (parseInt(i) !== index) {
+              const { left, width } = rect;
+              if (clientX > left && clientX <= left + width) {
+                return parseInt(i);
+              }
             }
           }
           return a;
@@ -81,6 +84,26 @@ function DragAndDropColumn() {
     setScrollRequest(undefined);
   };
 
+  const onDragColumn = useCallback(
+    function ({ clientX, clientY }) {
+      const target = Object.entries(head).reduce(function (curr, [id, el]) {
+        const { index } = draggedColumn;
+        const rect = el.getBoundingClientRect();
+        if (
+          isInBoundingRect(clientX, clientY, rect) &&
+          index !== Number.parseInt(id)
+        ) {
+          const { left, width } = rect;
+          const position = clientX < left + width / 2 ? "left" : "right";
+          return { index: Number.parseInt(id), position };
+        }
+        return curr;
+      }, undefined);
+      dispatch(actions.onDragColumn(target));
+    },
+    [head, draggedColumn, dispatch]
+  );
+
   if (draggedColumn !== undefined) {
     const { clientX, clientY, label, node } = draggedColumn;
 
@@ -93,6 +116,7 @@ function DragAndDropColumn() {
           node={node}
           parent={parent}
           onClose={onClose}
+          onDrag={onDragColumn}
           onEnterPortal={onEnterPortal}
           onExitPortal={onExitPortal}
         >

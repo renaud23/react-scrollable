@@ -74,6 +74,20 @@
             height: 100%;
             white-space: nowrap;
             cursor: grab;
+
+            .drag-column-indicator {
+              display: inline-block;
+              height: 100%;
+              width: 4px;
+              background-color: rgba(32, 178, 171, 0.6);
+              position: absolute;
+              &.left {
+                left: 0;
+              }
+              &.right {
+                right: 0;
+              }
+            }
           }
 
           .target {
