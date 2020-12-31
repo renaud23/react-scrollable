@@ -11,7 +11,7 @@ $boxShadowColor: black;
 
   /* Column dragger */
   .dragger {
-    opacity: 0.6;
+    opacity: 0.4;
     margin-left: -1px;
     border-right: solid 1px black;
     .th-dragger {
@@ -43,6 +43,11 @@ $boxShadowColor: black;
         background-color: transparent;
         color: $headerColor;
         line-height: 28px;
+      }
+
+      .drag-column-indicator {
+        width: 4px;
+        background-color: rgba(184, 161, 32, 0.774);
       }
     }
   }
@@ -77,7 +82,7 @@ $boxShadowColor: black;
     }
   }
 
-  /* */
+  /* ROW-NUMS */
   .row-nums {
     border-right: thick double $trackBgColorHover;
     min-width: 65px;
