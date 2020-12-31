@@ -7,7 +7,7 @@ import {
   INITIAL_STATE,
   actions,
 } from "./state-management";
-import ReactScrollable from "../react-scrollable-ex";
+import ReactScrollable from "../react-scrollable";
 import isBindedKey from "./is-binded-key";
 import "./react-rowable.scss";
 
@@ -47,12 +47,10 @@ function ReactRowable({
   } = horizontal;
   const {
     maxSize: maxHeight,
-
     scrollRequest: verticalOuterScrollRequest,
   } = verticalRowable;
   const {
     maxSize: maxWidth,
-
     scrollRequest: horizontalOuterScrollRequest,
   } = horizontalRowable;
   /* */
@@ -121,7 +119,7 @@ function ReactRowable({
   useEffect(
     function () {
       if (verticalOuterScrollRequest) {
-        dispatch(actions.onHorizontalScrollRequest(verticalOuterScrollRequest));
+        dispatch(actions.onVerticalScrollRequest(verticalOuterScrollRequest));
       }
     },
     [verticalOuterScrollRequest]

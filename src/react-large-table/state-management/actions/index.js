@@ -31,22 +31,28 @@ export const onClickRowNum = (index) => ({
 
 export const ON_VERTICAL_SCROLL_REQUEST =
   "react-large-table/on-vertical-scroll-request";
-export const onVerticalScrollRequest = ({ delta }) => ({
+export const onVerticalScrollRequest = ({ delta, pixels }) => ({
   type: ON_VERTICAL_SCROLL_REQUEST,
-  payload: { delta },
+  payload: { delta, pixels },
 });
 
 export const ON_HORIZONTAL_SCROLL_REQUEST =
   "react-large-table/on-horizontal-scroll-request";
-export const onHorizontalScrollRequest = ({ delta }) => ({
+export const onHorizontalScrollRequest = ({ delta, pixels }) => ({
   type: ON_HORIZONTAL_SCROLL_REQUEST,
-  payload: { delta },
+  payload: { delta, pixels },
 });
 
 export const ON_START_DRAG_COLUMN = "react-large-table/on-start-drag-column";
 export const onStartDragColumn = (args) => ({
   type: ON_START_DRAG_COLUMN,
   payload: { ...args },
+});
+
+export const ON_DRAG_COLUMN = "react-large-table/on-drag-column";
+export const onDragColumn = (target) => ({
+  type: ON_DRAG_COLUMN,
+  payload: { target },
 });
 
 export const ON_STOP_DRAG_COLUMN = "react-large-table/on-stop-drag-column";
