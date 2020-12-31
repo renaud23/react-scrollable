@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { RowablePortal } from "../../react-rowable";
+import { RowablePortal } from "../../../react-rowable";
 
 const PORTAL_SIZE = 18;
 
@@ -12,7 +12,7 @@ export const PORTAL_NAMES = {
 
 function empty() {}
 
-function isInBoundingRect(clientX, clientY, rect) {
+export function isInBoundingRect(clientX, clientY, rect) {
   const { left, top, height, width } = rect;
   if (
     clientX >= left &&
@@ -50,6 +50,7 @@ function Dragger({
   onClose,
   onEnterPortal,
   onExitPortal,
+  onDrag,
   children,
 }) {
   const [rect, setRect] = useState({});
@@ -80,28 +81,12 @@ function Dragger({
       const { clientX, clientY } = e;
       const pRect = parent.getBoundingClientRect();
       checkPortal(clientX, clientY, pRect, onEnter, onExit);
-      // if (isInBoundingRect(clientX, clientY, pRect)) {
-      //   const { left: pLeft, width: pWidth } = pRect;
-      //   if (clientX >= pLeft + pWidth - PORTAL_SIZE) {
-      //     if (!onPortal) {
-      //       onEnterPortal(PORTAL_NAMES.right);
-      //       setOnPortal(true);
-      //     }
-      //   } else if (clientX <= pLeft + PORTAL_SIZE) {
-      //     if (!onPortal) {
-      //       onEnterPortal(PORTAL_NAMES.left);
-      //       setOnPortal(true);
-      //     }
-      //   } else if (onPortal) {
-      //     onExitPortal();
-      //     setOnPortal(false);
-      //   }
-      // }
       const top = clientY - offsetY;
       const left = clientX - offsetX;
       setRect({ width, height, offsetX, offsetY, top, left });
+      onDrag({ clientX, clientY });
     },
-    [parent, width, height, offsetX, offsetY, onEnter, onExit]
+    [parent, width, height, offsetX, offsetY, onEnter, onExit, onDrag]
   );
 
   const onMouseUp = useCallback(
@@ -164,6 +149,7 @@ Dragger.defaultProps = {
   onClose: empty,
   onEnterPortal: empty,
   onExitPortal: empty,
+  onDrag: empty,
 };
 
 export default Dragger;

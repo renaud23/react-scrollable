@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import ReactScrollableEx from "../react-scrollable-ex";
+import ReactScrollable from "../react-scrollable";
 import { useResizeObserver } from "../commons-scrollable";
 import { Switch } from "./commons-stories";
 import "./custom-scrollable.scss";
@@ -43,7 +43,7 @@ function CreateOne({ width, height, className }) {
         <input type="text" disabled={true} value={verticalScrollPercent} />
       </div>
       <div className={"simple-scrollable-example"}>
-        <ReactScrollableEx
+        <ReactScrollable
           maxWidth={width}
           maxHeight={height}
           refWidth={refWidth}
@@ -59,13 +59,13 @@ function CreateOne({ width, height, className }) {
             className="scrollable-content-example"
             ref={containerEl}
           >{`${width}px X ${height}px`}</div>
-        </ReactScrollableEx>
+        </ReactScrollable>
       </div>
     </>
   );
 }
 
-export function ScrollableExExample() {
+export function ScrollableExample() {
   return <CreateOne width={6000} height={30000} />;
 }
 
@@ -89,6 +89,6 @@ export function ScrollableCustomTheme() {
 
 export default {
   title: "react-scrollable-ex",
-  component: ReactScrollableEx,
+  component: ReactScrollable,
   argTypes: {},
 };

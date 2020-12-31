@@ -78,7 +78,6 @@ function ReactLargeTable({
     },
     [headerHeight]
   );
-  //
   return (
     <TableContext.Provider value={[state, dispatch]}>
       <div

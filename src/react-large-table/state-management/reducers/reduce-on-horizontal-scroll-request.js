@@ -1,9 +1,12 @@
 function reduce(state, action) {
   const { payload } = action;
-  const { delta } = payload;
+  const { delta, pixels } = payload;
   const { horizontal } = state;
 
-  return { ...state, horizontal: { ...horizontal, scrollRequest: { delta } } };
+  return {
+    ...state,
+    horizontal: { ...horizontal, scrollRequest: { delta, pixels } },
+  };
 }
 
 export default reduce;
