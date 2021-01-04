@@ -5,7 +5,7 @@ import { Track, safeCss } from "../../commons-scrollable";
 import { TableContext } from "../state-management";
 import { useKeepDomEntities } from "../state-management";
 
-function DraggedOn({ dragged, column }) {
+function DraggedOn({ dragged, column, className }) {
   if (dragged) {
     const { target } = dragged;
     if (target) {
@@ -13,7 +13,7 @@ function DraggedOn({ dragged, column }) {
       if (index === column) {
         return (
           <div
-            className={classnames("drag-column-indicator", {
+            className={classnames(className, {
               right: position === "right",
               left: position === "left",
             })}
@@ -27,7 +27,7 @@ function DraggedOn({ dragged, column }) {
 
 function Th({ children, width, height, index }) {
   const [state, dispatch] = useContext(TableContext);
-  const { header, draggedColumn } = state;
+  const { header, dragged } = state;
   const column = header[index];
   const { resizable = false, label } = column;
   const thEl = useKeepDomEntities(index, "th");
@@ -41,11 +41,12 @@ function Th({ children, width, height, index }) {
   const onMouseDown = function (e) {
     const { clientX, clientY } = e;
     dispatch(
-      actions.onStartDragColumn({
+      actions.onStartDrag({
         clientX,
         clientY,
         label,
         index,
+        type: "drag/column",
         node: e.target,
       })
     );
@@ -60,7 +61,11 @@ function Th({ children, width, height, index }) {
       onMouseDown={onMouseDown}
       ref={thEl}
     >
-      <DraggedOn dragged={draggedColumn} column={index} />
+      <DraggedOn
+        dragged={dragged}
+        column={index}
+        className="drag-column-indicator"
+      />
       {resizable ? <Track onTrack={onTrackCallback} vertical right /> : null}
       {children}
     </th>

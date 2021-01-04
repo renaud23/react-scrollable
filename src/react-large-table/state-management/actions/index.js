@@ -43,21 +43,21 @@ export const onHorizontalScrollRequest = ({ delta, pixels }) => ({
   payload: { delta, pixels },
 });
 
-export const ON_START_DRAG_COLUMN = "react-large-table/on-start-drag-column";
-export const onStartDragColumn = (args) => ({
-  type: ON_START_DRAG_COLUMN,
+export const ON_START_DRAG = "react-large-table/on-start-drag";
+export const onStartDrag = (args) => ({
+  type: ON_START_DRAG,
   payload: { ...args },
 });
 
-export const ON_DRAG_COLUMN = "react-large-table/on-drag-column";
-export const onDragColumn = (target) => ({
-  type: ON_DRAG_COLUMN,
+export const ON_DRAG = "react-large-table/on-drag";
+export const onDrag = (target) => ({
+  type: ON_DRAG,
   payload: { target },
 });
 
-export const ON_STOP_DRAG_COLUMN = "react-large-table/on-stop-drag-column";
-export const onStopDragColumn = () => ({
-  type: ON_STOP_DRAG_COLUMN,
+export const ON_STOP_DRAG = "react-large-table/on-stop-drag";
+export const onStopDrag = () => ({
+  type: ON_STOP_DRAG,
 });
 
 export const ADD_ENTITY = "react-large-table/add-entity";

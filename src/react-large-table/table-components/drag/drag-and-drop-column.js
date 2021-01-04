@@ -1,9 +1,7 @@
 import React, { useContext, useCallback, useEffect, useState } from "react";
-import { actions } from "../state-management";
-import { PORTAL_NAMES, Dragger, isInBoundingRect } from "./drag";
-import { RowableContext } from "../../react-rowable/state-management";
-import { TableContext } from "../state-management";
-import { useDomEntities } from "../state-management";
+import { actions, TableContext, useDomEntities } from "../../state-management";
+import Dragger, { PORTAL_NAMES, isInBoundingRect } from "./dragger";
+import { RowableContext } from "../../../react-rowable/state-management";
 
 function Task({ delay = 25, activate }) {
   useEffect(
@@ -31,12 +29,12 @@ function DragAndDropColumn() {
   const [state, dispatch] = useContext(TableContext);
   const { current: parent } = useContext(RowableContext)[2];
   const head = useDomEntities("th");
-  const { draggedColumn } = state;
+  const { dragged } = state;
 
   const onClose = useCallback(
     function (refresh, { clientX, clientY }) {
-      if (refresh && draggedColumn) {
-        const { index } = draggedColumn;
+      if (refresh && dragged) {
+        const { index } = dragged;
         const onWitch = Object.entries(head).reduce(function (a, [i, e]) {
           const rect = e.getBoundingClientRect();
           if (isInBoundingRect(clientX, clientY, rect)) {
@@ -55,9 +53,9 @@ function DragAndDropColumn() {
         }
       }
 
-      dispatch(actions.onStopDragColumn());
+      dispatch(actions.onStopDrag());
     },
-    [head, draggedColumn, dispatch]
+    [head, dragged, dispatch]
   );
 
   const activate = useCallback(
@@ -87,7 +85,8 @@ function DragAndDropColumn() {
   const onDragColumn = useCallback(
     function ({ clientX, clientY }) {
       const target = Object.entries(head).reduce(function (curr, [id, el]) {
-        const { index } = draggedColumn;
+        const { index } = dragged;
+
         const rect = el.getBoundingClientRect();
         if (
           isInBoundingRect(clientX, clientY, rect) &&
@@ -99,31 +98,32 @@ function DragAndDropColumn() {
         }
         return curr;
       }, undefined);
-      dispatch(actions.onDragColumn(target));
+      dispatch(actions.onDrag(target));
     },
-    [head, draggedColumn, dispatch]
+    [head, dragged, dispatch]
   );
 
-  if (draggedColumn !== undefined) {
-    const { clientX, clientY, label, node } = draggedColumn;
-
-    return (
-      <>
-        {scrollRequest ? <Task activate={activate} /> : null}
-        <Dragger
-          clientX={clientX}
-          clientY={clientY}
-          node={node}
-          parent={parent}
-          onClose={onClose}
-          onDrag={onDragColumn}
-          onEnterPortal={onEnterPortal}
-          onExitPortal={onExitPortal}
-        >
-          <span className="th-dragger">{label}</span>
-        </Dragger>
-      </>
-    );
+  if (dragged !== undefined) {
+    const { clientX, clientY, label, node, type } = dragged;
+    if (type === "drag/column") {
+      return (
+        <>
+          {scrollRequest ? <Task activate={activate} /> : null}
+          <Dragger
+            clientX={clientX}
+            clientY={clientY}
+            node={node}
+            parent={parent}
+            onClose={onClose}
+            onDrag={onDragColumn}
+            onEnterPortal={onEnterPortal}
+            onExitPortal={onExitPortal}
+          >
+            <span className="th-dragger">{label}</span>
+          </Dragger>
+        </>
+      );
+    }
   }
   return null;
 }

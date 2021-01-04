@@ -1,5 +1,5 @@
 function reduce(state) {
-  return { ...state, draggedColumn: undefined };
+  return { ...state, dragged: undefined };
 }
 
 export default reduce;

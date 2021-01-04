@@ -5,12 +5,12 @@ import reduceOnVerticalScroll from "./reducer-on-vertical-scroll";
 import reduceOnResizeRow from "./reduce-on-resize-row";
 import onReduceVerticalScrollRequest from "./reduce-on-vertical-scroll-request";
 import onReduceOnHorizontalScrollRequest from "./reduce-on-horizontal-scroll-request";
-import reduceOnStartDragColumn from "./reduce-on-start-drag-column";
-import reduceOnStopDragColumn from "./reduce-on-stop-drag-column";
 import reduceAddEntity from "./reduce-add-entity";
 import reduceRemoveEntity from "./reduce-remove-entity";
 import reduceOnSwitchColumns from "./reduce-on-switch-columns";
-import reduceOnDragColumn from "./reduce-on-drag-column";
+import reduceOnDrag from "./reduce-on-drag";
+import reduceOnStartDrag from "./reduce-on-start-drag";
+import reduceOnStopDrag from "./reduce-on-stop-drag";
 
 function reducer(state, action) {
   const { type } = action;
@@ -27,18 +27,19 @@ function reducer(state, action) {
       return onReduceVerticalScrollRequest(state, action);
     case actions.ON_HORIZONTAL_SCROLL_REQUEST:
       return onReduceOnHorizontalScrollRequest(state, action);
-    case actions.ON_START_DRAG_COLUMN:
-      return reduceOnStartDragColumn(state, action);
-    case actions.ON_STOP_DRAG_COLUMN:
-      return reduceOnStopDragColumn(state, action);
+    case actions.ON_START_DRAG:
+      return reduceOnStartDrag(state, action);
+    case actions.ON_DRAG:
+      return reduceOnDrag(state, action);
+    case actions.ON_STOP_DRAG:
+      return reduceOnStopDrag(state, action);
     case actions.ADD_ENTITY:
       return reduceAddEntity(state, action);
     case actions.REMOVE_ENTITY:
       return reduceRemoveEntity(state, action);
     case actions.ON_SWITCH_COLUMNS:
       return reduceOnSwitchColumns(state, action);
-    case actions.ON_DRAG_COLUMN:
-      return reduceOnDragColumn(state, action);
+
     default:
       return state;
   }
