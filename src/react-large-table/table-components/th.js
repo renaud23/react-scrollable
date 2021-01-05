@@ -4,11 +4,13 @@ import { actions } from "../state-management";
 import { Track, safeCss } from "../../commons-scrollable";
 import { TableContext } from "../state-management";
 import { useKeepDomEntities } from "../state-management";
+import { RowableContext } from "../../react-rowable/state-management";
 
 function DraggedOn({ dragged, column, className }) {
   if (dragged) {
-    const { target } = dragged;
-    if (target) {
+    const { target, type } = dragged;
+
+    if (target && type === "drag/column") {
       const { index, position } = target;
       if (index === column) {
         return (
@@ -30,6 +32,7 @@ function Th({ children, width, height, index }) {
   const { header, dragged } = state;
   const column = header[index];
   const { resizable = false, label } = column;
+  const { current: parent } = useContext(RowableContext)[2];
   const thEl = useKeepDomEntities(index, "th");
   const onTrackCallback = useCallback(
     function (delta) {
@@ -48,6 +51,7 @@ function Th({ children, width, height, index }) {
         index,
         type: "drag/column",
         node: e.target,
+        parent,
       })
     );
   };

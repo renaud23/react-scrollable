@@ -9,7 +9,7 @@ function Task({ delay = 25, activate }) {
       let timer;
       function timing(step) {
         timer = window.setTimeout(function () {
-          activate(step);
+          activate(step, delay * step);
           timing(step + 1);
         }, delay);
       }
@@ -104,28 +104,27 @@ function DragAndDropColumn() {
   );
 
   if (dragged !== undefined) {
-    const { clientX, clientY, label, node, type } = dragged;
-    if (type === "drag/column") {
-      return (
-        <>
-          {scrollRequest ? <Task activate={activate} /> : null}
-          <Dragger
-            clientX={clientX}
-            clientY={clientY}
-            node={node}
-            parent={parent}
-            onClose={onClose}
-            onDrag={onDragColumn}
-            onEnterPortal={onEnterPortal}
-            onExitPortal={onExitPortal}
-          >
-            <span className="th-dragger">{label}</span>
-          </Dragger>
-        </>
-      );
-    }
+    const { clientX, clientY, label, node } = dragged;
+
+    return (
+      <>
+        {scrollRequest ? <Task activate={activate} /> : null}
+        <Dragger
+          clientX={clientX}
+          clientY={clientY}
+          node={node}
+          parent={parent}
+          onClose={onClose}
+          onDrag={onDragColumn}
+          onEnterPortal={onEnterPortal}
+          onExitPortal={onExitPortal}
+        >
+          <span className="th-dragger">{label}</span>
+        </Dragger>
+      </>
+    );
   }
   return null;
 }
 
-export default DragAndDropColumn;
+export default React.memo(DragAndDropColumn);

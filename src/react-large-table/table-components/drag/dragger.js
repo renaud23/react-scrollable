@@ -122,7 +122,6 @@ function Dragger({
           left: nLeft,
         } = node.getBoundingClientRect();
         const { top: pTop, left: pLeft } = parent.getBoundingClientRect();
-
         const top = nTop - pTop;
         const left = nLeft - pLeft;
         const offsetX = clientX - left;
