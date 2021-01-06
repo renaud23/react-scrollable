@@ -8,3 +8,4 @@ export { default as useDispatch } from "./use-dispatch";
 export { default as getPath } from "./get-path";
 export { default as getLabel } from "./get-label";
 export { default as isInBoundingRect } from "./is-in-bounding-rect";
+export { PORTAL_NAMES, PORTAL_SIZE } from "./constantes";

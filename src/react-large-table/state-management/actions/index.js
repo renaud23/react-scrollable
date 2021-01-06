@@ -72,4 +72,11 @@ export const removeEntity = (id, type) => ({
   payload: { id, type },
 });
 
-// const ON_ENTER_DRAG_PORTAL = ""
+export const ON_DRAG_ENTER_PORTAL = "react-large-table/on-drag-enter-portal";
+export const onDragEnterPortal = (direction) => ({
+  type: ON_DRAG_ENTER_PORTAL,
+  payload: { direction },
+});
+
+export const ON_DRAG_EXIT_PORTAL = "react-large-table/on-drag-exit-portal";
+export const onDragExitPortal = () => ({ type: ON_DRAG_EXIT_PORTAL });

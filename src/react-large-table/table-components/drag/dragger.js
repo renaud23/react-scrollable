@@ -1,15 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { RowablePortal } from "../../../react-rowable";
 import { isInBoundingRect } from "../../commons-table";
-
-const PORTAL_SIZE = 18;
-
-export const PORTAL_NAMES = {
-  top: "portal/top",
-  bottom: "portal/bottom",
-  left: "portal/left",
-  right: "portal/right",
-};
+import { PORTAL_NAMES, PORTAL_SIZE } from "../../commons-table";
 
 function empty() {}
 

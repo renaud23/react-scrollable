@@ -10,6 +10,8 @@ import reduceRemoveEntity from "./reduce-remove-entity";
 import reduceOnDrag from "./reduce-on-drag";
 import reduceOnStartDrag from "./reduce-on-start-drag";
 import reduceOnStopDrag from "./reduce-on-stop-drag";
+import reduceOnDragEnterPortal from "./reduce-on-drag-enter-portal";
+import reduceOnDragExitPortal from "./reduce-on-drag-exit-portal";
 
 function reducer(state, action) {
   const { type } = action;
@@ -32,11 +34,14 @@ function reducer(state, action) {
       return reduceOnDrag(state, action);
     case actions.ON_STOP_DRAG:
       return reduceOnStopDrag(state, action);
+    case actions.ON_DRAG_ENTER_PORTAL:
+      return reduceOnDragEnterPortal(state, action);
+    case actions.ON_DRAG_EXIT_PORTAL:
+      return reduceOnDragExitPortal(state, action);
     case actions.ADD_ENTITY:
       return reduceAddEntity(state, action);
     case actions.REMOVE_ENTITY:
       return reduceRemoveEntity(state, action);
-
     default:
       return state;
   }

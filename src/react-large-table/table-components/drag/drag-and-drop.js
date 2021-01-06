@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import Dragger from "./dragger"; // , { PORTAL_NAMES, isInBoundingRect }
+import Dragger from "./dragger";
 import { actions, TableContext } from "../../state-management";
+import DragAnDropColumn from "./drag-and-drop-column";
 
 function DragAndDrop() {
   const [state, dispatch] = useContext(TableContext);
@@ -16,14 +17,17 @@ function DragAndDrop() {
     dispatch(actions.onDrag({ x: clientX, y: clientY }));
   }
 
-  function onEnterPortal(where) {}
+  function onEnterPortal(direction) {
+    dispatch(actions.onDragEnterPortal(direction));
+  }
 
-  function onExitPortal() {}
+  function onExitPortal() {
+    dispatch(actions.onDragExitPortal());
+  }
 
   if (dragged) {
     const { clientX, clientY, initial, parent } = dragged;
-    const { el, data } = initial;
-    const { label } = data;
+    const { el } = initial;
     return (
       <Dragger
         clientX={clientX}
@@ -35,7 +39,7 @@ function DragAndDrop() {
         onEnterPortal={onEnterPortal}
         onExitPortal={onExitPortal}
       >
-        <span className="th-dragger">{label}</span>
+        <DragAnDropColumn dragged={dragged} />
       </Dragger>
     );
   }
