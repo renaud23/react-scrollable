@@ -16,7 +16,7 @@ function DragAndDrop() {
     dispatch(actions.onDrag({ x: clientX, y: clientY }));
   }
 
-  function onEnterPortal() {}
+  function onEnterPortal(where) {}
 
   function onExitPortal() {}
 

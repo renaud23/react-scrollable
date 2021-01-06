@@ -28,7 +28,8 @@ function reduceDragColumn(state) {
       dragged: undefined,
     };
   }
-  return state;
+
+  return { ...state, dragged: undefined };
 }
 
 function reduce(state) {

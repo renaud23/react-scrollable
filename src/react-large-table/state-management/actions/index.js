@@ -72,8 +72,4 @@ export const removeEntity = (id, type) => ({
   payload: { id, type },
 });
 
-export const ON_SWITCH_COLUMNS = "react-large-table/on-switch-columns";
-export const onSwitchColumns = (one, two) => ({
-  type: ON_SWITCH_COLUMNS,
-  payload: { one, two },
-});
+// const ON_ENTER_DRAG_PORTAL = ""

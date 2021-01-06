@@ -7,7 +7,6 @@ import onReduceVerticalScrollRequest from "./reduce-on-vertical-scroll-request";
 import onReduceOnHorizontalScrollRequest from "./reduce-on-horizontal-scroll-request";
 import reduceAddEntity from "./reduce-add-entity";
 import reduceRemoveEntity from "./reduce-remove-entity";
-import reduceOnSwitchColumns from "./reduce-on-switch-columns";
 import reduceOnDrag from "./reduce-on-drag";
 import reduceOnStartDrag from "./reduce-on-start-drag";
 import reduceOnStopDrag from "./reduce-on-stop-drag";
@@ -37,8 +36,6 @@ function reducer(state, action) {
       return reduceAddEntity(state, action);
     case actions.REMOVE_ENTITY:
       return reduceRemoveEntity(state, action);
-    case actions.ON_SWITCH_COLUMNS:
-      return reduceOnSwitchColumns(state, action);
 
     default:
       return state;
