@@ -6,13 +6,15 @@ import { TableContext } from "../state-management";
 import { useKeepDomEntities } from "../state-management";
 import { RowableContext } from "../../react-rowable/state-management";
 
-function DraggedOn({ dragged, column, className }) {
+function DraggedOn({ dragged, index, className }) {
   if (dragged) {
-    const { target, type } = dragged;
+    const { initial, target, type } = dragged;
 
-    if (target && type === "drag/column") {
-      const { index, position } = target;
-      if (index === column) {
+    if (type === "drag/column" && target) {
+      const { index: targetIndex, position } = target;
+      const { index: refIndex } = initial;
+
+      if (refIndex !== initial && targetIndex === index) {
         return (
           <div
             className={classnames(className, {
@@ -31,7 +33,7 @@ function Th({ children, width, height, index }) {
   const [state, dispatch] = useContext(TableContext);
   const { header, dragged } = state;
   const column = header[index];
-  const { resizable = false, label } = column;
+  const { resizable = false } = column;
   const { current: parent } = useContext(RowableContext)[2];
   const thEl = useKeepDomEntities(index, "th");
   const onTrackCallback = useCallback(
@@ -47,11 +49,10 @@ function Th({ children, width, height, index }) {
       actions.onStartDrag({
         clientX,
         clientY,
-        label,
-        index,
         type: "drag/column",
-        node: e.target,
         parent,
+        initial: { el: e.target, index, data: header[index] },
+        target: undefined,
       })
     );
   };
@@ -67,7 +68,7 @@ function Th({ children, width, height, index }) {
     >
       <DraggedOn
         dragged={dragged}
-        column={index}
+        index={index}
         className="drag-column-indicator"
       />
       {resizable ? <Track onTrack={onTrackCallback} vertical right /> : null}

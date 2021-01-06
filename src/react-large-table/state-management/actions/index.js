@@ -50,9 +50,9 @@ export const onStartDrag = (args) => ({
 });
 
 export const ON_DRAG = "react-large-table/on-drag";
-export const onDrag = (target) => ({
+export const onDrag = (args) => ({
   type: ON_DRAG,
-  payload: { target },
+  payload: { ...args },
 });
 
 export const ON_STOP_DRAG = "react-large-table/on-stop-drag";

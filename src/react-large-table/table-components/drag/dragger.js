@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { RowablePortal } from "../../../react-rowable";
+import { isInBoundingRect } from "../../commons-table";
 
 const PORTAL_SIZE = 18;
 
@@ -11,19 +12,6 @@ export const PORTAL_NAMES = {
 };
 
 function empty() {}
-
-export function isInBoundingRect(clientX, clientY, rect) {
-  const { left, top, height, width } = rect;
-  if (
-    clientX >= left &&
-    clientX <= left + width &&
-    clientY >= top &&
-    clientY <= top + height
-  ) {
-    return true;
-  }
-  return false;
-}
 
 function checkPortal(clientX, clientY, pRect, onEnter, onExit) {
   if (isInBoundingRect(clientX, clientY, pRect)) {
