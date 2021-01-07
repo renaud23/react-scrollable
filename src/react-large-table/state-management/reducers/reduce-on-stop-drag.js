@@ -1,5 +1,6 @@
 import resolveScrollableData from "./refresh-scrollable-data";
 import { getWidth } from "../../commons-table";
+import { DRAGGED_ELEMENT, POSITION } from "../../commons-table";
 
 function reduceDragColumn(state) {
   const { dragged, header } = state;
@@ -14,7 +15,7 @@ function reduceDragColumn(state) {
       }
 
       if (index === two) {
-        if (position === "left") {
+        if (position === POSITION.left) {
           return [...curr, header[one], column];
         }
         return [...curr, column, header[one]];
@@ -37,7 +38,7 @@ function reduce(state) {
   const { type } = dragged;
 
   switch (type) {
-    case "drag/column":
+    case DRAGGED_ELEMENT.column:
       return reduceDragColumn(state);
 
     default:

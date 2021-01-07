@@ -1,16 +1,15 @@
 import React, { useCallback, useContext } from "react";
 import classnames from "classnames";
-import { actions } from "../state-management";
 import { Track, safeCss } from "../../commons-scrollable";
-import { TableContext } from "../state-management";
-import { useKeepDomEntities } from "../state-management";
+import { TableContext, actions, useKeepDomEntities } from "../state-management";
 import { RowableContext } from "../../react-rowable/state-management";
+import { DRAGGED_ELEMENT, POSITION } from "../commons-table";
 
 function DraggedOn({ dragged, index, className }) {
   if (dragged) {
     const { initial, target, type } = dragged;
 
-    if (type === "drag/column" && target) {
+    if (type === DRAGGED_ELEMENT.column && target) {
       const { index: targetIndex, position } = target;
       const { index: refIndex } = initial;
 
@@ -18,8 +17,8 @@ function DraggedOn({ dragged, index, className }) {
         return (
           <div
             className={classnames(className, {
-              right: position === "right",
-              left: position === "left",
+              right: position === POSITION.right,
+              left: position === POSITION.left,
             })}
           ></div>
         );
@@ -49,7 +48,7 @@ function Th({ children, width, height, index }) {
       actions.onStartDrag({
         clientX,
         clientY,
-        type: "drag/column",
+        type: DRAGGED_ELEMENT.column,
         parent,
         initial: { el: e.target, index, data: header[index] },
         target: undefined,

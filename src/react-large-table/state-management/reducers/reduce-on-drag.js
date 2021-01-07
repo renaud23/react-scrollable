@@ -1,4 +1,5 @@
 import { isInBoundingRect } from "../../commons-table";
+import { DRAGGED_ELEMENT, POSITION } from "../../commons-table";
 
 function reduceOnDragColumn(state, action) {
   const { dragged, domEntities, header } = state;
@@ -15,7 +16,7 @@ function reduceOnDragColumn(state, action) {
       const index = Number.parseInt(stringIdx);
       if (refIndex !== index && isInBoundingRect(x, y, rect)) {
         const { left, width } = rect;
-        const position = x < left + width / 2 ? "left" : "right";
+        const position = x < left + width / 2 ? POSITION.left : POSITION.right;
         return {
           el,
           index: Number.parseInt(index),
@@ -36,7 +37,7 @@ function reduce(state, action) {
   const { dragged } = state;
   const { type } = dragged;
   switch (type) {
-    case "drag/column":
+    case DRAGGED_ELEMENT.column:
       return reduceOnDragColumn(state, action);
 
     default:
