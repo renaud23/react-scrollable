@@ -1,28 +1,9 @@
 import React, { useContext } from "react";
 import { TableContext } from "../../state-management";
-import { safeCss } from "../../../commons-scrollable";
+import RowNumContainer from "./row-num-container";
 import { getHeight } from "../../commons-table";
 import Row from "./row";
 import "./row-nums.scss";
-
-function RowNumContainer({ children, headerHeight, margin }) {
-  return (
-    <div className="row-nums">
-      <div
-        className="header-corner-container"
-        style={{ height: safeCss(headerHeight) }}
-        aria-hidden={true}
-      >
-        <div className="header-corner"></div>
-      </div>
-      <div className="row-nums-body">
-        <div className="row-nums-list" style={{ marginTop: safeCss(margin) }}>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function RowNums({ rowNumRenderer }) {
   const [state] = useContext(TableContext);
