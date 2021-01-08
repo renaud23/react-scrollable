@@ -3,7 +3,7 @@ import BodyContent from "./body-content";
 import HeaderContent from "./header-content";
 import { Table, Thead, Tr, Tbody } from "../table-components";
 import { TableContext, actions } from "../state-management";
-import { DragAndDropColumn } from "../table-components";
+import { DragAndDrop } from "../table-components";
 
 function TableContent({
   header,
@@ -30,7 +30,7 @@ function TableContent({
 
   return (
     <>
-      <DragAndDropColumn />
+      <DragAndDrop />
       <Table id={id}>
         <Thead height={headerHeight} marginLeft={marginLeft}>
           <Tr height={headerHeight}>

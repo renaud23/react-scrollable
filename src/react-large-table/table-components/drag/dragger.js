@@ -1,29 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { RowablePortal } from "../../../react-rowable";
-
-const PORTAL_SIZE = 18;
-
-export const PORTAL_NAMES = {
-  top: "portal/top",
-  bottom: "portal/bottom",
-  left: "portal/left",
-  right: "portal/right",
-};
+import { isInBoundingRect } from "../../commons-table";
+import { PORTAL_NAMES, PORTAL_SIZE } from "../../commons-table";
 
 function empty() {}
-
-export function isInBoundingRect(clientX, clientY, rect) {
-  const { left, top, height, width } = rect;
-  if (
-    clientX >= left &&
-    clientX <= left + width &&
-    clientY >= top &&
-    clientY <= top + height
-  ) {
-    return true;
-  }
-  return false;
-}
 
 function checkPortal(clientX, clientY, pRect, onEnter, onExit) {
   if (isInBoundingRect(clientX, clientY, pRect)) {
@@ -122,7 +102,6 @@ function Dragger({
           left: nLeft,
         } = node.getBoundingClientRect();
         const { top: pTop, left: pLeft } = parent.getBoundingClientRect();
-
         const top = nTop - pTop;
         const left = nLeft - pLeft;
         const offsetX = clientX - left;
