@@ -20,18 +20,53 @@ export const createDrawImage = (context) =>
     context.drawImage(texture, tx, ty, tw, th, x, y, w, h);
   };
 
+export function createDrawLine(context) {
+  return function (x1, y1, x2, y2, size = 1, color = "black") {
+    context.beginPath();
+    context.lineWidth = size;
+    context.strokeStyle = color;
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.stroke();
+  };
+}
+
+function createDrawCircle(context) {
+  return function (x, y, radius, size, color) {
+    context.beginPath();
+    context.arc(x, y, radius, 0, 2 * Math.PI, false);
+    // context.fillStyle = 'green';
+    // context.fill();
+    context.lineWidth = size;
+    context.strokeStyle = color;
+    context.stroke();
+  };
+}
+
 export const createDrawer = function (buffer) {
   const context = createContext(buffer);
   const { width, height } = buffer;
   const drawImage = createDrawImage(context);
   const fillRect = createFillRect(context);
+  const drawLine = createDrawLine(context);
+  const drawCircle = createDrawCircle(context);
+  const clear = function () {
+    context.clearRect(0, 0, width, height);
+  };
   const drawInContext = function (ctx, x, y, w, h) {
-    ctx.fillStyle = "green";
-    ctx.fillRect(0, 0, w, h);
     ctx.drawImage(buffer, x, y, w, h, 0, 0, w, h);
   };
 
-  return { drawImage, fillRect, drawInContext, width, height };
+  return {
+    drawImage,
+    fillRect,
+    drawInContext,
+    clear,
+    drawLine,
+    drawCircle,
+    width,
+    height,
+  };
 };
 
 // function createRenderer(canvas, width = 512, height = 512) {
