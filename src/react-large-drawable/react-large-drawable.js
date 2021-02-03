@@ -12,11 +12,18 @@ function ReactLargeDrawble({ backBuffer }) {
   const [position, setPosition] = useState([0, 0]);
   const [x, y] = position;
 
-  const onResize = useCallback(function (w, h) {
-    setOffscreenSize([w, h]);
+  const onResize = useCallback(
+    function (w, h) {
+      setOffscreenSize([w, h]);
+      setPosition([
+        Math.max(Math.min(width - w, x), 0),
+        Math.max(Math.min(height - h, y), 0),
+      ]);
 
-    return [w, h];
-  }, []);
+      return [w, h];
+    },
+    [width, height, x, y]
+  );
 
   const onHorizontalScroll = useCallback(
     function (percent) {

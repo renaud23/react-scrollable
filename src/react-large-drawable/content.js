@@ -12,10 +12,12 @@ function Content(
     function () {
       if (current && backBuffer) {
         const context = current.getContext("2d");
+        context.clearRect(0, 0, offscreenWidth, offscreenHeight);
+        const { width, height } = backBuffer;
         context.drawImage(
           backBuffer,
-          x,
-          y,
+          width <= offscreenWidth ? 0 : x,
+          height <= offscreenHeight ? 0 : y,
           offscreenWidth,
           offscreenHeight,
           0,
