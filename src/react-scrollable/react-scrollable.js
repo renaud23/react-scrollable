@@ -17,7 +17,7 @@ import { Corner } from "./components";
 
 function emptyCallback() {}
 
-function ReactScrollableEx({
+function ReactScrollable({
   children,
   maxWidth,
   maxHeight,
@@ -107,7 +107,7 @@ function ReactScrollableEx({
   );
 }
 
-ReactScrollableEx.propTypes = {
+ReactScrollable.propTypes = {
   maxWidth: PropTypes.number,
   maxHeight: PropTypes.number,
   refWidth: PropTypes.number,
@@ -126,7 +126,7 @@ ReactScrollableEx.propTypes = {
   className: PropTypes.string,
 };
 
-ReactScrollableEx.defaultProps = {
+ReactScrollable.defaultProps = {
   verticalScrollRequest: undefined,
   horizontalScrollRequest: undefined,
   focused: false,
@@ -135,4 +135,4 @@ ReactScrollableEx.defaultProps = {
   idContent: undefined,
 };
 
-export default ReactScrollableEx;
+export default ReactScrollable;

@@ -57,7 +57,6 @@ function DragAndDrop() {
         </Dragger>
       );
     }
-    return null;
   }
 
   return null;
