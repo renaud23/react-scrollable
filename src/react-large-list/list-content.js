@@ -83,7 +83,7 @@ function ContentList({
   }
   return (
     <div className="react-large-list">
-      <ul id={id} className={(classnames(className), { focused })}></ul>
+      <ul id={id} className={classnames(className, { focused })}></ul>
     </div>
   );
 }
