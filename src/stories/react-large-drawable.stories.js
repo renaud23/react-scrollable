@@ -3,11 +3,11 @@ import ReactLargeDrawable from "../react-large-drawable";
 import { createBackBuffer } from "./rendering";
 import { create, draw, drawWalker, createWalker } from "./maze.js";
 
-const SPEED = 200;
-const BUFFER_WIDTH = 1000;
-const BUFFER_HEIGHT = 500;
-const MAZE_WIDTH = 100;
-const MAZE_HEIGHT = 50;
+const SPEED = 10;
+const BUFFER_WIDTH = 2000;
+const BUFFER_HEIGHT = 1000;
+const MAZE_WIDTH = 200;
+const MAZE_HEIGHT = 100;
 
 export function Example() {
   const [buffer, setBuffer] = useState(undefined);

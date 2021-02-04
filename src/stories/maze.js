@@ -31,7 +31,7 @@ function openWall(code, wall) {
 
 function carve(laby) {
   const { width, height, data } = laby;
-  const visited = [];
+  const visited = new Map();
 
   let current = getRandomInt(width * height);
   const stack = [];
@@ -39,13 +39,13 @@ function carve(laby) {
 
   while (!end) {
     end = true;
-    visited.push(current);
+    visited.set(current, true);
     const possible = [];
 
     if (
       isNorthWall(data[current]) &&
       current - width >= 0 &&
-      visited.indexOf(current - width) === -1
+      !visited.has(current - width)
     ) {
       possible.push([current - width, NORTH_WALL, SOUTH_WALL]);
     }
@@ -53,7 +53,7 @@ function carve(laby) {
     if (
       isSouthWall(data[current]) &&
       current + width < width * height - 1 &&
-      visited.indexOf(current + width) === -1
+      !visited.has(current + width)
     ) {
       possible.push([current + width, SOUTH_WALL, NORTH_WALL]);
     }
@@ -61,7 +61,7 @@ function carve(laby) {
     if (
       isEastWall(data[current]) &&
       current % width < width - 1 &&
-      visited.indexOf(current + 1) === -1
+      !visited.has(current + 1)
     ) {
       possible.push([current + 1, EAST_WALL, WEST_WALL]);
     }
@@ -69,15 +69,14 @@ function carve(laby) {
     if (
       isWestWall(data[current]) &&
       current % width > 0 &&
-      visited.indexOf(current - 1) === -1
+      !visited.has(current - 1)
     ) {
       possible.push([current - 1, WEST_WALL, EAST_WALL]);
     }
-    //
+
     if (!possible.length) {
       if (stack.length) {
         current = stack.pop();
-
         end = false;
       }
     } else {
@@ -110,8 +109,8 @@ function drawPosition(
   j,
   width,
   height,
-  background = "black",
-  wall = "red"
+  background = "Navy",
+  wall = "MidnightBlue"
 ) {
   drawer.fillRect(background, i, j, width, height);
   drawer.fillRect(wall, i, j, 2, 2);
@@ -150,8 +149,8 @@ export function drawWalker(buffer, maze, position, before) {
       j,
       tileWidth,
       tileHeight,
-      "gold",
-      "orange"
+      "IndianRed",
+      "DarkRed"
     );
   }
 
@@ -165,10 +164,10 @@ export function drawWalker(buffer, maze, position, before) {
       j,
       tileWidth,
       tileHeight,
-      "gold",
-      "orange"
+      "IndianRed",
+      "DarkRed"
     );
-    drawer.fillRect("green", i + 2, j + 2, tileWidth - 4, tileHeight - 4);
+    drawer.fillRect("Lime", i + 2, j + 2, tileWidth - 4, tileHeight - 4);
   }
 }
 
