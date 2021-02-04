@@ -1,7 +1,7 @@
 {
   "mode": "production",
   "name": "react-scrollable-div",
-  "version": "v0.6.0",
+  "version": "v0.7.0",
   "license": "MIT",
   "author": "renaud.genevois",
   "homepage": "https://renaud23.github.io/react-scrollable/",

@@ -11,7 +11,35 @@ export function DefaultLargeList() {
     <>
       <p>A large list of {__LIST_LENGTH__} items.</p>
       <div className="react-large-list-container">
-        <ReactLargeList list={randomList} />
+        <ReactLargeList
+          list={randomList}
+          onClick={(_, item) => console.log(item)}
+        />
+      </div>
+    </>
+  );
+}
+
+export function CustomItem() {
+  function renderer({ item, height }) {
+    const { label } = item;
+    return (
+      <div
+        style={{
+          backgroundColor: "IndianRed",
+          height: "100%",
+          lineHeight: `${height}px`,
+        }}
+      >
+        {label}
+      </div>
+    );
+  }
+  return (
+    <>
+      <p>A large list of {__LIST_LENGTH__} items.</p>
+      <div className="react-large-list-container">
+        <ReactLargeList list={randomList} itemRenderer={renderer} />
       </div>
     </>
   );

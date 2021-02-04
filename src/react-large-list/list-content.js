@@ -2,6 +2,17 @@ import React from "react";
 import classnames from "classnames";
 import { safeCss } from "../commons-scrollable";
 
+function getObjectValue(item) {
+  const { label, value } = item;
+  if (typeof label === "string") {
+    return label;
+  }
+  if (value !== undefined) {
+    return value;
+  }
+  return "";
+}
+
 function getValue(item) {
   const type = typeof item;
   switch (type) {
@@ -10,7 +21,7 @@ function getValue(item) {
     case "string":
       return item;
     case "object":
-      return "value" in item ? item.value : "";
+      return getObjectValue(item);
     default:
       return "";
   }
@@ -41,6 +52,8 @@ function ContentList({
   itemRenderer: ItemRenderer = DefaultItemRenderer,
   className,
   focused,
+  onClick,
+  onKeyDown,
 }) {
   if (verticalNb) {
     const contentLi = new Array(verticalNb).fill(null).map(function (_, i) {
@@ -56,7 +69,6 @@ function ContentList({
     });
 
     return (
-      // <div className="react-large-list">
       <ul
         id={id}
         className={classnames(className, { focused })}
@@ -67,7 +79,6 @@ function ContentList({
       >
         {contentLi}
       </ul>
-      // </div>
     );
   }
   return (
