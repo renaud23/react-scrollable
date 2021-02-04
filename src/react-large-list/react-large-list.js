@@ -17,7 +17,7 @@ function initializeScrollable() {
 }
 
 /* */
-function ReactLargeList({ className, list, offsetChar }) {
+function ReactLargeList({ className, list, offsetChar, itemRenderer }) {
   const [id] = useState(() => getId());
   const [vertical, setVertical] = useState(initializeScrollable);
   const [horizontal, setHorizontal] = useState(initializeScrollable);
@@ -51,6 +51,7 @@ function ReactLargeList({ className, list, offsetChar }) {
         list={list}
         offsetChar={offsetChar}
         focused={focused}
+        itemRenderer={itemRenderer}
       />
     </ReactRowable>
   );

@@ -51,12 +51,13 @@ export function getSentence(sentence = "", current) {
 
 function generate(how) {
   return new Array(how).fill(null).map(function (_, i) {
-    const value = getSentence();
+    const label = getSentence();
     return {
       id: `Element-${i}`,
-      value,
+      label,
+      value: `option-${i}`,
       __height: 30 + randomInt(30),
-      __width: value.length,
+      __width: label.length,
     };
   });
 }

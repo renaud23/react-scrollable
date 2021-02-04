@@ -1,1 +1,1 @@
-export { default } from "./react-scrollable-ex";
+export { default } from "./react-scrollable";
