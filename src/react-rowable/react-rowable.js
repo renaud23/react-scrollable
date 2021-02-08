@@ -21,6 +21,7 @@ function ReactRowable({
   children,
   id,
   className,
+  tabIndex,
   vertical: verticalRowable,
   horizontal: horizontalRowable,
   onResize: onResizeRoot = emptyResizeCallback,
@@ -150,6 +151,7 @@ function ReactRowable({
         onKeyDown={onKeyDownCallback}
         className={className}
         idContent={id}
+        tabIndex={tabIndex}
       >
         <div className="react-rowable-container" ref={containerEl}>
           {React.cloneElement(React.Children.only(children), {
@@ -179,12 +181,14 @@ ReactRowable.propTypes = {
   vertical: rowableProps.isRequired,
   horizontal: rowableProps.isRequired,
   onResize: PropTypes.func,
+  tabIndex: PropTypes.oneOf(["0", "-1"]),
 };
 
 ReactRowable.defaultProps = {
   id: undefined,
   onBlur: emptyCallback,
   onFocus: emptyCallback,
+  tabIndex: "0",
 };
 
 export default ReactRowable;
