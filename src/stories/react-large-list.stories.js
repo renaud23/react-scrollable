@@ -11,10 +11,7 @@ export function DefaultLargeList() {
     <>
       <p>A large list of {__LIST_LENGTH__} items.</p>
       <div className="react-large-list-container">
-        <ReactLargeList
-          list={randomList}
-          onClick={(_, item) => console.log(item)}
-        />
+        <ReactLargeList list={randomList} />
       </div>
     </>
   );

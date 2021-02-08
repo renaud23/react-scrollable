@@ -1,0 +1,24 @@
+$selectionHeight: 30px;
+
+.custom-dropdown {
+  height: $selectionHeight;
+  width: 300px;
+
+  .react-large-dropdown {
+    border: solid 2px blue;
+
+    .selection-container {
+      height: $selectionHeight;
+      .dropdown-selection-content {
+        background-color: thistle;
+        &.writable {
+        }
+      }
+    }
+
+    /* */
+    .panel-container {
+      background-color: silver;
+    }
+  }
+}

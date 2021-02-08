@@ -30,6 +30,7 @@ function ReactScrollable({
   focused,
   className,
   idContent,
+  tabIndex,
   buttonProvider = DefaultButtonProvider,
   onFocus = emptyCallback,
   onBlur = emptyCallback,
@@ -97,6 +98,7 @@ function ReactScrollable({
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyDown={onKeyDown}
+        tabIndex={tabIndex}
       >
         {children}
         <HorizontalScrollbar buttonProvider={buttonProvider} />
@@ -124,6 +126,7 @@ ReactScrollable.propTypes = {
   focused: PropTypes.bool,
   buttonProvider: PropTypes.func,
   className: PropTypes.string,
+  tabIndex: PropTypes.oneOf(["0", "-1"]),
 };
 
 ReactScrollable.defaultProps = {
@@ -133,6 +136,7 @@ ReactScrollable.defaultProps = {
   buttonProvider: DefaultButtonProvider,
   className: undefined,
   idContent: undefined,
+  tabIndex: "0",
 };
 
 export default ReactScrollable;

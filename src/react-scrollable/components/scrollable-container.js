@@ -9,6 +9,7 @@ function ScrollableContainer({
   onFocus,
   onBlur,
   onKeyDown,
+  tabIndex,
 }) {
   const containerEl = useRef();
   const [state, dispatch] = useContext(ScrollableContext);
@@ -35,7 +36,7 @@ function ScrollableContainer({
   );
   return (
     <div
-      tabIndex="0"
+      tabIndex={tabIndex === "0" ? "0" : undefined}
       ref={containerEl}
       className={classnames("react-scrollable-ex", className, { focused })}
       onKeyDown={onKeyDown}

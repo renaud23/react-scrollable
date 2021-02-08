@@ -1,0 +1,45 @@
+.react-large-dropdown-container {
+  position: relative;
+
+  .react-large-dropdown {
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+    
+    &.focused {
+      z-index: 1;
+    }
+    /* */
+    .selection-container {
+      width: 100%;
+      height: max-content;
+
+      .dropdown-selection-content {
+        &.writable {
+          width: calc(100% - 10px);
+          padding: 0 5px;
+        }
+      }
+    }
+
+    /* */
+    .panel-container {
+      width: 100%;
+
+      .panel-content {
+        width: 100%;
+        height: 250px;
+        display: none;
+
+        &.focused {
+          display: block;
+        }
+
+        .dropdown-item {
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
