@@ -4,3 +4,4 @@ export { default as generateRandomTree, computeSize } from "./random-tree-data";
 export * from "./random-entities";
 export * from "./random-text";
 export * from "./components";
+export * from "./naf-tools";

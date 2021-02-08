@@ -54,6 +54,7 @@ function CreateOne({ width, height, className }) {
             setVerticalScrollPercent(percent);
           }}
           verticalScrollRequest={verticalScrollRequest}
+          tabIndex="-1"
         >
           <div
             className="scrollable-content-example"
