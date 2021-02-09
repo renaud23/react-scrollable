@@ -17,7 +17,7 @@ export function SimpleDropdown() {
           libelle,
           label: `${code} - ${libelle}`,
           value: code,
-          __width: libelle.length,
+          __width: libelle.length * 10,
           __height: 20,
         };
       });
