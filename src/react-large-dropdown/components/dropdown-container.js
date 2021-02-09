@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import classnames from "classnames";
 
-function DropdownContainer({ children, className, focused }) {
+function DropdownContainer({ children, className, focused, onBlur }) {
+  const containerEl = useRef();
+  const { current } = containerEl;
+
+  useEffect(
+    function () {
+      function onMouseDown(e) {
+        if (!current.contains(e.target)) {
+          onBlur();
+        }
+      }
+      window.addEventListener("mousedown", onMouseDown);
+      return function () {
+        window.removeEventListener("mousedown", onMouseDown);
+      };
+    },
+    [onBlur, current]
+  );
+
   return (
     <div className={classnames("react-large-dropdown-container", className)}>
-      <div className={classnames("react-large-dropdown", { focused })}>
+      <div
+        ref={containerEl}
+        className={classnames("react-large-dropdown", { focused })}
+      >
         {children}
       </div>
     </div>

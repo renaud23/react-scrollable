@@ -4,19 +4,21 @@ import DropdownPanelContainer from "./dropdown-panel-container";
 import { DropdownContext } from "../../state-management";
 
 function DefaultItemRenderer({ item }) {
-  const { libelle } = item;
-  return <div className="dropdown-item">{libelle}</div>;
+  const { label } = item;
+  return <div className="dropdown-item">{label}</div>;
 }
 
 function DropdownPanel() {
   const [state] = useContext(DropdownContext);
-  const { displayedItems, focused } = state;
+  const { displayedItems, verticalScrollRequest, focused } = state;
   if (focused) {
     return (
       <DropdownPanelContainer focused={true}>
         <ReactLargeList
           list={displayedItems}
           itemRenderer={DefaultItemRenderer}
+          verticalScrollRequest={verticalScrollRequest}
+          tabIndex="-1"
         />
       </DropdownPanelContainer>
     );

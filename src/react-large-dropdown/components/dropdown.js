@@ -1,16 +1,41 @@
-import React, { useContext } from "react";
-import { DropdownContext } from "../state-management";
+import React, { useContext, useCallback } from "react";
+import { DropdownContext, actions } from "../state-management";
 import DropdownContainer from "./dropdown-container";
 import DropdownSelection from "./selection";
 import DropdownPanel from "./panel";
 import "./react-large-dropdown.scss";
 
 function Dropdown({ className }) {
-  const [state] = useContext(DropdownContext);
+  const [state, dispatch] = useContext(DropdownContext);
   const { focused } = state;
+
+  const onBlur = useCallback(
+    function () {
+      dispatch(actions.onBlur());
+    },
+    [dispatch]
+  );
+
+  const onFocus = useCallback(
+    function () {
+      dispatch(actions.onFocus());
+    },
+    [dispatch]
+  );
+
+  const onKeyDown = useCallback(
+    function (key) {
+      dispatch(actions.onKeyDown(key));
+    },
+    [dispatch]
+  );
   return (
-    <DropdownContainer className={className} focused={focused}>
-      <DropdownSelection />
+    <DropdownContainer className={className} focused={focused} onBlur={onBlur}>
+      <DropdownSelection
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onKeyDown={onKeyDown}
+      />
       <DropdownPanel />
     </DropdownContainer>
   );

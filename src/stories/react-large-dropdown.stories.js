@@ -15,6 +15,8 @@ export function SimpleDropdown() {
         return {
           code,
           libelle,
+          label: `${code} - ${libelle}`,
+          value: code,
           __width: libelle.length,
           __height: 20,
         };

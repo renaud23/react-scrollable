@@ -27,6 +27,7 @@ function ReactLargeDropdown({
     },
     [list, disabled, writable]
   );
+
   return (
     <DropdownContext.Provider value={[state, dispatch]}>
       <Dropdown className={className} itemRenderer={itemRenderer} />
@@ -37,13 +38,7 @@ function ReactLargeDropdown({
 ReactLargeDropdown.propTypes = {
   writable: PropTypes.bool,
   className: PropTypes.string,
-  list: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired,
-    })
-  ).isRequired,
+  list: PropTypes.array.isRequired,
   itemRenderer: PropTypes.func,
 };
 

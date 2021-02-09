@@ -25,6 +25,8 @@ function ReactLargeList({
   offsetChar,
   itemRenderer,
   tabIndex,
+  verticalScrollRequest,
+  horizontalScrollRequest,
 }) {
   const [id] = useState(() => getId());
   const [vertical, setVertical] = useState(initializeScrollable);
@@ -48,8 +50,8 @@ function ReactLargeList({
   return (
     <ReactRowable
       id={id}
-      vertical={vertical}
-      horizontal={horizontal}
+      vertical={{ ...vertical, scrollRequest: verticalScrollRequest }}
+      horizontal={{ ...horizontal, scrollRequest: horizontalScrollRequest }}
       onFocus={onFocus}
       onBlur={onBlur}
       className={classnames("react-large-list", className, { focused })}
@@ -70,12 +72,18 @@ ReactLargeList.propTypes = {
   className: PropTypes.string,
   list: PropTypes.array.isRequired,
   itemRenderer: PropTypes.func,
+  verticalScrollRequest: PropTypes.shape({
+    delta: PropTypes.number,
+    index: PropTypes.number,
+    pixels: PropTypes.number,
+  }),
   tabIndex: PropTypes.oneOf(["0", "-1"]),
 };
 
 ReactLargeList.defaultProps = {
   className: undefined,
   itemRenderer: DefaultItemRenderer,
+  verticalScrollRequest: undefined,
   tabIndex: "0",
 };
 

@@ -5,6 +5,8 @@ const INITIAL = {
   disabled: false,
   focused: false,
   //
+  verticalScrollRequest: undefined,
+  //
   search: undefined,
 };
 
