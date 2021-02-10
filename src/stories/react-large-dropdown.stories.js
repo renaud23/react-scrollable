@@ -11,14 +11,14 @@ export function SimpleDropdown() {
       const naf = await getNaf();
       const list = Object.values(naf).map(function (poste) {
         const { code, libelle } = poste;
-
+        const label = `${code} - ${libelle}`;
         return {
           code,
           libelle,
-          label: `${code} - ${libelle}`,
-          value: code,
-          __width: libelle.length * 10,
-          __height: 20,
+          label, // needed
+          value: code, // needed
+          __width: label.length, // needed
+          __height: 20, // needed
         };
       });
       setData(list);

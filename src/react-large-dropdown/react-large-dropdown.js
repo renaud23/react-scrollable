@@ -8,8 +8,9 @@ import {
   actions,
 } from "./state-management";
 
-function DefaultItemRenderer() {
-  return null;
+function DefaultItemRenderer({ item }) {
+  const { label } = item;
+  return <div className="dropdown-item">{label}</div>;
 }
 
 function ReactLargeDropdown({

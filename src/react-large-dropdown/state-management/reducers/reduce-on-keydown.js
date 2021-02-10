@@ -6,30 +6,55 @@ const BIND_KEY = {
 };
 
 function reduceEnd(state) {
-  const { displayedItems } = state;
-  const verticalScrollRequest = { index: displayedItems.length - 1 };
-
-  return { ...state, verticalScrollRequest };
+  const { displayedItems, vertical } = state;
+  const activeIndex = displayedItems.length - 1;
+  const scrollRequest = { index: activeIndex };
+  return { ...state, activeIndex, vertical: { ...vertical, scrollRequest } };
 }
 
 function reduceHome(state) {
-  const verticalScrollRequest = { index: 0 };
+  const { vertical } = state;
+  const scrollRequest = { index: 0 };
+  return { ...state, activeIndex: 0, vertical: { ...vertical, scrollRequest } };
+}
 
-  return { ...state, verticalScrollRequest };
+function validatePanel(state) {
+  const { activeIndex, verticalScroll, vertical } = state;
+  const { start, nb } = verticalScroll;
+  if (activeIndex < start) {
+    const scrollRequest = { index: activeIndex, margin: 0 };
+    return { ...state, vertical: { ...vertical, scrollRequest } };
+  }
+  if (activeIndex >= start + nb) {
+    const scrollRequest = { index: activeIndex - nb + 1, margin: 0 };
+    return { ...state, vertical: { ...vertical, scrollRequest } };
+  }
+  return state;
 }
 
 function reduceArrowUp(state) {
-  return state;
+  const { activeIndex } = state;
+  const index = Math.max(activeIndex - 1 || 0, 0);
+
+  return validatePanel({
+    ...state,
+    activeIndex: index,
+  });
 }
 
 function reduceArrowDown(state) {
-  return state;
+  const { activeIndex, displayedItems } = state;
+  const index = Math.min(activeIndex + 1 || 0, displayedItems.length);
+
+  return validatePanel({
+    ...state,
+    activeIndex: index,
+  });
 }
 
 function reduce(state, action) {
   const { payload } = action;
   const { key } = payload;
-
   switch (key) {
     case BIND_KEY.arrowUp:
       return reduceArrowUp(state);

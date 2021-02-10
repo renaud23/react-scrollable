@@ -12,3 +12,21 @@ export const onBlur = () => ({ type: ON_BLUR });
 
 export const ON_KEYDOWN = "react-large-dropdown/on-keydown";
 export const onKeyDown = (key) => ({ type: ON_KEYDOWN, payload: { key } });
+
+export const ON_RESIZE = "react-large-dropdown/on-resize";
+export const onResize = (width, height) => ({
+  type: ON_RESIZE,
+  payload: { width, height },
+});
+
+export const ON_VERTICAL_SCROLL = "react-large-dropdown/on-vertical-scroll";
+export const onVerticalScroll = (percent) => ({
+  type: ON_VERTICAL_SCROLL,
+  payload: { percent },
+});
+
+export const ON_HORIZONTAL_SCROLL = "react-large-dropdown/on-horizontal-scroll";
+export const onHorizontalScroll = (percent) => ({
+  type: ON_HORIZONTAL_SCROLL,
+  payload: { percent },
+});

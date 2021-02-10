@@ -5,7 +5,7 @@ import DropdownSelection from "./selection";
 import DropdownPanel from "./panel";
 import "./react-large-dropdown.scss";
 
-function Dropdown({ className }) {
+function Dropdown({ className, itemRenderer }) {
   const [state, dispatch] = useContext(DropdownContext);
   const { focused } = state;
 
@@ -36,7 +36,7 @@ function Dropdown({ className }) {
         onFocus={onFocus}
         onKeyDown={onKeyDown}
       />
-      <DropdownPanel />
+      <DropdownPanel itemRenderer={itemRenderer} />
     </DropdownContainer>
   );
 }
