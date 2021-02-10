@@ -18,15 +18,25 @@ function ReactLargeDropdown({
   disabled,
   writable,
   itemRenderer,
+  optionsHeight,
+  panelMaxWidth,
   className,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
 
   useEffect(
     function () {
-      dispatch(actions.onUpdateProps({ list, disabled, writable }));
+      dispatch(
+        actions.onUpdateProps({
+          list,
+          disabled,
+          writable,
+          optionsHeight,
+          panelMaxWidth,
+        })
+      );
     },
-    [list, disabled, writable]
+    [list, disabled, writable, optionsHeight, panelMaxWidth]
   );
 
   return (
@@ -37,6 +47,8 @@ function ReactLargeDropdown({
 }
 
 ReactLargeDropdown.propTypes = {
+  optionsHeight: PropTypes.number,
+  panelMaxWidth: PropTypes.number,
   writable: PropTypes.bool,
   className: PropTypes.string,
   list: PropTypes.array.isRequired,
@@ -47,6 +59,8 @@ ReactLargeDropdown.defaultProps = {
   itemRenderer: DefaultItemRenderer,
   className: undefined,
   writable: false,
+  optionsHeight: 26,
+  panelMaxWidth: 450,
 };
 
 export default ReactLargeDropdown;

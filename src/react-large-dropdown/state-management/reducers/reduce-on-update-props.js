@@ -1,25 +1,7 @@
-// import { computeVertical, computeHorizontal } from "./commons-reducer";
-
-// function reduce(state, action) {
-//   const { payload } = action;
-//   const { list, disabled, writable } = payload;
-//   const { offsetChar } = state;
-
-//   return {
-//     ...state,
-//     list,
-//     disabled,
-//     writable,
-//     displayedItems: list,
-//     vertical: computeVertical(list),
-//     horizontal: computeHorizontal(list, offsetChar),
-//   };
-// }
-
 function reduce(state, action) {
   const { payload } = action;
-  const { list, disabled, writable } = payload;
-  const { rowHeight, rowWidth, vertical, horizontal } = state;
+  const { list, disabled, writable, optionsHeight, panelMaxWidth } = payload;
+  const { vertical, horizontal } = state;
 
   return {
     ...state,
@@ -27,12 +9,14 @@ function reduce(state, action) {
     disabled,
     writable,
     displayedItems: list,
+    optionsHeight,
+    panelMaxWidth,
     vertical: {
       ...vertical,
-      maxSize: list.length * rowHeight,
+      maxSize: list.length * optionsHeight,
       max: list.length,
     },
-    horizontal: { ...horizontal, maxSize: rowWidth },
+    horizontal: { ...horizontal, maxSize: panelMaxWidth },
   };
 }
 

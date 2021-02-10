@@ -3,9 +3,12 @@ import { resolveVertical } from "./commons-reducer";
 function reduce(state, action) {
   const { payload } = action;
   const { percent } = payload;
-  const { rowHeight, vertical } = state;
+  const { optionsHeight, vertical } = state;
 
-  return { ...state, vertical: resolveVertical(vertical, percent, rowHeight) };
+  return {
+    ...state,
+    vertical: resolveVertical(vertical, percent, optionsHeight),
+  };
 }
 
 export default reduce;

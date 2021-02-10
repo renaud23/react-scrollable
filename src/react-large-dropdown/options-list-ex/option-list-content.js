@@ -26,14 +26,14 @@ function getContent(vertical, items, rowHeight, marginLeft, ItemRenderer) {
 
 function OptionListContent({ itemRenderer }, ref) {
   const [state] = useContext(DropdownContext);
-  const { displayedItems, vertical, rowHeight, horizontal } = state;
+  const { displayedItems, vertical, optionsHeight, horizontal } = state;
   const { margin: marginLeft } = horizontal;
   const { margin: marginTop } = vertical;
 
   const content = getContent(
     vertical,
     displayedItems,
-    rowHeight,
+    optionsHeight,
     marginLeft,
     itemRenderer
   );
