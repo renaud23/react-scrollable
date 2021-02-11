@@ -4,7 +4,6 @@ function reduce(state, action) {
   const { payload } = action;
   const { percent } = payload;
   const { optionsHeight, vertical } = state;
-
   return {
     ...state,
     vertical: resolveVertical(vertical, percent, optionsHeight),

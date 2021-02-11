@@ -1,22 +1,35 @@
 import React, { useContext } from "react";
+import classnames from "classnames";
 import { safeCss } from "../../commons-scrollable";
 import { DropdownContext } from "../state-management";
 
-function getContent(vertical, items, rowHeight, marginLeft, ItemRenderer) {
+function getContent(state, ItemRenderer) {
+  const {
+    vertical,
+    optionsHeight,
+    horizontal,
+    displayedItems,
+    activeIndex,
+  } = state;
+  const { margin } = horizontal;
   const { nb, start } = vertical;
   if (nb) {
     return new Array(nb).fill(null).map(function (_, i) {
-      const item = items[start + i];
+      const index = start + i;
+      const item = displayedItems[index];
       const { value } = item;
       return (
         <li
           key={value}
+          className={classnames("dropdown-list-item", {
+            active: activeIndex === index,
+          })}
           style={{
-            height: safeCss(rowHeight),
-            marginLeft: safeCss(marginLeft),
+            height: safeCss(optionsHeight),
+            marginLeft: safeCss(margin),
           }}
         >
-          <ItemRenderer item={item} index={start + i} />
+          <ItemRenderer item={item} index={index} />
         </li>
       );
     });
@@ -26,17 +39,10 @@ function getContent(vertical, items, rowHeight, marginLeft, ItemRenderer) {
 
 function OptionListContent({ itemRenderer }, ref) {
   const [state] = useContext(DropdownContext);
-  const { displayedItems, vertical, optionsHeight, horizontal } = state;
-  const { margin: marginLeft } = horizontal;
+  const { vertical } = state;
   const { margin: marginTop } = vertical;
 
-  const content = getContent(
-    vertical,
-    displayedItems,
-    optionsHeight,
-    marginLeft,
-    itemRenderer
-  );
+  const content = getContent(state, itemRenderer);
   return (
     <ul
       role="listbox"

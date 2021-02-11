@@ -7,7 +7,7 @@ import OptionListContent from "./option-list-content.js";
 
 function OptionList({ itemRenderer }) {
   const [state, dispatch] = useContext(DropdownContext);
-  const { vertical, horizontal } = state;
+  const { vertical, horizontal, verticalScrollRequest } = state;
 
   const { maxSize: maxHeight, size: panelHeight } = vertical;
   const { maxSize: maxWidth, size: panelWidth } = horizontal;
@@ -45,6 +45,7 @@ function OptionList({ itemRenderer }) {
       maxWidth={maxWidth}
       refWidth={panelWidth}
       refHeight={panelHeight}
+      verticalScrollRequest={verticalScrollRequest}
     >
       <OptionListContent ref={containerEl} itemRenderer={itemRenderer} />
     </ReactScrollable>

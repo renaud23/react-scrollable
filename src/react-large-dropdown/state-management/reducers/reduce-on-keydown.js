@@ -1,3 +1,5 @@
+// import { resolveVertical } from "./commons-reducer";
+
 const BIND_KEY = {
   arrowUp: "ArrowUp",
   arrowDown: "ArrowDown",
@@ -5,29 +7,46 @@ const BIND_KEY = {
   end: "End",
 };
 
-function reduceEnd(state) {
-  const { displayedItems, vertical } = state;
-  const activeIndex = displayedItems.length - 1;
-  const scrollRequest = { index: activeIndex };
-  return { ...state, activeIndex, vertical: { ...vertical, scrollRequest } };
+function computePercentAtEnd(index, size, maxSize, optionsHeight) {
+  return (
+    ((index - Math.ceil(size / optionsHeight) + 1) * optionsHeight) /
+    (maxSize - size)
+  );
 }
 
-function reduceHome(state) {
-  const { vertical } = state;
-  const scrollRequest = { index: 0 };
-  return { ...state, activeIndex: 0, vertical: { ...vertical, scrollRequest } };
+function computePercentAtStart(index, size, maxSize, optionsHeight) {
+  return (index * optionsHeight) / (maxSize - size);
 }
 
 function validatePanel(state) {
-  const { activeIndex, verticalScroll, vertical } = state;
-  const { start, nb } = verticalScroll;
-  if (activeIndex < start) {
-    const scrollRequest = { index: activeIndex, margin: 0 };
-    return { ...state, vertical: { ...vertical, scrollRequest } };
-  }
+  const { vertical, activeIndex, optionsHeight } = state;
+  const { start, nb, maxSize, size } = vertical;
+
   if (activeIndex >= start + nb) {
-    const scrollRequest = { index: activeIndex - nb + 1, margin: 0 };
-    return { ...state, vertical: { ...vertical, scrollRequest } };
+    const percent = computePercentAtEnd(
+      activeIndex,
+      size,
+      maxSize,
+      optionsHeight
+    );
+    const verticalScrollRequest = { percent };
+    return {
+      ...state,
+      verticalScrollRequest,
+    };
+  }
+  if (activeIndex < start) {
+    const percent = computePercentAtStart(
+      activeIndex,
+      size,
+      maxSize,
+      optionsHeight
+    );
+    const verticalScrollRequest = { percent };
+    return {
+      ...state,
+      verticalScrollRequest,
+    };
   }
   return state;
 }
@@ -49,6 +68,22 @@ function reduceArrowDown(state) {
   return validatePanel({
     ...state,
     activeIndex: index,
+  });
+}
+
+function reduceEnd(state) {
+  const { displayedItems } = state;
+
+  return validatePanel({
+    ...state,
+    activeIndex: displayedItems.length - 1,
+  });
+}
+
+function reduceHome(state) {
+  return validatePanel({
+    ...state,
+    activeIndex: 0,
   });
 }
 

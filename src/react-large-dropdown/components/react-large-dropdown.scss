@@ -47,19 +47,19 @@
         }
 
         .dropdown-options-list {
-
-          ul{
+          ul {
             width: calc(100% - 16px);
             height: calc(100% - 16px);
-          }
-          .dropdown-list-item {
-            white-space: nowrap;
-            overflow: hidden;
 
-            &.active {
-              background-color: red;
-            }
-            .dropdown-item {
+            .dropdown-list-item {
+              white-space: nowrap;
+              overflow: hidden;
+
+              &.active {
+                background-color: red;
+              }
+              .dropdown-item {
+              }
             }
           }
         }
