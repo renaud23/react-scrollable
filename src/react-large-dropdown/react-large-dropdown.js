@@ -8,6 +8,8 @@ import {
   actions,
 } from "./state-management";
 
+function empty() {}
+
 function DefaultItemRenderer({ item }) {
   const { label } = item;
   return <div className="dropdown-item">{label}</div>;
@@ -21,6 +23,9 @@ function ReactLargeDropdown({
   optionsHeight,
   panelMaxWidth,
   className,
+  onSelect,
+  id,
+  labelledBy,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
 
@@ -33,15 +38,21 @@ function ReactLargeDropdown({
           writable,
           optionsHeight,
           panelMaxWidth,
+          id,
+          labelledBy,
         })
       );
     },
-    [list, disabled, writable, optionsHeight, panelMaxWidth]
+    [list, disabled, writable, optionsHeight, panelMaxWidth, id, labelledBy]
   );
 
   return (
     <DropdownContext.Provider value={[state, dispatch]}>
-      <Dropdown className={className} itemRenderer={itemRenderer} />
+      <Dropdown
+        className={className}
+        itemRenderer={itemRenderer}
+        onSelect={onSelect}
+      />
     </DropdownContext.Provider>
   );
 }
@@ -53,6 +64,9 @@ ReactLargeDropdown.propTypes = {
   className: PropTypes.string,
   list: PropTypes.array.isRequired,
   itemRenderer: PropTypes.func,
+  onSelect: PropTypes.func,
+  id: PropTypes.string,
+  labelledBy: PropTypes.string,
 };
 
 ReactLargeDropdown.defaultProps = {
@@ -61,6 +75,9 @@ ReactLargeDropdown.defaultProps = {
   writable: false,
   optionsHeight: 26,
   panelMaxWidth: 450,
+  onSelect: empty,
+  id: undefined,
+  labelledBy: undefined,
 };
 
 export default ReactLargeDropdown;

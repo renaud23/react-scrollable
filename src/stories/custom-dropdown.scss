@@ -6,11 +6,17 @@ $selectionHeight: 30px;
 
   .react-large-dropdown {
     border: solid 2px blue;
+    border-radius: 8px 8px;
+
+    &.focused {
+      box-shadow: 0 -3px 8px gray, -3px 0 8px gray, 0 3px 8px gray,
+        3px 0 8px gray;
+    }
 
     .selection-container {
       height: $selectionHeight;
       .dropdown-selection-content {
-        background-color: thistle;
+        background-color: transparent;
         &.writable {
         }
       }
@@ -18,7 +24,17 @@ $selectionHeight: 30px;
 
     /* */
     .panel-container {
-      background-color: silver;
+      .panel-content {
+        border-radius: 0 0 8px 8px;
+        background-color: silver;
+        overflow: hidden;
+        &.expended {
+          
+        }
+        .scrollabe-ex-corner {
+          border: solid 1px #bcbcbc;
+        }
+      }
     }
   }
 }

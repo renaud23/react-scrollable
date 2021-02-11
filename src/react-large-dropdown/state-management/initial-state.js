@@ -13,19 +13,17 @@ const INITIAL = {
   writable: false,
   disabled: false,
   focused: false,
+  expended: false,
   activeIndex: undefined,
+  selectedIndex: undefined,
 
   //
   rowHeight: 20,
   rowWidth: 400,
   vertical: initializeScrollable(),
   horizontal: {},
+  verticalScrollRequest: undefined,
 
-  //
-  // vertical: initializeScrollable(),
-  // verticalScroll: { start: undefined, nb: undefined },
-  // horizontal: initializeScrollable(),
-  // offsetChar: 10,
   //
   search: undefined,
 };

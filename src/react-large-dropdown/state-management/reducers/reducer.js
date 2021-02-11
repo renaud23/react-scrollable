@@ -6,6 +6,10 @@ import reduceOnKeyDown from "./reduce-on-keydown";
 import reduceOnResize from "./reduce-on-resize";
 import reduceOnVerticalScroll from "./reduce-on-vertical-scroll";
 import reduceOnHorizontalScroll from "./reduce-on-horizontal-scroll";
+import reduceOnMouseEnter from "./reduce-on-mouse-enter";
+import reduceOnSelect from "./reduce-on-select";
+import reduceOnClickSelection from "./reduce-on-click-selection";
+import reduceOnExpendPanel from "./reduce-on-expend-panel";
 
 function reducer(state, action) {
   const { type } = action;
@@ -24,6 +28,14 @@ function reducer(state, action) {
       return reduceOnVerticalScroll(state, action);
     case actions.ON_HORIZONTAL_SCROLL:
       return reduceOnHorizontalScroll(state, action);
+    case actions.ON_MOUSE_ENTER_OPTION:
+      return reduceOnMouseEnter(state, action);
+    case actions.ON_SELECT:
+      return reduceOnSelect(state, action);
+    case actions.ON_CLICK_SELECTION:
+      return reduceOnClickSelection(state, action);
+    case actions.ON_EXPEND_PANEL:
+      return reduceOnExpendPanel(state, action);
     default:
       return state;
   }

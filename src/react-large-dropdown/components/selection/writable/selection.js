@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import classnames from "classnames";
 import "./selection.scss";
 
-function Selection({ onFocus, onBlur, onKeyDown }) {
+function Selection({ onClick, onFocus, onBlur, onKeyDown }) {
   const onKeyDownCallback = useCallback(
     function (e) {
       const { key } = e;
@@ -15,9 +15,18 @@ function Selection({ onFocus, onBlur, onKeyDown }) {
     },
     [onBlur, onKeyDown]
   );
+  function onClickCallback(e) {
+    onClick();
+  }
   return (
     <div className={classnames("dropdown-selection-content", "writable")}>
-      <input type="text" onFocus={onFocus} onKeyDown={onKeyDownCallback} />
+      <input
+        aria-haspopup="listbox"
+        type="text"
+        onClick={onClickCallback}
+        onFocus={onFocus}
+        onKeyDown={onKeyDownCallback}
+      />
     </div>
   );
 }

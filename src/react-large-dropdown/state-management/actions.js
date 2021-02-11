@@ -30,3 +30,22 @@ export const onHorizontalScroll = (percent) => ({
   type: ON_HORIZONTAL_SCROLL,
   payload: { percent },
 });
+
+export const ON_MOUSE_ENTER_OPTION =
+  "react-large-dropdown/on-mouse-enter-option";
+export const onMouseEnterOption = (index) => ({
+  type: ON_MOUSE_ENTER_OPTION,
+  payload: { index },
+});
+
+export const ON_SELECT = "react-large-dropdown/on-select";
+export const onSelect = (index) => ({
+  type: ON_SELECT,
+  payload: { index },
+});
+
+export const ON_CLICK_SELECTION = "react-large-dropdown/on-click-selection";
+export const onClickSelection = () => ({ type: ON_CLICK_SELECTION });
+
+export const ON_EXPEND_PANEL = "react-large-dropdown/on-expend-panel";
+export const onExpendPanel = () => ({ type: ON_EXPEND_PANEL });

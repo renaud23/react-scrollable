@@ -1,14 +1,13 @@
-import React, { useContext, useCallback } from "react";
-import { useResizeObserver } from "../../commons-scrollable";
+import React, { useContext, useCallback, useEffect } from "react";
 import classnames from "classnames";
-import { DropdownContext, actions } from "../state-management";
-import ReactScrollable from "../../react-scrollable";
+import { useResizeObserver } from "../../../../commons-scrollable";
+import { DropdownContext, actions } from "../../../state-management";
+import ReactScrollable from "../../../../react-scrollable";
 import OptionListContent from "./option-list-content.js";
 
-function OptionList({ itemRenderer }) {
+function OptionList({ itemRenderer, onSelect }) {
   const [state, dispatch] = useContext(DropdownContext);
-  const { vertical, horizontal, verticalScrollRequest } = state;
-
+  const { vertical, horizontal, verticalScrollRequest, expended } = state;
   const { maxSize: maxHeight, size: panelHeight } = vertical;
   const { maxSize: maxWidth, size: panelWidth } = horizontal;
 
@@ -34,6 +33,15 @@ function OptionList({ itemRenderer }) {
     [dispatch]
   );
 
+  useEffect(
+    function () {
+      if (expended && panelHeight) {
+        dispatch(actions.onExpendPanel());
+      }
+    },
+    [expended, panelHeight, dispatch]
+  );
+
   const containerEl = useResizeObserver(onResize);
 
   return (
@@ -47,7 +55,11 @@ function OptionList({ itemRenderer }) {
       refHeight={panelHeight}
       verticalScrollRequest={verticalScrollRequest}
     >
-      <OptionListContent ref={containerEl} itemRenderer={itemRenderer} />
+      <OptionListContent
+        ref={containerEl}
+        itemRenderer={itemRenderer}
+        onSelect={onSelect}
+      />
     </ReactScrollable>
   );
 }

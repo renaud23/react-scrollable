@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import "./selection.scss";
 
-function Selection({ onFocus, onBlur, onKeyDown }) {
+function Selection({ onClick, onFocus, onBlur, onKeyDown }) {
   const onKeyDownCallback = useCallback(
     function (e) {
       const { key } = e;
@@ -14,16 +14,20 @@ function Selection({ onFocus, onBlur, onKeyDown }) {
     },
     [onBlur, onKeyDown]
   );
-
+  function onClickCallback(e) {
+    onClick();
+  }
   return (
-    <div
+    <button
       className="dropdown-selection-content"
       tabIndex="0"
+      aria-haspopup="listbox"
+      onClick={onClickCallback}
       onFocus={onFocus}
       onKeyDown={onKeyDownCallback}
     >
       simple
-    </div>
+    </button>
   );
 }
 

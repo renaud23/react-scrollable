@@ -5,9 +5,9 @@ import DropdownSelection from "./selection";
 import DropdownPanel from "./panel";
 import "./react-large-dropdown.scss";
 
-function Dropdown({ className, itemRenderer }) {
+function Dropdown({ className, itemRenderer, onSelect }) {
   const [state, dispatch] = useContext(DropdownContext);
-  const { focused } = state;
+  const { focused, labelledBy, id } = state;
 
   const onBlur = useCallback(
     function () {
@@ -30,13 +30,19 @@ function Dropdown({ className, itemRenderer }) {
     [dispatch]
   );
   return (
-    <DropdownContainer className={className} focused={focused} onBlur={onBlur}>
+    <DropdownContainer
+      id={id}
+      labelledBy={labelledBy}
+      className={className}
+      focused={focused}
+      onBlur={onBlur}
+    >
       <DropdownSelection
         onBlur={onBlur}
         onFocus={onFocus}
         onKeyDown={onKeyDown}
       />
-      <DropdownPanel itemRenderer={itemRenderer} />
+      <DropdownPanel itemRenderer={itemRenderer} onSelect={onSelect} />
     </DropdownContainer>
   );
 }

@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useCallback } from "react";
 import DropdownSelectionContainer from "./dropdown-selection-container";
-import { DropdownContext } from "../../state-management";
+import { DropdownContext, actions } from "../../state-management";
 import SimpleSelection from "./simple";
 import WritableSelection from "./writable";
 
@@ -9,14 +9,26 @@ function getComponent(writable) {
 }
 
 function DropdownSelection({ onFocus, onBlur, onKeyDown }) {
-  const [state] = useContext(DropdownContext);
+  const [state, dispatch] = useContext(DropdownContext);
   const { writable } = state;
 
   const Selection = getComponent(writable);
 
+  const onClick = useCallback(
+    function () {
+      dispatch(actions.onClickSelection());
+    },
+    [dispatch]
+  );
+
   return (
     <DropdownSelectionContainer>
-      <Selection onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} />
+      <Selection
+        onFocus={onFocus}
+        onClick={onClick}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+      />
     </DropdownSelectionContainer>
   );
 }

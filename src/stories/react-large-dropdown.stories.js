@@ -29,8 +29,10 @@ export function SimpleDropdown() {
   return (
     <>
       <p>ppppppppppppppppppppppppppppppppppppppp</p>
+      <label id="label-chercher-dans-la-naf">Chercher dans la Naf :</label>
       <ReactLargeDropdown
         className="custom-dropdown"
+        labelledBy="label-chercher-dans-la-naf"
         list={data}
         writable={true}
       />

@@ -42,7 +42,7 @@
         height: 250px;
         display: none;
 
-        &.focused {
+        &.expended {
           display: block;
         }
 
@@ -51,12 +51,24 @@
             width: calc(100% - 16px);
             height: calc(100% - 16px);
 
+            &:focus {
+              outline: none;
+            }
+
             .dropdown-list-item {
               white-space: nowrap;
               overflow: hidden;
+              width: max-content;
 
               &.active {
                 background-color: red;
+                &.selected {
+                  background-color: gold;
+                }
+              }
+
+              &.selected {
+                background-color: goldenrod;
               }
               .dropdown-item {
               }

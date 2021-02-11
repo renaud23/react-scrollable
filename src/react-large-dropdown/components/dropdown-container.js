@@ -1,7 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import classnames from "classnames";
 
-function DropdownContainer({ children, className, focused, onBlur }) {
+function DropdownContainer({
+  children,
+  className,
+  focused,
+  onBlur,
+  id,
+  labelledBy,
+}) {
   const containerEl = useRef();
   const { current } = containerEl;
 
@@ -19,11 +26,12 @@ function DropdownContainer({ children, className, focused, onBlur }) {
     },
     [onBlur, current]
   );
-
   return (
     <div className={classnames("react-large-dropdown-container", className)}>
       <div
         ref={containerEl}
+        id={id}
+        aria-labelledby={labelledBy}
         className={classnames("react-large-dropdown", { focused })}
       >
         {children}
