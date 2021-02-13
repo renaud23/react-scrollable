@@ -15,8 +15,11 @@ $selectionHeight: 30px;
 
     .selection-container {
       height: $selectionHeight;
+
       .dropdown-selection-content {
-        background-color: transparent;
+        background-color: ivory;
+        border-radius: 8px 8px;
+        padding: 0 4px;
         &.writable {
         }
       }
@@ -26,11 +29,11 @@ $selectionHeight: 30px;
     .panel-container {
       .panel-content {
         border-radius: 0 0 8px 8px;
-        background-color: silver;
+        background-color: ivory;
         overflow: hidden;
         &.expended {
-          
         }
+
         .scrollabe-ex-corner {
           border: solid 1px #bcbcbc;
         }

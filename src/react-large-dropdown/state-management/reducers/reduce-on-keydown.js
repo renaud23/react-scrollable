@@ -4,6 +4,7 @@ const BIND_KEY = {
   home: "Home",
   end: "End",
   enter: "Enter",
+  tab: "Tab",
 };
 
 function computePercentAtEnd(index, size, maxSize, optionsHeight) {
@@ -99,6 +100,16 @@ function reduceEnter(state) {
   return state;
 }
 
+function reduceTab(state) {
+  return {
+    ...state,
+    focused: false,
+    expended: false,
+    activeIndex: undefined,
+    verticalScrollRequest: { percent: 0 },
+  };
+}
+
 function reduce(state, action) {
   const { payload } = action;
   const { key } = payload;
@@ -113,6 +124,8 @@ function reduce(state, action) {
       return reduceHome(state);
     case BIND_KEY.enter:
       return reduceEnter(state);
+    case BIND_KEY.tab:
+      return reduceTab(state);
     default:
       return state;
   }

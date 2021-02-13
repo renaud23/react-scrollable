@@ -5,6 +5,8 @@
   padding: 0;
   margin: none;
   text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
 
   &:focus {
     outline: none;

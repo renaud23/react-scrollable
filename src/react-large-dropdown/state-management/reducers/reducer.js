@@ -10,6 +10,7 @@ import reduceOnMouseEnter from "./reduce-on-mouse-enter";
 import reduceOnSelect from "./reduce-on-select";
 import reduceOnClickSelection from "./reduce-on-click-selection";
 import reduceOnExpendPanel from "./reduce-on-expend-panel";
+import reduceOnChangeDisplayedItems from "./reduce-on-change-displayed-items";
 
 function reducer(state, action) {
   const { type } = action;
@@ -36,6 +37,8 @@ function reducer(state, action) {
       return reduceOnClickSelection(state, action);
     case actions.ON_EXPEND_PANEL:
       return reduceOnExpendPanel(state, action);
+    case actions.ON_CHANGE_DISPLAYED_ITEMS:
+      return reduceOnChangeDisplayedItems(state, action);
     default:
       return state;
   }

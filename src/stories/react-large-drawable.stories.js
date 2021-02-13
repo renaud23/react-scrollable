@@ -35,7 +35,7 @@ export function Example() {
         const walk = createWalker(maze);
         task = window.setInterval(function () {
           const [current, old] = walk();
-          if (current !== old) {
+          if (current !== old && buffer) {
             buffer.frame = new Date().getTime();
             setBefore(old);
             setPosition(current);

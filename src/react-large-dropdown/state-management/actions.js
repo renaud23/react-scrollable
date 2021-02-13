@@ -49,3 +49,10 @@ export const onClickSelection = () => ({ type: ON_CLICK_SELECTION });
 
 export const ON_EXPEND_PANEL = "react-large-dropdown/on-expend-panel";
 export const onExpendPanel = () => ({ type: ON_EXPEND_PANEL });
+
+export const ON_CHANGE_DISPLAYED_ITEMS =
+  "react-large-dropdown/on-change-displayed-items";
+export const onChangeDisplayedItems = (items, search) => ({
+  type: ON_CHANGE_DISPLAYED_ITEMS,
+  payload: { items, search },
+});

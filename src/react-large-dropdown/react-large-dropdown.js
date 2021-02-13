@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import Dropdown from "./components";
 import PropTypes from "prop-types";
+import { searchByPrefix } from "./searching";
 import {
   reducers,
   INITIAL_STATE,
@@ -26,6 +27,8 @@ function ReactLargeDropdown({
   onSelect,
   id,
   labelledBy,
+  placeHolder,
+  searching,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
 
@@ -40,10 +43,20 @@ function ReactLargeDropdown({
           panelMaxWidth,
           id,
           labelledBy,
+          placeHolder,
         })
       );
     },
-    [list, disabled, writable, optionsHeight, panelMaxWidth, id, labelledBy]
+    [
+      list,
+      disabled,
+      writable,
+      optionsHeight,
+      panelMaxWidth,
+      id,
+      labelledBy,
+      placeHolder,
+    ]
   );
 
   return (
@@ -52,6 +65,7 @@ function ReactLargeDropdown({
         className={className}
         itemRenderer={itemRenderer}
         onSelect={onSelect}
+        searching={searching}
       />
     </DropdownContext.Provider>
   );
@@ -67,6 +81,8 @@ ReactLargeDropdown.propTypes = {
   onSelect: PropTypes.func,
   id: PropTypes.string,
   labelledBy: PropTypes.string,
+  placeHolder: PropTypes.string,
+  searching: PropTypes.func,
 };
 
 ReactLargeDropdown.defaultProps = {
@@ -78,6 +94,8 @@ ReactLargeDropdown.defaultProps = {
   onSelect: empty,
   id: undefined,
   labelledBy: undefined,
+  placeHolder: "Placeholder...",
+  searching: searchByPrefix,
 };
 
 export default ReactLargeDropdown;

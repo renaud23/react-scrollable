@@ -5,7 +5,7 @@ import { DropdownContext, actions } from "../../../state-management";
 import ReactScrollable from "../../../../react-scrollable";
 import OptionListContent from "./option-list-content.js";
 
-function OptionList({ itemRenderer, onSelect }) {
+function OptionList({ itemRenderer, onSelect, onKeyDown }) {
   const [state, dispatch] = useContext(DropdownContext);
   const { vertical, horizontal, verticalScrollRequest, expended } = state;
   const { maxSize: maxHeight, size: panelHeight } = vertical;
@@ -59,6 +59,7 @@ function OptionList({ itemRenderer, onSelect }) {
         ref={containerEl}
         itemRenderer={itemRenderer}
         onSelect={onSelect}
+        onKeyDown={onKeyDown}
       />
     </ReactScrollable>
   );

@@ -41,7 +41,10 @@ function getContent(state, ItemRenderer, onSelect, onMouseEnter) {
   return [];
 }
 
-function OptionListContent({ itemRenderer, onSelect: onSelectUser }, ref) {
+function OptionListContent(
+  { itemRenderer, onKeyDown, onSelect: onSelectUser },
+  ref
+) {
   const [state, dispatch] = useContext(DropdownContext);
   const { vertical } = state;
   const { margin: marginTop } = vertical;
@@ -63,12 +66,20 @@ function OptionListContent({ itemRenderer, onSelect: onSelectUser }, ref) {
 
   const content = getContent(state, itemRenderer, onSelect, onMouseEnter);
 
+  function onKeydownCallback(e) {
+    e.stopPropagation();
+    const { key } = e;
+    if (key !== "Tab") {
+      e.preventDefault();
+    }
+    onKeyDown(key);
+  }
   return (
     <ul
       role="listbox"
       ref={ref}
       tabIndex="-1"
-      onKeyDown={() => null}
+      onKeyDown={onKeydownCallback}
       style={{
         marginTop: safeCss(marginTop),
       }}

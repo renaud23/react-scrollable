@@ -17,7 +17,9 @@ function Option({
   function onClick(e) {
     e.stopPropagation();
     e.preventDefault();
-    onSelect(item, index);
+    if (!selected) {
+      onSelect(item, index);
+    }
   }
   function onMouseEnterCallback() {
     onMouseEnter(index);

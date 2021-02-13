@@ -14,6 +14,7 @@ function reduce(state, action) {
     panelMaxWidth,
     id,
     labelledBy,
+    placeHolder,
   } = payload;
   const { vertical, horizontal } = state;
 
@@ -25,8 +26,9 @@ function reduce(state, action) {
     displayedItems: list,
     optionsHeight,
     panelMaxWidth,
-    id: getId(id),
     labelledBy,
+    placeHolder,
+    id: getId(id),
     vertical: {
       ...vertical,
       maxSize: list.length * optionsHeight,

@@ -25,7 +25,7 @@ const INITIAL = {
   verticalScrollRequest: undefined,
 
   //
-  search: undefined,
+  search: "",
 };
 
 export default INITIAL;
