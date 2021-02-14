@@ -34,6 +34,22 @@ $selectionHeight: 30px;
         &.expended {
         }
 
+        .dropdown-options-list {
+          .dropdown-list-item {
+            &.active {
+              &.selected {
+                background-color: lime;
+              }
+            }
+
+            &.selected {
+              background-color: goldenrod;
+            }
+            .dropdown-item {
+            }
+          }
+        }
+
         .scrollabe-ex-corner {
           border: solid 1px #bcbcbc;
         }

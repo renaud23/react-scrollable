@@ -3,7 +3,6 @@ function reduce(state) {
     ...state,
     focused: false,
     expended: false,
-    activeIndex: undefined,
     verticalScrollRequest: { percent: 0 },
   };
 }

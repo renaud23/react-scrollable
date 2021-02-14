@@ -19,7 +19,6 @@ function reduce(state, action) {
   return {
     ...state,
     selectedIndex: undefined,
-    activeIndex: undefined,
     vertical: checkVertical(vertical, items_, optionsHeight),
     search,
     displayedItems: items_,

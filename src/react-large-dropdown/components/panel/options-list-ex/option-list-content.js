@@ -9,7 +9,6 @@ function getContent(state, ItemRenderer, onSelect, onMouseEnter) {
     optionsHeight,
     horizontal,
     displayedItems,
-    activeIndex,
     selectedIndex,
   } = state;
   const { margin, maxSize } = horizontal;
@@ -25,7 +24,6 @@ function getContent(state, ItemRenderer, onSelect, onMouseEnter) {
           key={value}
           item={item}
           index={index}
-          active={activeIndex === index}
           height={optionsHeight}
           width={maxSize}
           margin={margin}

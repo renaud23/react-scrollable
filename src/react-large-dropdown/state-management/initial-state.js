@@ -14,7 +14,6 @@ const INITIAL = {
   disabled: false,
   focused: false,
   expended: false,
-  activeIndex: undefined,
   selectedIndex: undefined,
 
   //

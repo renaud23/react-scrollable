@@ -18,11 +18,11 @@ function computePercentAtStart(index, size, maxSize, optionsHeight) {
 }
 
 function validatePanel(state) {
-  const { vertical, activeIndex, optionsHeight } = state;
+  const { vertical, selectedIndex, optionsHeight } = state;
   const { start, nb, maxSize, size } = vertical;
-  if (activeIndex !== undefined && activeIndex >= start + nb) {
+  if (selectedIndex !== undefined && selectedIndex >= start + nb) {
     const percent = computePercentAtEnd(
-      activeIndex,
+      selectedIndex,
       size,
       maxSize,
       optionsHeight
@@ -34,9 +34,9 @@ function validatePanel(state) {
       verticalScrollRequest,
     };
   }
-  if (activeIndex < start) {
+  if (selectedIndex < start) {
     const percent = computePercentAtStart(
-      activeIndex,
+      selectedIndex,
       size,
       maxSize,
       optionsHeight
@@ -51,22 +51,22 @@ function validatePanel(state) {
 }
 
 function reduceArrowUp(state) {
-  const { activeIndex } = state;
-  const index = Math.max(activeIndex - 1 || 0, 0);
+  const { selectedIndex } = state;
+  const index = Math.max(selectedIndex - 1 || 0, 0);
 
   return validatePanel({
     ...state,
-    activeIndex: index,
+    selectedIndex: index,
   });
 }
 
 function reduceArrowDown(state) {
-  const { activeIndex, displayedItems } = state;
-  const index = Math.min(activeIndex + 1 || 0, displayedItems.length);
+  const { selectedIndex, displayedItems } = state;
+  const index = Math.min(selectedIndex + 1 || 0, displayedItems.length);
 
   return validatePanel({
     ...state,
-    activeIndex: index,
+    selectedIndex: index,
   });
 }
 
@@ -75,27 +75,24 @@ function reduceEnd(state) {
 
   return validatePanel({
     ...state,
-    activeIndex: displayedItems.length - 1,
+    selectedIndex: displayedItems.length - 1,
   });
 }
 
 function reduceHome(state) {
   return validatePanel({
     ...state,
-    activeIndex: 0,
+    selectedIndex: 0,
   });
 }
 
 function reduceEnter(state) {
-  const { activeIndex, expended } = state;
+  const { expended } = state;
   if (!expended) {
     return {
       ...state,
       expended: true,
     };
-  }
-  if (activeIndex !== undefined) {
-    return validatePanel({ ...state, selectedIndex: activeIndex });
   }
   return state;
 }
@@ -105,7 +102,6 @@ function reduceTab(state) {
     ...state,
     focused: false,
     expended: false,
-    activeIndex: undefined,
     verticalScrollRequest: { percent: 0 },
   };
 }
