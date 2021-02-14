@@ -13,6 +13,7 @@ function Selection({
 }) {
   const [state, dispatch] = useContext(DropdownContext);
   const { list, search } = state;
+
   const onKeyDownCallback = useCallback(
     function (e) {
       const { key } = e;
@@ -24,10 +25,6 @@ function Selection({
     [onKeyDown]
   );
 
-  function onClickCallback(e) {
-    onClick();
-  }
-
   const onChangeItems = useCallback(
     function (items, value) {
       dispatch(actions.onChangeDisplayedItems(items, value));
@@ -35,11 +32,18 @@ function Selection({
     [dispatch]
   );
 
-  function onChange(e) {
-    const { value } = e.target;
-    searching(value, list).then(function (items) {
+  const onChange = useCallback(
+    async function (e) {
+      const { value } = e.target;
+      const items = await searching(value, list);
+      dispatch(actions.onChangeSearch(value));
       onChangeItems(items, value);
-    });
+    },
+    [list, dispatch]
+  );
+
+  function onClickCallback(e) {
+    onClick();
   }
 
   return (

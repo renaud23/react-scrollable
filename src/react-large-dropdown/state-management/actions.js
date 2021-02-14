@@ -56,3 +56,9 @@ export const onChangeDisplayedItems = (items, search) => ({
   type: ON_CHANGE_DISPLAYED_ITEMS,
   payload: { items, search },
 });
+
+export const ON_CHANGE_SEARCH = "react-large-dropdown/on-change-search";
+export const onChangeSearch = (search) => ({
+  type: ON_CHANGE_SEARCH,
+  payload: { search },
+});

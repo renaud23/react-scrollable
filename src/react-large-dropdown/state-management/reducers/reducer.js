@@ -11,6 +11,7 @@ import reduceOnSelect from "./reduce-on-select";
 import reduceOnClickSelection from "./reduce-on-click-selection";
 import reduceOnExpendPanel from "./reduce-on-expend-panel";
 import reduceOnChangeDisplayedItems from "./reduce-on-change-displayed-items";
+import reduceOnChangeSearch from "./reduce-on-change-search";
 
 function reducer(state, action) {
   const { type } = action;
@@ -39,6 +40,8 @@ function reducer(state, action) {
       return reduceOnExpendPanel(state, action);
     case actions.ON_CHANGE_DISPLAYED_ITEMS:
       return reduceOnChangeDisplayedItems(state, action);
+    case actions.ON_CHANGE_SEARCH:
+      return reduceOnChangeSearch(state, action);
     default:
       return state;
   }
