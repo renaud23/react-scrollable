@@ -3,7 +3,7 @@ import { safeCss } from "../../../../commons-scrollable";
 import { DropdownContext, actions } from "../../../state-management";
 import Option from "./option";
 
-function getContent(state, ItemRenderer, onSelect, onMouseEnter) {
+function getContent(state, ItemRenderer, onSelect) {
   const {
     vertical,
     optionsHeight,
@@ -29,7 +29,6 @@ function getContent(state, ItemRenderer, onSelect, onMouseEnter) {
           margin={margin}
           selected={selectedIndex === index}
           onSelect={onSelect}
-          onMouseEnter={onMouseEnter}
         >
           <ItemRenderer item={item} index={index} />
         </Option>
@@ -47,13 +46,6 @@ function OptionListContent(
   const { vertical } = state;
   const { margin: marginTop } = vertical;
 
-  const onMouseEnter = useCallback(
-    function (index) {
-      dispatch(actions.onMouseEnterOption(index));
-    },
-    [dispatch]
-  );
-
   const onSelect = useCallback(
     function (item, index) {
       dispatch(actions.onSelect(index));
@@ -62,7 +54,7 @@ function OptionListContent(
     [dispatch, onSelectUser]
   );
 
-  const content = getContent(state, itemRenderer, onSelect, onMouseEnter);
+  const content = getContent(state, itemRenderer, onSelect);
 
   function onKeydownCallback(e) {
     e.stopPropagation();

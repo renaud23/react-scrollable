@@ -31,13 +31,6 @@ export const onHorizontalScroll = (percent) => ({
   payload: { percent },
 });
 
-export const ON_MOUSE_ENTER_OPTION =
-  "react-large-dropdown/on-mouse-enter-option";
-export const onMouseEnterOption = (index) => ({
-  type: ON_MOUSE_ENTER_OPTION,
-  payload: { index },
-});
-
 export const ON_SELECT = "react-large-dropdown/on-select";
 export const onSelect = (index) => ({
   type: ON_SELECT,

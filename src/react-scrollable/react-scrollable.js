@@ -15,7 +15,7 @@ import { DefaultButtonProvider } from "./components";
 import "./react-scrollable-ex.scss";
 import { Corner } from "./components";
 
-function emptyCallback() {}
+function emptyCallback(e) {}
 
 function ReactScrollable({
   children,

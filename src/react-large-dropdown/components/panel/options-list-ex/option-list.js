@@ -42,6 +42,14 @@ function OptionList({ itemRenderer, onSelect, onKeyDown }) {
     [expended, panelHeight, dispatch]
   );
 
+  const onKeyDownCallback = useCallback(
+    function (e) {
+      const { key } = e;
+      onKeyDown(key);
+    },
+    [onKeyDown]
+  );
+
   const containerEl = useResizeObserver(onResize);
 
   return (
@@ -54,6 +62,7 @@ function OptionList({ itemRenderer, onSelect, onKeyDown }) {
       refWidth={panelWidth}
       refHeight={panelHeight}
       verticalScrollRequest={verticalScrollRequest}
+      onKeyDown={onKeyDownCallback}
     >
       <OptionListContent
         ref={containerEl}

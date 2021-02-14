@@ -11,7 +11,6 @@ function Option({
   margin,
   selected,
   onSelect,
-  onMouseEnter,
   children,
 }) {
   function onClick(e) {
@@ -21,9 +20,7 @@ function Option({
       onSelect(item, index);
     }
   }
-  function onMouseEnterCallback() {
-    onMouseEnter(index);
-  }
+
   return (
     <li
       className={classnames("dropdown-list-item", {
@@ -35,7 +32,6 @@ function Option({
         width: safeCss(width),
         marginLeft: safeCss(margin),
       }}
-      onMouseEnter={onMouseEnterCallback}
       onClick={onClick}
     >
       {children}
