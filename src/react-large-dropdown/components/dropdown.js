@@ -11,9 +11,11 @@ function Dropdown({ className, itemRenderer, onSelect, searching }) {
 
   const onBlur = useCallback(
     function () {
-      dispatch(actions.onBlur());
+      if (focused) {
+        dispatch(actions.onBlur());
+      }
     },
-    [dispatch]
+    [dispatch, focused, id]
   );
 
   const onFocus = useCallback(
@@ -38,7 +40,6 @@ function Dropdown({ className, itemRenderer, onSelect, searching }) {
       onBlur={onBlur}
     >
       <DropdownSelection
-        onBlur={onBlur}
         onFocus={onFocus}
         onKeyDown={onKeyDown}
         searching={searching}
