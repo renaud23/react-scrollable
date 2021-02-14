@@ -10,6 +10,7 @@ function getContent(state, ItemRenderer, onSelect) {
     horizontal,
     displayedItems,
     selectedIndex,
+    search,
   } = state;
   const { margin, maxSize } = horizontal;
   const { nb, start } = vertical;
@@ -30,7 +31,7 @@ function getContent(state, ItemRenderer, onSelect) {
           selected={selectedIndex === index}
           onSelect={onSelect}
         >
-          <ItemRenderer item={item} index={index} />
+          <ItemRenderer item={item} index={index} search={search} />
         </Option>
       );
     });

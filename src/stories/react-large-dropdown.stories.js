@@ -20,6 +20,13 @@ function nafSearching(search, items) {
   return searchByPrefix(search, items, attributs);
 }
 
+function NafItemRenderer({ item, search, index }) {
+  const { code, libelle } = item;
+  return (
+    <div className="dropdown-custom-item-renderer">{`${code} - ${libelle}`}</div>
+  );
+}
+
 export function SimpleDropdown() {
   const [data, setData] = useState([]);
 
@@ -52,6 +59,7 @@ export function SimpleDropdown() {
         list={data}
         writable={true}
         searching={nafSearching}
+        itemRenderer={NafItemRenderer}
       />
       <LoremParagraph />
       <ReactLargeDropdown

@@ -1,18 +1,27 @@
-import React, { useCallback, useContext } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 import classnames from "classnames";
 import { DropdownContext, actions } from "../../../state-management";
 import "./selection.scss";
 
-function Selection({
-  onClick,
-  onFocus,
-  onKeyDown,
-  selection,
-  placeHolder,
-  searching,
-}) {
+function getLabel(label, placeHolder) {
+  if (typeof label === "string" && label.length) {
+    return label;
+  }
+  return placeHolder;
+}
+
+function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
   const [state, dispatch] = useContext(DropdownContext);
-  const { list, search } = state;
+  const { list, displayedItems, search, selectedIndex, labelledBy } = state;
+  const [label, setLabel] = useState("");
+  const [displayLabel, setDisplayLabel] = useState(true);
+  const inputEl = useRef();
 
   const onKeyDownCallback = useCallback(
     function (e) {
@@ -46,16 +55,65 @@ function Selection({
     onClick();
   }
 
+  useEffect(
+    function () {
+      if (selectedIndex !== undefined) {
+        setLabel(displayedItems[selectedIndex].label);
+      } else {
+        setLabel("");
+      }
+    },
+    [selectedIndex]
+  );
+
+  useEffect(
+    function () {
+      setDisplayLabel(true);
+    },
+    [displayedItems]
+  );
+
+  const onFocusCallback = useCallback(
+    function () {
+      setDisplayLabel(false);
+      onFocus();
+    },
+    [onFocus]
+  );
+
+  const onBlurCallback = useCallback(function () {
+    setDisplayLabel(true);
+  }, []);
+
+  function onclickLabel() {
+    setDisplayLabel(false);
+    inputEl.current.focus();
+    onClick();
+  }
+
   return (
     <div className={classnames("dropdown-selection-content", "writable")}>
+      <button
+        tabIndex="0"
+        aria-haspopup="listbox"
+        className={classnames("dropdown-selection-label", {
+          display: displayLabel,
+        })}
+        onClick={onclickLabel}
+        aria-labelledby={labelledBy}
+      >
+        {getLabel(label, placeHolder)}
+      </button>
       <input
         aria-haspopup="listbox"
         type="text"
         onClick={onClickCallback}
-        onFocus={onFocus}
+        onFocus={onFocusCallback}
+        onBlur={onBlurCallback}
         onKeyDown={onKeyDownCallback}
         onChange={onChange}
         value={search}
+        ref={inputEl}
       />
     </div>
   );
