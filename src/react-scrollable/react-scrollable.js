@@ -15,7 +15,7 @@ import { DefaultButtonProvider } from "./components";
 import "./react-scrollable-ex.scss";
 import { Corner } from "./components";
 
-function emptyCallback() {}
+function emptyCallback(e) {}
 
 function ReactScrollable({
   children,
@@ -74,8 +74,7 @@ function ReactScrollable({
   useEffect(
     function () {
       if (verticalScrollRequest) {
-        const { percent } = verticalScrollRequest;
-        dispatch(actions.onVerticalScrollTo({ percent }));
+        dispatch(actions.onVerticalScrollTo(verticalScrollRequest));
       }
     },
     [verticalScrollRequest, dispatch]
@@ -84,8 +83,7 @@ function ReactScrollable({
   useEffect(
     function () {
       if (horizontalScrollRequest) {
-        const { percent } = horizontalScrollRequest;
-        dispatch(actions.onHorizontalScrollTo({ percent }));
+        dispatch(actions.onHorizontalScrollTo(horizontalScrollRequest));
       }
     },
     [horizontalScrollRequest, dispatch]

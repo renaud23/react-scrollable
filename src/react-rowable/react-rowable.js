@@ -135,6 +135,7 @@ function ReactRowable({
     },
     [horizontalOuterScrollRequest]
   );
+
   return (
     <RowableContext.Provider value={[state, dispatch, containerEl]}>
       <ReactScrollable
