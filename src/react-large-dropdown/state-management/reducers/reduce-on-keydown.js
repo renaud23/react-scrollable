@@ -4,6 +4,7 @@ const BIND_KEY = {
   home: "Home",
   end: "End",
   enter: "Enter",
+  escape: "Escape",
   tab: "Tab",
 };
 
@@ -51,23 +52,31 @@ function validatePanel(state) {
 }
 
 function reduceArrowUp(state) {
-  const { selectedIndex } = state;
-  const index = Math.max(selectedIndex - 1 || 0, 0);
+  const { selectedIndex, displayedItems } = state;
+  if (displayedItems.length) {
+    const index = Math.max(selectedIndex - 1 || 0, 0);
 
-  return validatePanel({
-    ...state,
-    selectedIndex: index,
-  });
+    return validatePanel({
+      ...state,
+      selectedIndex: index,
+      expended: true,
+    });
+  }
+  return { ...state, selectedIndex: undefined };
 }
 
 function reduceArrowDown(state) {
   const { selectedIndex, displayedItems } = state;
-  const index = Math.min(selectedIndex + 1 || 0, displayedItems.length);
+  if (displayedItems.length) {
+    const index = Math.min(selectedIndex + 1 || 0, displayedItems.length - 1);
 
-  return validatePanel({
-    ...state,
-    selectedIndex: index,
-  });
+    return validatePanel({
+      ...state,
+      selectedIndex: index,
+      expended: true,
+    });
+  }
+  return { ...state, selectedIndex: undefined };
 }
 
 function reduceEnd(state) {
@@ -75,26 +84,29 @@ function reduceEnd(state) {
 
   return validatePanel({
     ...state,
-    selectedIndex: displayedItems.length - 1,
+    selectedIndex: displayedItems.length
+      ? displayedItems.length - 1
+      : undefined,
+    expended: true,
   });
 }
 
 function reduceHome(state) {
+  const { displayedItems } = state;
   return validatePanel({
     ...state,
-    selectedIndex: 0,
+    selectedIndex: displayedItems.length ? 0 : undefined,
+    expended: true,
   });
 }
 
 function reduceEnter(state) {
   const { expended } = state;
-  if (!expended) {
-    return {
-      ...state,
-      expended: true,
-    };
-  }
-  return state;
+
+  return {
+    ...state,
+    expended: !expended,
+  };
 }
 
 function reduceTab(state) {

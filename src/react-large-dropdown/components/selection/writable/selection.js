@@ -47,12 +47,17 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
       const items = await searching(value, list);
       dispatch(actions.onChangeSearch(value));
       onChangeItems(items, value);
+      setDisplayLabel(false);
     },
     [list, dispatch]
   );
 
   function onClickCallback(e) {
     onClick();
+  }
+
+  function onBlurInput() {
+    setDisplayLabel(true);
   }
 
   useEffect(
@@ -68,7 +73,6 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
 
   useEffect(
     function () {
-      console.log("oooooo", selectedIndex);
       if (selectedIndex !== undefined) {
         setDisplayLabel(true);
       }
@@ -84,11 +88,8 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
     [onFocus]
   );
 
-  const onBlurCallback = useCallback(function () {
-    setDisplayLabel(true);
-  }, []);
-
-  function onclickLabel() {
+  function onclickLabel(e) {
+    e.nativeEvent.stopImmediatePropagation();
     setDisplayLabel(false);
     inputEl.current.focus();
     onClick();
@@ -97,22 +98,24 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
   return (
     <div className={classnames("dropdown-selection-content", "writable")}>
       <button
-        tabIndex="0"
+        tabIndex="-1"
         aria-haspopup="listbox"
         className={classnames("dropdown-selection-label", {
           display: displayLabel,
         })}
         onClick={onclickLabel}
         aria-labelledby={labelledBy}
+        onKeyDown={onKeyDownCallback}
       >
         {getLabel(label, placeHolder)}
       </button>
       <input
+        tabIndex="0"
         aria-haspopup="listbox"
         type="text"
         onClick={onClickCallback}
         onFocus={onFocusCallback}
-        onBlur={onBlurCallback}
+        onBlur={onBlurInput}
         onKeyDown={onKeyDownCallback}
         onChange={onChange}
         value={search}
