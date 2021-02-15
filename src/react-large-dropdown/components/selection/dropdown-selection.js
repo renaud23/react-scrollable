@@ -31,6 +31,7 @@ function DropdownSelection({ onFocus, onBlur, onKeyDown, searching }) {
     <DropdownSelectionContainer>
       <Selection
         onFocus={onFocus}
+        onBlur={onBlur}
         onClick={onClick}
         onBlur={onBlur}
         onKeyDown={onKeyDown}

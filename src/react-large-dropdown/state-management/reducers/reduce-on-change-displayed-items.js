@@ -16,13 +16,17 @@ function reduce(state, action) {
   const { vertical, list, optionsHeight } = state;
   const items_ = search.trim().length ? items : list;
 
-  return {
-    ...state,
-    selectedIndex: undefined,
-    vertical: checkVertical(vertical, items_, optionsHeight),
-    search,
-    displayedItems: items_,
-  };
+  const { search: origin } = state;
+  if (origin === search) {
+    return {
+      ...state,
+      selectedIndex: undefined,
+      vertical: checkVertical(vertical, items_, optionsHeight),
+      search,
+      displayedItems: items_,
+    };
+  }
+  return state;
 }
 
 export default reduce;

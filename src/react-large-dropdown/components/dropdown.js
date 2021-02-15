@@ -41,6 +41,7 @@ function Dropdown({ className, itemRenderer, onSelect, searching }) {
     >
       <DropdownSelection
         onFocus={onFocus}
+        onBlur={onBlur}
         onKeyDown={onKeyDown}
         searching={searching}
       />

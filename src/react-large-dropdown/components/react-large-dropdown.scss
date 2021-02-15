@@ -16,9 +16,19 @@
       width: 100%;
       height: max-content;
 
+      .delete {
+        position: absolute;
+        right: 0;
+        top: 0;
+         
+      }
+
       .dropdown-selection-content {
         &.writable {
+
+     
         }
+
       }
     }
 

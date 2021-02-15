@@ -25,22 +25,37 @@ $bkgColor2: LavenderBlush;
 
     .selection-container {
       height: $selectionHeight;
+      background-color: $bkgColor2;
+
+      .delete {
+        border-radius: 50%;
+        background-color: darkblue;
+        width: 16px;
+        height: 16px;
+        top: 4px;
+        right: 4px;
+
+        &:hover {
+          box-shadow: 0 -1px 3px gray, -1px 0 3px gray, 0  1px 3px gray,
+            1px 0 3px gray;
+          cursor: pointer;
+        }
+      }
 
       .dropdown-selection-content {
-        background-color: $bkgColor1;
-        border-radius: 8px 8px 0 0;
-         
+        background-color: transparent;
         @include selectionFont();
+        width: calc(100% - 30px);
+        margin: 0 20px 0 10px;
 
         &.writable {
           .dropdown-selection-label,
           input {
-            background-color: $bkgColor1;
-            @include selectionFont(); 
+            @include selectionFont();
           }
+
           .dropdown-selection-label {
             &.display {
-              background-color: $bkgColor2;
               display: flex;
               align-items: center;
             }
@@ -55,6 +70,8 @@ $bkgColor2: LavenderBlush;
         border-radius: 0 0 8px 8px;
         background-color: $bkgColor1;
         overflow: hidden;
+        @include selectionFont();
+        
         &.expended {
         }
 
