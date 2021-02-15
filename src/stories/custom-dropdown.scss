@@ -1,11 +1,21 @@
 $selectionHeight: 30px;
+$primaryColor: DarkBlue;
+$secondaryColor: DarkGoldenRod;
+$bkgColor1: Snow;
+$bkgColor2: LavenderBlush;
+
+@mixin selectionFont {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
 
 .custom-dropdown {
   height: $selectionHeight;
   width: 300px;
 
   .react-large-dropdown {
-    border: solid 2px blue;
+    border: solid 2px $primaryColor;
     border-radius: 8px 8px;
 
     &.focused {
@@ -17,24 +27,20 @@ $selectionHeight: 30px;
       height: $selectionHeight;
 
       .dropdown-selection-content {
-        background-color: ivory;
-        border-radius: 8px 8px;
-        padding: 0 4px;
-        font-family: Verdana, Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        font-weight: 600;
+        background-color: $bkgColor1;
+        border-radius: 8px 8px 0 0;
+         
+        @include selectionFont();
 
         &.writable {
           .dropdown-selection-label,
           input {
-            background-color: transparent;
-            font-family: Verdana, Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            font-weight: 600;
+            background-color: $bkgColor1;
+            @include selectionFont(); 
           }
           .dropdown-selection-label {
             &.display {
-              background-color: ivory;
+              background-color: $bkgColor2;
               display: flex;
               align-items: center;
             }
@@ -47,7 +53,7 @@ $selectionHeight: 30px;
     .panel-container {
       .panel-content {
         border-radius: 0 0 8px 8px;
-        background-color: ivory;
+        background-color: $bkgColor1;
         overflow: hidden;
         &.expended {
         }
@@ -55,7 +61,7 @@ $selectionHeight: 30px;
         .dropdown-options-list {
           .dropdown-list-item {
             &.selected {
-              background-color: goldenrod;
+              background-color: DarkGoldenRod;
             }
             .dropdown-item {
             }
@@ -70,7 +76,6 @@ $selectionHeight: 30px;
   }
 }
 
-
 /* Custom item renderer */
 .dropdown-custom-item-renderer {
   line-height: 26px;
@@ -78,5 +83,4 @@ $selectionHeight: 30px;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 400;
-
 }

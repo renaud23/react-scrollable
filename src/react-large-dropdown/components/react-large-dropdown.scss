@@ -1,8 +1,10 @@
 .react-large-dropdown-container {
   position: relative;
 
+
   .react-large-dropdown {
     width: 100%;
+    overflow: hidden;
     position: absolute;
     z-index: 0;
 
@@ -16,8 +18,6 @@
 
       .dropdown-selection-content {
         &.writable {
-          width: calc(100% - 10px);
-          padding: 0 5px;
         }
       }
     }

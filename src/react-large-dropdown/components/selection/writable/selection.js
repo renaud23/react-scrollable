@@ -68,9 +68,12 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
 
   useEffect(
     function () {
-      setDisplayLabel(true);
+      console.log("oooooo", selectedIndex);
+      if (selectedIndex !== undefined) {
+        setDisplayLabel(true);
+      }
     },
-    [displayedItems]
+    [displayedItems, selectedIndex]
   );
 
   const onFocusCallback = useCallback(
