@@ -41,8 +41,6 @@ export function SimpleDropdown() {
           libelle,
           label, // needed
           value: code, // needed
-          __width: label.length, // needed
-          __height: 20, // needed
         };
       });
       setData(list);
@@ -60,6 +58,8 @@ export function SimpleDropdown() {
         writable={true}
         searching={nafSearching}
         itemRenderer={NafItemRenderer}
+        optionsHeight={26}
+        panelMaxWidth={800}
       />
       <LoremParagraph />
       <ReactLargeDropdown
