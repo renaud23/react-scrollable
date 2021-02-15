@@ -27,6 +27,7 @@ function Option({
         active,
         selected,
       })}
+      aria-selected={selected || undefined}
       style={{
         height: safeCss(height),
         width: safeCss(width),
