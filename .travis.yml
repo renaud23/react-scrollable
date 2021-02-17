@@ -18,7 +18,8 @@ jobs:
           tags: true
     - stage: storybook
       script:
-        - yarn build-storybook
+        - npm i --save-dev webpack-cli
+        - npm run build-storybook
       deploy:
         provider: pages
         skip-cleanup: true
