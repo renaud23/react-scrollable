@@ -25,6 +25,8 @@ function ReactLargeList({
   offsetChar,
   itemRenderer,
   tabIndex,
+  verticalScrollRequest,
+  horizontalScrollRequest,
 }) {
   const [id] = useState(() => getId());
   const [vertical, setVertical] = useState(initializeScrollable);
@@ -48,8 +50,8 @@ function ReactLargeList({
   return (
     <ReactRowable
       id={id}
-      vertical={vertical}
-      horizontal={horizontal}
+      vertical={{ ...vertical, scrollRequest: verticalScrollRequest }}
+      horizontal={{ ...horizontal, scrollRequest: horizontalScrollRequest }}
       onFocus={onFocus}
       onBlur={onBlur}
       className={classnames("react-large-list", className, { focused })}
@@ -67,22 +69,36 @@ function ReactLargeList({
 }
 
 ReactLargeList.propTypes = {
+  monospace: PropTypes.bool,
   className: PropTypes.string,
   list: PropTypes.array.isRequired,
   itemRenderer: PropTypes.func,
+  offsetChar: PropTypes.number,
+  verticalScrollRequest: PropTypes.shape({
+    delta: PropTypes.number,
+    index: PropTypes.number,
+    pixels: PropTypes.number,
+  }),
   tabIndex: PropTypes.oneOf(["0", "-1"]),
 };
 
 ReactLargeList.defaultProps = {
   className: undefined,
+  monospace: false,
   itemRenderer: DefaultItemRenderer,
+  verticalScrollRequest: undefined,
   tabIndex: "0",
+  offsetChar: 10,
 };
 
 export default function WrappingOffsetchar(props) {
-  return (
-    <OffsetChar>
-      <ReactLargeList {...props} />
-    </OffsetChar>
-  );
+  const { monospace, ...rest } = props;
+  if (monospace) {
+    return (
+      <OffsetChar>
+        <ReactLargeList {...rest} />
+      </OffsetChar>
+    );
+  }
+  return <ReactLargeList {...rest} />;
 }

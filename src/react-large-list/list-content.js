@@ -25,7 +25,12 @@ function ContentList({
       const height = safeCss(__height);
       return (
         <li key={index} style={{ height }}>
-          <ItemRenderer item={item} height={height} width={__width} />
+          <ItemRenderer
+            item={item}
+            height={height}
+            width={__width}
+            index={index}
+          />
         </li>
       );
     });

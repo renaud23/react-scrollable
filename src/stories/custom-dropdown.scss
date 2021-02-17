@@ -1,24 +1,122 @@
 $selectionHeight: 30px;
+$primaryColor: DarkBlue;
+$secondaryColor: DarkGoldenRod;
+$bkgColor1: Snow;
+$bkgColor2: LavenderBlush;
+
+@mixin selectionFont {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
 
 .custom-dropdown {
   height: $selectionHeight;
   width: 300px;
 
   .react-large-dropdown {
-    border: solid 2px blue;
+    border: solid 2px $primaryColor;
+    border-radius: 8px 8px;
+
+    &.focused {
+      box-shadow: 0 -3px 8px gray, -3px 0 8px gray, 0 3px 8px gray,
+        3px 0 8px gray;
+    }
 
     .selection-container {
       height: $selectionHeight;
+      background-color: $bkgColor2;
+
+      .delete {
+        border-radius: 50%;
+        background-color: darkblue;
+        width: 16px;
+        height: 16px;
+        top: 4px;
+        right: 4px;
+
+        &:hover {
+          box-shadow: 0 -1px 3px gray, -1px 0 3px gray, 0  1px 3px gray,
+            1px 0 3px gray;
+          cursor: pointer;
+        }
+      }
+
       .dropdown-selection-content {
-        background-color: thistle;
+        background-color: transparent;
+        @include selectionFont();
+        width: calc(100% - 30px);
+        margin: 0 20px 0 10px;
+
         &.writable {
+          .dropdown-selection-label,
+          input {
+            @include selectionFont();
+          }
+
+          .dropdown-selection-label {
+            &.display {
+              display: flex;
+              align-items: center;
+            }
+          }
         }
       }
     }
 
     /* */
     .panel-container {
-      background-color: silver;
+      .panel-content {
+        border-radius: 0 0 8px 8px;
+        background-color: $bkgColor1;
+        overflow: hidden;
+        @include selectionFont();
+        
+        &.expended {
+        }
+
+        .dropdown-options-list {
+          .dropdown-list-item {
+            &.selected {
+              background-color: DarkGoldenRod;
+            }
+            .dropdown-item {
+            }
+          }
+        }
+
+        .scrollabe-ex-corner {
+          border: solid 1px #bcbcbc;
+        }
+      }
     }
+  }
+}
+
+/* Custom item renderer */
+.dropdown-custom-item-renderer {
+  line-height: 26px;
+  margin-left: 4px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+.message {
+  width: 250px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 4px 4px;
+  color: aliceblue;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: 800;
+
+  &.not-ready {
+    background-color: firebrick;
+  }
+  &.ready {
+    background-color: forestgreen;
   }
 }

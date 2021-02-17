@@ -1,10 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 
-function DropdownPanelContainer({ children, focused }) {
+function DropdownPanelContainer({ children, expended }) {
   return (
-    <div className="panel-container">
-      <div className={classnames("panel-content", { focused })}>{children}</div>
+    <div className={classnames("panel-container")}>
+      <div className={classnames("panel-content", { expended })}>
+        {children}
+      </div>
     </div>
   );
 }

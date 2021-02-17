@@ -32,16 +32,21 @@ export const onHorizontalScroll = (percent) => ({
 
 export const ON_VERTICAL_SCROLL_REQUEST =
   "react-rowable/on-vertical-scroll-request";
-export const onVerticalScrollRequest = ({ delta, pixels }) => ({
+export const onVerticalScrollRequest = ({ delta, pixels, index, margin }) => ({
   type: ON_VERTICAL_SCROLL_REQUEST,
-  payload: { delta, pixels },
+  payload: { delta, pixels, index, margin },
 });
 
 export const ON_HORIZONTAL_SCROLL_REQUEST =
   "react-rowable/on-horizontal-scroll-request";
-export const onHorizontalScrollRequest = ({ delta, pixels }) => ({
+export const onHorizontalScrollRequest = ({
+  delta,
+  pixels,
+  index,
+  margin,
+}) => ({
   type: ON_HORIZONTAL_SCROLL_REQUEST,
-  payload: { delta, pixels },
+  payload: { delta, pixels, index, margin },
 });
 
 export const ON_KEY_DOWN = "react-rowable/on-keydown";

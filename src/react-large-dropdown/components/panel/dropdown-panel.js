@@ -1,27 +1,21 @@
 import React, { useContext } from "react";
-import ReactLargeList from "../../../react-large-list";
+import OptionsList from "./options-list-ex";
 import DropdownPanelContainer from "./dropdown-panel-container";
 import { DropdownContext } from "../../state-management";
 
-function DefaultItemRenderer({ item }) {
-  const { libelle } = item;
-  return <div className="dropdown-item">{libelle}</div>;
-}
-
-function DropdownPanel() {
+function DropdownPanel({ itemRenderer, onSelect, onKeyDown }) {
   const [state] = useContext(DropdownContext);
-  const { displayedItems, focused } = state;
-  if (focused) {
-    return (
-      <DropdownPanelContainer focused={true}>
-        <ReactLargeList
-          list={displayedItems}
-          itemRenderer={DefaultItemRenderer}
-        />
-      </DropdownPanelContainer>
-    );
-  }
-  return <DropdownPanelContainer focused={false} />;
+  const { focused, expended } = state;
+
+  return (
+    <DropdownPanelContainer focused={focused} expended={expended}>
+      <OptionsList
+        itemRenderer={itemRenderer}
+        onSelect={onSelect}
+        onKeyDown={onKeyDown}
+      />
+    </DropdownPanelContainer>
+  );
 }
 
 export default DropdownPanel;

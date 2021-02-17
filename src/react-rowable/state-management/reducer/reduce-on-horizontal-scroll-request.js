@@ -2,20 +2,31 @@ import {
   resolveFromStart,
   moveStart,
   resolveScrollPixels,
+  refreshMargin,
 } from "./commons-reducers";
 
 function reduce(state, action) {
   const { payload } = action;
-  const { delta, pixels } = payload;
+  const { delta, pixels, margin } = payload;
   const { horizontal } = state;
+
   if (delta !== undefined) {
     const start = moveStart(horizontal, delta);
-    return { ...state, horizontal: resolveFromStart({ ...horizontal, start }) };
+    return {
+      ...state,
+      horizontal: refreshMargin(
+        resolveFromStart({ ...horizontal, start }),
+        margin
+      ),
+    };
   }
   if (pixels !== undefined) {
     return {
       ...state,
-      horizontal: resolveScrollPixels(horizontal, pixels),
+      horizontal: refreshMargin(
+        resolveScrollPixels(horizontal, pixels),
+        margin
+      ),
     };
   }
   return state;
