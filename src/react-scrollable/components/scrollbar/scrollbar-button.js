@@ -18,7 +18,10 @@ function ScrollbarButton({ type, disabled = false, buttonProvider: Button }) {
   const { ref: width } = vertical;
   const { ref: height } = horizontal;
   const [move, setMove] = useState(false);
-  const [task, setTask] = useState(undefined);
+
+  const [scrollTask, setScrollTask] = useState(undefined);
+  const [waitTask, setWaitTask] = useState(undefined);
+
   const triggerMove = useCallback(
     function (first) {
       switch (type) {
@@ -57,24 +60,32 @@ function ScrollbarButton({ type, disabled = false, buttonProvider: Button }) {
       if (e.button === 0) {
         if (!disabled) {
           setMove(true);
-          if (task) {
-            window.clearInterval(task);
+          triggerMove();
+          if (waitTask) window.clearTimeout(waitTask);
+          if (scrollTask) {
+            window.clearInterval(scrollTask);
           }
-          setTask(window.setInterval(triggerMove, 30));
+          setWaitTask(
+            window.setTimeout(function () {
+              setScrollTask(window.setInterval(triggerMove, 30));
+            }, 600)
+          );
         }
       }
     },
-    [disabled, triggerMove, task]
+    [disabled, triggerMove, waitTask, scrollTask]
   );
   const onMouseUpCallback = useCallback(
     function () {
       if (move) {
-        window.clearInterval(task);
-        setTask(undefined);
+        window.clearInterval(scrollTask);
+        window.clearTimeout(waitTask);
+        setScrollTask(undefined);
+        setWaitTask(waitTask);
         setMove(false);
       }
     },
-    [move, task]
+    [move, waitTask, scrollTask]
   );
 
   useEffect(
