@@ -8,7 +8,7 @@ jobs:
   include:
     - stage: build and deploy
       script:
-        - yarn build
+        - npm run build
       deploy:
         provider: npm
         skip_cleanup: true
@@ -18,7 +18,7 @@ jobs:
           tags: true
     - stage: storybook
       script:
-        - yarn build-storybook
+        - npm run build-storybook
       deploy:
         provider: pages
         skip-cleanup: true
