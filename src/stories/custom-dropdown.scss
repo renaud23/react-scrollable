@@ -101,3 +101,22 @@ $bkgColor2: LavenderBlush;
   font-size: 14px;
   font-weight: 400;
 }
+
+
+.message {
+  width: 250px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 4px 4px;
+  color: aliceblue;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: 800;
+
+  &.not-ready {
+    background-color: firebrick;
+  }
+  &.ready {
+    background-color: forestgreen;
+  }
+}
