@@ -68,7 +68,7 @@ function ScrollbarButton({ type, disabled = false, buttonProvider: Button }) {
           setWaitTask(
             window.setTimeout(function () {
               setScrollTask(window.setInterval(triggerMove, 30));
-            }, 600)
+            }, 400)
           );
         }
       }
