@@ -31,7 +31,6 @@ function ReactLargeDropdown({
   searching,
 }) {
   const [state, dispatch] = useReducer(reducers, INITIAL_STATE);
-
   useEffect(
     function () {
       dispatch(

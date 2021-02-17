@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import "core-js/stable";
-import { searchByPrefix } from "./search-tools";
+import { searchByPrefix } from "../search-tools";
 
 self.onmessage = (e) => {
   const { search, items, attributs } = e.data;

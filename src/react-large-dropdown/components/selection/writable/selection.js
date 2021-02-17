@@ -72,7 +72,7 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
       onChangeItems(items, value);
       setDisplayLabel(false);
     },
-    [list, dispatch]
+    [list, dispatch, searching]
   );
 
   function onClickCallback(e) {
