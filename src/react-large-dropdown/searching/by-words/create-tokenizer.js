@@ -72,7 +72,6 @@ function createTokenizer(fields = []) {
     const { name } = field;
     const tokenizeIt = FIELDS_TOKENIZER_MAP[name];
     const value = `${entity[name]}`;
-
     return tokenizeIt(removeAccents(`${value}`).toLowerCase());
   };
 }
@@ -81,9 +80,7 @@ function createEntityTokenizer(fields) {
   const tokenizer = createTokenizer(fields);
   return function (entity) {
     return fields.reduce(function (a, field) {
-      const tokens = tokenizer(field, entity);
-
-      return [...a, ...tokens];
+      return [...a, ...tokenizer(field, entity)];
     }, []);
   };
 }
