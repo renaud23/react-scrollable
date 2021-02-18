@@ -17,8 +17,7 @@ jobs:
         on:
           tags: true
     - stage: storybook
-      script:
-        - npm i --save-dev webpack-cli
+      script: 
         - npm run build-storybook
       deploy:
         provider: pages
