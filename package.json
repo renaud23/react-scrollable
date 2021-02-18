@@ -13,20 +13,19 @@
   "files": [
     "release"
   ],
-  "dependencies": {
-    "@koale/useworker": "^3.4.0",
+  "dependencies": { 
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
     "remove-accents": "^0.4.2",
     "snowball": "^0.3.1",
-    "string-tokenizer": "^0.0.8"
+    "string-tokenizer": "^0.0.8",
+    "react-dom": "^17.0.1"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^17.0.1"
   },
   "scripts": {
     "build": "webpack",
@@ -56,11 +55,10 @@
     "@storybook/node-logger": "^6.0.26",
     "@storybook/preset-create-react-app": "^3.1.4",
     "@storybook/react": "^6.0.26",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.1.0",    
     "html-webpack-plugin": "^4.3.0",
     "node-sass": "^4.14.1",
-    "prettier": "^2.1.2",
-    "react-app-rewired": "^2.1.8",
+    "prettier": "^2.1.2",    
     "react-is": "^16.13.1",
     "react-scripts": "^4.0.2",
     "sass-loader": "^10.0.5",
