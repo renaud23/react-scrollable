@@ -28,7 +28,7 @@
     "prop-types": "^15.7.2"
   },
   "scripts": {
-    "build": "webpack'",
+    "build": "webpack",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
