@@ -85,5 +85,6 @@ export async function buildNaf() {
 }
 
 export async function getNaf() {
-  return getJson("/naf-rev2.json");
+  const pathname = "/react-scrollable";
+  return getJson(`/${pathname}naf-rev2.json`);
 }
