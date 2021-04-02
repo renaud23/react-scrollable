@@ -35,14 +35,17 @@ function reduceOnDragColumn(state, action) {
 
 function reduce(state, action) {
   const { dragged } = state;
-  const { type } = dragged;
-  switch (type) {
-    case DRAGGED_ELEMENT.column:
-      return reduceOnDragColumn(state, action);
+  if (dragged) {
+    const { type } = dragged;
+    switch (type) {
+      case DRAGGED_ELEMENT.column:
+        return reduceOnDragColumn(state, action);
 
-    default:
-      return { ...state, dragged: undefined };
+      default:
+        return { ...state, dragged: undefined };
+    }
   }
+  return state;
 }
 
 export default reduce;

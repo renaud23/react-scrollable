@@ -15,7 +15,7 @@ function Dropdown({ className, itemRenderer, onSelect, searching }) {
         dispatch(actions.onBlur());
       }
     },
-    [dispatch, focused, id]
+    [dispatch, focused]
   );
 
   const onFocus = useCallback(
