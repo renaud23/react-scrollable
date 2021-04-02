@@ -107,8 +107,10 @@ export function FixedRowHeightTable() {
   );
 }
 
-export default {
+const STORY = {
   title: "react-large-table",
   component: ReactLargeTable,
   argTypes: {},
 };
+
+export default STORY;

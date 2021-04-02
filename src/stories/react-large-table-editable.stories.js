@@ -46,8 +46,10 @@ export function EditableTable() {
   );
 }
 
-export default {
+const STORY = {
   title: "react-large-table-editable",
   component: ReactLargeTableEditable,
   argTypes: {},
 };
+
+export default STORY;

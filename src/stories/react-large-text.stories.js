@@ -23,8 +23,10 @@ export function LargeText() {
   );
 }
 
-export default {
+const STORY = {
   title: "react-large-text",
   component: ReactLargeText,
   argTypes: {},
 };
+
+export default STORY;

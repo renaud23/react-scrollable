@@ -61,7 +61,7 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
       dispatch(actions.onChangeSearch(""));
       onChangeItems(list, "");
     },
-    [list]
+    [list, onChangeItems, dispatch]
   );
 
   const onChange = useCallback(
@@ -72,7 +72,7 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
       onChangeItems(items, value);
       setDisplayLabel(false);
     },
-    [list, dispatch, searching]
+    [list, dispatch, searching, onChangeItems]
   );
 
   function onClickCallback(e) {
@@ -91,7 +91,7 @@ function Selection({ onClick, onFocus, onKeyDown, placeHolder, searching }) {
         setLabel("");
       }
     },
-    [selectedIndex]
+    [selectedIndex, displayedItems]
   );
 
   useEffect(

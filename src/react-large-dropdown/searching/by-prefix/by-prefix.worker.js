@@ -8,4 +8,4 @@ self.onmessage = (e) => {
   self.postMessage(rest);
 };
 
-export default () => null;
+export default function empty() {}

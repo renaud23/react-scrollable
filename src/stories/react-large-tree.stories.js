@@ -13,8 +13,10 @@ export function DefaultTree() {
   );
 }
 
-export default {
+const STORY = {
   title: "react-large-tree",
   component: ReactLargeTree,
   argTypes: {},
 };
+
+export default STORY;

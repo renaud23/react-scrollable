@@ -9,4 +9,4 @@ self.onmessage = function (e) {
   self.postMessage(index);
 };
 
-export default () => null;
+export default function empty() {}

@@ -55,8 +55,10 @@ export function ReactRowableDefault() {
   );
 }
 
-export default {
+const STORY = {
   title: "react-rowable",
   component: ReactRowable,
   argTypes: {},
 };
+
+export default STORY;

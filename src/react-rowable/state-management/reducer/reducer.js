@@ -32,7 +32,4 @@ function reduce(state, action) {
   }
 }
 
-export default function (state, action) {
-  const next = reduce(state, action);
-  return next;
-}
+export default reduce;

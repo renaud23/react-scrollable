@@ -15,7 +15,9 @@ function initializeScrollable() {
   };
 }
 
-export default {
+const INITIAL = {
   horizontal: initializeScrollable(),
   vertical: initializeScrollable(),
 };
+
+export default INITIAL;

@@ -42,8 +42,10 @@ export function CustomItem() {
   );
 }
 
-export default {
+const STORY = {
   title: "react-large-list",
   component: ReactLargeList,
   argTypes: {},
 };
+
+export default STORY;

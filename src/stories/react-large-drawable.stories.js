@@ -81,8 +81,10 @@ export function Example() {
   return <ReactLargeDrawable backBuffer={buffer} />;
 }
 
-export default {
+const STORY = {
   title: "react-large-drawable",
   component: ReactLargeDrawable,
   argTypes: {},
 };
+
+export default STORY;

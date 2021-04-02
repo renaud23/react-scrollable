@@ -17,7 +17,7 @@ function getItem(items, index) {
 
 function DropdownSelection({ onFocus, onBlur, onKeyDown, searching }) {
   const [state, dispatch] = useContext(DropdownContext);
-  const { writable, displayedItems, selectedIndex, placeHolder, list } = state;
+  const { writable, displayedItems, selectedIndex, placeHolder } = state;
   const item = getItem(displayedItems, selectedIndex);
   const Selection = getComponent(writable);
   const onClick = useCallback(
@@ -33,7 +33,6 @@ function DropdownSelection({ onFocus, onBlur, onKeyDown, searching }) {
         onFocus={onFocus}
         onBlur={onBlur}
         onClick={onClick}
-        onBlur={onBlur}
         onKeyDown={onKeyDown}
         searching={searching}
         selection={item}

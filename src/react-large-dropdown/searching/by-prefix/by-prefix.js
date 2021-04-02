@@ -1,7 +1,7 @@
 import ByPrefixWorker from "./by-prefix.worker";
 import { isWorkerCompatible, searchByPrefix } from "../search-tools";
 
-export default function (search, items = [], attributs) {
+export default function search(search, items = [], attributs) {
   return new Promise(function (resolve) {
     if (isWorkerCompatible()) {
       const worker = new ByPrefixWorker();

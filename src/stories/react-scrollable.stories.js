@@ -88,8 +88,10 @@ export function ScrollableCustomTheme() {
   );
 }
 
-export default {
+const STORY = {
   title: "react-scrollable-ex",
   component: ReactScrollable,
   argTypes: {},
 };
+
+export default STORY;

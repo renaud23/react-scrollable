@@ -1,4 +1,4 @@
-export default [
+const STOP_WORDS = [
   "alors",
   "au",
   "aucuns",
@@ -114,3 +114,5 @@ export default [
   "ete",
   "etre",
 ];
+
+export default STOP_WORDS;

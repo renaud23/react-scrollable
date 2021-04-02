@@ -146,7 +146,12 @@ function ReactLargeText({ offsetChar, value, lineHeight, onCompute }) {
   );
 }
 
-export default ({ value, lineHeight, onCompute, className }) => {
+export default function ReactLargeTextWithOffsetChar({
+  value,
+  lineHeight,
+  onCompute,
+  className,
+}) {
   return (
     <OffsetChar className={className}>
       <ReactLargeText
@@ -156,4 +161,4 @@ export default ({ value, lineHeight, onCompute, className }) => {
       />
     </OffsetChar>
   );
-};
+}

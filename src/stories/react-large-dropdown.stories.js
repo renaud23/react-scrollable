@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import ReactLargeDropdown, {
   searchByPrefix,
   createNafRev2Index,
@@ -117,7 +117,7 @@ export function SearchInNafStory() {
     [data]
   );
   // createSearchByWords
-  const searchCallback = useCallback(createSearchInNaf(index), [index]);
+  const searchCallback = createSearchInNaf(index);
   return (
     <>
       {index ? (
@@ -147,8 +147,10 @@ export function SearchInNafStory() {
   );
 }
 
-export default {
+const STORY = {
   title: "react-large-dropdown",
   component: ReactLargeDropdown,
   argTypes: {},
 };
+
+export default STORY;

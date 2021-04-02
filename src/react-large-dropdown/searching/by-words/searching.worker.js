@@ -11,4 +11,4 @@ self.onmessage = function (e) {
   self.postMessage([]);
 };
 
-export default () => null;
+export default function empty() {}
